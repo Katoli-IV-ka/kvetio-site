@@ -1,0 +1,57 @@
+/*
+ * Design tokens extracted from the Figma frame "New site" (L1lle7jWAc4GdCQ0AS7aq1, node 91:212).
+ * The file defines no Figma variables, so every value below is read from the frame itself.
+ */
+:root {
+  /* Surfaces */
+  --color-bg: #050608;
+  --color-surface: #111113;
+  --color-surface-raised: #0d0f12;
+  --color-surface-inset: #0a0a0c;
+  --color-paper: #f4f2ee;
+
+  /* Text on dark */
+  --color-white: #ffffff;
+  --color-text-soft: rgba(255, 255, 255, 0.8);
+  --color-text-dim: rgba(255, 255, 255, 0.5);
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-600: #525252;
+
+  /* Text on paper */
+  --color-ink: #000000;
+  --color-ink-soft: rgba(0, 0, 0, 0.75);
+  --color-ink-dim: rgba(0, 0, 0, 0.6);
+
+  /* Lines */
+  --color-line-subtle: rgba(255, 255, 255, 0.06);
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-line-strong: rgba(255, 255, 255, 0.2);
+
+  /* Accents */
+  --color-blue: #60a5fa;
+  --color-amber: #fbbf24;
+  --color-linkedin: #0a66c2;
+  --color-purple: #a855f7;
+
+  /* Effects */
+  --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-text-soft: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.06))
+    drop-shadow(0 4px 1.5px rgba(0, 0, 0, 0.07));
+  --shadow-text-tiny: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.05));
+
+  /* Shape */
+  --radius-card: 16px;
+  --radius-panel: 24px;
+
+  /* Type */
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --tracking-tight: -0.025em;
+  --tracking-wide: 0.05em;
+
+  /* Layout */
+  --content-max: 1280px;
+  --section-gutter: 48px;
+}

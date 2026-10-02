@@ -1,0 +1,11 @@
+.photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}

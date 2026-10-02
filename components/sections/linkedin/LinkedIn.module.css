@@ -1,0 +1,321 @@
+/* Section: 1px top border + 96px padding = 97px from the section's top edge (Figma). */
+.section {
+  padding: 96px max(var(--section-gutter), calc((100% - 1184px) / 2));
+  border-top: 1px solid var(--color-line-subtle);
+  background: var(--color-bg);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.heading {
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  text-align: center;
+  color: var(--color-white);
+}
+
+/* ── Card ───────────────────────────────────────────────────────────── */
+.card {
+  width: 448px;
+  max-width: 100%;
+  overflow: hidden;
+  overflow: clip;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 128px;
+  margin-bottom: -48px;
+  overflow: hidden;
+  overflow: clip;
+}
+
+.bannerShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    var(--color-surface-raised) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+.bannerText {
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  color: var(--color-white);
+  white-space: nowrap;
+  filter: var(--shadow-text-soft);
+}
+
+.bannerAccent {
+  font-weight: 600;
+  color: var(--color-purple);
+}
+
+.body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 32px 28px;
+}
+
+/* ── Avatar + actions ───────────────────────────────────────────────── */
+.identity {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.avatar {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  padding: 4px;
+  overflow: hidden;
+  overflow: clip;
+  border: 4px solid var(--color-surface-raised);
+  border-radius: 16px;
+  background: var(--color-surface-inset);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.avatarInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  overflow: hidden;
+  overflow: clip;
+  border-radius: 12px;
+  background: var(--color-surface-inset);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tile {
+  width: 100%;
+  height: 100%;
+  filter: var(--shadow-text-soft);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 56px;
+}
+
+.follow,
+.message {
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--color-white);
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.follow {
+  gap: 6px;
+  padding: 6px 16px;
+  background: var(--color-linkedin);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+}
+
+.follow:hover {
+  background: #0b5db0;
+}
+
+.plus {
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.message {
+  gap: 3.515px;
+  padding: 5px 14px 5px 11.515px;
+  border: 1px solid var(--color-line-strong);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.message:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sendBox {
+  position: relative;
+  flex: none;
+  width: 16.97px;
+  height: 18px;
+}
+
+.sendIcon {
+  position: absolute;
+  top: -0.245px;
+  left: 0;
+}
+
+.actionLabel {
+  display: block;
+}
+
+/* ── About ──────────────────────────────────────────────────────────── */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.name {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-white);
+}
+
+.verified {
+  flex: none;
+}
+
+.tagline {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-neutral-300);
+}
+
+.meta {
+  padding-top: 2px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-neutral-400);
+}
+
+/* ── Footer row ─────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-line);
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.personAvatar {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  overflow: clip;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 9999px;
+  background: #262626;
+}
+
+.personPhoto {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+}
+
+.personName {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-white);
+}
+
+.personSuffix {
+  font-weight: 400;
+  color: var(--color-neutral-400);
+}
+
+.followers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.followersCount {
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.followersLabel {
+  font-weight: 500;
+  color: var(--color-neutral-400);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 80px;
+  }
+}
+
+@media (max-width: 719px) {
+  .section {
+    padding-block: 64px;
+    padding-inline: 16px;
+  }
+
+  .container {
+    gap: 40px;
+  }
+
+  .heading {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .body {
+    padding-inline: 20px;
+  }
+}

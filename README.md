@@ -1,28 +1,80 @@
 # kvet.io
 
-Базовый шаблон для Landing Page на знакомом стеке:
+Лендинг Kvetio — новый дизайн, перенесённый из Figma (фрейм **«New site»**, 1259 px).
 
-- Next.js (Pages Router)
-- TypeScript
-- Chakra UI
-- ESLint + Prettier
-- Husky + lint-staged
+- Next.js 16 (App Router) + React 19 + TypeScript
+- CSS Modules + дизайн-токены (`styles/tokens.css`), без UI-библиотек
+- Шрифты `Inter` и `JetBrains Mono` через `next/font`
+- ESLint + Prettier + Husky + lint-staged, тесты на Vitest
+
+Предыдущая версия сайта (Pages Router + Chakra UI) осталась в ветке `main`.
 
 ## Запуск
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:4000
 ```
 
-Сервер разработки запускается на `http://localhost:4000`.
+Если `npm install` падает на `Cannot read properties of null (reading 'edgesOut')` — это баг npm 10 при резолве зависимостей без lock-файла. Используйте npm 11 (`npx npm@11 install`); с готовым `package-lock.json` проблемы нет.
 
 ## Скрипты
 
-- `npm run dev` - запуск в режиме разработки
-- `npm run build` - production-сборка
-- `npm run start` - запуск production-сборки
-- `npm run lint` - ESLint
-- `npm run tc` - TypeScript check
-- `npm run format` - форматирование Prettier
-- `npm run validate` - полная локальная проверка
+| Команда            | Что делает                     |
+| ------------------ | ------------------------------ |
+| `npm run dev`      | разработка                     |
+| `npm run build`    | production-сборка              |
+| `npm run start`    | запуск собранного сайта        |
+| `npm run lint`     | ESLint                         |
+| `npm run tc`       | проверка типов                 |
+| `npm run test`     | Vitest                         |
+| `npm run format`   | Prettier                       |
+| `npm run validate` | `tc` + `lint` + `format:check` |
+
+## Структура
+
+```
+app/                      маршруты, layout, metadata, robots, sitemap, favicon
+  layout.tsx              шрифты, <html>, метаданные, аналитика
+  page.tsx                страница: секции по порядку из макета
+  globals.css             reset + подключение токенов
+components/
+  sections/               по одной папке на секцию макета (tsx + module.css)
+    hero/                 Hero («Oddly specific training data»)
+    statements/           три карточки: Proprietary capture / Any format / Rights-ready
+    data-types/           «Data types»
+    team/                 «Production-first data team»
+    mission/              баннер «Too specific to find…»
+    accuracy/             «Data for Final AI Accuracy» + график
+    linkedin/             «Connect with us on LinkedIn»
+    footer/
+  ui/                     LogoMark, BrandTile, Photo
+  analytics/              Microsoft Clarity (по env-переменной)
+lib/
+  content.ts              весь текст сайта (как в макете)
+  site.ts                 URL, контакты, соцсети, SEO
+styles/tokens.css         цвета, тени, радиусы, шрифты, трекинг — из Figma
+public/images/            фото секций (см. «Ассеты»)
+__tests__/                тесты контента и разметки
+docs/figma-mapping.md     соответствие узлов Figma → компонентам
+```
+
+## Переменные окружения
+
+См. `.env.example`.
+
+- `NEXT_PUBLIC_SITE_URL` — канонический URL (по умолчанию `https://kvet.io`)
+- `NEXT_PUBLIC_CLARITY_ID` — id Microsoft Clarity; без него скрипт не подключается
+
+## Ассеты
+
+Фото в макете — маленькие растровые заливки (например 288×512) с наложенными режимами смешивания
+(multiply, saturation, opacity). Чтобы картинка на сайте совпала с макетом пиксель в пиксель,
+в `public/images/` лежат **рендеры самих слоёв из Figma** (эффекты уже «запечены» в файл), а в CSS остались
+только градиенты поверх фото. Подробности и список узлов — в `docs/figma-mapping.md`.
+
+## Адаптив
+
+Макет нарисован только для десктопа (1259 px). На ширине 1259 px вёрстка совпадает с макетом;
+для планшета (< 1024 px) и телефона (< 720 px) секции перестраиваются в одну колонку, размеры
+заголовков масштабируются. На экранах шире 1280 px контент центрируется, фоны остаются на всю ширину.

@@ -1,21 +1,20 @@
 {
-  "name": "kvet-io",
-  "version": "0.1.0",
+  "name": "kvetio-site",
+  "version": "2.0.0",
   "private": true,
   "packageManager": "npm@11.8.0",
   "engines": {
-    "node": "24.x"
+    "node": ">=22"
   },
   "scripts": {
-    "preinstall": "npx only-allow npm",
     "dev": "next dev --port 4000",
     "build": "next build",
     "start": "next start --port 4000",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "tc": "tsc --noEmit",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,css,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,css,json,md}\"",
     "fix": "npm run lint:fix && npm run format",
     "validate": "npm run tc && npm run lint && npm run format:check",
     "test": "vitest run",
@@ -23,19 +22,12 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@chakra-ui/react": "3.33.0",
-    "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.1",
-    "lru-cache": "^11.2.7",
     "next": "16.1.6",
-    "next-themes": "^0.4.6",
-    "nodemailer": "^8.0.3",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@types/node": "25.3.0",
-    "@types/nodemailer": "^7.0.11",
+    "@types/node": "^22.0.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.19.0",
@@ -48,6 +40,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix",
-    "*.{js,ts,jsx,tsx,json,md}": "prettier --write"
+    "*.{js,ts,jsx,tsx,css,json,md}": "prettier --write"
   }
 }

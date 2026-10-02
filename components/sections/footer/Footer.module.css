@@ -1,0 +1,106 @@
+/* Footer: 1px top border + 48px padding = 49px from the top edge; 48px below (Figma). */
+.footer {
+  padding: 48px max(80px, calc((100% - 1152px) / 2));
+  border-top: 1px solid var(--color-line-subtle);
+  background: var(--color-bg);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 1152px;
+  margin-inline: auto;
+}
+
+/* Brand block is 294.77 × 48.13 with absolutely placed children, like the Figma frame. */
+.brand {
+  position: relative;
+  flex: none;
+  width: 294.77px;
+  height: 48.13px;
+}
+
+.lockup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(-50%);
+}
+
+.name {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.divider {
+  position: absolute;
+  top: calc(50% - 0.01px);
+  left: 72.13px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-neutral-600);
+  transform: translateY(-50%);
+}
+
+.copyright {
+  position: absolute;
+  top: calc(50% - 0.01px);
+  left: 100.13px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-neutral-400);
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.link {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-neutral-400);
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--color-white);
+}
+
+@media (max-width: 1023px) {
+  .footer {
+    padding-inline: 48px;
+  }
+}
+
+@media (max-width: 719px) {
+  .footer {
+    padding-inline: 16px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}

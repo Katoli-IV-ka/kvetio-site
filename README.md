@@ -68,10 +68,12 @@ docs/figma-mapping.md     соответствие узлов Figma → комп
 
 ## Ассеты
 
-Фото в макете — маленькие растровые заливки (например 288×512) с наложенными режимами смешивания
-(multiply, saturation, opacity). Чтобы картинка на сайте совпала с макетом пиксель в пиксель,
-в `public/images/` лежат **рендеры самих слоёв из Figma** (эффекты уже «запечены» в файл), а в CSS остались
-только градиенты поверх фото. Подробности и список узлов — в `docs/figma-mapping.md`.
+- `statement-field.webp`, `statement-sunflowers.webp`, `team-daisy.webp` — оригинальные фото. Эффекты слоёв из Figma
+  (multiply, saturation, opacity) воспроизведены в CSS через `components/ui/Photo`, так что файл можно просто заменить.
+- `hero-meadow.webp`, `mission-meadow.webp`, `linkedin-banner.webp`, `avatar-dzmitry.webp` — оригиналов нет,
+  поэтому это **рендеры слоёв из Figma** (эффекты уже «запечены» в файл); в CSS остались только градиенты поверх фото.
+
+Подробности и список узлов — в `docs/figma-mapping.md`.
 
 ## Адаптив
 

@@ -1,6 +1,7 @@
 .photo {
   position: absolute;
   inset: 0;
+  isolation: isolate;
   overflow: hidden;
   pointer-events: none;
 }
@@ -8,4 +9,18 @@
 .image {
   object-fit: cover;
   object-position: center;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.desaturate {
+  background-color: #fff;
+  mix-blend-mode: saturation;
+}
+
+.multiply {
+  mix-blend-mode: multiply;
 }

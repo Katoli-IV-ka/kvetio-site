@@ -15,6 +15,7 @@ export function Statements() {
           <Photo
             src='/images/statement-field.webp'
             sizes='(min-width: 1024px) 33vw, 100vw'
+            tint={{ multiply: '#bfbfbf' }}
           />
           <div
             className={`${styles.shade} ${styles.shadeCapture}`}
@@ -32,8 +33,9 @@ export function Statements() {
 
         <article className={`${styles.card} ${styles.light}`}>
           <Photo
-            src='/images/statement-sunflower-tint.webp'
+            src='/images/statement-sunflowers.webp'
             sizes='(min-width: 1024px) 33vw, 100vw'
+            opacity={0.2}
           />
           <div
             className={`${styles.shade} ${styles.shadePaper}`}
@@ -51,8 +53,9 @@ export function Statements() {
 
         <article className={`${styles.card} ${styles.dark} ${styles.centered}`}>
           <Photo
-            src='/images/statement-sunflower-mono.webp'
+            src='/images/statement-sunflowers.webp'
             sizes='(min-width: 1024px) 33vw, 100vw'
+            tint={{ desaturate: true, multiply: '#b2b2b2' }}
           />
           <div
             className={`${styles.shade} ${styles.shadeRights}`}

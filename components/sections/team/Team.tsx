@@ -24,6 +24,7 @@ export function Team() {
             <Photo
               src='/images/team-daisy.webp'
               sizes='(min-width: 1024px) 448px, 100vw'
+              tint={{ multiply: '#f2f2f2' }}
             />
           </div>
         </div>

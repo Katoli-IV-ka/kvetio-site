@@ -1,0 +1,141 @@
+/* The Figma frame lays this section out 28px shorter than its content (the header paragraph
+   is four lines tall there), so the bottom padding is 112 - 28 = 84px. */
+.section {
+  padding: 112px max(24px, calc((100% - 1024px) / 2)) 84px;
+  overflow: hidden;
+  overflow: clip;
+  background: var(--color-bg);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  width: 100%;
+  max-width: 1024px;
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 768px;
+}
+
+.heading {
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-white);
+}
+
+/* The Figma header reserves four 28px lines for this paragraph (112px); keeping that
+   height preserves the frame's vertical rhythm for everything below it. */
+.body {
+  min-height: 112px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  color: var(--color-neutral-400);
+}
+
+/* Chart: 1024×420 plot, stage labels 420px down, legend 485px down */
+.chart {
+  margin: 0;
+}
+
+.graph {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1024 / 420;
+  overflow: visible;
+}
+
+.stages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-neutral-400);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 48px;
+  margin: 32px 0 0;
+  padding: 8px 0 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-neutral-300);
+}
+
+.swatch {
+  flex: none;
+  width: 24px;
+  height: 2px;
+  border-radius: 9999px;
+}
+
+.blue {
+  background: var(--color-blue);
+}
+
+.amber {
+  background: var(--color-amber);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 80px;
+  }
+
+  .body {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 719px) {
+  .section {
+    padding-block: 64px;
+    padding-inline: 16px;
+  }
+
+  .container {
+    gap: 40px;
+  }
+
+  .heading {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .body {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .stages {
+    font-size: 10px;
+  }
+}

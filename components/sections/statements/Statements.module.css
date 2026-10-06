@@ -1,0 +1,217 @@
+.section {
+  padding: 96px max(var(--section-gutter), calc((100% - 1184px) / 2));
+  background: var(--color-bg);
+}
+
+.grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Card shell: 520px tall, 16px radius. Dark cards carry a 1px border, so inner padding is 40 + 1 = 41px from the edge. */
+.card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  height: 520px;
+  overflow: hidden;
+  overflow: clip;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.dark {
+  padding: 40px;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+
+.light {
+  padding: 40px;
+  background: var(--color-paper);
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gradients that sit on top of the photos */
+.shade {
+  position: absolute;
+  inset: 0;
+}
+
+.shadeCapture {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+.shadePaper {
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 238, 0.95) 0%,
+    rgba(244, 242, 238, 0.8) 50%,
+    rgba(244, 242, 238, 0.95) 100%
+  );
+}
+
+.shadeRights {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Content sits above the photo + shade layers */
+.eyebrow,
+.middle,
+.rule,
+.body,
+.rights {
+  position: relative;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16.5px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.eyebrowDark {
+  color: var(--color-neutral-300);
+  filter: var(--shadow-text-tiny);
+}
+
+.eyebrowLight {
+  color: var(--color-ink-dim);
+}
+
+/* Vertically centred block between eyebrow and footer of the card */
+.middle {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 112px;
+}
+
+.heading {
+  padding-block: 24px;
+}
+
+.headingCapture {
+  font-size: 38px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-white);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85));
+}
+
+.rule {
+  display: block;
+  width: 32px;
+  height: 2px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Light card */
+.pair {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-block: 16px;
+}
+
+.primary {
+  font-size: 42px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+.secondary {
+  font-size: 34px;
+  line-height: 36px;
+  font-weight: 300;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink-soft);
+}
+
+.body {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ink-soft);
+}
+
+/* Rights-ready card */
+.rights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 261.75px;
+  max-width: 100%;
+}
+
+.rightsTitle {
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  text-align: center;
+  color: var(--color-white);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9));
+}
+
+.rightsBody {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--color-neutral-300);
+  filter: var(--shadow-text-soft);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 64px;
+  }
+
+  .grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card {
+    flex: none;
+  }
+}
+
+@media (max-width: 719px) {
+  .section {
+    padding-inline: 16px;
+  }
+
+  .headingCapture {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}

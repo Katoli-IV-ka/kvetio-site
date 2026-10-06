@@ -1,0 +1,270 @@
+/* Alternative design — Figma frame "New site v2" (1268 × 884). */
+.hero {
+  --ui-font: var(--font-inter-tight), var(--font-sans);
+  --bg: #0c0e12;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: max(640px, 100svh);
+  background: var(--bg);
+  color: var(--color-white);
+  font-family: var(--ui-font);
+}
+
+/* ── Left panel ─────────────────────────────────────────────────────── */
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 28% 52%, rgba(60, 70, 110, 0.09), transparent 70%), var(--bg);
+}
+
+.header {
+  position: absolute;
+  top: 48px;
+  left: 82px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 22px;
+}
+
+.menu {
+  display: block;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.brand {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.nav {
+  display: flex;
+  gap: 29.7px;
+  margin-left: 23.5px;
+}
+
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: 22px;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.navItem:hover {
+  color: var(--color-white);
+}
+
+/* ── Copy ───────────────────────────────────────────────────────────── */
+.title {
+  position: relative;
+  top: 2.5px;
+  left: 1px;
+  /* 8.7em keeps the designed break: "ODDLY SPECIFIC" / "AI TRAINING DATA" */
+  max-width: 8.7em;
+  font-size: 54px;
+  line-height: 54px;
+  font-weight: 500;
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.body {
+  max-width: 448px;
+  margin-top: 24px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.actions {
+  position: relative;
+  top: -1px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-top: 42px;
+}
+
+.secondary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.secondary {
+  height: 42px;
+  padding-inline: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.035);
+  font-weight: 500;
+  color: #e2e8f0;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.secondary:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.primary {
+  gap: 12px;
+  height: 45px;
+  padding: 0 8.5px 0 24px;
+  background: var(--color-white);
+  font-weight: 600;
+  color: var(--bg);
+  transition: background-color 0.15s ease;
+}
+
+.primary:hover {
+  background: #e5e7eb;
+}
+
+.arrow {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: #111317;
+  color: var(--color-white);
+}
+
+/* ── Right panel ────────────────────────────────────────────────────── */
+.media {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Carousel indicator: 4 dots, the first one active */
+.dots {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  display: flex;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+
+.dot,
+.dotActive {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+}
+
+.dot {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dotActive {
+  background: var(--color-white);
+}
+
+/* Between the tablet and the design width the split layout scales with the viewport */
+@media (min-width: 1024px) and (max-width: 1267px) {
+  .panel {
+    padding-inline: 6.3vw;
+  }
+
+  .header {
+    left: 6.45vw;
+  }
+
+  .title {
+    font-size: 4.26vw;
+    line-height: 1;
+  }
+
+  /* 20px / 12px at 1024px, growing to the designed 29.7px / 23.5px at 1268px */
+  .nav {
+    gap: calc(20px + (100vw - 1024px) * 0.04);
+    margin-left: calc(12px + (100vw - 1024px) * 0.0473);
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .panel {
+    padding: 140px 48px 72px;
+  }
+
+  .header {
+    left: 48px;
+    right: 48px;
+  }
+
+  .media {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .title {
+    max-width: none;
+    font-size: clamp(36px, 7.5vw, 56px);
+    line-height: 0.96;
+  }
+}
+
+@media (max-width: 719px) {
+  .panel {
+    padding: 112px 20px 56px;
+  }
+
+  .header {
+    top: 28px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+}

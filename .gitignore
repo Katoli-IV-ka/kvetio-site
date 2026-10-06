@@ -33,3 +33,9 @@ yarn-error.log*
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# TypeScript
+*.tsbuildinfo
+
+# Vercel
+.vercel

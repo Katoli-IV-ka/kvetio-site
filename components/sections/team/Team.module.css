@@ -1,0 +1,95 @@
+/* Section: 1px top border + 96px padding = 97px from the section's top edge (Figma). */
+.section {
+  padding: 96px max(var(--section-gutter), calc((100% - 1184px) / 2));
+  border-top: 1px solid var(--color-line-subtle);
+  background: var(--color-bg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 64px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-column: 1 / span 7;
+  align-self: center;
+}
+
+.heading {
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-white);
+}
+
+.body {
+  padding-top: 24px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  color: var(--color-neutral-300);
+}
+
+.media {
+  display: flex;
+  grid-column: 8 / span 5;
+  align-self: center;
+  justify-content: flex-end;
+}
+
+/* Square photo card: 1px border, 16px radius */
+.frame {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 1px;
+  max-width: 448px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  overflow: clip;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-inset);
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 80px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .copy,
+  .media {
+    grid-column: 1 / -1;
+  }
+
+  .media {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 719px) {
+  .section {
+    padding-block: 64px;
+    padding-inline: 16px;
+  }
+
+  .heading {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .body {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}

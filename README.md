@@ -37,6 +37,7 @@ npm run dev      # http://localhost:4000
 app/                      маршруты, layout, metadata, robots, sitemap, favicon
   layout.tsx              шрифты, <html>, метаданные, аналитика
   page.tsx                страница: секции по порядку из макета
+  v2/                     альтернативный дизайн по адресу /v2 (отдельный layout и страница)
   globals.css             reset + подключение токенов
 components/
   sections/               по одной папке на секцию макета (tsx + module.css)
@@ -49,6 +50,7 @@ components/
     linkedin/             «Connect with us on LinkedIn»
     footer/
   ui/                     LogoMark, BrandTile, Photo
+  v2/                     экран альтернативного дизайна (SplitHero)
   analytics/              Microsoft Clarity (по env-переменной)
 lib/
   content.ts              весь текст сайта (как в макете)
@@ -58,6 +60,11 @@ public/images/            фото секций (см. «Ассеты»)
 __tests__/                тесты контента и разметки
 docs/figma-mapping.md     соответствие узлов Figma → компонентам
 ```
+
+## Страницы
+
+- `/` — основной дизайн (Figma «New site v1»)
+- `/v2` — альтернативный дизайн (Figma «New site v2»), закрыт от индексации
 
 ## Переменные окружения
 

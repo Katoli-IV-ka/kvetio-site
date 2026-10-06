@@ -92,3 +92,14 @@ export const footer = {
     { label: 'Privacy', href: '#' },
   ],
 } as const;
+
+/** Alternative design: Figma frame "New site v2" (route /v2). */
+export const splitHero = {
+  brand: 'Kvetio',
+  nav: ['Platform', 'Datasets', 'Solutions', 'Research'],
+  title: 'Oddly specific AI training data',
+  body: "We produce training data that doesn't exist yet — for your model only. High-throughput synthesis, pristine edge-case capture, and verified licensing.",
+  secondaryCta: { label: 'Specifications', href: '/' },
+  primaryCta: { label: 'Start Building' },
+  slides: 4,
+} as const;

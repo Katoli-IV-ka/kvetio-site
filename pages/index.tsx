@@ -9,6 +9,7 @@ import { Team } from '../widgets/team/ui/Team';
 import { Modalities } from '../widgets/modalities/ui/Modalities';
 import { Network } from '../widgets/network/ui/Network';
 import { LinkedInCard } from '../widgets/linkedin/ui/LinkedInCard';
+import { SiteFooter } from '../widgets/contact-band/ui/SiteFooter';
 import { ContactBand } from '../widgets/contact-band/ui/ContactBand';
 
 const SITE_URL = 'https://kvet.io';
@@ -139,11 +140,12 @@ export default function HomePage() {
           <Team />
           <Cases />
           <LinkedInCard />
-          <ContactBand />
           <Accuracy />
           <Modalities />
           <Network />
+          <ContactBand />
         </main>
+        <SiteFooter />
       </Box>
     </>
   );

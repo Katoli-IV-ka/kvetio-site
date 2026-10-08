@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Box, Flex, Heading, Link, Text, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, chakra } from '@chakra-ui/react';
 import { ContactModal } from '../../../features/contact/ui/ContactModal';
-import { hairline, ink, muted } from '../../../shared/theme/palette';
-import { Flower } from '../../../shared/ui/Flower';
+import { hairline, ink } from '../../../shared/theme/palette';
 
 export function ContactBand() {
   const [open, setOpen] = useState(false);
@@ -14,7 +13,7 @@ export function ContactBand() {
       bg={ink}
       px={{ base: 5, md: 16 }}
       pt={{ base: 14, md: 20 }}
-      pb={10}
+      pb={{ base: 14, md: 20 }}
       borderTopWidth='1px'
       borderColor={hairline}
     >
@@ -55,55 +54,6 @@ export function ContactBand() {
             Contact us
           </chakra.button>
         </Box>
-        <Flex
-          wrap='wrap'
-          align='center'
-          justify='space-between'
-          gap={4}
-          mt={10}
-          pt={6}
-          borderTopWidth='1px'
-          borderColor={hairline}
-          fontSize='12px'
-          color={muted}
-        >
-          <Flex
-            align='center'
-            gap={2}
-            color='white'
-          >
-            <Flower size={16} />
-            <span>Kvetio</span>
-          </Flex>
-          <Flex
-            gap={6}
-            wrap='wrap'
-          >
-            <Link
-              href='mailto:contact@kvet.io'
-              color='inherit'
-            >
-              contact@kvet.io
-            </Link>
-            <Link
-              href='https://www.linkedin.com/company/kvet-io'
-              target='_blank'
-              rel='noopener noreferrer'
-              color='inherit'
-            >
-              LinkedIn
-            </Link>
-            <Link
-              href='https://www.instagram.com/kvetio'
-              target='_blank'
-              rel='noopener noreferrer'
-              color='inherit'
-            >
-              Instagram
-            </Link>
-          </Flex>
-          <Text m='0'>© {new Date().getFullYear()} Kvetio</Text>
-        </Flex>
       </Flex>
       <ContactModal
         open={open}

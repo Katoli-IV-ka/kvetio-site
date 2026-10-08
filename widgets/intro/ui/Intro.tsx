@@ -28,6 +28,7 @@ function Chevron() {
 
 export function Intro() {
   const [contactOpen, setContactOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <Flex
@@ -56,6 +57,7 @@ export function Intro() {
           aria-label='Primary'
           wrap='wrap'
           align='center'
+          justify={{ base: 'space-between', md: 'flex-start' }}
           gap='20px 36px'
         >
           <Link
@@ -72,17 +74,58 @@ export function Intro() {
             <Flower size={22} />
             <span>Kvetio</span>
           </Link>
+          <chakra.button
+            type='button'
+            display={{ base: 'inline-flex', md: 'none' }}
+            alignItems='center'
+            justifyContent='center'
+            w='40px'
+            h='40px'
+            color='white'
+            cursor='pointer'
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((value) => !value)}
+          >
+            <svg
+              width='22'
+              height='22'
+              viewBox='0 0 22 22'
+              fill='none'
+              aria-hidden='true'
+            >
+              {menuOpen ? (
+                <path
+                  d='M5 5L17 17M17 5L5 17'
+                  stroke='currentColor'
+                  strokeWidth='1.6'
+                  strokeLinecap='round'
+                />
+              ) : (
+                <path
+                  d='M3 6H19M3 11H19M3 16H19'
+                  stroke='currentColor'
+                  strokeWidth='1.6'
+                  strokeLinecap='round'
+                />
+              )}
+            </svg>
+          </chakra.button>
           <Flex
+            display={{ base: menuOpen ? 'flex' : 'none', md: 'flex' }}
+            direction={{ base: 'column', md: 'row' }}
+            w={{ base: '100%', md: 'auto' }}
             wrap='wrap'
-            align='center'
-            gap='12px 26px'
-            fontSize='11px'
+            align={{ base: 'flex-start', md: 'center' }}
+            gap={{ base: 5, md: '12px 26px' }}
+            fontSize={{ base: '14px', md: '11px' }}
             color='#9aa1b0'
           >
             {navLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
+                onClick={() => setMenuOpen(false)}
                 display='flex'
                 alignItems='center'
                 gap='5px'
@@ -118,6 +161,7 @@ export function Intro() {
             {introCopy.title}
           </Heading>
           <Text
+            display={{ base: 'none', md: 'block' }}
             m='0'
             fontSize='13px'
             lineHeight='1.55'
@@ -134,7 +178,7 @@ export function Intro() {
           >
             <Link
               href='#cases'
-              display='inline-flex'
+              display={{ base: 'none', md: 'inline-flex' }}
               alignItems='center'
               justifyContent='center'
               h='44px'
@@ -205,9 +249,14 @@ export function Intro() {
         zIndex={0}
         bg='#2c3a22'
         css={{
-          '--flower-top': '70%',
+          '--flower-top': 'auto',
+          '--flower-bottom': '15%',
           '--flower-w': '40%',
-          '@media (min-width: 48em)': { '--flower-top': '54%', '--flower-w': '30%' },
+          '@media (min-width: 48em)': {
+            '--flower-top': '54%',
+            '--flower-bottom': 'auto',
+            '--flower-w': '30%',
+          },
         }}
       >
         <Image
@@ -235,6 +284,7 @@ export function Intro() {
             position: 'absolute',
             left: '50%',
             top: 'var(--flower-top)',
+            bottom: 'var(--flower-bottom)',
             width: 'var(--flower-w)',
             aspectRatio: '3/4',
             transform: 'translateX(-50%)',

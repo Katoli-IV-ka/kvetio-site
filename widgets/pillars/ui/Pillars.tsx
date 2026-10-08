@@ -55,10 +55,12 @@ export function Pillars() {
     <Box
       as='section'
       bg={ink}
-      px={{ base: 4, md: 8 }}
-      py={6}
+      px={{ base: 5, md: 16 }}
+      py={{ base: 6, md: 10 }}
     >
       <Box
+        maxW='1312px'
+        mx='auto'
         display='flex'
         flexWrap='wrap'
         gap={6}

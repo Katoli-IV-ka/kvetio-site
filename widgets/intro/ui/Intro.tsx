@@ -36,13 +36,15 @@ export function Intro() {
       align='stretch'
       bg={ink}
       overflow='hidden'
-      minH={{ base: 'auto', md: '800px' }}
+      minH='100vh'
+      css={{ minHeight: '100dvh' }}
     >
       <Flex
         direction='column'
         flex='1 1 520px'
         minW='0'
-        px={{ base: 5, md: 16 }}
+        pl={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
+        pr={{ base: 5, md: 16 }}
         pt={10}
         bg={ink}
       >
@@ -194,7 +196,7 @@ export function Intro() {
       <Box
         flex='1 1 520px'
         minW='0'
-        minH={{ base: '480px', md: '800px' }}
+        minH={{ base: '480px', md: '100%' }}
         position='relative'
         bg='#2c3a22'
       >

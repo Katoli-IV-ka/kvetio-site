@@ -1,35 +1,15 @@
 import Head from 'next/head';
-import { Box, Container } from '@chakra-ui/react';
-import { keyframes } from '@emotion/react';
-import { bgPage, glowPink, glowPrimary, glowSecondary, gradientPage } from '../shared/theme/colors';
-import { Header } from '../widgets/header/ui/Header';
-import { Hero } from '../widgets/hero/ui/Hero';
-import { Services } from '../widgets/services/ui/Services';
-import { TrustStrip } from '../widgets/trust-strip/ui/TrustStrip';
-import { DataTypes } from '../widgets/data-types/ui/DataTypes';
-import { SampleDatasets } from '../widgets/samples/ui/SampleDatasets';
-import { Workflow } from '../widgets/workflow/ui/Workflow';
-import { UseCases } from '../widgets/use-cases/ui/UseCases';
-import { WhyUs } from '../widgets/why-us/ui/WhyUs';
-import { QualitySystem } from '../widgets/quality/ui/QualitySystem';
-import { Cta } from '../widgets/cta/ui/Cta';
-import { Footer } from '../widgets/footer/ui/Footer';
-
-const floatA = keyframes`
-  0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(350px, 200px); }
-  50%  { transform: translate(140px, 420px); }
-  75%  { transform: translate(-200px, 160px); }
-  100% { transform: translate(0px, 0px); }
-`;
-
-const floatB = keyframes`
-  0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(-300px, 160px); }
-  50%  { transform: translate(-100px, -320px); }
-  75%  { transform: translate(220px, -120px); }
-  100% { transform: translate(0px, 0px); }
-`;
+import { Box } from '@chakra-ui/react';
+import { ink } from '../shared/theme/palette';
+import { Intro } from '../widgets/intro/ui/Intro';
+import { Cases } from '../widgets/cases/ui/Cases';
+import { Accuracy } from '../widgets/accuracy/ui/Accuracy';
+import { Pillars } from '../widgets/pillars/ui/Pillars';
+import { Team } from '../widgets/team/ui/Team';
+import { Modalities } from '../widgets/modalities/ui/Modalities';
+import { Network } from '../widgets/network/ui/Network';
+import { LinkedInCard } from '../widgets/linkedin/ui/LinkedInCard';
+import { ContactBand } from '../widgets/contact-band/ui/ContactBand';
 
 const SITE_URL = 'https://kvet.io';
 const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
@@ -138,7 +118,7 @@ export default function HomePage() {
           body,
           #__next {
             min-height: 100%;
-            background: ${bgPage};
+            background: ${ink};
           }
           body {
             overflow-x: hidden;
@@ -148,80 +128,22 @@ export default function HomePage() {
 
       <Box
         minH='100vh'
-        bg={gradientPage}
+        bg={ink}
         color='white'
-        position='relative'
+        fontFamily="'Inter', system-ui, sans-serif"
         overflowX='hidden'
       >
-        <Box
-          position='fixed'
-          inset='0'
-          pointerEvents='none'
-          zIndex={0}
-          opacity={0.28}
-          bg='linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)'
-          backgroundSize='72px 72px'
-          maskImage='linear-gradient(180deg, black, transparent 78%)'
-        />
-        <Box
-          position='fixed'
-          top='-220px'
-          left='-200px'
-          w='620px'
-          h='620px'
-          bg={glowPrimary}
-          pointerEvents='none'
-          zIndex={0}
-          animation={`${floatA} 12s ease-in-out infinite`}
-        />
-        <Box
-          position='fixed'
-          right='-160px'
-          top='18%'
-          w='560px'
-          h='560px'
-          bg={glowSecondary}
-          pointerEvents='none'
-          zIndex={0}
-          animation={`${floatB} 15s ease-in-out infinite`}
-        />
-        <Box
-          position='fixed'
-          left='40%'
-          bottom='-260px'
-          w='620px'
-          h='620px'
-          bg={glowPink}
-          pointerEvents='none'
-          zIndex={0}
-        />
-
-        <Container
-          maxW='7xl'
-          py={{ base: 4, md: 6 }}
-          px={{ base: 5, md: 8 }}
-          position='relative'
-          zIndex={1}
-        >
-          <Header />
-          <Box
-            as='main'
-            pt={{ base: 4, md: 6 }}
-            pb={{ base: 12, md: 20 }}
-          >
-            <Hero />
-            <TrustStrip />
-            <Services />
-            <DataTypes />
-            <SampleDatasets />
-            <Workflow />
-            <UseCases />
-            <WhyUs />
-            <QualitySystem />
-          </Box>
-          <Cta />
-          <Footer />
-        </Container>
+        <Intro />
+        <main>
+          <Cases />
+          <Accuracy />
+          <Pillars />
+          <Team />
+          <Modalities />
+          <Network />
+          <LinkedInCard />
+        </main>
+        <ContactBand />
       </Box>
     </>
   );

@@ -9,7 +9,7 @@ export function ContactBand() {
 
   return (
     <Box
-      as='footer'
+      as='section'
       id='contact'
       bg={ink}
       px={{ base: 5, md: 16 }}

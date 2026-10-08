@@ -135,15 +135,15 @@ export default function HomePage() {
       >
         <Intro />
         <main>
-          <Cases />
-          <Accuracy />
           <Pillars />
           <Team />
+          <Cases />
+          <LinkedInCard />
+          <ContactBand />
+          <Accuracy />
           <Modalities />
           <Network />
-          <LinkedInCard />
         </main>
-        <ContactBand />
       </Box>
     </>
   );

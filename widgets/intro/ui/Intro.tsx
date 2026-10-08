@@ -35,6 +35,7 @@ export function Intro() {
       wrap='wrap'
       align='stretch'
       bg={ink}
+      position='relative'
       overflow='hidden'
       minH='100vh'
       css={{ minHeight: '100dvh' }}
@@ -46,7 +47,9 @@ export function Intro() {
         pl={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
         pr={{ base: 5, md: 16 }}
         pt={10}
-        bg={ink}
+        bg={{ base: 'transparent', md: ink }}
+        position='relative'
+        zIndex={1}
       >
         <Flex
           as='nav'
@@ -95,10 +98,10 @@ export function Intro() {
 
         <Flex
           direction='column'
-          justify='center'
+          justify={{ base: 'flex-start', md: 'center' }}
           flex='1 1 auto'
           gap={6}
-          py={{ base: 16, md: '80px' }}
+          pt={{ base: 12, md: '80px' }}
           pb={{ base: 16, md: '96px' }}
           maxW='420px'
         >
@@ -196,9 +199,16 @@ export function Intro() {
       <Box
         flex='1 1 520px'
         minW='0'
-        minH={{ base: '480px', md: '100%' }}
-        position='relative'
+        position={{ base: 'absolute', md: 'relative' }}
+        inset={{ base: '0', md: 'auto' }}
+        minH={{ base: '100%', md: '100%' }}
+        zIndex={0}
         bg='#2c3a22'
+        css={{
+          '--flower-top': '70%',
+          '--flower-w': '40%',
+          '@media (min-width: 48em)': { '--flower-top': '54%', '--flower-w': '30%' },
+        }}
       >
         <Image
           src='/images/v2/hills.jpg'
@@ -210,6 +220,12 @@ export function Intro() {
           objectFit='cover'
           objectPosition='50% 50%'
         />
+        <Box
+          display={{ base: 'block', md: 'none' }}
+          position='absolute'
+          inset='0'
+          bg='linear-gradient(180deg, rgba(14,15,19,0.88) 0%, rgba(14,15,19,0.55) 45%, rgba(14,15,19,0.1) 100%)'
+        />
         <svg
           viewBox='0 0 15 15'
           preserveAspectRatio='none'
@@ -218,8 +234,8 @@ export function Intro() {
           style={{
             position: 'absolute',
             left: '50%',
-            top: '54%',
-            width: '30%',
+            top: 'var(--flower-top)',
+            width: 'var(--flower-w)',
             aspectRatio: '3/4',
             transform: 'translateX(-50%)',
             filter:

@@ -87,6 +87,7 @@ export function Cases() {
             Where oddly specific data goes to work
           </Heading>
           <Flex
+            display={{ base: 'none', md: 'flex' }}
             gap={2}
             flexShrink={0}
           >

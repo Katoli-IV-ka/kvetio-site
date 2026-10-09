@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { Box, Flex, Heading, Link, Text, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, chakra } from '@chakra-ui/react';
 import { clearDraft, loadDraft } from '../../../features/contact/lib/draft';
-import { contactForm, navLinks } from '../../../shared/landing/site-content';
+import { contactForm } from '../../../shared/landing/site-content';
 import { ConsentFields } from '../../../shared/ui/ConsentCheckbox';
 import { LineInput, LineSelect, LineTextarea } from '../../../shared/ui/LineField';
 import {
@@ -13,7 +13,7 @@ import {
   muted,
   pillBorder,
 } from '../../../shared/theme/palette';
-import { Flower } from '../../../shared/ui/Flower';
+import { SiteNav } from '../../site-nav/ui/SiteNav';
 import { SiteFooter } from '../../contact-band/ui/SiteFooter';
 
 type Status = 'idle' | 'loading' | 'success' | 'error' | 'ratelimit';
@@ -49,88 +49,15 @@ function Field({
   );
 }
 
-export const TopNav = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  return (
-    <Flex
-      as='nav'
-      aria-label='Primary'
-      wrap='wrap'
-      align='center'
-      justify={{ base: 'space-between', md: 'flex-start' }}
-      gap='20px 36px'
-      maxW='1312px'
-      mx='auto'
-      pt={10}
-    >
-      <Link
-        href='/'
-        aria-label='Kvetio home'
-        display='flex'
-        alignItems='center'
-        gap={3}
-        fontSize='13px'
-        fontWeight='500'
-        color='white'
-        _hover={{ textDecoration: 'none' }}
-      >
-        <Flower size={22} />
-        <span>Kvetio</span>
-      </Link>
-      <chakra.button
-        type='button'
-        display={{ base: 'inline-flex', md: 'none' }}
-        alignItems='center'
-        justifyContent='center'
-        w='40px'
-        h='40px'
-        color='white'
-        cursor='pointer'
-        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((value) => !value)}
-      >
-        <svg
-          width='22'
-          height='22'
-          viewBox='0 0 22 22'
-          fill='none'
-          aria-hidden='true'
-        >
-          <path
-            d={menuOpen ? 'M5 5L17 17M17 5L5 17' : 'M3 6H19M3 11H19M3 16H19'}
-            stroke='currentColor'
-            strokeWidth='1.6'
-            strokeLinecap='round'
-          />
-        </svg>
-      </chakra.button>
-      <Flex
-        display={{ base: menuOpen ? 'flex' : 'none', md: 'flex' }}
-        direction={{ base: 'column', md: 'row' }}
-        w={{ base: '100%', md: 'auto' }}
-        wrap='wrap'
-        align={{ base: 'flex-start', md: 'center' }}
-        gap={{ base: 5, md: '12px 26px' }}
-        fontSize={{ base: '14px', md: '11px' }}
-        color='#9aa1b0'
-        bg={{ base: 'rgba(14,15,19,0.92)', md: 'transparent' }}
-        p={{ base: 4, md: 0 }}
-      >
-        {navLinks.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            color={item.href === '/contact' ? 'white' : 'inherit'}
-            _hover={{ textDecoration: 'none', color: 'white' }}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </Flex>
-    </Flex>
-  );
-};
+export const TopNav = () => (
+  <Box
+    maxW='1312px'
+    mx='auto'
+    pt={{ base: 5, md: 8 }}
+  >
+    <SiteNav />
+  </Box>
+);
 
 const STEPS = ['contact', 'request'] as const;
 

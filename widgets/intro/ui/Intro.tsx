@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { Box, Flex, Heading, Image, Link, Text, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { FLOWER_PATH } from '../../../shared/landing/geometry';
-import { introCopy, navLinks } from '../../../shared/landing/site-content';
+import { introCopy } from '../../../shared/landing/site-content';
 import { cream, ink, muted, pillBg, pillBorder } from '../../../shared/theme/palette';
-import { Flower } from '../../../shared/ui/Flower';
+import { SiteNav } from '../../site-nav/ui/SiteNav';
 
 export function Intro() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <Flex
       as='header'
@@ -19,102 +16,26 @@ export function Intro() {
       minH='100vh'
       css={{ minHeight: '100dvh' }}
     >
+      <Box
+        position='absolute'
+        top={{ base: 5, md: 8 }}
+        left={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
+        right={{ base: 5, md: 'auto' }}
+        zIndex={3}
+      >
+        <SiteNav />
+      </Box>
       <Flex
         direction='column'
         flex='1 1 520px'
         minW='0'
         pl={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
         pr={{ base: 5, md: 16 }}
-        pt={10}
+        pt='120px'
         bg={{ base: 'transparent', md: ink }}
         position='relative'
         zIndex={1}
       >
-        <Flex
-          as='nav'
-          aria-label='Primary'
-          wrap='wrap'
-          align='center'
-          justify={{ base: 'space-between', md: 'flex-start' }}
-          gap='20px 36px'
-        >
-          <Link
-            href='/'
-            aria-label='Kvetio home'
-            display='flex'
-            alignItems='center'
-            gap={3}
-            fontSize='13px'
-            fontWeight='500'
-            color='white'
-            _hover={{ textDecoration: 'none' }}
-          >
-            <Flower size={22} />
-            <span>Kvetio</span>
-          </Link>
-          <chakra.button
-            type='button'
-            display={{ base: 'inline-flex', md: 'none' }}
-            alignItems='center'
-            justifyContent='center'
-            w='40px'
-            h='40px'
-            color='white'
-            cursor='pointer'
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((value) => !value)}
-          >
-            <svg
-              width='22'
-              height='22'
-              viewBox='0 0 22 22'
-              fill='none'
-              aria-hidden='true'
-            >
-              {menuOpen ? (
-                <path
-                  d='M5 5L17 17M17 5L5 17'
-                  stroke='currentColor'
-                  strokeWidth='1.6'
-                  strokeLinecap='round'
-                />
-              ) : (
-                <path
-                  d='M3 6H19M3 11H19M3 16H19'
-                  stroke='currentColor'
-                  strokeWidth='1.6'
-                  strokeLinecap='round'
-                />
-              )}
-            </svg>
-          </chakra.button>
-          <Flex
-            display={{ base: menuOpen ? 'flex' : 'none', md: 'flex' }}
-            direction={{ base: 'column', md: 'row' }}
-            w={{ base: '100%', md: 'auto' }}
-            wrap='wrap'
-            align={{ base: 'flex-start', md: 'center' }}
-            gap={{ base: 5, md: '12px 26px' }}
-            fontSize={{ base: '14px', md: '11px' }}
-            color='#9aa1b0'
-            bg={{ base: 'rgba(14,15,19,0.92)', md: 'transparent' }}
-            p={{ base: 4, md: 0 }}
-          >
-            {navLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                color='inherit'
-                _hover={{ textDecoration: 'none', color: 'white' }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </Flex>
-        </Flex>
-
         <Flex
           direction='column'
           justify='center'

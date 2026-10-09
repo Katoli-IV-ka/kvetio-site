@@ -108,7 +108,7 @@ function Deck({ cards }: { cards: ReactNode[] }) {
       display={{ base: 'block', md: 'none' }}
       maxW='420px'
       mx='auto'
-      pb={`${depth * DECK_OFFSET + 8}px`}
+      pr={`${depth * DECK_OFFSET}px`}
     >
       <Box
         position='relative'
@@ -136,8 +136,8 @@ function Deck({ cards }: { cards: ReactNode[] }) {
               onPointerUp={isTop ? onPointerUp : undefined}
               onPointerCancel={isTop ? onPointerUp : undefined}
               css={{
-                transform: `translate(${dx}${fly ? '%' : 'px'}, ${lift * DECK_OFFSET}px) rotate(${rotate}deg) scale(${scale})`,
-                transformOrigin: '50% 100%',
+                transform: `translate(${fly ? `${dx}%` : `${dx + lift * DECK_OFFSET}px`}, 0) rotate(${rotate}deg) scale(${scale})`,
+                transformOrigin: '0% 100%',
                 transition:
                   isTop && !fly && dragging
                     ? 'none'

@@ -18,7 +18,7 @@ export function Modalities() {
       id='modalities'
       bg={ink}
       px={{ base: 5, md: 16 }}
-      py={{ base: 12, lg: 24 }}
+      py={{ base: 14, md: 24 }}
     >
       <Box
         maxW='1312px'
@@ -29,19 +29,20 @@ export function Modalities() {
             as='h2'
             m='0'
             maxW='760px'
-            fontSize='30px'
-            lineHeight='1.1'
-            fontWeight='700'
+            fontSize={{ base: '30px', md: '40px' }}
+            lineHeight='1.08'
+            fontWeight='500'
             letterSpacing='-0.01em'
+            textTransform='uppercase'
             color='white'
           >
             {modalityCopy.title}
           </Heading>
           <Text
-            mt='18px'
+            mt={5}
             mb='0'
-            maxW='560px'
-            fontSize='13px'
+            maxW='640px'
+            fontSize='15px'
             lineHeight='1.55'
             color={muted}
           >

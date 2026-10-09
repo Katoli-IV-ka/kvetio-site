@@ -1,5 +1,4 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { LAND_PATH } from '../../../shared/landing/geometry';
 import { cities, networkCopy } from '../../../shared/landing/site-content';
 import { blue, ink } from '../../../shared/theme/palette';
 
@@ -49,14 +48,17 @@ export function Network() {
           minW='0'
         >
           <svg
-            viewBox='0 0 1000 560'
+            viewBox='110 0 790 560'
             role='img'
             aria-label={`World map with marked cities: ${names}`}
             style={{ display: 'block', width: '100%', height: 'auto', overflow: 'visible' }}
           >
-            <path
-              d={LAND_PATH}
-              fill='#ffffff'
+            <image
+              href='/images/v2/globe.jpg'
+              x='140'
+              y='0'
+              width='720'
+              height='557'
             />
             {cities.map((city) => (
               <g key={`line-${city.name}`}>

@@ -194,14 +194,14 @@ export type CityMarker = {
 export const networkCopy = { title: 'We shoot worldwide' };
 
 export const cities: CityMarker[] = [
-  { name: 'Berlin', x: 537.2, y: 191.1, labelX: 470, labelY: 148, labelWidth: 55.6 },
-  { name: 'Warsaw', x: 558.3, y: 192.2, labelX: 556, labelY: 138, labelWidth: 55.6 },
-  { name: 'Minsk', x: 576.7, y: 185.8, labelX: 642, labelY: 150, labelWidth: 50 },
-  { name: 'Prague', x: 540, y: 200, labelX: 590, labelY: 238, labelWidth: 55.6 },
-  { name: 'Madrid', x: 489.7, y: 233.4, labelX: 430, labelY: 228, labelWidth: 55.6 },
-  { name: 'New York', x: 294.4, y: 232.4, labelX: 352, labelY: 262, labelWidth: 66.8 },
-  { name: 'Tokyo', x: 888.1, y: 248.6, labelX: 925, labelY: 292, labelWidth: 50 },
-  { name: 'Dubai', x: 653.6, y: 280.6, labelX: 655, labelY: 324, labelWidth: 50 },
+  { name: 'Berlin', x: 525, y: 158, labelX: 440, labelY: 40, labelWidth: 55.6 },
+  { name: 'Warsaw', x: 545, y: 158, labelX: 650, labelY: 40, labelWidth: 55.6 },
+  { name: 'Minsk', x: 562, y: 150, labelX: 770, labelY: 100, labelWidth: 50 },
+  { name: 'Prague', x: 530, y: 170, labelX: 560, labelY: 18, labelWidth: 55.6 },
+  { name: 'Madrid', x: 495, y: 185, labelX: 250, labelY: 170, labelWidth: 55.6 },
+  { name: 'New York', x: 365, y: 245, labelX: 150, labelY: 300, labelWidth: 66.8 },
+  { name: 'Tokyo', x: 703, y: 250, labelX: 890, labelY: 300, labelWidth: 50 },
+  { name: 'Dubai', x: 688, y: 200, labelX: 860, labelY: 210, labelWidth: 50 },
 ];
 
 export const linkedinCopy = {

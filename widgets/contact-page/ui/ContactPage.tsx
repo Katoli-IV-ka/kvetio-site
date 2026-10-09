@@ -251,22 +251,32 @@ export function ContactPage() {
             >
               {contactForm.title}
             </Heading>
-            <Text
-              mt={5}
-              mb={10}
-              fontSize='15px'
-              lineHeight='1.55'
-              color={muted}
-            >
-              {contactForm.intro}
-            </Text>
+            {status !== 'success' && (
+              <Flex
+                role='progressbar'
+                aria-label='Form progress'
+                aria-valuemin={1}
+                aria-valuemax={STEPS.length}
+                aria-valuenow={step + 1}
+                gap={1}
+                mt={6}
+                mb={10}
+              >
+                {STEPS.map((label, index) => (
+                  <Box
+                    key={label}
+                    flex='1'
+                    h='2px'
+                    bg={index <= step ? blue : hairline}
+                  />
+                ))}
+              </Flex>
+            )}
 
             {status === 'success' ? (
               <Box
                 role='status'
-                borderTopWidth='1px'
-                borderColor={hairline}
-                pt={8}
+                mt={6}
               >
                 <Text
                   m='0'
@@ -289,39 +299,7 @@ export function ContactPage() {
                 <Flex
                   direction='column'
                   gap={6}
-                  borderTopWidth='1px'
-                  borderColor={hairline}
-                  pt={6}
                 >
-                  <Flex
-                    align='center'
-                    gap={3}
-                    aria-label={`Step ${step + 1} of ${STEPS.length}`}
-                    fontSize='11px'
-                    letterSpacing='0.08em'
-                    textTransform='uppercase'
-                    color={muted}
-                  >
-                    <span>
-                      Step {step + 1} / {STEPS.length}
-                    </span>
-                    <Flex
-                      flex='1'
-                      gap={1}
-                      aria-hidden='true'
-                    >
-                      {STEPS.map((label, index) => (
-                        <Box
-                          key={label}
-                          flex='1'
-                          h='2px'
-                          bg={index <= step ? blue : hairline}
-                        />
-                      ))}
-                    </Flex>
-                    <span>{STEPS[step]}</span>
-                  </Flex>
-
                   {step === 0 && (
                     <>
                       <Field

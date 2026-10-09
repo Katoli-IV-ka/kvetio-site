@@ -29,7 +29,6 @@ export const navLinks = [
 
 export const contactForm = {
   title: 'Contact Us',
-  intro: 'Interested in Kvetio data? Fill out the contact form below, and we’ll be in touch.',
   dataTypes: ['Healthcare', 'Media', 'Audio', 'Motion capture', 'Company data', 'Other'],
   sources: [
     'Google Search',

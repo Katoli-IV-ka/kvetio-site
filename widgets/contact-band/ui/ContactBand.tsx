@@ -153,28 +153,34 @@ function HandsButton() {
         position='relative'
         overflow='hidden'
         borderRadius='full'
-        h={{ base: '104px', md: '160px' }}
+        h={{ base: '72px', md: '96px' }}
         bg='#030304'
       >
+        {/* The whole touching-hands scene is scaled down to fit (≈140 rows of the 640px photo
+            across the button height); anything the photo does not reach stays black. */}
         <Box
           aria-hidden='true'
           position='absolute'
-          top='-150%'
-          bottom='-150%'
-          left='-45%'
-          right='-45%'
+          top='50%'
+          left='50%'
+          w={{ base: '329px', md: '439px' }}
+          h={{ base: '329px', md: '439px' }}
           backgroundImage="url('/images/v2/contact-hands.jpg')"
-          backgroundSize='100% auto'
-          backgroundPosition='50% 49%'
-          backgroundRepeat='no-repeat'
-          transform='translateX(-6%) rotate(-7deg)'
+          backgroundSize='100% 100%'
+          transform='translate(-56%, -50.3%) rotate(-7deg)'
+          transformOrigin='56% 50.3%'
+          css={{
+            maskImage: 'radial-gradient(farthest-side at 56% 50.3%, #000 32%, transparent 74%)',
+            WebkitMaskImage:
+              'radial-gradient(farthest-side at 56% 50.3%, #000 32%, transparent 74%)',
+          }}
         />
         <Flex
           position='relative'
           h='100%'
           align='center'
           justify='center'
-          fontSize={{ base: '20px', md: '30px' }}
+          fontSize={{ base: '17px', md: '22px' }}
           fontWeight='200'
           letterSpacing='0.12em'
           textTransform='uppercase'

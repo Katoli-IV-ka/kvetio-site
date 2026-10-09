@@ -59,6 +59,12 @@ export function SiteFooter() {
             >
               Instagram
             </Link>
+            <Link
+              href='/privacy-policy'
+              color='inherit'
+            >
+              Privacy Policy
+            </Link>
           </Flex>
           <Text m='0'>© {new Date().getFullYear()} Kvetio</Text>
         </Flex>

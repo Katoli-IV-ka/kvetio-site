@@ -1,6 +1,9 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Box, Flex, Heading, Input, Link, Text, Textarea, chakra } from '@chakra-ui/react';
+import { clearDraft, loadDraft } from '../../../features/contact/lib/draft';
 import { contactForm, navLinks } from '../../../shared/landing/site-content';
+import { ConsentCheckbox } from '../../../shared/ui/ConsentCheckbox';
+import { fieldProps } from '../../../shared/ui/formStyles';
 import {
   blue,
   cream,
@@ -14,20 +17,6 @@ import { Flower } from '../../../shared/ui/Flower';
 import { SiteFooter } from '../../contact-band/ui/SiteFooter';
 
 type Status = 'idle' | 'loading' | 'success' | 'error' | 'ratelimit';
-
-const fieldProps = {
-  w: '100%',
-  h: '48px',
-  px: 4,
-  borderRadius: '0',
-  borderWidth: '1px',
-  borderColor: pillBorder,
-  bg: inkSoft,
-  color: 'white',
-  fontSize: '14px',
-  _placeholder: { color: '#5d6472' },
-  _focusVisible: { borderColor: blue, outline: 'none', boxShadow: 'none' },
-} as const;
 
 function Field({
   label,
@@ -60,7 +49,7 @@ function Field({
   );
 }
 
-const TopNav = () => {
+export const TopNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <Flex
@@ -143,47 +132,97 @@ const TopNav = () => {
   );
 };
 
+const STEPS = ['About you', 'Your company', 'Your request'] as const;
+
+type Values = {
+  name: string;
+  email: string;
+  consent: boolean;
+  jobTitle: string;
+  company: string;
+  dataTypes: string[];
+  message: string;
+  source: string;
+};
+
+const EMPTY: Values = {
+  name: '',
+  email: '',
+  consent: false,
+  jobTitle: '',
+  company: '',
+  dataTypes: [],
+  message: '',
+  source: '',
+};
+
 export function ContactPage() {
-  const [dataTypes, setDataTypes] = useState<string[]>([]);
-  const [source, setSource] = useState('');
+  const [values, setValues] = useState<Values>(EMPTY);
+  const [step, setStep] = useState(0);
   const [status, setStatus] = useState<Status>('idle');
   const [typeError, setTypeError] = useState(false);
 
+  // Answers given in the landing band are already here: jump to the second step.
+  useEffect(() => {
+    const draft = loadDraft();
+    if (!draft) return;
+    // sessionStorage is only readable on the client, so restore after hydration.
+    queueMicrotask(() => {
+      setValues((current) => ({ ...current, ...draft }));
+      if (draft.name && draft.email && draft.consent) setStep(1);
+    });
+  }, []);
+
+  const set = <K extends keyof Values>(key: K, value: Values[K]) =>
+    setValues((current) => ({ ...current, [key]: value }));
+
   const toggleType = (type: string) => {
     setTypeError(false);
-    setDataTypes((current) =>
-      current.includes(type) ? current.filter((item) => item !== type) : [...current, type],
+    set(
+      'dataTypes',
+      values.dataTypes.includes(type)
+        ? values.dataTypes.filter((item) => item !== type)
+        : [...values.dataTypes, type],
     );
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (dataTypes.length === 0) {
-      setTypeError(true);
-      return;
-    }
-    const form = new FormData(event.currentTarget);
-    const value = (key: string) => String(form.get(key) ?? '');
+  const submit = async () => {
     setStatus('loading');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: value('name'),
-          jobTitle: value('jobTitle'),
-          company: value('company'),
-          email: value('email'),
-          dataTypes,
-          message: value('message'),
-          source,
+          name: values.name,
+          jobTitle: values.jobTitle,
+          company: values.company,
+          email: values.email,
+          dataTypes: values.dataTypes,
+          message: values.message,
+          source: values.source,
         }),
       });
+      if (res.ok) clearDraft();
       setStatus(res.ok ? 'success' : res.status === 429 ? 'ratelimit' : 'error');
     } catch {
       setStatus('error');
     }
   };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (step === 1 && values.dataTypes.length === 0) {
+      setTypeError(true);
+      return;
+    }
+    if (step < STEPS.length - 1) {
+      setStep(step + 1);
+      return;
+    }
+    void submit();
+  };
+
+  const last = step === STEPS.length - 1;
 
   return (
     <Box
@@ -246,191 +285,262 @@ export function ContactPage() {
                 </Text>
               </Box>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                noValidate={false}
-              >
+              <form onSubmit={handleSubmit}>
                 <Flex
                   direction='column'
                   gap={6}
                   borderTopWidth='1px'
                   borderColor={hairline}
-                  pt={8}
+                  pt={6}
                 >
-                  <Field
-                    label='Name'
-                    htmlFor='cf-name'
+                  <Flex
+                    align='center'
+                    gap={3}
+                    aria-label={`Step ${step + 1} of ${STEPS.length}`}
+                    fontSize='11px'
+                    letterSpacing='0.08em'
+                    textTransform='uppercase'
+                    color={muted}
                   >
-                    <Input
-                      {...fieldProps}
-                      id='cf-name'
-                      name='name'
-                      placeholder='John Doe'
-                      autoComplete='name'
-                      required
-                    />
-                  </Field>
-                  <Field
-                    label='Job title'
-                    htmlFor='cf-title'
-                  >
-                    <Input
-                      {...fieldProps}
-                      id='cf-title'
-                      name='jobTitle'
-                      autoComplete='organization-title'
-                      required
-                    />
-                  </Field>
-                  <Field
-                    label='Company name'
-                    htmlFor='cf-company'
-                  >
-                    <Input
-                      {...fieldProps}
-                      id='cf-company'
-                      name='company'
-                      placeholder='ACME Corp.'
-                      autoComplete='organization'
-                      required
-                    />
-                  </Field>
-                  <Field
-                    label='Email'
-                    htmlFor='cf-email'
-                  >
-                    <Input
-                      {...fieldProps}
-                      id='cf-email'
-                      name='email'
-                      type='email'
-                      placeholder='john@company.com'
-                      autoComplete='email'
-                      required
-                    />
-                  </Field>
-
-                  <Box
-                    as='fieldset'
-                    m='0'
-                    p='0'
-                    border='0'
-                    minW='0'
-                  >
-                    <Field label='Data type needed'>
-                      <Text
-                        m='0'
-                        fontSize='12px'
-                        color='#5d6472'
-                      >
-                        Check all that apply
-                      </Text>
-                      <Flex
-                        wrap='wrap'
-                        gap={2}
-                      >
-                        {contactForm.dataTypes.map((type) => {
-                          const active = dataTypes.includes(type);
-                          return (
-                            <chakra.label
-                              key={type}
-                              display='inline-flex'
-                              alignItems='center'
-                              h='40px'
-                              px={4}
-                              borderWidth='1px'
-                              borderColor={active ? blue : pillBorder}
-                              bg={active ? blue : inkSoft}
-                              color={active ? ink : 'white'}
-                              fontSize='12px'
-                              fontWeight={active ? 600 : 500}
-                              cursor='pointer'
-                              css={{ '&:has(:focus-visible)': { outline: `2px solid ${cream}` } }}
-                            >
-                              <input
-                                type='checkbox'
-                                name='dataType'
-                                value={type}
-                                checked={active}
-                                onChange={() => toggleType(type)}
-                                style={{
-                                  position: 'absolute',
-                                  opacity: 0,
-                                  width: 1,
-                                  height: 1,
-                                  pointerEvents: 'none',
-                                }}
-                              />
-                              {type}
-                            </chakra.label>
-                          );
-                        })}
-                      </Flex>
-                      {typeError && (
-                        <Text
-                          role='alert'
-                          m='0'
-                          fontSize='12px'
-                          color='#e07a6a'
-                        >
-                          Select at least one data type.
-                        </Text>
-                      )}
-                    </Field>
-                  </Box>
-
-                  <Field
-                    label='Describe your request'
-                    htmlFor='cf-message'
-                  >
-                    <Textarea
-                      {...fieldProps}
-                      id='cf-message'
-                      name='message'
-                      placeholder='How can we help?'
-                      h='auto'
-                      minH='132px'
-                      py={3}
-                      required
-                    />
-                  </Field>
-
-                  <Field
-                    label='How did you hear about us?'
-                    htmlFor='cf-source'
-                  >
-                    <chakra.select
-                      {...fieldProps}
-                      id='cf-source'
-                      name='source'
-                      value={source}
-                      onChange={(event) => setSource(event.target.value)}
-                      required
-                      css={{ colorScheme: 'dark' }}
+                    <span>
+                      Step {step + 1} / {STEPS.length}
+                    </span>
+                    <Flex
+                      flex='1'
+                      gap={1}
+                      aria-hidden='true'
                     >
-                      <option
-                        value=''
-                        disabled
-                      >
-                        Click to select
-                      </option>
-                      {contactForm.sources.map((item) => (
-                        <option
-                          key={item}
-                          value={item}
-                        >
-                          {item}
-                        </option>
+                      {STEPS.map((label, index) => (
+                        <Box
+                          key={label}
+                          flex='1'
+                          h='2px'
+                          bg={index <= step ? blue : hairline}
+                        />
                       ))}
-                    </chakra.select>
-                  </Field>
+                    </Flex>
+                    <span>{STEPS[step]}</span>
+                  </Flex>
+
+                  {step === 0 && (
+                    <>
+                      <Field
+                        label='Name'
+                        htmlFor='cf-name'
+                      >
+                        <Input
+                          {...fieldProps}
+                          id='cf-name'
+                          name='name'
+                          placeholder='John Doe'
+                          autoComplete='name'
+                          value={values.name}
+                          onChange={(event) => set('name', event.target.value)}
+                          required
+                        />
+                      </Field>
+                      <Field
+                        label='Email'
+                        htmlFor='cf-email'
+                      >
+                        <Input
+                          {...fieldProps}
+                          id='cf-email'
+                          name='email'
+                          type='email'
+                          placeholder='john@company.com'
+                          autoComplete='email'
+                          value={values.email}
+                          onChange={(event) => set('email', event.target.value)}
+                          required
+                        />
+                      </Field>
+                      <ConsentCheckbox
+                        id='cf-consent'
+                        checked={values.consent}
+                        onChange={(checked) => set('consent', checked)}
+                      />
+                    </>
+                  )}
+
+                  {step === 1 && (
+                    <>
+                      <Field
+                        label='Job title'
+                        htmlFor='cf-title'
+                      >
+                        <Input
+                          {...fieldProps}
+                          id='cf-title'
+                          name='jobTitle'
+                          autoComplete='organization-title'
+                          value={values.jobTitle}
+                          onChange={(event) => set('jobTitle', event.target.value)}
+                          required
+                        />
+                      </Field>
+                      <Field
+                        label='Company name'
+                        htmlFor='cf-company'
+                      >
+                        <Input
+                          {...fieldProps}
+                          id='cf-company'
+                          name='company'
+                          placeholder='ACME Corp.'
+                          autoComplete='organization'
+                          value={values.company}
+                          onChange={(event) => set('company', event.target.value)}
+                          required
+                        />
+                      </Field>
+                      <Box
+                        as='fieldset'
+                        m='0'
+                        p='0'
+                        border='0'
+                        minW='0'
+                      >
+                        <Field label='Data type needed'>
+                          <Text
+                            m='0'
+                            fontSize='12px'
+                            color='#5d6472'
+                          >
+                            Check all that apply
+                          </Text>
+                          <Flex
+                            wrap='wrap'
+                            gap={2}
+                          >
+                            {contactForm.dataTypes.map((type) => {
+                              const active = values.dataTypes.includes(type);
+                              return (
+                                <chakra.label
+                                  key={type}
+                                  display='inline-flex'
+                                  alignItems='center'
+                                  h='40px'
+                                  px={4}
+                                  borderWidth='1px'
+                                  borderColor={active ? blue : pillBorder}
+                                  bg={active ? blue : inkSoft}
+                                  color={active ? ink : 'white'}
+                                  fontSize='12px'
+                                  fontWeight={active ? 600 : 500}
+                                  cursor='pointer'
+                                  css={{
+                                    '&:has(:focus-visible)': { outline: `2px solid ${cream}` },
+                                  }}
+                                >
+                                  <input
+                                    type='checkbox'
+                                    name='dataType'
+                                    value={type}
+                                    checked={active}
+                                    onChange={() => toggleType(type)}
+                                    style={{
+                                      position: 'absolute',
+                                      opacity: 0,
+                                      width: 1,
+                                      height: 1,
+                                      pointerEvents: 'none',
+                                    }}
+                                  />
+                                  {type}
+                                </chakra.label>
+                              );
+                            })}
+                          </Flex>
+                          {typeError && (
+                            <Text
+                              role='alert'
+                              m='0'
+                              fontSize='12px'
+                              color='#e07a6a'
+                            >
+                              Select at least one data type.
+                            </Text>
+                          )}
+                        </Field>
+                      </Box>
+                    </>
+                  )}
+
+                  {step === 2 && (
+                    <>
+                      <Field
+                        label='Describe your request'
+                        htmlFor='cf-message'
+                      >
+                        <Textarea
+                          {...fieldProps}
+                          id='cf-message'
+                          name='message'
+                          placeholder='How can we help?'
+                          h='auto'
+                          minH='132px'
+                          py={3}
+                          value={values.message}
+                          onChange={(event) => set('message', event.target.value)}
+                          required
+                        />
+                      </Field>
+                      <Field
+                        label='How did you hear about us?'
+                        htmlFor='cf-source'
+                      >
+                        <chakra.select
+                          {...fieldProps}
+                          id='cf-source'
+                          name='source'
+                          value={values.source}
+                          onChange={(event) => set('source', event.target.value)}
+                          required
+                          css={{ colorScheme: 'dark' }}
+                        >
+                          <option
+                            value=''
+                            disabled
+                          >
+                            Click to select
+                          </option>
+                          {contactForm.sources.map((item) => (
+                            <option
+                              key={item}
+                              value={item}
+                            >
+                              {item}
+                            </option>
+                          ))}
+                        </chakra.select>
+                      </Field>
+                    </>
+                  )}
 
                   <Flex
                     align='center'
-                    gap={5}
+                    gap={4}
                     wrap='wrap'
                     pt={2}
                   >
+                    {step > 0 && (
+                      <chakra.button
+                        type='button'
+                        onClick={() => setStep(step - 1)}
+                        h='44px'
+                        px={6}
+                        borderRadius='full'
+                        borderWidth='1px'
+                        borderColor='rgba(255,255,255,0.35)'
+                        color='white'
+                        fontSize='12px'
+                        fontWeight='600'
+                        cursor='pointer'
+                      >
+                        Back
+                      </chakra.button>
+                    )}
                     <chakra.button
                       type='submit'
                       disabled={status === 'loading'}
@@ -446,7 +556,7 @@ export function ContactPage() {
                       cursor='pointer'
                       opacity={status === 'loading' ? 0.6 : 1}
                     >
-                      {status === 'loading' ? 'Sending…' : 'Submit'}
+                      {status === 'loading' ? 'Sending…' : last ? 'Submit' : 'Continue'}
                     </chakra.button>
                     {status === 'error' && (
                       <Text

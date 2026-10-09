@@ -138,12 +138,12 @@ export default function HomePage() {
         <main>
           <Pillars />
           <Team />
+          <ContactBand />
           <Cases />
           <LinkedInCard />
           <Accuracy />
           <Modalities />
           <Network />
-          <ContactBand />
         </main>
         <SiteFooter />
       </Box>

@@ -54,7 +54,7 @@ function Fill({ src, alt, position }: { src: string; alt: string; position?: str
   );
 }
 
-const DECK_OFFSET = 16;
+const DECK_OFFSET = 20;
 const SWIPE_DISTANCE = 70;
 const FLY_MS = 280;
 
@@ -120,7 +120,7 @@ function Deck({ cards }: { cards: ReactNode[] }) {
           const fly = isTop && flying !== 0;
           const dx = isTop ? (fly ? flying * 130 : drag) : 0;
           const lift = fly ? 0 : position;
-          const scale = 1 - lift * 0.05;
+          const scaleY = 1 - lift * 0.05;
           const rotate = isTop ? (fly ? flying * 12 : drag / 18) : 0;
           return (
             <Box
@@ -136,8 +136,8 @@ function Deck({ cards }: { cards: ReactNode[] }) {
               onPointerUp={isTop ? onPointerUp : undefined}
               onPointerCancel={isTop ? onPointerUp : undefined}
               css={{
-                transform: `translate(${fly ? `${dx}%` : `${dx + lift * DECK_OFFSET}px`}, 0) rotate(${rotate}deg) scale(${scale})`,
-                transformOrigin: '0% 100%',
+                transform: `translate(${fly ? `${dx}%` : `${dx + lift * DECK_OFFSET}px`}, 0) rotate(${rotate}deg) scale(1, ${scaleY})`,
+                transformOrigin: fly || isTop ? '0% 100%' : '50% 50%',
                 transition:
                   isTop && !fly && dragging
                     ? 'none'

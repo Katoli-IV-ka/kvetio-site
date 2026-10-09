@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Box, Flex, Heading, Input, Link, Text, Textarea, chakra } from '@chakra-ui/react';
 import { clearDraft, loadDraft } from '../../../features/contact/lib/draft';
 import { contactForm, navLinks } from '../../../shared/landing/site-content';
-import { ConsentCheckbox } from '../../../shared/ui/ConsentCheckbox';
+import { ConsentFields } from '../../../shared/ui/ConsentCheckbox';
 import { fieldProps } from '../../../shared/ui/formStyles';
 import {
   blue,
@@ -132,12 +132,13 @@ export const TopNav = () => {
   );
 };
 
-const STEPS = ['About you', 'Your company', 'Your request'] as const;
+const STEPS = ['contact', 'request'] as const;
 
 type Values = {
   name: string;
   email: string;
   consent: boolean;
+  marketing: boolean;
   jobTitle: string;
   company: string;
   dataTypes: string[];
@@ -149,6 +150,7 @@ const EMPTY: Values = {
   name: '',
   email: '',
   consent: false,
+  marketing: false,
   jobTitle: '',
   company: '',
   dataTypes: [],
@@ -200,6 +202,7 @@ export function ContactPage() {
           dataTypes: values.dataTypes,
           message: values.message,
           source: values.source,
+          marketingConsent: values.marketing,
         }),
       });
       if (res.ok) clearDraft();
@@ -211,7 +214,7 @@ export function ContactPage() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (step === 1 && values.dataTypes.length === 0) {
+    if (step === STEPS.length - 1 && values.dataTypes.length === 0) {
       setTypeError(true);
       return;
     }
@@ -333,11 +336,6 @@ export function ContactPage() {
                           required
                         />
                       </Field>
-                      <ConsentCheckbox
-                        id='cf-consent'
-                        checked={values.consent}
-                        onChange={(checked) => set('consent', checked)}
-                      />
                     </>
                   )}
 
@@ -442,11 +440,6 @@ export function ContactPage() {
                           )}
                         </Field>
                       </Box>
-                    </>
-                  )}
-
-                  {step === 2 && (
-                    <>
                       <Field
                         label='Describe your request'
                         htmlFor='cf-message'
@@ -497,12 +490,21 @@ export function ContactPage() {
                   )}
 
                   <Flex
-                    align='center'
+                    align={step === 0 ? 'flex-end' : 'center'}
+                    justify='space-between'
                     gap={4}
                     wrap='wrap'
                     pt={2}
                   >
-                    {step > 0 && (
+                    {step === 0 ? (
+                      <ConsentFields
+                        idPrefix='cf'
+                        consent={values.consent}
+                        marketing={values.marketing}
+                        onConsent={(checked) => set('consent', checked)}
+                        onMarketing={(checked) => set('marketing', checked)}
+                      />
+                    ) : (
                       <chakra.button
                         type='button'
                         onClick={() => setStep(step - 1)}
@@ -526,6 +528,7 @@ export function ContactPage() {
                       alignItems='center'
                       h='44px'
                       px={8}
+                      ml='auto'
                       borderRadius='full'
                       bg='white'
                       color={ink}

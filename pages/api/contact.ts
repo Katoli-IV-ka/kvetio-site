@@ -7,6 +7,7 @@ const rateLimitCache = new LRUCache<string, number>({
   ttl: 10 * 60 * 1000, // 10 minutes
 });
 
+const PRIVACY_POLICY_VERSION = '2026-10-09';
 const RATE_LIMIT = 3; // max requests per IP per TTL window
 
 export type ContactPayload = {
@@ -18,6 +19,7 @@ export type ContactPayload = {
   company?: string;
   dataTypes?: string[];
   source?: string;
+  marketingConsent?: boolean;
 };
 
 function text(value: unknown, max = 2000): string | undefined {
@@ -55,6 +57,7 @@ export function normalizeContactPayload(body: unknown): ContactPayload | null {
   if (company) result.company = company;
   if (dataTypes.length) result.dataTypes = dataTypes;
   if (source) result.source = source;
+  if (payload.marketingConsent === true) result.marketingConsent = true;
   return result;
 }
 
@@ -109,12 +112,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ message: 'Email and message are required' });
   }
 
-  const { name, email, message, datasetTitle, jobTitle, company, dataTypes, source } = payload;
+  const {
+    name,
+    email,
+    message,
+    datasetTitle,
+    jobTitle,
+    company,
+    dataTypes,
+    source,
+    marketingConsent,
+  } = payload;
   const details = [
     jobTitle && `Title: ${jobTitle}`,
     company && `Company: ${company}`,
     dataTypes && `Data type: ${dataTypes.join(', ')}`,
     source && `Heard about us: ${source}`,
+    `Consent to reply (Privacy Policy ${PRIVACY_POLICY_VERSION}): given ${new Date().toISOString()}`,
+    `Marketing e-mail consent: ${marketingConsent ? 'YES' : 'no'}`,
   ].filter((line): line is string => Boolean(line));
   const escape = (value: string) =>
     value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

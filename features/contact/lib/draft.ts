@@ -4,6 +4,7 @@ export type ContactDraft = {
   name: string;
   email: string;
   consent: boolean;
+  marketing: boolean;
 };
 
 /** Hands the first two answers from the landing band over to the contact page. */
@@ -21,7 +22,12 @@ export function loadDraft(): ContactDraft | null {
     if (!raw) return null;
     const data = JSON.parse(raw) as Partial<ContactDraft>;
     if (typeof data.name !== 'string' || typeof data.email !== 'string') return null;
-    return { name: data.name, email: data.email, consent: data.consent === true };
+    return {
+      name: data.name,
+      email: data.email,
+      consent: data.consent === true,
+      marketing: data.marketing === true,
+    };
   } catch {
     return null;
   }

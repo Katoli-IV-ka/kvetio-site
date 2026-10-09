@@ -2,8 +2,8 @@ import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Flex, Heading, Input, chakra } from '@chakra-ui/react';
 import { saveDraft } from '../../../features/contact/lib/draft';
-import { hairline, ink, muted } from '../../../shared/theme/palette';
-import { ConsentCheckbox } from '../../../shared/ui/ConsentCheckbox';
+import { hairline, ink } from '../../../shared/theme/palette';
+import { ConsentFields } from '../../../shared/ui/ConsentCheckbox';
 import { fieldProps } from '../../../shared/ui/formStyles';
 
 export function ContactBand() {
@@ -11,11 +11,12 @@ export function ContactBand() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
+  const [marketing, setMarketing] = useState(false);
 
   // Nothing is sent from here: the two answers are only carried to the full form.
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    saveDraft({ name: name.trim(), email: email.trim(), consent });
+    saveDraft({ name: name.trim(), email: email.trim(), consent, marketing });
     void router.push('/contact');
   };
 
@@ -56,7 +57,7 @@ export function ContactBand() {
           >
             <Box
               display='grid'
-              gridTemplateColumns={{ base: '1fr', md: '1fr 1fr auto' }}
+              gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
               gap={3}
             >
               <Input
@@ -80,7 +81,22 @@ export function ContactBand() {
                 onChange={(event) => setEmail(event.target.value)}
                 required
               />
+            </Box>
+            <Flex
+              align='flex-end'
+              justify='space-between'
+              gap={6}
+              wrap='wrap'
+            >
+              <ConsentFields
+                idPrefix='band'
+                consent={consent}
+                marketing={marketing}
+                onConsent={setConsent}
+                onMarketing={setMarketing}
+              />
               <chakra.button
+                ml='auto'
                 type='submit'
                 display='inline-flex'
                 alignItems='center'
@@ -96,19 +112,7 @@ export function ContactBand() {
               >
                 Let’s talk
               </chakra.button>
-            </Box>
-            <ConsentCheckbox
-              id='band-consent'
-              checked={consent}
-              onChange={setConsent}
-            />
-            <Box
-              m='0'
-              fontSize='11px'
-              color={muted}
-            >
-              We only use these details to reply to you.
-            </Box>
+            </Flex>
           </Flex>
         </form>
       </Flex>

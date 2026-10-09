@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Flex, Link, chakra } from '@chakra-ui/react';
-import { blue, inkSoft, muted, pillBorder } from '../theme/palette';
+import { blue, inkSoft, pillBorder, textSoft } from '../theme/palette';
 
 type Props = {
   id: string;
@@ -18,7 +18,7 @@ export function ConsentCheckbox({ id, checked, onChange, required = false, child
       gap={3}
       fontSize='12px'
       lineHeight='1.5'
-      color={muted}
+      color={textSoft}
     >
       <chakra.input
         id={id}

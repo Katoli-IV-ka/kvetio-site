@@ -5,9 +5,9 @@ import type {
   TextareaHTMLAttributes,
 } from 'react';
 import { Box, chakra } from '@chakra-ui/react';
-import { blue, muted } from '../theme/palette';
+import { blue } from '../theme/palette';
 
-const LINE = '#3a3e48';
+const LINE = 'rgba(255,255,255,0.4)';
 
 const control = {
   display: 'block',
@@ -36,7 +36,7 @@ const wrapperCss = {
     position: 'absolute',
     left: 0,
     top: '40px',
-    color: muted,
+    color: 'rgba(255,255,255,0.72)',
     fontSize: '15px',
     pointerEvents: 'none',
     transformOrigin: 'left top',

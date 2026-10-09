@@ -190,7 +190,7 @@ export function Intro() {
               color={{ base: 'white', md: ink }}
               _hover={{ textDecoration: 'none' }}
             >
-              <span>Start Building</span>
+              <span>Contact Us</span>
               <Flex
                 align='center'
                 justify='center'

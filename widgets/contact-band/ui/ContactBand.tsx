@@ -46,7 +46,7 @@ export function ContactBand() {
             color={ink}
             _hover={{ textDecoration: 'none' }}
           >
-            Contact us
+            Contact Us
           </Link>
         </Box>
       </Flex>

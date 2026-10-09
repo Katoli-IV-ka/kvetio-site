@@ -24,11 +24,11 @@ export const navLinks = [
   { label: 'Team', href: '/#team' },
   { label: 'Data types', href: '/#modalities' },
   { label: 'Locations', href: '/#network' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export const contactForm = {
-  title: 'Contact us',
+  title: 'Contact Us',
   intro: 'Interested in Kvetio data? Fill out the contact form below, and we’ll be in touch.',
   dataTypes: ['Healthcare', 'Media', 'Audio', 'Motion capture', 'Company data', 'Other'],
   sources: [

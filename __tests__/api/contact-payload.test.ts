@@ -18,8 +18,7 @@ describe('normalizeContactPayload', () => {
   it('accepts the full contact page form', () => {
     expect(
       normalizeContactPayload({
-        firstName: 'Ada',
-        lastName: 'Lovelace',
+        name: 'Ada Lovelace',
         jobTitle: 'CTO',
         company: 'ACME',
         email: 'ada@acme.com',

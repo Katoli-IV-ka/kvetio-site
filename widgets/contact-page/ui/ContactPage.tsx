@@ -170,8 +170,7 @@ export function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: value('firstName'),
-          lastName: value('lastName'),
+          name: value('name'),
           jobTitle: value('jobTitle'),
           company: value('company'),
           email: value('email'),
@@ -258,40 +257,21 @@ export function ContactPage() {
                   borderColor={hairline}
                   pt={8}
                 >
-                  <Box
-                    display='grid'
-                    gridTemplateColumns={{ base: '1fr', sm: '1fr 1fr' }}
-                    gap={6}
-                  >
-                    <Field
-                      label='First name'
-                      htmlFor='cf-first'
-                    >
-                      <Input
-                        {...fieldProps}
-                        id='cf-first'
-                        name='firstName'
-                        placeholder='John'
-                        autoComplete='given-name'
-                        required
-                      />
-                    </Field>
-                    <Field
-                      label='Last name'
-                      htmlFor='cf-last'
-                    >
-                      <Input
-                        {...fieldProps}
-                        id='cf-last'
-                        name='lastName'
-                        placeholder='Doe'
-                        autoComplete='family-name'
-                        required
-                      />
-                    </Field>
-                  </Box>
                   <Field
-                    label='Title'
+                    label='Name'
+                    htmlFor='cf-name'
+                  >
+                    <Input
+                      {...fieldProps}
+                      id='cf-name'
+                      name='name'
+                      placeholder='John Doe'
+                      autoComplete='name'
+                      required
+                    />
+                  </Field>
+                  <Field
+                    label='Job title'
                     htmlFor='cf-title'
                   >
                     <Input

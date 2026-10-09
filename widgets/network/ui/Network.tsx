@@ -1,7 +1,18 @@
 import { Box, Heading } from '@chakra-ui/react';
 import { LAND_PATH } from '../../../shared/landing/geometry';
 import { cities, networkCopy } from '../../../shared/landing/site-content';
-import { amber, ink } from '../../../shared/theme/palette';
+import { blue, ink } from '../../../shared/theme/palette';
+
+/** Lettering size inside the 1000x560 map viewBox. */
+const TEXT_EM = 13;
+
+const textProps = {
+  textAnchor: 'middle',
+  fontFamily: "'Inter', system-ui, sans-serif",
+  fontWeight: 600,
+  fontSize: TEXT_EM,
+  letterSpacing: '-0.01em',
+} as const;
 
 export function Network() {
   const names = cities.map((city) => city.name).join(', ');
@@ -61,7 +72,7 @@ export function Network() {
                   y1={city.y}
                   x2={city.labelX}
                   y2={city.labelY}
-                  stroke={amber}
+                  stroke={blue}
                   strokeWidth='0.9'
                 />
               </g>
@@ -72,34 +83,48 @@ export function Network() {
                 cx={city.x}
                 cy={city.y}
                 r='2.6'
-                fill={amber}
+                fill={blue}
                 stroke={ink}
                 strokeWidth='1.2'
               />
             ))}
-            {cities.map((city) => (
-              <g key={`tag-${city.name}`}>
-                <rect
-                  rx='2'
-                  x={city.labelX - city.labelWidth / 2}
-                  y={city.labelY - 8.5}
-                  width={city.labelWidth}
-                  height='17'
-                  fill={amber}
-                />
-                <text
-                  x={city.labelX}
-                  y={city.labelY + 3.4}
-                  textAnchor='middle'
-                  fill={ink}
-                  fontFamily="'Inter', system-ui, sans-serif"
-                  fontWeight='600'
-                  fontSize='10'
-                >
-                  {city.name}
-                </text>
-              </g>
-            ))}
+            {cities.map((city) => {
+              // The highlight is deliberately smaller than the lettering, like a marker
+              // swiped carelessly under the word: the text bleeds out on every side.
+              const textWidth = city.name.length * TEXT_EM * 0.58;
+              const width = textWidth * 0.86;
+              return (
+                <g key={`tag-${city.name}`}>
+                  <text
+                    {...textProps}
+                    x={city.labelX}
+                    y={city.labelY + 4.6}
+                    fill='none'
+                    stroke={ink}
+                    strokeWidth='2.6'
+                    strokeLinejoin='round'
+                  >
+                    {city.name}
+                  </text>
+                  <rect
+                    x={city.labelX - width / 2 + 1.5}
+                    y={city.labelY - 4.2}
+                    width={width}
+                    height={TEXT_EM * 0.72}
+                    fill={blue}
+                    transform={`rotate(-1.2 ${city.labelX} ${city.labelY})`}
+                  />
+                  <text
+                    {...textProps}
+                    x={city.labelX}
+                    y={city.labelY + 4.6}
+                    fill='#ffffff'
+                  >
+                    {city.name}
+                  </text>
+                </g>
+              );
+            })}
           </svg>
         </Box>
       </Box>

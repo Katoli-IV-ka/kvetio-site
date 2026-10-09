@@ -27,6 +27,23 @@ const jsonLd = {
     'Kvetio produces, collects, annotates, and delivers custom datasets across data types and domains for AI model training.',
 };
 
+function PreviewLabel({ text }: { text: string }) {
+  return (
+    <Box
+      bg='#000'
+      px={{ base: 5, md: 16 }}
+      pt={6}
+      fontFamily='monospace'
+      fontSize='11px'
+      letterSpacing='0.08em'
+      textTransform='uppercase'
+      color='#8b93a3'
+    >
+      {text}
+    </Box>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -138,7 +155,19 @@ export default function HomePage() {
         <main>
           <Pillars />
           <Team />
-          <ContactBand />
+          {/* Preview of three Contact Us designs, one under another; the chosen one stays. */}
+          <PreviewLabel text='Variant 1 — sky photo' />
+          <ContactBand variant='sky' />
+          <PreviewLabel text='Variant 2 — hands photo' />
+          <ContactBand
+            variant='hands'
+            idPrefix='b'
+          />
+          <PreviewLabel text='Variant 3 — black, hands in the button' />
+          <ContactBand
+            variant='button'
+            idPrefix='c'
+          />
           <Cases />
           <LinkedInCard />
           <Accuracy />

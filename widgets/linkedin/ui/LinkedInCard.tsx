@@ -257,7 +257,7 @@ export function LinkedInCard() {
                 m='0'
                 fontSize='26px'
                 lineHeight='1.1'
-                fontWeight='600'
+                fontWeight='500'
                 letterSpacing='-0.01em'
                 color='white'
               >

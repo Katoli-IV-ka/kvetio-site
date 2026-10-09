@@ -195,8 +195,8 @@ export function Pillars() {
         m='0'
         fontSize={{ base: '30px', xl: '38px' }}
         lineHeight='1.06'
-        fontWeight='600'
-        letterSpacing='-0.015em'
+        fontWeight='500'
+        letterSpacing='-0.01em'
         color='white'
         textShadow='0 2px 18px rgba(0,0,0,.35)'
       >
@@ -251,8 +251,8 @@ export function Pillars() {
           m='0'
           fontSize={{ base: '30px', xl: '38px' }}
           lineHeight='1.06'
-          fontWeight='700'
-          letterSpacing='-0.015em'
+          fontWeight='500'
+          letterSpacing='-0.01em'
           color={ink}
         >
           {pillarCopy.anyData.title}
@@ -311,8 +311,8 @@ export function Pillars() {
           m='0'
           fontSize={{ base: '42px', xl: '52px' }}
           lineHeight='1.02'
-          fontWeight='700'
-          letterSpacing='-0.02em'
+          fontWeight='500'
+          letterSpacing='-0.01em'
           color='white'
           textShadow='0 3px 22px rgba(0,0,0,.45)'
         >

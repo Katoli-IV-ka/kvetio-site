@@ -35,10 +35,11 @@ export function Network() {
         <Heading
           as='h2'
           m='0'
-          fontSize={{ base: '34px', md: '52px' }}
+          fontSize={{ base: '30px', md: '40px' }}
           lineHeight='1.08'
           fontWeight='500'
-          letterSpacing='-0.02em'
+          letterSpacing='-0.01em'
+          textTransform='uppercase'
           color='white'
         >
           {networkCopy.title}

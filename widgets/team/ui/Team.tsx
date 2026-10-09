@@ -28,10 +28,11 @@ export function Team() {
           <Heading
             as='h2'
             m='0'
-            fontSize={{ base: '34px', md: '52px' }}
+            fontSize={{ base: '30px', md: '40px' }}
             lineHeight='1.08'
-            fontWeight='400'
-            letterSpacing='-0.02em'
+            fontWeight='500'
+            letterSpacing='-0.01em'
+            textTransform='uppercase'
             color='white'
           >
             {teamCopy.title}

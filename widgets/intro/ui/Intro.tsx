@@ -147,7 +147,7 @@ export function Intro() {
           flex='1 1 auto'
           gap={6}
           pt={{ base: 0, md: '80px' }}
-          pb={{ base: 36, md: '96px' }}
+          pb={{ base: 56, md: '96px' }}
           maxW={{ base: 'none', md: '420px' }}
         >
           <Heading
@@ -207,10 +207,12 @@ export function Intro() {
               pl='18px'
               pr='6px'
               borderRadius='full'
-              bg='white'
+              bg={{ base: 'transparent', md: 'white' }}
+              borderWidth={{ base: '1px', md: '0' }}
+              borderColor='rgba(255,255,255,0.55)'
               fontSize='11px'
               fontWeight='600'
-              color={ink}
+              color={{ base: 'white', md: ink }}
               cursor='pointer'
             >
               <span>Start Building</span>
@@ -220,7 +222,8 @@ export function Intro() {
                 w='26px'
                 h='26px'
                 borderRadius='full'
-                bg={ink}
+                bg={{ base: 'white', md: ink }}
+                color={{ base: ink, md: 'white' }}
               >
                 <svg
                   width='12'
@@ -231,7 +234,7 @@ export function Intro() {
                 >
                   <path
                     d='M2 6H10M6.5 2.5L10 6L6.5 9.5'
-                    stroke='#fff'
+                    stroke='currentColor'
                     strokeWidth='1.3'
                     strokeLinecap='round'
                     strokeLinejoin='round'

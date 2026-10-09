@@ -18,11 +18,11 @@ export const introCopy = {
 };
 
 export const navLinks = [
-  { label: 'How we work', href: '/#pillars' },
   { label: 'Use cases', href: '/#cases' },
-  { label: 'Accuracy', href: '/#accuracy' },
   { label: 'Team', href: '/#team' },
   { label: 'Data types', href: '/#modalities' },
+  { label: 'How we work', href: '/#pillars' },
+  { label: 'Accuracy', href: '/#accuracy' },
   { label: 'Locations', href: '/#network' },
   { label: 'Contact Us', href: '/contact' },
 ];

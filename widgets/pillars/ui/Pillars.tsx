@@ -1,6 +1,6 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
-import { pillarCopy } from '../../../shared/landing/site-content';
+import { pillarCopy, pillarsHeading } from '../../../shared/landing/site-content';
 import { hairline, ink, inkSoft } from '../../../shared/theme/palette';
 import { Grain } from '../../../shared/ui/Grain';
 
@@ -341,6 +341,21 @@ export function Pillars() {
       px={{ base: 5, md: 16 }}
       py={{ base: 6, md: 10 }}
     >
+      <Heading
+        as='h2'
+        maxW='1312px'
+        mx='auto'
+        mt={{ base: 8, md: 12 }}
+        mb={{ base: 8, md: 12 }}
+        fontSize={{ base: '30px', md: '40px' }}
+        lineHeight='1.08'
+        fontWeight='500'
+        letterSpacing='-0.01em'
+        textTransform='uppercase'
+        color='white'
+      >
+        {pillarsHeading}
+      </Heading>
       <Box
         display={{ base: 'none', md: 'flex' }}
         maxW='1312px'

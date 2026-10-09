@@ -124,6 +124,8 @@ export const accuracyCopy = {
   legend: ['Ready-made data availability', 'In-house simulation complexity'],
 };
 
+export const pillarsHeading = 'How we work';
+
 export const pillarCopy = {
   proprietary: {
     eyebrow: 'Proprietary capture',
@@ -150,7 +152,7 @@ export const teamCopy = {
 };
 
 export const modalityCopy = {
-  title: 'Not limited to one modality',
+  title: 'Whatever your model reads',
   description:
     'Photo and video are strong use cases for us, but the workflow is built around the model requirement: modality, domain rules, annotation schema, and delivery format.',
   rows: [
@@ -189,7 +191,7 @@ export type CityMarker = {
   labelWidth: number;
 };
 
-export const networkCopy = { title: 'Our Global Network' };
+export const networkCopy = { title: 'We shoot worldwide' };
 
 export const cities: CityMarker[] = [
   { name: 'Berlin', x: 537.2, y: 191.1, labelX: 470, labelY: 148, labelWidth: 55.6 },

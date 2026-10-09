@@ -84,7 +84,7 @@ export function Cases() {
             textTransform='uppercase'
             color='white'
           >
-            Where oddly specific data goes to work
+            Built for your edge case
           </Heading>
           <Flex
             display={{ base: 'none', md: 'flex' }}

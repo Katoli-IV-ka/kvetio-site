@@ -19,8 +19,9 @@ export function Intro() {
       <Box
         position='absolute'
         top={{ base: 5, md: 8 }}
-        left={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
-        right={{ base: 5, md: 'auto' }}
+        left={{ base: 5, lg: '50%' }}
+        right={{ base: 5, lg: 'auto' }}
+        transform={{ base: 'none', lg: 'translateX(-50%)' }}
         zIndex={3}
       >
         <SiteNav />

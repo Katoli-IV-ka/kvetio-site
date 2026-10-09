@@ -25,21 +25,19 @@ export function ContactBand() {
       as='section'
       id='contact'
       bg={ink}
-      px={{ base: 5, md: 16 }}
       py={{ base: 14, md: 24 }}
     >
       {/* Gradient frame in the photo's colours, photo (blurred, turned landscape) inside. */}
       <Box
-        maxW='1312px'
-        mx='auto'
-        p={{ base: '3px', md: '4px' }}
+        w='100%'
+        p={{ base: '5px', md: '7px' }}
         background='linear-gradient(105deg,#3f6aa6 0%,#233a59 28%,#c9ad8a 62%,#8c8578 82%,#d8bf9c 100%)'
       >
         <Box
           position='relative'
           overflow='hidden'
           bg='#233a59'
-          px={{ base: 5, md: 14 }}
+          px={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
           py={{ base: 10, md: 16 }}
         >
           <Box

@@ -147,7 +147,7 @@ export function Intro() {
           flex='1 1 auto'
           gap={6}
           pt={{ base: 0, md: '80px' }}
-          pb={{ base: 56, md: '96px' }}
+          pb={{ base: 80, md: '96px' }}
           maxW={{ base: 'none', md: '420px' }}
         >
           <Heading

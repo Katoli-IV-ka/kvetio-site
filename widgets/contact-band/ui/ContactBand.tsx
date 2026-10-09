@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Flex, Heading, Input, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, chakra } from '@chakra-ui/react';
 import { saveDraft } from '../../../features/contact/lib/draft';
 import { hairline, ink } from '../../../shared/theme/palette';
 import { ConsentFields } from '../../../shared/ui/ConsentCheckbox';
-import { fieldProps } from '../../../shared/ui/formStyles';
+import { LineInput } from '../../../shared/ui/LineField';
 
 export function ContactBand() {
   const router = useRouter();
@@ -58,24 +58,23 @@ export function ContactBand() {
             <Box
               display='grid'
               gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
-              gap={3}
+              columnGap={10}
+              rowGap={2}
             >
-              <Input
-                {...fieldProps}
+              <LineInput
+                id='band-name'
                 name='name'
-                aria-label='Name'
-                placeholder='Name'
+                label='Name'
                 autoComplete='name'
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 required
               />
-              <Input
-                {...fieldProps}
+              <LineInput
+                id='band-email'
                 name='email'
                 type='email'
-                aria-label='Email'
-                placeholder='Email'
+                label='Email'
                 autoComplete='email'
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}

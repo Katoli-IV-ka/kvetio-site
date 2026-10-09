@@ -1,9 +1,9 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { Box, Flex, Heading, Input, Link, Text, Textarea, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, Link, Text, chakra } from '@chakra-ui/react';
 import { clearDraft, loadDraft } from '../../../features/contact/lib/draft';
 import { contactForm, navLinks } from '../../../shared/landing/site-content';
 import { ConsentFields } from '../../../shared/ui/ConsentCheckbox';
-import { fieldProps } from '../../../shared/ui/formStyles';
+import { LineInput, LineSelect, LineTextarea } from '../../../shared/ui/LineField';
 import {
   blue,
   cream,
@@ -305,71 +305,48 @@ export function ContactPage() {
                 >
                   {step === 0 && (
                     <>
-                      <Field
+                      <LineInput
+                        id='cf-name'
+                        name='name'
                         label='Name'
-                        htmlFor='cf-name'
-                      >
-                        <Input
-                          {...fieldProps}
-                          id='cf-name'
-                          name='name'
-                          placeholder='John Doe'
-                          autoComplete='name'
-                          value={values.name}
-                          onChange={(event) => set('name', event.target.value)}
-                          required
-                        />
-                      </Field>
-                      <Field
+                        autoComplete='name'
+                        value={values.name}
+                        onChange={(event) => set('name', event.target.value)}
+                        required
+                      />
+                      <LineInput
+                        id='cf-email'
+                        name='email'
+                        type='email'
                         label='Email'
-                        htmlFor='cf-email'
-                      >
-                        <Input
-                          {...fieldProps}
-                          id='cf-email'
-                          name='email'
-                          type='email'
-                          placeholder='john@company.com'
-                          autoComplete='email'
-                          value={values.email}
-                          onChange={(event) => set('email', event.target.value)}
-                          required
-                        />
-                      </Field>
+                        autoComplete='email'
+                        value={values.email}
+                        onChange={(event) => set('email', event.target.value)}
+                        required
+                      />
                     </>
                   )}
 
                   {step === 1 && (
                     <>
-                      <Field
+                      <LineInput
+                        id='cf-title'
+                        name='jobTitle'
                         label='Job title'
-                        htmlFor='cf-title'
-                      >
-                        <Input
-                          {...fieldProps}
-                          id='cf-title'
-                          name='jobTitle'
-                          autoComplete='organization-title'
-                          value={values.jobTitle}
-                          onChange={(event) => set('jobTitle', event.target.value)}
-                          required
-                        />
-                      </Field>
-                      <Field
+                        autoComplete='organization-title'
+                        value={values.jobTitle}
+                        onChange={(event) => set('jobTitle', event.target.value)}
+                        required
+                      />
+                      <LineInput
+                        id='cf-company'
+                        name='company'
                         label='Company name'
-                        htmlFor='cf-company'
-                      >
-                        <Input
-                          {...fieldProps}
-                          id='cf-company'
-                          name='company'
-                          placeholder='ACME Corp.'
-                          autoComplete='organization'
-                          value={values.company}
-                          onChange={(event) => set('company', event.target.value)}
-                          required
-                        />
-                      </Field>
+                        autoComplete='organization'
+                        value={values.company}
+                        onChange={(event) => set('company', event.target.value)}
+                        required
+                      />
                       <Box
                         as='fieldset'
                         m='0'
@@ -440,52 +417,37 @@ export function ContactPage() {
                           )}
                         </Field>
                       </Box>
-                      <Field
+                      <LineTextarea
+                        id='cf-message'
+                        name='message'
                         label='Describe your request'
-                        htmlFor='cf-message'
-                      >
-                        <Textarea
-                          {...fieldProps}
-                          id='cf-message'
-                          name='message'
-                          placeholder='How can we help?'
-                          h='auto'
-                          minH='132px'
-                          py={3}
-                          value={values.message}
-                          onChange={(event) => set('message', event.target.value)}
-                          required
-                        />
-                      </Field>
-                      <Field
+                        value={values.message}
+                        onChange={(event) => set('message', event.target.value)}
+                        required
+                      />
+                      <LineSelect
+                        id='cf-source'
+                        name='source'
                         label='How did you hear about us?'
-                        htmlFor='cf-source'
+                        value={values.source}
+                        onChange={(event) => set('source', event.target.value)}
+                        required
                       >
-                        <chakra.select
-                          {...fieldProps}
-                          id='cf-source'
-                          name='source'
-                          value={values.source}
-                          onChange={(event) => set('source', event.target.value)}
-                          required
-                          css={{ colorScheme: 'dark' }}
+                        <option
+                          value=''
+                          disabled
                         >
+                          Select…
+                        </option>
+                        {contactForm.sources.map((item) => (
                           <option
-                            value=''
-                            disabled
+                            key={item}
+                            value={item}
                           >
-                            Click to select
+                            {item}
                           </option>
-                          {contactForm.sources.map((item) => (
-                            <option
-                              key={item}
-                              value={item}
-                            >
-                              {item}
-                            </option>
-                          ))}
-                        </chakra.select>
-                      </Field>
+                        ))}
+                      </LineSelect>
                     </>
                   )}
 

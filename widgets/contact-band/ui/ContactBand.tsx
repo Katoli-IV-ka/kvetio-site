@@ -61,13 +61,14 @@ function BandForm({ idPrefix, variant }: { idPrefix: string; variant: Variant })
         direction='column'
         gap={5}
         maxW={wide ? 'none' : '760px'}
+        w='100%'
       >
         <Box
           display='grid'
           gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
           columnGap={10}
           rowGap={2}
-          maxW={wide ? '760px' : 'none'}
+          maxW='none'
         >
           <LineInput
             id={`${idPrefix}-name`}
@@ -255,7 +256,7 @@ export function ContactBand({ variant = 'sky', idPrefix = 'band' }: Props) {
         <Flex
           direction='column'
           gap={8}
-          maxW='1312px'
+          maxW='760px'
           mx='auto'
         >
           <Title />

@@ -141,12 +141,14 @@ export function Intro() {
 
         <Flex
           direction='column'
-          justify={{ base: 'flex-start', md: 'center' }}
+          justify='center'
+          align={{ base: 'center', md: 'stretch' }}
+          textAlign={{ base: 'center', md: 'left' }}
           flex='1 1 auto'
           gap={6}
-          pt={{ base: 12, md: '80px' }}
-          pb={{ base: 16, md: '96px' }}
-          maxW='420px'
+          pt={{ base: 0, md: '80px' }}
+          pb={{ base: 36, md: '96px' }}
+          maxW={{ base: 'none', md: '420px' }}
         >
           <Heading
             as='h1'
@@ -175,6 +177,7 @@ export function Intro() {
             align='center'
             gap={3}
             mt={1.5}
+            justify={{ base: 'center', md: 'flex-start' }}
           >
             <Link
               href='#cases'

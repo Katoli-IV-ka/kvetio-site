@@ -134,7 +134,7 @@ function PillButton() {
   );
 }
 
-/** Wide button: gradient frame, the two touching hands inside, the spark off-centre to the right. */
+/** Wide pill button: gradient frame, the touching hands inside with the spark centred, thin label. */
 function HandsButton() {
   return (
     <chakra.button
@@ -142,9 +142,9 @@ function HandsButton() {
       display='block'
       w='100%'
       p={{ base: '4px', md: '6px' }}
+      borderRadius='full'
       background={HANDS_BORDER}
       cursor='pointer'
-      textAlign='left'
       aria-label='Let’s talk'
       transition='filter .2s'
       _hover={{ filter: 'brightness(1.12)' }}
@@ -152,36 +152,34 @@ function HandsButton() {
       <Box
         position='relative'
         overflow='hidden'
-        h={{ base: '150px', md: '230px' }}
+        borderRadius='full'
+        h={{ base: '104px', md: '160px' }}
         bg='#030304'
       >
         <Box
           aria-hidden='true'
           position='absolute'
-          inset='-45%'
+          top='-150%'
+          bottom='-150%'
+          left='-45%'
+          right='-45%'
           backgroundImage="url('/images/v2/contact-hands.jpg')"
           backgroundSize='100% auto'
           backgroundPosition='50% 49%'
           backgroundRepeat='no-repeat'
-          transform='rotate(-7deg)'
-        />
-        <Box
-          aria-hidden='true'
-          position='absolute'
-          inset='0'
-          bg='linear-gradient(90deg,rgba(3,3,4,.85) 0%,rgba(3,3,4,.4) 30%,rgba(3,3,4,0) 50%)'
+          transform='translateX(-6%) rotate(-7deg)'
         />
         <Flex
           position='relative'
           h='100%'
           align='center'
-          px={{ base: 5, md: 12 }}
-          fontSize={{ base: '22px', md: '34px' }}
-          fontWeight='500'
-          letterSpacing='-0.01em'
+          justify='center'
+          fontSize={{ base: '20px', md: '30px' }}
+          fontWeight='200'
+          letterSpacing='0.12em'
           textTransform='uppercase'
           color='white'
-          textShadow='0 2px 18px rgba(0,0,0,.6)'
+          textShadow='0 1px 14px rgba(0,0,0,.7)'
         >
           Let’s talk
         </Flex>
@@ -214,21 +212,27 @@ export function ContactBand({ variant = 'sky', idPrefix = 'band' }: Props) {
         <Box
           aria-hidden='true'
           position='absolute'
-          inset='0'
+          top='50%'
+          left={{ base: '50%', md: '74%' }}
+          h={{ base: '100%', md: '200%' }}
+          aspectRatio='1'
+          transform='translate(-56%, -49%)'
           backgroundImage="url('/images/v2/contact-hands.jpg')"
-          backgroundSize='auto 200%'
-          backgroundPosition='100% 49%'
-          backgroundRepeat='no-repeat'
+          backgroundSize='100% 100%'
           css={{
-            maskImage: 'linear-gradient(90deg, transparent 43%, #000 66%)',
-            WebkitMaskImage: 'linear-gradient(90deg, transparent 43%, #000 66%)',
+            maskImage: 'radial-gradient(farthest-side at 56% 49%, #000 72%, transparent 100%)',
+            WebkitMaskImage:
+              'radial-gradient(farthest-side at 56% 49%, #000 72%, transparent 100%)',
           }}
         />
         <Box
           aria-hidden='true'
           position='absolute'
           inset='0'
-          bg='linear-gradient(90deg,rgba(3,3,4,.5) 0%,rgba(3,3,4,0) 60%)'
+          bg={{
+            base: 'rgba(3,3,4,.45)',
+            md: 'linear-gradient(90deg,rgba(3,3,4,.5) 0%,rgba(3,3,4,0) 60%)',
+          }}
         />
       </>
     );

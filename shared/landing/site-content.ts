@@ -18,11 +18,32 @@ export const introCopy = {
 };
 
 export const navLinks = [
-  { label: 'Platform', href: '#modalities' },
-  { label: 'Datasets', href: '#cases' },
-  { label: 'Solutions', href: '#accuracy' },
-  { label: 'Research', href: '#team' },
+  { label: 'How we work', href: '/#pillars' },
+  { label: 'Use cases', href: '/#cases' },
+  { label: 'Accuracy', href: '/#accuracy' },
+  { label: 'Team', href: '/#team' },
+  { label: 'Data types', href: '/#modalities' },
+  { label: 'Locations', href: '/#network' },
+  { label: 'Contact', href: '/contact' },
 ];
+
+export const contactForm = {
+  title: 'Contact us',
+  intro: 'Interested in Kvetio data? Fill out the contact form below, and we’ll be in touch.',
+  dataTypes: ['Healthcare', 'Media', 'Audio', 'Motion capture', 'Company data', 'Other'],
+  sources: [
+    'Google Search',
+    'AI Search',
+    'LinkedIn',
+    'X / Twitter',
+    'News / Newsletter',
+    'Referral / Word of Mouth',
+    'Email',
+    'Event or Conference',
+    'Podcast',
+    'Other',
+  ],
+};
 
 export const useCaseCards: UseCaseCard[] = [
   {

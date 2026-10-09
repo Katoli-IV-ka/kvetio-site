@@ -1,11 +1,7 @@
-import { useState } from 'react';
-import { Box, Flex, Heading, chakra } from '@chakra-ui/react';
-import { ContactModal } from '../../../features/contact/ui/ContactModal';
+import { Box, Flex, Heading, Link } from '@chakra-ui/react';
 import { hairline, ink } from '../../../shared/theme/palette';
 
 export function ContactBand() {
-  const [open, setOpen] = useState(false);
-
   return (
     <Box
       as='section'
@@ -37,9 +33,8 @@ export function ContactBand() {
           Tell us what your model is missing
         </Heading>
         <Box>
-          <chakra.button
-            type='button'
-            onClick={() => setOpen(true)}
+          <Link
+            href='/contact'
             display='inline-flex'
             alignItems='center'
             h='44px'
@@ -49,16 +44,12 @@ export function ContactBand() {
             fontSize='12px'
             fontWeight='600'
             color={ink}
-            cursor='pointer'
+            _hover={{ textDecoration: 'none' }}
           >
             Contact us
-          </chakra.button>
+          </Link>
         </Box>
       </Flex>
-      <ContactModal
-        open={open}
-        onClose={() => setOpen(false)}
-      />
     </Box>
   );
 }

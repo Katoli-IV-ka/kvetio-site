@@ -337,6 +337,7 @@ export function Pillars() {
   return (
     <Box
       as='section'
+      id='pillars'
       bg={ink}
       px={{ base: 5, md: 16 }}
       py={{ base: 6, md: 10 }}

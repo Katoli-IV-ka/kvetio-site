@@ -1,33 +1,11 @@
 import { useState } from 'react';
 import { Box, Flex, Heading, Image, Link, Text, chakra } from '@chakra-ui/react';
-import { ContactModal } from '../../../features/contact/ui/ContactModal';
 import { FLOWER_PATH } from '../../../shared/landing/geometry';
 import { introCopy, navLinks } from '../../../shared/landing/site-content';
 import { cream, ink, muted, pillBg, pillBorder } from '../../../shared/theme/palette';
 import { Flower } from '../../../shared/ui/Flower';
 
-function Chevron() {
-  return (
-    <svg
-      width='8'
-      height='8'
-      viewBox='0 0 8 8'
-      fill='none'
-      aria-hidden='true'
-    >
-      <path
-        d='M1 2.5L4 5.5L7 2.5'
-        stroke='#9aa1b0'
-        strokeWidth='1'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-    </svg>
-  );
-}
-
 export function Intro() {
-  const [contactOpen, setContactOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -61,7 +39,7 @@ export function Intro() {
           gap='20px 36px'
         >
           <Link
-            href='#'
+            href='/'
             aria-label='Kvetio home'
             display='flex'
             alignItems='center'
@@ -120,20 +98,18 @@ export function Intro() {
             gap={{ base: 5, md: '12px 26px' }}
             fontSize={{ base: '14px', md: '11px' }}
             color='#9aa1b0'
+            bg={{ base: 'rgba(14,15,19,0.92)', md: 'transparent' }}
+            p={{ base: 4, md: 0 }}
           >
             {navLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                display='flex'
-                alignItems='center'
-                gap='5px'
                 color='inherit'
                 _hover={{ textDecoration: 'none', color: 'white' }}
               >
                 {item.label}
-                <Chevron />
               </Link>
             ))}
           </Flex>
@@ -197,9 +173,8 @@ export function Intro() {
             >
               Specifications
             </Link>
-            <chakra.button
-              type='button'
-              onClick={() => setContactOpen(true)}
+            <Link
+              href='/contact'
               display='inline-flex'
               alignItems='center'
               gap='14px'
@@ -213,7 +188,7 @@ export function Intro() {
               fontSize='11px'
               fontWeight='600'
               color={{ base: 'white', md: ink }}
-              cursor='pointer'
+              _hover={{ textDecoration: 'none' }}
             >
               <span>Start Building</span>
               <Flex
@@ -241,7 +216,7 @@ export function Intro() {
                   />
                 </svg>
               </Flex>
-            </chakra.button>
+            </Link>
           </Flex>
         </Flex>
       </Flex>
@@ -305,11 +280,6 @@ export function Intro() {
           />
         </svg>
       </Box>
-
-      <ContactModal
-        open={contactOpen}
-        onClose={() => setContactOpen(false)}
-      />
     </Flex>
   );
 }

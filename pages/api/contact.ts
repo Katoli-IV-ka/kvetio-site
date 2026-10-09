@@ -14,26 +14,48 @@ export type ContactPayload = {
   email: string;
   message: string;
   datasetTitle?: string;
+  jobTitle?: string;
+  company?: string;
+  dataTypes?: string[];
+  source?: string;
 };
+
+function text(value: unknown, max = 2000): string | undefined {
+  if (typeof value !== 'string') return undefined;
+  const trimmed = value.trim().slice(0, max);
+  return trimmed || undefined;
+}
 
 export function normalizeContactPayload(body: unknown): ContactPayload | null {
   if (!body || typeof body !== 'object') return null;
 
-  const payload = body as Partial<Record<'name' | 'email' | 'message' | 'datasetTitle', unknown>>;
-  const email = typeof payload.email === 'string' ? payload.email.trim() : '';
-  const message = typeof payload.message === 'string' ? payload.message.trim() : '';
-  const name =
-    typeof payload.name === 'string' && payload.name.trim()
-      ? payload.name.trim()
-      : 'Website visitor';
-  const datasetTitle =
-    typeof payload.datasetTitle === 'string' && payload.datasetTitle.trim()
-      ? payload.datasetTitle.trim()
-      : undefined;
+  const payload = body as Record<string, unknown>;
+  const email = text(payload.email, 320) ?? '';
+  const message = text(payload.message, 5000) ?? '';
+  const fullName = [text(payload.firstName, 100), text(payload.lastName, 100)]
+    .filter(Boolean)
+    .join(' ');
+  const name = fullName || text(payload.name, 200) || 'Website visitor';
+  const dataTypes = Array.isArray(payload.dataTypes)
+    ? payload.dataTypes
+        .map((item) => text(item, 60))
+        .filter((item): item is string => Boolean(item))
+        .slice(0, 12)
+    : [];
 
   if (!email || !message) return null;
 
-  return { name, email, message, datasetTitle };
+  const result: ContactPayload = { name, email, message };
+  const datasetTitle = text(payload.datasetTitle, 300);
+  const jobTitle = text(payload.jobTitle, 200);
+  const company = text(payload.company, 200);
+  const source = text(payload.source, 100);
+  if (datasetTitle) result.datasetTitle = datasetTitle;
+  if (jobTitle) result.jobTitle = jobTitle;
+  if (company) result.company = company;
+  if (dataTypes.length) result.dataTypes = dataTypes;
+  if (source) result.source = source;
+  return result;
 }
 
 function getRateLimitedIP(req: NextApiRequest): string {
@@ -87,7 +109,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ message: 'Email and message are required' });
   }
 
-  const { name, email, message, datasetTitle } = payload;
+  const { name, email, message, datasetTitle, jobTitle, company, dataTypes, source } = payload;
+  const details = [
+    jobTitle && `Title: ${jobTitle}`,
+    company && `Company: ${company}`,
+    dataTypes && `Data type: ${dataTypes.join(', ')}`,
+    source && `Heard about us: ${source}`,
+  ].filter((line): line is string => Boolean(line));
+  const escape = (value: string) =>
+    value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
     const transporter = nodemailer.createTransport({
@@ -102,15 +132,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       from: `"${name}" <${process.env.GMAIL_USER}>`,
       to: 'kvetio.data@gmail.com',
       subject: `New contact form message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br/>${message}</p>`,
+      text: `Name: ${name}\nEmail: ${email}\n${details.join('\n')}${details.length ? '\n' : ''}\n${message}`,
+      html: `<p><strong>Name:</strong> ${escape(name)}</p><p><strong>Email:</strong> ${escape(email)}</p>${details.map((line) => `<p>${escape(line)}</p>`).join('')}<p><strong>Message:</strong><br/>${escape(message)}</p>`,
     });
   }
   const telegramText =
     `📬 Новое сообщение с формы\n\n` +
     (datasetTitle ? `📦 Датасет: ${datasetTitle}\n\n` : '') +
     `Имя: ${name}\n` +
-    `Email: ${email}\n\n` +
+    `Email: ${email}\n` +
+    (details.length ? `${details.join('\n')}\n` : '') +
+    '\n' +
     `Сообщение:\n${message}`;
   await sendTelegramMessage(telegramText);
 

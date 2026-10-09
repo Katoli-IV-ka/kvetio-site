@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { Box, chakra, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { useCaseCards } from '../../../shared/landing/site-content';
 import { ink } from '../../../shared/theme/palette';
 import { Flower } from '../../../shared/ui/Flower';
@@ -7,53 +6,7 @@ import { Grain } from '../../../shared/ui/Grain';
 
 const TOTAL = String(useCaseCards.length).padStart(2, '0');
 
-function Arrow({ direction, onClick }: { direction: 'prev' | 'next'; onClick: () => void }) {
-  return (
-    <chakra.button
-      type='button'
-      onClick={onClick}
-      aria-label={direction === 'prev' ? 'Previous cards' : 'Next cards'}
-      display='inline-flex'
-      alignItems='center'
-      justifyContent='center'
-      w='44px'
-      h='44px'
-      borderRadius='full'
-      bg='#1a1c22'
-      borderWidth='1px'
-      borderColor='#2a2d35'
-      color='white'
-      cursor='pointer'
-      _hover={{ borderColor: '#3a3d45' }}
-    >
-      <svg
-        width='14'
-        height='14'
-        viewBox='0 0 12 12'
-        fill='none'
-        aria-hidden='true'
-        style={{ transform: direction === 'prev' ? 'rotate(180deg)' : undefined }}
-      >
-        <path
-          d='M2 6H10M6.5 2.5L10 6L6.5 9.5'
-          stroke='currentColor'
-          strokeWidth='1.3'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        />
-      </svg>
-    </chakra.button>
-  );
-}
-
 export function Cases() {
-  const rowRef = useRef<HTMLDivElement>(null);
-  const scrollRow = (dir: 1 | -1) => {
-    const row = rowRef.current;
-    if (!row) return;
-    row.scrollBy({ left: dir * row.clientWidth * 0.8, behavior: 'smooth' });
-  };
-
   return (
     <Box
       as='section'
@@ -68,42 +21,21 @@ export function Cases() {
         maxW='1312px'
         mx='auto'
       >
-        <Flex
-          align='flex-end'
-          justify='space-between'
-          gap={6}
+        <Heading
+          as='h2'
+          m='0'
+          maxW='560px'
+          fontSize={{ base: '30px', md: '40px' }}
+          lineHeight='1.08'
+          fontWeight='500'
+          letterSpacing='-0.01em'
+          textTransform='uppercase'
+          color='white'
         >
-          <Heading
-            as='h2'
-            m='0'
-            maxW='560px'
-            fontSize={{ base: '30px', md: '40px' }}
-            lineHeight='1.08'
-            fontWeight='500'
-            letterSpacing='-0.01em'
-            textTransform='uppercase'
-            color='white'
-          >
-            Built for your edge case
-          </Heading>
-          <Flex
-            display={{ base: 'none', md: 'flex' }}
-            gap={2}
-            flexShrink={0}
-          >
-            <Arrow
-              direction='prev'
-              onClick={() => scrollRow(-1)}
-            />
-            <Arrow
-              direction='next'
-              onClick={() => scrollRow(1)}
-            />
-          </Flex>
-        </Flex>
+          Built for your edge case
+        </Heading>
 
         <Flex
-          ref={rowRef}
           gap={5}
           overflowX='auto'
           pb={5}

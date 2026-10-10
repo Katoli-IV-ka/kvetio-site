@@ -50,7 +50,7 @@ export function SiteNav() {
         overflow='hidden'
       >
         <Link
-          href='/'
+          href='/v1'
           aria-label='Kvetio home'
           display='flex'
           alignItems='center'

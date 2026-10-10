@@ -1,18 +1,19 @@
 import Head from 'next/head';
 import { Box } from '@chakra-ui/react';
-import { ink } from '../shared/theme/palette';
-import { Intro } from '../widgets/intro/ui/Intro';
-import { Cases } from '../widgets/cases/ui/Cases';
-import { Accuracy } from '../widgets/accuracy/ui/Accuracy';
-import { Pillars } from '../widgets/pillars/ui/Pillars';
-import { Team } from '../widgets/team/ui/Team';
-import { Modalities } from '../widgets/modalities/ui/Modalities';
-import { Network } from '../widgets/network/ui/Network';
-import { LinkedInCard } from '../widgets/linkedin/ui/LinkedInCard';
-import { SiteFooter } from '../widgets/contact-band/ui/SiteFooter';
-import { ContactBand } from '../widgets/contact-band/ui/ContactBand';
+import { ink } from '../../shared/theme/palette';
+import { Intro } from '../../widgets/intro/ui/Intro';
+import { Cases } from '../../widgets/cases/ui/Cases';
+import { Accuracy } from '../../widgets/accuracy/ui/Accuracy';
+import { Pillars } from '../../widgets/pillars/ui/Pillars';
+import { Team } from '../../widgets/team/ui/Team';
+import { Modalities } from '../../widgets/modalities/ui/Modalities';
+import { Network } from '../../widgets/network/ui/Network';
+import { LinkedInCard } from '../../widgets/linkedin/ui/LinkedInCard';
+import { SiteFooter } from '../../widgets/contact-band/ui/SiteFooter';
+import { ContactBand } from '../../widgets/contact-band/ui/ContactBand';
 
 const SITE_URL = 'https://kvet.io';
+const PAGE_URL = `${SITE_URL}/v1`;
 const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
 
 const jsonLd = {
@@ -31,6 +32,10 @@ export default function HomePage() {
   return (
     <>
       <Head>
+        <meta
+          name='robots'
+          content='noindex'
+        />
         <title>Kvetio — Custom AI Training Data Production</title>
         <meta
           name='description'
@@ -38,7 +43,7 @@ export default function HomePage() {
         />
         <link
           rel='canonical'
-          href={SITE_URL}
+          href={PAGE_URL}
         />
 
         {/* Open Graph */}
@@ -48,7 +53,7 @@ export default function HomePage() {
         />
         <meta
           property='og:url'
-          content={SITE_URL}
+          content={PAGE_URL}
         />
         <meta
           property='og:title'

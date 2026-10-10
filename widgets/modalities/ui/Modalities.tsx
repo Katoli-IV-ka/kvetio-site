@@ -1,17 +1,13 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import { FLOWER_PATH } from '../../../shared/landing/geometry';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import { modalityCopy } from '../../../shared/landing/site-content';
 import { cream, ink, muted } from '../../../shared/theme/palette';
 
-const FAN_START_Y = [20, 83.8, 147.5, 211.2, 275, 338.8, 402.5, 466.2, 530];
+const LINE = '#3a3f4a';
+const MONO = "'JetBrains Mono', ui-monospace, monospace";
 
-/** Fan of curves converging into one line, tangent to the axis (bowing outward). */
-const fanPaths = FAN_START_Y.map((y) => {
-  const c1 = (y + (275 - y) * 0.9).toFixed(1);
-  return `M0 ${y.toFixed(1)} C 90 ${c1}, 190 275, 330 275`;
-});
-
+/** Heading on top, then one numbered column per data type hanging off a single horizontal line. */
 export function Modalities() {
+  const rows = modalityCopy.rows;
   return (
     <Box
       as='section'
@@ -19,12 +15,13 @@ export function Modalities() {
       bg={ink}
       px={{ base: 5, md: 16 }}
       py={{ base: 14, md: 24 }}
+      overflow='hidden'
     >
       <Box
         maxW='1312px'
         mx='auto'
       >
-        <Box mb={14}>
+        <Box mb={{ base: 10, md: 20 }}>
           <Heading
             as='h2'
             m='0'
@@ -50,84 +47,104 @@ export function Modalities() {
           </Text>
         </Box>
 
-        <Flex align='flex-start'>
-          <Box
-            flex={{ base: '1 1 100%', lg: '0 0 460px' }}
-            maxW='100%'
-          >
-            {modalityCopy.rows.map((row) => (
+        <Box
+          as='ol'
+          m='0'
+          p='0'
+          listStyleType='none'
+          display='grid'
+          gridTemplateColumns={{ base: '1fr', md: `repeat(${rows.length}, 1fr)` }}
+          rowGap={{ base: 8, md: 0 }}
+        >
+          {rows.map((row, index) => {
+            const last = index === rows.length - 1;
+            return (
               <Box
+                as='li'
                 key={row.title}
-                h={{ base: 'auto', lg: '110px' }}
-                mb={{ base: 7, lg: 0 }}
-                boxSizing='border-box'
+                position='relative'
+                pr={{ base: 0, md: 6 }}
+                pl={{ base: 7, md: 0 }}
+                css={{
+                  /* mobile: vertical rail */
+                  '@media (max-width: 47.99em)': {
+                    borderLeft: `1px solid ${LINE}`,
+                  },
+                }}
               >
                 <Text
                   m='0'
+                  fontFamily={MONO}
+                  fontSize='13px'
+                  letterSpacing='0.04em'
+                  color={muted}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </Text>
+                <Text
+                  mt={3}
+                  mb='0'
                   fontSize='16px'
                   fontWeight='700'
+                  letterSpacing='-0.005em'
+                  textTransform='uppercase'
                   color='white'
+                  minH={{ base: 'auto', md: '2.6em' }}
                 >
                   {row.title}
                 </Text>
+                {/* desktop: horizontal line with a dot per column (the last one runs off the edge) */}
+                <Box
+                  display={{ base: 'none', md: 'block' }}
+                  position='relative'
+                  h='20px'
+                  my={3}
+                  mr={last ? { md: '-64px' } : '0'}
+                >
+                  <Box
+                    position='absolute'
+                    left='0'
+                    right='0'
+                    top='50%'
+                    h='1px'
+                    bg={LINE}
+                  />
+                  <Box
+                    position='absolute'
+                    left='0'
+                    top='50%'
+                    w='10px'
+                    h='10px'
+                    mt='-5px'
+                    borderRadius='full'
+                    bg={cream}
+                  />
+                </Box>
+                {/* mobile: dot sits on the rail */}
+                <Box
+                  display={{ base: 'block', md: 'none' }}
+                  position='absolute'
+                  left='-5px'
+                  top='4px'
+                  w='9px'
+                  h='9px'
+                  borderRadius='full'
+                  bg={cream}
+                />
                 <Text
-                  mt='10px'
-                  mb='0'
-                  maxW='420px'
-                  fontSize='12px'
+                  m='0'
+                  mt={{ base: 2, md: 0 }}
+                  fontSize='14px'
                   lineHeight='1.55'
                   color={muted}
+                  maxW='240px'
                 >
                   {row.description}
                 </Text>
               </Box>
-            ))}
-          </Box>
-          <Box
-            display={{ base: 'none', lg: 'block' }}
-            flex='1 1 0'
-            minW='0'
-          >
-            <svg
-              viewBox='0 0 700 550'
-              role='img'
-              aria-label='Many sources converging into one line'
-              style={{ display: 'block', width: '100%', height: 'auto', overflow: 'visible' }}
-            >
-              <g
-                fill='none'
-                stroke={cream}
-                strokeWidth='1.3'
-              >
-                {fanPaths.map((d) => (
-                  <path
-                    key={d}
-                    d={d}
-                  />
-                ))}
-              </g>
-              <path
-                d='M330 275 H 700'
-                fill='none'
-                stroke={cream}
-                strokeWidth='1'
-              />
-              <svg
-                x='520'
-                y='190.5'
-                width='84'
-                height='84'
-                viewBox='0 0 15 15'
-                fill='none'
-              >
-                <path
-                  d={FLOWER_PATH}
-                  fill='#ffffff'
-                />
-              </svg>
-            </svg>
-          </Box>
-        </Flex>
+            );
+          })}
+        </Box>
       </Box>
     </Box>
   );

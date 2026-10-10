@@ -1,19 +1,25 @@
 import Head from 'next/head';
 import { Box, Container } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react';
-import { bgPage, glowPink, glowPrimary, glowSecondary, gradientPage } from '../shared/theme/colors';
-import { Header } from '../widgets/header/ui/Header';
-import { Hero } from '../widgets/hero/ui/Hero';
-import { Services } from '../widgets/services/ui/Services';
-import { TrustStrip } from '../widgets/trust-strip/ui/TrustStrip';
-import { DataTypes } from '../widgets/data-types/ui/DataTypes';
-import { SampleDatasets } from '../widgets/samples/ui/SampleDatasets';
-import { Workflow } from '../widgets/workflow/ui/Workflow';
-import { UseCases } from '../widgets/use-cases/ui/UseCases';
-import { WhyUs } from '../widgets/why-us/ui/WhyUs';
-import { QualitySystem } from '../widgets/quality/ui/QualitySystem';
-import { Cta } from '../widgets/cta/ui/Cta';
-import { Footer } from '../widgets/footer/ui/Footer';
+import {
+  bgPage,
+  glowPink,
+  glowPrimary,
+  glowSecondary,
+  gradientPage,
+} from '../../shared/theme/colors';
+import { Header } from '../../widgets/header/ui/Header';
+import { Hero } from '../../widgets/hero/ui/Hero';
+import { Services } from '../../widgets/services/ui/Services';
+import { TrustStrip } from '../../widgets/trust-strip/ui/TrustStrip';
+import { DataTypes } from '../../widgets/data-types/ui/DataTypes';
+import { SampleDatasets } from '../../widgets/samples/ui/SampleDatasets';
+import { Workflow } from '../../widgets/workflow/ui/Workflow';
+import { UseCases } from '../../widgets/use-cases/ui/UseCases';
+import { WhyUs } from '../../widgets/why-us/ui/WhyUs';
+import { QualitySystem } from '../../widgets/quality/ui/QualitySystem';
+import { Cta } from '../../widgets/cta/ui/Cta';
+import { Footer } from '../../widgets/footer/ui/Footer';
 
 const floatA = keyframes`
   0%   { transform: translate(0px, 0px); }
@@ -32,6 +38,7 @@ const floatB = keyframes`
 `;
 
 const SITE_URL = 'https://kvet.io';
+const PAGE_URL = `${SITE_URL}/v1`;
 const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
 
 const jsonLd = {
@@ -55,9 +62,13 @@ export default function HomePage() {
           name='description'
           content='Custom AI training data for model builders. Kvetio collects, produces, annotates, reviews, and delivers datasets across modalities, domains, and formats.'
         />
+        <meta
+          name='robots'
+          content='noindex'
+        />
         <link
           rel='canonical'
-          href={SITE_URL}
+          href={PAGE_URL}
         />
 
         {/* Open Graph */}
@@ -67,7 +78,7 @@ export default function HomePage() {
         />
         <meta
           property='og:url'
-          content={SITE_URL}
+          content={PAGE_URL}
         />
         <meta
           property='og:title'

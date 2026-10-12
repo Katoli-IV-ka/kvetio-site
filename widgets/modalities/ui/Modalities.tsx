@@ -54,7 +54,7 @@ export function Modalities() {
           listStyleType='none'
           display='grid'
           gridTemplateColumns={{ base: '1fr', md: `repeat(${rows.length}, 1fr)` }}
-          rowGap={{ base: 8, md: 0 }}
+          rowGap='0'
         >
           {rows.map((row, index) => {
             const last = index === rows.length - 1;
@@ -65,6 +65,7 @@ export function Modalities() {
                 position='relative'
                 pr={{ base: 0, md: 6 }}
                 pl={{ base: 7, md: 0 }}
+                pb={{ base: 8, md: 0 }}
                 css={{
                   /* mobile: vertical rail */
                   '@media (max-width: 47.99em)': {
@@ -78,13 +79,13 @@ export function Modalities() {
                   fontSize='13px'
                   letterSpacing='0.04em'
                   color={muted}
-                  visibility={{ base: 'hidden', md: 'visible' }}
+                  display={{ base: 'none', md: 'block' }}
                   aria-hidden='true'
                 >
                   {String(index + 1).padStart(2, '0')}
                 </Text>
                 <Text
-                  mt={3}
+                  mt={{ base: 0, md: 3 }}
                   mb='0'
                   fontSize='16px'
                   fontWeight='700'
@@ -127,7 +128,7 @@ export function Modalities() {
                   display={{ base: 'block', md: 'none' }}
                   position='absolute'
                   left='-5px'
-                  top='4px'
+                  top='7px'
                   w='9px'
                   h='9px'
                   borderRadius='full'

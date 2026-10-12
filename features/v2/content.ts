@@ -8,67 +8,68 @@ export const NAV_LINKS = [
   { label: 'News', href: '/v1' },
 ];
 
+export type CardVariant = 'photo' | 'light' | 'dark' | 'warm' | 'paper';
+
 export type UseCaseCard = {
   title: string[];
   text: string;
-  image: string;
-  crop: { top: string; left: string; width: string; height: string };
+  variant: CardVariant;
+  /** processed poster image for the card, if the variant uses one */
+  image?: string;
 };
 
 export const USE_CASES: UseCaseCard[] = [
   {
     title: ['Egocentric'],
     text: 'First-person video of real tasks, filmed through the eyes of the person doing them: hands, tools, objects, in your chosen environments.',
-    image: '/v2/card-1.webp',
-    crop: { top: '0', left: '-81.38%', width: '262.76%', height: '100%' },
+    variant: 'photo',
+    image: '/v2/uc/1.webp',
   },
   {
     title: ['Home & everyday life'],
     text: 'Daily routines in real interiors, staged and filmed from the side: kitchens, living spaces, household devices in use.',
-    image: '/v2/card-2.webp',
-    crop: { top: '0', left: '-14.43%', width: '128.86%', height: '100%' },
+    variant: 'light',
   },
   {
     title: ['Physical AI &', 'Robotics'],
     text: 'Human demonstrations for teaching robots: hands, objects, manipulation, filmed from the angles your model needs.',
-    image: '/v2/card-3.webp',
-    crop: { top: '-0.97%', left: '0', width: '100%', height: '101.94%' },
+    variant: 'dark',
+    image: '/v2/uc/3.webp',
   },
   {
     title: ['Agriculture'],
     text: 'Field work staged and filmed on location: machinery cabs, crops, tools and routines of the working day.',
-    image: '/v2/card-4.webp',
-    crop: { top: '-0.97%', left: '0', width: '100%', height: '101.94%' },
+    variant: 'warm',
+    image: '/v2/uc/4.webp',
   },
   {
     title: ['Construction'],
     text: 'Building-site work staged and filmed on location: installation, tools, team tasks, safety gear.',
-    image: '/v2/card-5.webp',
-    crop: { top: '0', left: '-135.89%', width: '371.78%', height: '100%' },
+    variant: 'light',
   },
   {
     title: ['Documents &', 'privacy-safe data'],
     text: "Forms, letters, receipts and handwriting made from scratch: realistic, yet free of anyone's real personal data.",
-    image: '/v2/card-6.webp',
-    crop: { top: '0', left: '-11.35%', width: '122.71%', height: '100%' },
+    variant: 'paper',
+    image: '/v2/uc/6.webp',
   },
   {
     title: ['People, crowds &', 'security'],
     text: "Staged scenes for detection and tracking: crowds, rare incidents, behavior, with every participant's signed release.",
-    image: '/v2/card-7.webp',
-    crop: { top: '0', left: '-6.74%', width: '113.48%', height: '100%' },
+    variant: 'photo',
+    image: '/v2/uc/7.webp',
   },
   {
     title: ['Retail & Fashion'],
     text: 'Products, shelves and outfits, shot and labeled attribute by attribute for e-commerce and visual search.',
-    image: '/v2/card-8.webp',
-    crop: { top: '0', left: '-6.74%', width: '113.48%', height: '100%' },
+    variant: 'paper',
+    image: '/v2/uc/8.webp',
   },
   {
     title: ['Anything oddly', 'specific'],
     text: "Don't see your case? We stage it: your city, your lighting, your rules.",
-    image: '/v2/card-9.webp',
-    crop: { top: '0', left: '-11.69%', width: '123.39%', height: '100%' },
+    variant: 'dark',
+    image: '/v2/uc/9.webp',
   },
 ];
 

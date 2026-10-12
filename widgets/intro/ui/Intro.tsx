@@ -10,6 +10,23 @@ const GLASS = 'rgba(255,255,255,0.22)';
 const GLASS_EDGE = 'rgba(255,255,255,0.28)';
 const FONT = "'Inter Tight', 'Inter', 'Helvetica Neue', Arial, sans-serif";
 
+/** Film-grain tile: fractal noise as an inline SVG, laid over the photo. */
+const GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 -0.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
+function Grain({ opacity = 0.5 }: { opacity?: number }) {
+  return (
+    <Box
+      aria-hidden='true'
+      position='absolute'
+      inset='0'
+      pointerEvents='none'
+      opacity={opacity}
+      css={{ backgroundImage: GRAIN, backgroundSize: '220px 220px', mixBlendMode: 'overlay' }}
+    />
+  );
+}
+
 const chips = navLinks.slice(0, 3);
 const menuLinks = navLinks;
 
@@ -46,29 +63,32 @@ function DesktopHero() {
       overflow='hidden'
       direction='column'
       align='center'
-      justify='center'
+      justify='flex-start'
       textAlign='center'
       minH='100vh'
       px={10}
-      pb='6vh'
+      pt='14vh'
       bg='#2c3a22'
       css={{ minHeight: '100dvh' }}
     >
+      {/* Taller than the screen and pinned to the top: the runner ends up below the button. */}
       <Image
-        src='/images/v1-hero-hills.webp'
-        alt='Green hills under a cloudy sky'
+        src='/images/v1-hero-runner.webp'
+        alt='A person in white running through a field between red bushes under heavy clouds'
         position='absolute'
-        inset='0'
+        top='0'
+        left='0'
         w='100%'
-        h='100%'
+        h='125%'
         objectFit='cover'
-        objectPosition='50% 60%'
+        objectPosition='50% 0%'
       />
       <Box
         position='absolute'
         inset='0'
-        bg='linear-gradient(180deg, rgba(14,15,19,0.88) 0%, rgba(14,15,19,0.55) 45%, rgba(14,15,19,0.1) 100%)'
+        bg='linear-gradient(180deg, rgba(14,15,19,0.62) 0%, rgba(14,15,19,0.42) 42%, rgba(14,15,19,0) 70%)'
       />
+      <Grain />
       <chakra.h1
         position='relative'
         m='0'
@@ -174,23 +194,22 @@ export function Intro() {
           h={{ base: 'min(680px, 112vw)', md: 'clamp(560px, 84dvh, 760px)' }}
         >
           <Image
-            src='/images/v2/hills.jpg'
-            alt='Green hills under a cloudy sky'
+            src='/images/v1-hero-runner.webp'
+            alt='A person in white running through a field between red bushes under heavy clouds'
             position='absolute'
-            inset='0'
+            top='0'
+            left='0'
             w='100%'
-            h='100%'
+            h='125%'
             objectFit='cover'
-            objectPosition='50% 50%'
+            objectPosition='40% 0%'
           />
           <Box
             position='absolute'
             inset='0'
-            bg='linear-gradient(180deg, rgba(8,12,6,0.45) 0%, rgba(8,12,6,0.25) 45%, rgba(8,12,6,0.45) 100%)'
+            bg='linear-gradient(180deg, rgba(8,12,6,0.55) 0%, rgba(8,12,6,0.35) 45%, rgba(8,12,6,0) 75%)'
           />
-          <Flower
-            style={{ left: '50%', top: '60%', width: '26%', transform: 'translateX(-50%)' }}
-          />
+          <Grain />
           <Flex
             position='absolute'
             top='20px'
@@ -220,7 +239,7 @@ export function Intro() {
           <chakra.h1
             position='absolute'
             left='50%'
-            top='46%'
+            top='30%'
             m='0'
             w='78%'
             transform='translate(-50%, -50%)'

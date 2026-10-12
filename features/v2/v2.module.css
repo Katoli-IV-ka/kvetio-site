@@ -735,7 +735,7 @@
 
 .step::before {
   position: absolute;
-  top: 8px;
+  top: 11px;
   left: -32px;
   width: 12px;
   height: 12px;
@@ -750,6 +750,13 @@
   line-height: 28px;
   letter-spacing: -0.45px;
   color: #000;
+  display: none; /* numbers only on desktop */
+}
+
+@media (min-width: 1024px) {
+  .stepNum {
+    display: block;
+  }
 }
 
 .stepTitle {

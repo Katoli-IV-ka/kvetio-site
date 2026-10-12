@@ -311,8 +311,12 @@
 }
 
 .brandName {
-  font-size: 13px;
-  color: #737373;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
 }
 
 .nav {

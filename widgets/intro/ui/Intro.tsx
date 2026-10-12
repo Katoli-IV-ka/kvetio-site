@@ -37,7 +37,100 @@ function Flower({ style }: { style: React.CSSProperties }) {
   );
 }
 
-/** Two rounded panels on a dark canvas: photo with the headline, and a dark text panel. */
+/** Desktop: the whole first screen is one photo with the headline and a single button. */
+function DesktopHero() {
+  return (
+    <Flex
+      display={{ base: 'none', md: 'flex' }}
+      position='relative'
+      overflow='hidden'
+      direction='column'
+      align='center'
+      justify='center'
+      textAlign='center'
+      minH='100vh'
+      px={10}
+      pb='6vh'
+      bg='#2c3a22'
+      css={{ minHeight: '100dvh' }}
+    >
+      <Image
+        src='/images/v1-hero-hills.webp'
+        alt='Green hills under a cloudy sky'
+        position='absolute'
+        inset='0'
+        w='100%'
+        h='100%'
+        objectFit='cover'
+        objectPosition='50% 60%'
+      />
+      <Box
+        position='absolute'
+        inset='0'
+        bg='linear-gradient(180deg, rgba(14,15,19,0.88) 0%, rgba(14,15,19,0.55) 45%, rgba(14,15,19,0.1) 100%)'
+      />
+      <chakra.h1
+        position='relative'
+        m='0'
+        maxW='1100px'
+        fontSize='clamp(48px, 6vw, 92px)'
+        lineHeight='1.08'
+        fontWeight='500'
+        letterSpacing='-0.01em'
+        textTransform='uppercase'
+      >
+        {introCopy.title}
+      </chakra.h1>
+      <Link
+        href='/contact'
+        position='relative'
+        display='inline-flex'
+        alignItems='center'
+        gap='20px'
+        h='56px'
+        mt={10}
+        pl='28px'
+        pr='8px'
+        borderRadius='full'
+        borderWidth='1px'
+        borderColor='rgba(255,255,255,0.55)'
+        fontSize='15px'
+        fontWeight='600'
+        color='white'
+        _hover={{ textDecoration: 'none', borderColor: 'white' }}
+      >
+        <span>Contact Us</span>
+        <Flex
+          align='center'
+          justify='center'
+          w='40px'
+          h='40px'
+          borderRadius='full'
+          bg='white'
+          color={PAGE}
+        >
+          <svg
+            width='16'
+            height='16'
+            viewBox='0 0 12 12'
+            fill='none'
+            aria-hidden='true'
+          >
+            <path
+              d='M2 6H10M6.5 2.5L10 6L6.5 9.5'
+              stroke='currentColor'
+              strokeWidth='1.3'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+          </svg>
+        </Flex>
+      </Link>
+    </Flex>
+  );
+}
+
+/** Mobile: two rounded panels on a dark canvas: photo with the headline, and a dark text panel. */
 export function Intro() {
   const [open, setOpen] = useState(false);
 
@@ -59,14 +152,15 @@ export function Intro() {
     <Box
       as='header'
       bg={PAGE}
-      px={{ base: 3, md: 10 }}
-      py={{ base: 3, md: 10 }}
+      px={{ base: 3, md: 0 }}
+      py={{ base: 3, md: 0 }}
       fontFamily={FONT}
       color='white'
     >
+      <DesktopHero />
       <Box
-        display='grid'
-        gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
+        display={{ base: 'grid', md: 'none' }}
+        gridTemplateColumns='1fr'
         gap={{ base: 3, md: 5 }}
         maxW='1120px'
         mx='auto'

@@ -128,11 +128,14 @@ export function ContactBand() {
       as='section'
       id='contact'
       bg={ink}
+      px={{ base: 5, md: 16 }}
       py={{ base: 14, md: 24 }}
     >
-      {/* Gradient frame in the photo's colours, photo (blurred) inside, full width. */}
+      {/* Gradient frame in the photo's colours, photo (blurred) inside, as wide as the other blocks. */}
       <Box
         w='100%'
+        maxW='1312px'
+        mx='auto'
         p={{ base: '5px', md: '7px' }}
         background={HANDS_BORDER}
       >
@@ -140,7 +143,7 @@ export function ContactBand() {
           position='relative'
           overflow='hidden'
           bg='#030304'
-          px={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
+          px={{ base: 5, md: 16 }}
           py={{ base: 10, md: 16 }}
         >
           <Box

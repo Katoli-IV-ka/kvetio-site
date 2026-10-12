@@ -7,6 +7,14 @@ import styles from '../v2.module.css';
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -29,7 +37,10 @@ export function MobileMenu() {
 
   return (
     <div className={styles.mobileMenu}>
-      <div className={styles.mobileBar}>
+      <div
+        className={styles.mobileBar}
+        data-solid={scrolled || open}
+      >
         <a
           className={styles.mobileBrand}
           href='#top'
@@ -38,8 +49,8 @@ export function MobileMenu() {
           <Image
             src='/v2/logo.png'
             alt='Kvetio'
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             priority
           />
           <span className={styles.brandName}>Kvetio</span>

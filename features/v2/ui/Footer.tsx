@@ -2,7 +2,8 @@
 import { FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
-export function Footer() {
+export function Footer({ base = '' }: { base?: string }) {
+  const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
   return (
     <footer className={styles.footer}>
       <img
@@ -20,7 +21,7 @@ export function Footer() {
           </h2>
           <a
             className={styles.ctaButton}
-            href='#contact'
+            href={base ? '/contact' : '#contact'}
           >
             Let&apos;s talk
           </a>
@@ -35,7 +36,7 @@ export function Footer() {
               <ul className={styles.footerLinks}>
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href}>{link.label}</a>
+                    <a href={to(link.href)}>{link.label}</a>
                   </li>
                 ))}
               </ul>

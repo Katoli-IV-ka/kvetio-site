@@ -1,18 +1,13 @@
-import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
-import { hairline, ink, muted, textSoft } from '../../../shared/theme/palette';
-import { SiteFooter } from '../../contact-band/ui/SiteFooter';
-import { TopNav } from '../../contact-page/ui/ContactPage';
+export const PRIVACY_EMAIL = 'contact@kvet.io';
+export const PRIVACY_UPDATED = '9 October 2026';
 
-const EMAIL = 'contact@kvet.io';
-const UPDATED = '9 October 2026';
+export type PolicySection = { title: string; body: string[]; list?: string[] };
 
-type Section = { title: string; body: string[]; list?: string[] };
-
-const sections: Section[] = [
+export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '1. Who we are',
     body: [
-      `The controller of your personal data is Kvetio (“we”, “us”), a business based in Warsaw, Poland, operating the website kvet.io. You can contact us about anything in this policy at ${EMAIL}.`,
+      `The controller of your personal data is Kvetio (“we”, “us”), a business based in Warsaw, Poland, operating the website kvet.io. You can contact us about anything in this policy at ${PRIVACY_EMAIL}.`,
     ],
   },
   {
@@ -70,7 +65,7 @@ const sections: Section[] = [
   {
     title: '8. Complaints',
     body: [
-      `To use any of these rights, write to ${EMAIL}. You also have the right to lodge a complaint with the Polish supervisory authority — the President of the Personal Data Protection Office (Prezes Urzędu Ochrony Danych Osobowych), ul. Stawki 2, 00-193 Warsaw, uodo.gov.pl — or with the authority of your country of residence.`,
+      `To use any of these rights, write to ${PRIVACY_EMAIL}. You also have the right to lodge a complaint with the Polish supervisory authority — the President of the Personal Data Protection Office (Prezes Urzędu Ochrony Danych Osobowych), ul. Stawki 2, 00-193 Warsaw, uodo.gov.pl — or with the authority of your country of residence.`,
     ],
   },
   {
@@ -100,108 +95,3 @@ const sections: Section[] = [
   },
 ];
 
-export function PrivacyPolicy() {
-  return (
-    <Box
-      bg={ink}
-      minH='100vh'
-    >
-      <Box px={{ base: 5, md: 16 }}>
-        <TopNav />
-        <Box
-          as='main'
-          maxW='1312px'
-          mx='auto'
-          pt={{ base: 14, md: 24 }}
-          pb={{ base: 14, md: 24 }}
-        >
-          <Box maxW='760px'>
-            <Heading
-              as='h1'
-              m='0'
-              fontSize={{ base: '30px', md: '40px' }}
-              lineHeight='1.08'
-              fontWeight='500'
-              letterSpacing='-0.01em'
-              textTransform='uppercase'
-              color='white'
-            >
-              Privacy Policy
-            </Heading>
-            <Text
-              mt={5}
-              mb={10}
-              fontSize='13px'
-              color={muted}
-            >
-              Last updated: {UPDATED}
-            </Text>
-            <Flex
-              direction='column'
-              gap={8}
-              borderTopWidth='1px'
-              borderColor={hairline}
-              pt={8}
-            >
-              {sections.map((section) => (
-                <Box key={section.title}>
-                  <Heading
-                    as='h2'
-                    m='0'
-                    mb={3}
-                    fontSize='18px'
-                    fontWeight='500'
-                    color='white'
-                  >
-                    {section.title}
-                  </Heading>
-                  {section.body.map((paragraph) => (
-                    <Text
-                      key={paragraph}
-                      m='0'
-                      mb={3}
-                      fontSize='14px'
-                      lineHeight='1.65'
-                      color={textSoft}
-                    >
-                      {paragraph}
-                    </Text>
-                  ))}
-                  {section.list && (
-                    <Box
-                      as='ul'
-                      m='0'
-                      pl={5}
-                      fontSize='14px'
-                      lineHeight='1.65'
-                      color={textSoft}
-                    >
-                      {section.list.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </Box>
-                  )}
-                </Box>
-              ))}
-              <Text
-                m='0'
-                fontSize='13px'
-                color={muted}
-              >
-                Questions? Write to{' '}
-                <Link
-                  href={`mailto:${EMAIL}`}
-                  color='white'
-                >
-                  {EMAIL}
-                </Link>
-                .
-              </Text>
-            </Flex>
-          </Box>
-        </Box>
-      </Box>
-      <SiteFooter />
-    </Box>
-  );
-}

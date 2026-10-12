@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { MENU_GROUPS, MENU_LINKS } from '../content';
 import styles from '../v2.module.css';
 
-export function MobileMenu() {
+/** `base` makes in-page anchors work from other pages (e.g. base='/v2' turns '#process' into '/v2#process'). */
+export function MobileMenu({ base = '' }: { base?: string }) {
+  const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -43,7 +45,7 @@ export function MobileMenu() {
       >
         <a
           className={styles.mobileBrand}
-          href='#top'
+          href={base || '#top'}
           onClick={close}
         >
           <Image
@@ -102,7 +104,7 @@ export function MobileMenu() {
                     {group.items.map((item) => (
                       <li key={item.label}>
                         <a
-                          href={item.href}
+                          href={to(item.href)}
                           onClick={close}
                         >
                           <span className={styles.subTitle}>{item.label}</span>
@@ -119,7 +121,7 @@ export function MobileMenu() {
             <a
               key={link.label}
               className={styles.menuItem}
-              href={link.href}
+              href={to(link.href)}
               onClick={close}
             >
               {link.label}
@@ -128,7 +130,7 @@ export function MobileMenu() {
           <div className={styles.menuCtas}>
             <a
               className={styles.menuCta}
-              href='#contact'
+              href={base ? '/contact' : '#contact'}
               onClick={close}
             >
               Let&apos;s talk

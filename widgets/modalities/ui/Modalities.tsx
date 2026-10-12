@@ -3,9 +3,8 @@ import { modalityCopy } from '../../../shared/landing/site-content';
 import { cream, ink, muted } from '../../../shared/theme/palette';
 
 const LINE = '#3a3f4a';
-const MONO = "'JetBrains Mono', ui-monospace, monospace";
 
-/** Heading on top, then one numbered column per data type hanging off a single horizontal line. */
+/** Heading on top, then one column per data type hanging off a single horizontal line. */
 export function Modalities() {
   const rows = modalityCopy.rows;
   return (
@@ -74,18 +73,7 @@ export function Modalities() {
                 }}
               >
                 <Text
-                  m='0'
-                  fontFamily={MONO}
-                  fontSize='13px'
-                  letterSpacing='0.04em'
-                  color={muted}
-                  display={{ base: 'none', md: 'block' }}
-                  aria-hidden='true'
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </Text>
-                <Text
-                  mt={{ base: 0, md: 3 }}
+                  mt='0'
                   mb='0'
                   fontSize='16px'
                   fontWeight='700'
@@ -102,7 +90,7 @@ export function Modalities() {
                   position='relative'
                   h='20px'
                   my={3}
-                  mr={last ? { md: '-64px' } : '0'}
+                  mr={last ? { md: '-64px' } : { md: '-24px' }}
                 >
                   <Box
                     position='absolute'

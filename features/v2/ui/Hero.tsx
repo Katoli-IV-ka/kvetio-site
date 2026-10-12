@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
 import Image from 'next/image';
+import Link from 'next/link';
 import { NAV_LINKS } from '../content';
 import styles from '../v2.module.css';
 
@@ -43,6 +44,12 @@ export function Hero() {
           We produce training data that doesn&apos;t exist yet — for your model only.
           High-throughput synthesis, pristine edge-case capture, and verified licensing.
         </p>
+        <Link
+          className={styles.heroCta}
+          href='/contact'
+        >
+          Send a brief
+        </Link>
       </div>
     </header>
   );

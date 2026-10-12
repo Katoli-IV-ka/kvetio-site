@@ -89,9 +89,9 @@ export default function V2Page() {
         <main>
           <UseCases />
           <DataTypes />
+          <Contact />
           <Process />
           <Worldwide />
-          <Contact />
         </main>
         <Footer />
       </div>

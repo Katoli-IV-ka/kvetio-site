@@ -28,7 +28,6 @@
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.04em;
-  text-transform: uppercase;
   color: #000;
 }
 
@@ -378,12 +377,11 @@
 
 .cases {
   padding: 56px 0 0;
-  background: #1c1b18;
+  background: #fbfbfb;
 }
 
 .casesTitle {
   padding: 0 24px;
-  color: #f2f0ea;
 }
 
 .scroller {
@@ -652,7 +650,6 @@
   line-height: 24px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  text-transform: uppercase;
   color: #171717;
   white-space: nowrap;
 }
@@ -761,7 +758,6 @@
   line-height: 24px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  text-transform: uppercase;
   color: #000;
 }
 
@@ -1184,7 +1180,6 @@
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.04em;
-  text-transform: uppercase;
   color: #fff;
 }
 

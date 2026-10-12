@@ -67,7 +67,7 @@ function DesktopHero() {
       textAlign='center'
       minH='100vh'
       px={10}
-      pt='14vh'
+      pt='12vh'
       bg='#2c3a22'
       css={{ minHeight: '100dvh' }}
     >
@@ -79,7 +79,7 @@ function DesktopHero() {
         top='0'
         left='0'
         w='100%'
-        h='125%'
+        h='110%'
         objectFit='cover'
         objectPosition='50% 0%'
       />
@@ -92,12 +92,13 @@ function DesktopHero() {
       <chakra.h1
         position='relative'
         m='0'
-        maxW='1100px'
-        fontSize='clamp(48px, 6vw, 92px)'
+        maxW='860px'
+        fontSize='clamp(36px, 4.4vw, 68px)'
         lineHeight='1.08'
         fontWeight='500'
         letterSpacing='-0.01em'
         textTransform='uppercase'
+        css={{ textWrap: 'balance' }}
       >
         {introCopy.title}
       </chakra.h1>
@@ -106,15 +107,15 @@ function DesktopHero() {
         position='relative'
         display='inline-flex'
         alignItems='center'
-        gap='20px'
-        h='56px'
-        mt={10}
-        pl='28px'
-        pr='8px'
+        gap='16px'
+        h='48px'
+        mt={8}
+        pl='24px'
+        pr='7px'
         borderRadius='full'
         borderWidth='1px'
         borderColor='rgba(255,255,255,0.55)'
-        fontSize='15px'
+        fontSize='14px'
         fontWeight='600'
         color='white'
         _hover={{ textDecoration: 'none', borderColor: 'white' }}
@@ -123,15 +124,15 @@ function DesktopHero() {
         <Flex
           align='center'
           justify='center'
-          w='40px'
-          h='40px'
+          w='34px'
+          h='34px'
           borderRadius='full'
           bg='white'
           color={PAGE}
         >
           <svg
-            width='16'
-            height='16'
+            width='14'
+            height='14'
             viewBox='0 0 12 12'
             fill='none'
             aria-hidden='true'
@@ -200,7 +201,7 @@ export function Intro() {
             top='0'
             left='0'
             w='100%'
-            h='125%'
+            h='112%'
             objectFit='cover'
             objectPosition='40% 0%'
           />

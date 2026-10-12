@@ -79,7 +79,7 @@ export default function V2Page() {
         />
         <link
           rel='stylesheet'
-          href='https://fonts.googleapis.com/css2?family=Cousine:wght@400&family=Inter:wght@400;500;600;700&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Cousine:wght@400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap'
         />
         <style>{`html, body { margin: 0; background: #fff; }`}</style>
       </Head>

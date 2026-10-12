@@ -6,7 +6,7 @@
   margin: 0;
   background: #fff;
   color: #111;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -23,7 +23,7 @@
 
 .heading {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
   font-size: var(--heading-size);
   line-height: 1;
   font-weight: 700;
@@ -263,10 +263,11 @@
 
 .heroImage {
   position: absolute;
-  top: -40px;
+  top: 64px; /* starts below the mobile header */
   right: 0;
+  bottom: 0;
   width: 456px;
-  height: 611px;
+  height: auto;
   max-width: 60%;
   object-fit: cover;
   opacity: 0.35;
@@ -326,6 +327,9 @@
   }
 
   .heroImage {
+    top: -40px;
+    bottom: auto;
+    height: 611px;
     opacity: 1;
     max-width: none;
   }

@@ -1043,7 +1043,7 @@
 .consent {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 20px;
   font-size: 13px;
   line-height: 18px;
   color: #444;

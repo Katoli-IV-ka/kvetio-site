@@ -50,14 +50,10 @@ function Field({
 }
 
 export const TopNav = () => (
-  <Flex
-    maxW='1312px'
-    mx='auto'
-    pt={{ base: 5, md: 8 }}
-    justify='center'
-  >
+  <>
     <SiteNav />
-  </Flex>
+    <Box h='64px' />
+  </>
 );
 
 const STEPS = ['contact', 'request'] as const;

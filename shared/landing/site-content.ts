@@ -18,12 +18,12 @@ export const introCopy = {
 };
 
 export const navLinks = [
-  { label: 'Use cases', href: '/#cases' },
-  { label: 'Team', href: '/#team' },
-  { label: 'Data types', href: '/#modalities' },
-  { label: 'How we work', href: '/#pillars' },
-  { label: 'Accuracy', href: '/#accuracy' },
-  { label: 'Locations', href: '/#network' },
+  { label: 'Use cases', href: '/v1#cases' },
+  { label: 'Team', href: '/v1#team' },
+  { label: 'Data types', href: '/v1#modalities' },
+  { label: 'How we work', href: '/v1#pillars' },
+  { label: 'Accuracy', href: '/v1#accuracy' },
+  { label: 'Locations', href: '/v1#network' },
   { label: 'Contact Us', href: '/contact' },
 ];
 

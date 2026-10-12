@@ -1,102 +1,100 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Flex, Link, chakra } from '@chakra-ui/react';
 import { navLinks } from '../../../shared/landing/site-content';
-import { cream, ink } from '../../../shared/theme/palette';
+import { ink } from '../../../shared/theme/palette';
 import { Flower } from '../../../shared/ui/Flower';
 
-/** Shades taken from the hero photo: dark olive hills, grey-green haze, the cream flower. */
-const BAR = 'rgba(30,38,24,0.84)';
-const EDGE = 'rgba(246,241,200,0.2)';
-const SOFT = '#aab59a';
-const BAR_H = '48px';
+const BAR_H = '64px';
+const SOFT = 'rgba(255,255,255,0.82)';
 
-/** Main sections, then quieter ones, then the call to action (the last navLinks entry). */
-const PRIMARY_COUNT = 4;
-const primary = navLinks.slice(0, PRIMARY_COUNT);
-const secondary = navLinks.slice(PRIMARY_COUNT, -1);
 const cta = navLinks[navLinks.length - 1];
+const links = navLinks.slice(0, -1);
 
-const linkProps = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  h: BAR_H,
-  fontSize: '11px',
-  fontWeight: '600',
-  letterSpacing: '0.02em',
-  textTransform: 'uppercase',
-  whiteSpace: 'nowrap',
-} as const;
-
-/** Floating dark bar: logo, main links | quieter links | white call-to-action block. */
+/**
+ * Header in the same language as /v2: a flat bar without borders that sits on the page
+ * background, brand on the left, plain text links, a pill call-to-action, and on small
+ * screens a burger that opens a fullscreen menu.
+ */
 export function SiteNav() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  const close = () => setOpen(false);
+  const solid = scrolled || open;
 
   return (
     <Box
-      as='nav'
-      aria-label='Primary'
-      position='relative'
-      display='inline-block'
-      maxW='100%'
-      w={{ base: '100%', lg: 'auto' }}
-      css={{ backdropFilter: 'blur(10px)' }}
+      as='header'
+      position='fixed'
+      top='0'
+      left='0'
+      right='0'
+      zIndex={60}
+      h={BAR_H}
     >
       <Flex
-        align='stretch'
+        as='nav'
+        aria-label='Primary'
+        position='relative'
+        zIndex={2}
         h={BAR_H}
-        bg={BAR}
-        borderWidth='1px'
-        borderColor={EDGE}
-        overflow='hidden'
+        align='center'
+        justify='space-between'
+        gap={8}
+        px={{ base: 6, lg: 14 }}
+        bg={solid ? ink : 'transparent'}
+        transition='background 0.2s'
       >
         <Link
           href='/v1'
           aria-label='Kvetio home'
           display='flex'
           alignItems='center'
-          gap={2.5}
-          px={5}
+          gap={4}
           color='white'
-          fontSize='12px'
-          fontWeight='600'
-          letterSpacing='0.04em'
-          textTransform='uppercase'
+          fontSize='13px'
           _hover={{ textDecoration: 'none' }}
+          onClick={close}
         >
-          <Flower size={20} />
+          <Flower size={32} />
           <span>Kvetio</span>
         </Link>
 
         <Flex
           display={{ base: 'none', lg: 'flex' }}
-          align='stretch'
+          align='center'
           gap={7}
-          px={7}
+          ml='auto'
         >
-          {primary.map((item) => (
+          {links.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              {...linkProps}
-              color='white'
-              _hover={{ textDecoration: 'none', color: cream }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </Flex>
-        <Flex
-          display={{ base: 'none', lg: 'flex' }}
-          align='stretch'
-          gap={7}
-          px={7}
-        >
-          {secondary.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              {...linkProps}
+              fontSize='14px'
               color={SOFT}
+              textShadow='0 0 12px rgba(0,0,0,0.45)'
+              whiteSpace='nowrap'
               _hover={{ textDecoration: 'none', color: 'white' }}
             >
               {item.label}
@@ -108,15 +106,15 @@ export function SiteNav() {
             href={cta.href}
             display={{ base: 'none', lg: 'inline-flex' }}
             alignItems='center'
-            px={8}
-            bg={cream}
+            h='40px'
+            px={6}
+            borderRadius='20px'
+            bg='white'
             color={ink}
-            fontSize='11px'
-            fontWeight='700'
-            letterSpacing='0.02em'
-            textTransform='uppercase'
+            fontSize='14px'
+            fontWeight='500'
             whiteSpace='nowrap'
-            _hover={{ textDecoration: 'none', bg: '#fffbe0' }}
+            _hover={{ textDecoration: 'none', bg: '#e6e6e6' }}
           >
             {cta.label}
           </Link>
@@ -124,65 +122,88 @@ export function SiteNav() {
 
         <chakra.button
           type='button'
-          display={{ base: 'inline-flex', lg: 'none' }}
+          display={{ base: 'flex', lg: 'none' }}
           alignItems='center'
           justifyContent='center'
-          ml='auto'
-          w={BAR_H}
+          w='44px'
+          h='44px'
+          mr='-10px'
           color='white'
           cursor='pointer'
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((value) => !value)}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls='v1-mobile-menu'
+          onClick={() => setOpen((value) => !value)}
         >
           <svg
-            width='20'
-            height='20'
-            viewBox='0 0 22 22'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
             fill='none'
             aria-hidden='true'
           >
             <path
-              d={menuOpen ? 'M5 5L17 17M17 5L5 17' : 'M3 6H19M3 11H19M3 16H19'}
+              d={open ? 'M5 5L19 19M19 5L5 19' : 'M2 6H22M2 12H22M2 18H22'}
               stroke='currentColor'
-              strokeWidth='1.6'
-              strokeLinecap='round'
+              strokeWidth='2'
+              strokeLinecap='square'
             />
           </svg>
         </chakra.button>
       </Flex>
 
       <Flex
-        display={{ base: menuOpen ? 'flex' : 'none', lg: 'none' }}
+        id='v1-mobile-menu'
+        display={{ base: 'flex', lg: 'none' }}
         direction='column'
-        position='absolute'
-        top='100%'
-        left='0'
-        right='0'
-        mt='-1px'
-        bg='#1e2618'
-        borderWidth='1px'
-        borderColor={EDGE}
-        zIndex={5}
+        position='fixed'
+        inset='0'
+        zIndex={1}
+        pt={`calc(${BAR_H} + 32px)`}
+        px={6}
+        pb={12}
+        overflowY='auto'
+        bg={ink}
+        opacity={open ? 1 : 0}
+        visibility={open ? 'visible' : 'hidden'}
+        transition='opacity 0.2s, visibility 0.2s'
+        aria-hidden={!open}
       >
-        {navLinks.map((item, index) => (
+        {links.map((item) => (
           <Link
             key={item.label}
             href={item.href}
-            onClick={() => setMenuOpen(false)}
-            px={5}
-            py={3.5}
-            fontSize='12px'
-            fontWeight='600'
-            letterSpacing='0.02em'
-            textTransform='uppercase'
-            color={index === navLinks.length - 1 ? ink : index < PRIMARY_COUNT ? 'white' : SOFT}
-            bg={index === navLinks.length - 1 ? cream : 'transparent'}
+            onClick={close}
+            py='18px'
+            fontSize='22px'
+            lineHeight='28px'
+            letterSpacing='-0.02em'
+            color='white'
             _hover={{ textDecoration: 'none' }}
           >
             {item.label}
           </Link>
         ))}
+        {cta ? (
+          <Link
+            href={cta.href}
+            onClick={close}
+            alignSelf='flex-start'
+            display='inline-flex'
+            alignItems='center'
+            h='48px'
+            mt={7}
+            px={7}
+            borderRadius='24px'
+            bg='white'
+            color={ink}
+            fontSize='15px'
+            fontWeight='500'
+            _hover={{ textDecoration: 'none', bg: '#e6e6e6' }}
+          >
+            {cta.label}
+          </Link>
+        ) : null}
       </Flex>
     </Box>
   );

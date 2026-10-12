@@ -78,6 +78,8 @@ export function Modalities() {
                   fontSize='13px'
                   letterSpacing='0.04em'
                   color={muted}
+                  visibility={{ base: 'hidden', md: 'visible' }}
+                  aria-hidden='true'
                 >
                   {String(index + 1).padStart(2, '0')}
                 </Text>

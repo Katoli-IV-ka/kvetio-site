@@ -16,16 +16,7 @@ export function Intro() {
       minH='100vh'
       css={{ minHeight: '100dvh' }}
     >
-      <Box
-        position='absolute'
-        top={{ base: 5, md: 8 }}
-        left={{ base: 5, lg: '50%' }}
-        right={{ base: 5, lg: 'auto' }}
-        transform={{ base: 'none', lg: 'translateX(-50%)' }}
-        zIndex={3}
-      >
-        <SiteNav />
-      </Box>
+      <SiteNav />
       <Flex
         direction='column'
         flex='1 1 520px'

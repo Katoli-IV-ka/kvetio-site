@@ -628,12 +628,12 @@
   line-height: 28px;
   letter-spacing: -0.45px;
   color: #000;
-  visibility: hidden; /* numbers hidden on mobile, the 40px indent stays */
+  display: none; /* no numbers and no indent on mobile */
 }
 
 @media (min-width: 1024px) {
   .typeNum {
-    visibility: visible;
+    display: block;
   }
 }
 

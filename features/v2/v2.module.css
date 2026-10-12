@@ -6,7 +6,7 @@
   margin: 0;
   background: #fff;
   color: #111;
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -23,7 +23,7 @@
 
 .heading {
   margin: 0;
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
   font-size: var(--heading-size);
   line-height: 1;
   font-weight: 700;

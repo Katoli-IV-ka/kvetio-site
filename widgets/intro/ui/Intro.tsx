@@ -1,198 +1,311 @@
-import { Box, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { Box, Flex, Image, Link, chakra } from '@chakra-ui/react';
 import { FLOWER_PATH } from '../../../shared/landing/geometry';
-import { introCopy } from '../../../shared/landing/site-content';
-import { cream, ink, muted, pillBg, pillBorder } from '../../../shared/theme/palette';
-import { SiteNav } from '../../site-nav/ui/SiteNav';
+import { introCopy, navLinks } from '../../../shared/landing/site-content';
+import { cream } from '../../../shared/theme/palette';
 
-export function Intro() {
+const PAGE = '#050608';
+const CARD = '#0a0c10';
+const GLASS = 'rgba(255,255,255,0.22)';
+const GLASS_EDGE = 'rgba(255,255,255,0.28)';
+const FONT = "'Inter Tight', 'Inter', 'Helvetica Neue', Arial, sans-serif";
+
+const chips = navLinks.slice(0, 3);
+const menuLinks = navLinks;
+
+const glow =
+  'drop-shadow(0 0 10px rgba(255,246,190,0.55)) drop-shadow(0 0 28px rgba(255,246,190,0.3))';
+
+/** Splits the intro paragraph: the first sentence is bright, the rest dimmed. */
+const [lead, ...restParts] = introCopy.description.replace(" —", "\u00a0—").split(/(?<=—)\s/);
+const rest = restParts.join(' ');
+
+function Flower({ style }: { style: React.CSSProperties }) {
   return (
-    <Flex
-      as='header'
-      wrap='wrap'
-      align='stretch'
-      bg={ink}
-      position='relative'
-      overflow='hidden'
-      minH='100vh'
-      css={{ minHeight: '100dvh' }}
+    <svg
+      viewBox='0 0 15 15'
+      preserveAspectRatio='none'
+      fill='none'
+      aria-hidden='true'
+      style={{ position: 'absolute', aspectRatio: '3/4', pointerEvents: 'none', filter: glow, ...style }}
     >
-      <SiteNav />
-      <Flex
-        direction='column'
-        flex='1 1 520px'
-        minW='0'
-        pl={{ base: 5, md: 'max(64px, calc((100vw - 1312px) / 2))' }}
-        pr={{ base: 5, md: 16 }}
-        pt='120px'
-        bg={{ base: 'transparent', md: ink }}
-        position='relative'
-        zIndex={1}
+      <path
+        d={FLOWER_PATH}
+        fill={cream}
+      />
+    </svg>
+  );
+}
+
+/** Two rounded panels on a dark canvas: photo with the headline, and a dark text panel. */
+export function Intro() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  return (
+    <Box
+      as='header'
+      bg={PAGE}
+      px={{ base: 3, md: 10 }}
+      py={{ base: 3, md: 10 }}
+      fontFamily={FONT}
+      color='white'
+    >
+      <Box
+        display='grid'
+        gridTemplateColumns={{ base: '1fr', md: '1fr 1fr' }}
+        gap={{ base: 3, md: 5 }}
+        maxW='1120px'
+        mx='auto'
       >
-        <Flex
-          direction='column'
-          justify='center'
-          align={{ base: 'center', md: 'stretch' }}
-          textAlign={{ base: 'center', md: 'left' }}
-          flex='1 1 auto'
-          gap={6}
-          pt={{ base: 0, md: '80px' }}
-          pb={{ base: 80, md: '96px' }}
-          maxW={{ base: 'none', md: '420px' }}
+        {/* Left: photo panel */}
+        <Box
+          position='relative'
+          overflow='hidden'
+          borderRadius='20px'
+          bg='#2c3a22'
+          h={{ base: 'min(680px, 112vw)', md: 'clamp(560px, 84dvh, 760px)' }}
         >
-          <Heading
-            as='h1'
+          <Image
+            src='/images/v2/hills.jpg'
+            alt='Green hills under a cloudy sky'
+            position='absolute'
+            inset='0'
+            w='100%'
+            h='100%'
+            objectFit='cover'
+            objectPosition='50% 50%'
+          />
+          <Box
+            position='absolute'
+            inset='0'
+            bg='linear-gradient(180deg, rgba(8,12,6,0.45) 0%, rgba(8,12,6,0.25) 45%, rgba(8,12,6,0.45) 100%)'
+          />
+          <Flower
+            style={{ left: '50%', top: '60%', width: '26%', transform: 'translateX(-50%)' }}
+          />
+          <Flex
+            position='absolute'
+            top='20px'
+            left='20px'
+            gap='4px'
+            zIndex={2}
+          >
+            {chips.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                px='8px'
+                py='4px'
+                borderRadius='6px'
+                bg={GLASS}
+                fontSize='11px'
+                fontWeight='500'
+                lineHeight='1.2'
+                color='white'
+                css={{ backdropFilter: 'blur(12px)' }}
+                _hover={{ textDecoration: 'none', bg: 'rgba(255,255,255,0.34)' }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </Flex>
+          <chakra.h1
+            position='absolute'
+            left='50%'
+            top='46%'
             m='0'
-            fontSize='40px'
-            lineHeight='1.08'
+            w='78%'
+            transform='translate(-50%, -50%)'
+            textAlign='center'
+            fontSize={{ base: '40px', md: 'clamp(34px, 3.6vw, 48px)' }}
+            lineHeight='0.95'
             fontWeight='500'
-            letterSpacing='-0.01em'
-            textTransform='uppercase'
-            color='white'
+            letterSpacing='-0.045em'
+            textShadow='0 2px 30px rgba(0,0,0,0.25)'
           >
             {introCopy.title}
-          </Heading>
-          <Text
-            display={{ base: 'none', md: 'block' }}
-            m='0'
-            fontSize='13px'
-            lineHeight='1.55'
-            color={muted}
-            maxW='340px'
+          </chakra.h1>
+          <Link
+            href='/contact'
+            position='absolute'
+            left='20px'
+            bottom='20px'
+            display='inline-flex'
+            alignItems='center'
+            gap='8px'
+            h='40px'
+            px='14px'
+            borderRadius='10px'
+            bg={GLASS}
+            borderWidth='1px'
+            borderColor={GLASS_EDGE}
+            fontSize='12px'
+            fontWeight='500'
+            color='white'
+            css={{ backdropFilter: 'blur(14px)' }}
+            _hover={{ textDecoration: 'none', bg: 'rgba(255,255,255,0.34)' }}
           >
-            {introCopy.description}
-          </Text>
+            Contact Us <span aria-hidden='true'>→</span>
+          </Link>
+        </Box>
+
+        {/* Right: dark text panel */}
+        <Box
+          position='relative'
+          overflow='hidden'
+          borderRadius='20px'
+          bg={CARD}
+          h={{ base: 'min(680px, 112vw)', md: 'clamp(560px, 84dvh, 760px)' }}
+        >
           <Flex
-            wrap='wrap'
+            position='relative'
+            zIndex={2}
+            justify='space-between'
             align='center'
-            gap={3}
-            mt={1.5}
-            justify={{ base: 'center', md: 'flex-start' }}
+            px='24px'
+            pt='20px'
+            fontSize='11px'
           >
             <Link
-              href='#cases'
-              display={{ base: 'none', md: 'inline-flex' }}
-              alignItems='center'
-              justifyContent='center'
-              h='44px'
-              px={5}
-              borderRadius='full'
-              bg={pillBg}
-              borderWidth='1px'
-              borderColor={pillBorder}
-              fontSize='11px'
-              fontWeight='500'
+              href='/v1'
               color='white'
-              _hover={{ textDecoration: 'none', borderColor: '#3a3d45' }}
-            >
-              Specifications
-            </Link>
-            <Link
-              href='/contact'
-              display='inline-flex'
-              alignItems='center'
-              gap='14px'
-              h='44px'
-              pl='18px'
-              pr='6px'
-              borderRadius='full'
-              bg={{ base: 'transparent', md: 'white' }}
-              borderWidth={{ base: '1px', md: '0' }}
-              borderColor='rgba(255,255,255,0.55)'
-              fontSize='11px'
-              fontWeight='600'
-              color={{ base: 'white', md: ink }}
               _hover={{ textDecoration: 'none' }}
             >
-              <span>Contact Us</span>
-              <Flex
-                align='center'
-                justify='center'
-                w='26px'
-                h='26px'
-                borderRadius='full'
-                bg={{ base: 'white', md: ink }}
-                color={{ base: ink, md: 'white' }}
-              >
-                <svg
-                  width='12'
-                  height='12'
-                  viewBox='0 0 12 12'
-                  fill='none'
-                  aria-hidden='true'
-                >
-                  <path
-                    d='M2 6H10M6.5 2.5L10 6L6.5 9.5'
-                    stroke='currentColor'
-                    strokeWidth='1.3'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />
-                </svg>
-              </Flex>
+              kvetio
             </Link>
+            <chakra.button
+              type='button'
+              fontSize='11px'
+              color='white'
+              cursor='pointer'
+              aria-expanded={open}
+              aria-controls='v1-menu'
+              onClick={() => setOpen(true)}
+            >
+              open menu
+            </chakra.button>
           </Flex>
+          <chakra.p
+            position='relative'
+            zIndex={2}
+            m='0'
+            px='24px'
+            pt='36px'
+            fontSize={{ base: '26px', md: 'clamp(24px, 2.5vw, 32px)' }}
+            lineHeight='1.05'
+            fontWeight='400'
+            letterSpacing='-0.04em'
+            color='#7d8088'
+          >
+            <chakra.span
+              display='inline-block'
+              w='26%'
+              aria-hidden='true'
+            />
+            <chakra.span color='white'>{lead}</chakra.span> {rest}
+          </chakra.p>
+          <Box
+            position='absolute'
+            left='0'
+            right='0'
+            bottom='0'
+            h='55%'
+            overflow='hidden'
+          >
+            <Image
+              src='/images/v2/hills.jpg'
+              alt=''
+              position='absolute'
+              inset='0'
+              w='100%'
+              h='100%'
+              objectFit='cover'
+              objectPosition='50% 70%'
+              opacity={0.55}
+            />
+            <Box
+              position='absolute'
+              inset='0'
+              bg={`linear-gradient(180deg, ${CARD} 0%, rgba(10,12,16,0.2) 40%, rgba(10,12,16,0.55) 100%)`}
+              css={{
+                backgroundImage: `linear-gradient(180deg, ${CARD} 0%, rgba(10,12,16,0.2) 40%, rgba(10,12,16,0.55) 100%), linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+                backgroundSize: 'auto, 25% 25%, 25% 25%',
+              }}
+            />
+            <Flower style={{ left: '50%', top: '18%', width: '30%', transform: 'translateX(-50%)' }} />
+          </Box>
+        </Box>
+      </Box>
+
+      {/* Fullscreen menu */}
+      <Flex
+        id='v1-menu'
+        direction='column'
+        position='fixed'
+        inset='0'
+        zIndex={70}
+        px={6}
+        pt={5}
+        pb={12}
+        bg={PAGE}
+        overflowY='auto'
+        opacity={open ? 1 : 0}
+        visibility={open ? 'visible' : 'hidden'}
+        transition='opacity 0.2s, visibility 0.2s'
+        aria-hidden={!open}
+      >
+        <Flex
+          justify='space-between'
+          align='center'
+          fontSize='11px'
+        >
+          <span>kvetio</span>
+          <chakra.button
+            type='button'
+            fontSize='11px'
+            color='white'
+            cursor='pointer'
+            onClick={() => setOpen(false)}
+          >
+            close
+          </chakra.button>
+        </Flex>
+        <Flex
+          direction='column'
+          mt={10}
+        >
+          {menuLinks.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              py='14px'
+              fontSize='34px'
+              lineHeight='1'
+              fontWeight='500'
+              letterSpacing='-0.045em'
+              color='white'
+              _hover={{ textDecoration: 'none', color: '#aab59a' }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </Flex>
       </Flex>
-
-      <Box
-        flex='1 1 520px'
-        minW='0'
-        position={{ base: 'absolute', md: 'relative' }}
-        inset={{ base: '0', md: 'auto' }}
-        minH={{ base: '100%', md: '100%' }}
-        zIndex={0}
-        bg='#2c3a22'
-        css={{
-          '--flower-top': 'auto',
-          '--flower-bottom': '15%',
-          '--flower-w': '40%',
-          '@media (min-width: 48em)': {
-            '--flower-top': '54%',
-            '--flower-bottom': 'auto',
-            '--flower-w': '30%',
-          },
-        }}
-      >
-        <Image
-          src='/images/v2/hills.jpg'
-          alt='Green hills under a cloudy sky'
-          position='absolute'
-          inset='0'
-          w='100%'
-          h='100%'
-          objectFit='cover'
-          objectPosition='50% 50%'
-        />
-        <Box
-          display={{ base: 'block', md: 'none' }}
-          position='absolute'
-          inset='0'
-          bg='linear-gradient(180deg, rgba(14,15,19,0.88) 0%, rgba(14,15,19,0.55) 45%, rgba(14,15,19,0.1) 100%)'
-        />
-        <svg
-          viewBox='0 0 15 15'
-          preserveAspectRatio='none'
-          fill='none'
-          aria-hidden='true'
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: 'var(--flower-top)',
-            bottom: 'var(--flower-bottom)',
-            width: 'var(--flower-w)',
-            aspectRatio: '3/4',
-            transform: 'translateX(-50%)',
-            filter:
-              'drop-shadow(0 0 10px rgba(255,246,190,0.55)) drop-shadow(0 0 28px rgba(255,246,190,0.3))',
-            pointerEvents: 'none',
-          }}
-        >
-          <path
-            d={FLOWER_PATH}
-            fill={cream}
-          />
-        </svg>
-      </Box>
-    </Flex>
+    </Box>
   );
 }

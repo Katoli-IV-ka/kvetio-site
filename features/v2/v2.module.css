@@ -380,7 +380,7 @@
   .brand {
     position: absolute;
     top: 40px;
-    left: calc(var(--gutter) + 56px);
+    left: 56px;
     display: flex;
   }
 
@@ -388,7 +388,7 @@
     display: flex;
     position: absolute;
     top: 129px;
-    left: calc(var(--gutter) + 56px);
+    left: 56px;
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 13px;
@@ -1585,9 +1585,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1280px;
     height: 96px;
-    margin: 0 auto -96px;
+    margin: 0 0 -96px;
     padding: 0 56px;
   }
 

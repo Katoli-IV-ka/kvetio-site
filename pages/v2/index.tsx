@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Contact } from '../../features/v2/ui/Contact';
 import { DataTypes } from '../../features/v2/ui/DataTypes';
 import { Footer } from '../../features/v2/ui/Footer';
+import { MobileMenu } from '../../features/v2/ui/MobileMenu';
 import { Hero } from '../../features/v2/ui/Hero';
 import { Process } from '../../features/v2/ui/Process';
 import { UseCases } from '../../features/v2/ui/UseCases';
@@ -83,6 +84,7 @@ export default function V2Page() {
         <style>{`html, body { margin: 0; background: #fff; }`}</style>
       </Head>
       <div className={styles.root}>
+        <MobileMenu />
         <Hero />
         <main>
           <UseCases />

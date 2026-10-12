@@ -186,3 +186,38 @@ export const LEGAL_LINKS = [
   { label: 'Terms of Service', href: '/privacy-policy' },
   { label: 'Security', href: '/privacy-policy' },
 ];
+
+export type MenuGroup = {
+  label: string;
+  items: { label: string; text?: string; href: string }[];
+};
+
+/** Mobile burger menu: accordion groups first, then plain links, mirroring the footer sections. */
+export const MENU_GROUPS: MenuGroup[] = [
+  {
+    label: 'Use cases',
+    items: [
+      { label: 'Egocentric', text: 'First-person video of real tasks', href: '#use-cases' },
+      { label: 'Physical AI & Robotics', text: 'Manipulation, navigation, sensor data', href: '#use-cases' },
+      { label: 'Agriculture', text: 'Field and farm-scene capture', href: '#use-cases' },
+      { label: 'Construction', text: 'Building-site work filmed on location', href: '#use-cases' },
+      { label: 'Retail & Fashion', text: 'Products, shelves and in-store behaviour', href: '#use-cases' },
+    ],
+  },
+  {
+    label: 'Data types',
+    items: [
+      { label: 'Visual Data', text: 'Images, video, frames, annotations', href: '#data-types' },
+      { label: 'Audio & Speech', text: 'Voice, sound events, transcripts', href: '#data-types' },
+      { label: 'Text & Documents', text: 'Prompts, structured text, document data', href: '#data-types' },
+      { label: 'Sensor & Structured Data', text: 'Metadata, tabular data, device logs', href: '#data-types' },
+      { label: 'Domain-Specific Data', text: 'Healthcare, retail, safety, industrial', href: '#data-types' },
+    ],
+  },
+];
+
+export const MENU_LINKS = [
+  { label: 'Process', href: '#process' },
+  { label: 'Worldwide', href: '#worldwide' },
+  { label: 'News', href: '/v1' },
+];

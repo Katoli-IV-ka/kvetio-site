@@ -5,7 +5,10 @@ import styles from '../v2.module.css';
 
 export function Hero() {
   return (
-    <header className={styles.hero}>
+    <header
+      id='top'
+      className={styles.hero}
+    >
       <div className={styles.heroInner}>
         <img
           className={styles.heroImage}

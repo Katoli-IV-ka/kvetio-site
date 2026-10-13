@@ -63,7 +63,7 @@ export function SiteNav() {
           textTransform='uppercase'
           _hover={{ textDecoration: 'none' }}
         >
-          <Flower size={20} />
+          <Flower size={14} />
           <span>Kvetio</span>
         </Link>
 

@@ -18,13 +18,14 @@ export const introCopy = {
 };
 
 export const navLinks = [
-  { label: 'Use cases', href: '/#cases' },
+  { label: 'Areas', href: '/#cases' },
+  { label: 'Data', href: '/#modalities' },
+  { label: 'Coverage', href: '/#coverage' },
+  { label: 'Process', href: '/#pillars' },
+  { label: 'Quality', href: '/#accuracy' },
   { label: 'Team', href: '/#team' },
-  { label: 'Data types', href: '/#modalities' },
-  { label: 'How we work', href: '/#pillars' },
-  { label: 'Accuracy', href: '/#accuracy' },
   { label: 'Locations', href: '/#network' },
-  { label: 'Contact Us', href: '/contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const contactForm = {
@@ -234,4 +235,42 @@ export const linkedinCopy = {
   url: 'https://www.linkedin.com/company/kvet-io',
   person: 'Dzmitry',
   followers: 6,
+};
+
+export type CoverageAxis = { label: string; text: string };
+export type CoverageArea = {
+  label: string;
+  /** Share of the brief that ready-made data covers, 0..1, one value per axis. */
+  values: number[];
+};
+
+export const coverageCopy = {
+  title: 'Ready-made data covers most of it. Not the part that matters.',
+  description:
+    'Open and off-the-shelf datasets cover the common part of a brief. The rest, the rare scenario, your sensor, your place, your rights, is produced to your spec.',
+  legend: ['Covered by ready-made data', 'Produced by Kvetio to your spec'],
+  note: 'Illustrative values, not measurements. They show the shape of a typical brief, not a benchmark.',
+  axes: [
+    {
+      label: 'Scenario',
+      text: 'The exact action your model has to learn, often rare and rarely filmed.',
+    },
+    {
+      label: 'Conditions',
+      text: 'Your lighting, weather and time of day, not whatever was available.',
+    },
+    { label: 'Camera & gear', text: 'Your mounting position, sensor and resolution.' },
+    { label: 'Location', text: 'Your city or your kind of place.' },
+    {
+      label: 'Rights',
+      text: 'Signed likeness releases and terms that allow commercial training.',
+    },
+    { label: 'Labels & format', text: 'Annotations on your schema, delivered in your format.' },
+  ] as CoverageAxis[],
+  areas: [
+    { label: 'Egocentric', values: [0.85, 0.7, 0.55, 0.4, 0.3, 0.45] },
+    { label: 'Physical AI', values: [0.6, 0.5, 0.4, 0.35, 0.45, 0.3] },
+    { label: 'Agro data', values: [0.7, 0.55, 0.6, 0.45, 0.5, 0.4] },
+    { label: 'Documents', values: [0.9, 0.8, 0.7, 0.6, 0.5, 0.55] },
+  ] as CoverageArea[],
 };

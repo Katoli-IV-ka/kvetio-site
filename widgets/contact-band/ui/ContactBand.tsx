@@ -16,7 +16,7 @@ function Title() {
     <Heading
       as='h2'
       m='0'
-      maxW='640px'
+      maxW={{ base: 'none', md: '900px' }}
       fontSize={{ base: '30px', md: '40px' }}
       lineHeight='1.08'
       fontWeight='500'
@@ -77,24 +77,14 @@ function BandForm() {
             required
           />
         </Box>
-        <Flex
-          direction='row'
-          align='flex-end'
-          justify='space-between'
-          gap={6}
-          wrap='wrap'
-        >
-          <Box>
-            <ConsentFields
-              idPrefix={idPrefix}
-              consent={consent}
-              marketing={marketing}
-              onConsent={setConsent}
-              onMarketing={setMarketing}
-            />
-          </Box>
-          <PillButton />
-        </Flex>
+        <ConsentFields
+          idPrefix={idPrefix}
+          consent={consent}
+          marketing={marketing}
+          onConsent={setConsent}
+          onMarketing={setMarketing}
+        />
+        <PillButton />
       </Flex>
     </form>
   );
@@ -103,7 +93,7 @@ function BandForm() {
 function PillButton() {
   return (
     <chakra.button
-      ml='auto'
+      alignSelf='flex-start'
       type='submit'
       display='inline-flex'
       alignItems='center'

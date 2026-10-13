@@ -88,9 +88,9 @@ export function ConsentFields({
     <Flex
       direction='column'
       gap={3}
-      flex='1 1 320px'
+      w='100%'
       minW='0'
-      maxW='520px'
+      maxW='760px'
     >
       <ConsentCheckbox
         id={`${idPrefix}-consent`}

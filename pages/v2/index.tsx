@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Contact } from '../../features/v2/ui/Contact';
 import { DataTypes } from '../../features/v2/ui/DataTypes';
 import { Footer } from '../../features/v2/ui/Footer';
+import { Plateau } from '../../features/v2/ui/Plateau';
 import { MobileMenu } from '../../features/v2/ui/MobileMenu';
 import { Hero } from '../../features/v2/ui/Hero';
 import { Process } from '../../features/v2/ui/Process';
@@ -89,6 +90,7 @@ export default function V2Page() {
         <main>
           <UseCases />
           <DataTypes />
+          <Plateau />
           <Contact />
           <Process />
           <Worldwide />

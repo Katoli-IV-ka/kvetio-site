@@ -4,36 +4,39 @@ import styles from '../v2.module.css';
 /* Chart geometry (viewBox units). */
 const W = 640;
 const H = 560;
-const X0 = 56;
-const X1 = 616;
-const Y_BASE = 470;
-const Y_TOP = 96;
-const BARS = 36;
-const SLOT = (X1 - X0) / BARS;
-const BAR_W = 11;
-const KNEE = 14; // bar index where generic data stops paying off
+const CX = 320;
+const CY = 292;
+const R = 178;
+const RINGS = [0.25, 0.5, 0.75, 1];
 
-/** Illustrative curves, not measurements: gain per added batch of data. */
-const generic = Array.from({ length: BARS }, (_, i) => 330 * Math.exp(-i / 8.5) + 10);
-const targeted = Array.from({ length: BARS }, (_, i) =>
-  i < KNEE ? 0 : 255 * Math.pow(0.975, i - KNEE) + 20,
-);
-
-const TICKS = [
-  { i: 0, label: '1K' },
-  { i: 9, label: '10K' },
-  { i: 18, label: '100K' },
-  { i: 27, label: '1M' },
-  { i: 35, label: '10M' },
+/** Illustrative coverage, not measurements. */
+const AXES = [
+  { label: 'EVERYDAY SCENES', generic: 0.92, needed: 0.98 },
+  { label: 'COMMON OBJECTS', generic: 0.9, needed: 0.95 },
+  { label: 'TYPICAL ANGLES', generic: 0.84, needed: 0.96 },
+  { label: 'STANDARD LIGHT', generic: 0.78, needed: 0.94 },
+  { label: 'RARE OBJECTS', generic: 0.3, needed: 0.95 },
+  { label: 'UNUSUAL PLACES', generic: 0.2, needed: 0.97 },
+  { label: 'ODD LIGHTING', generic: 0.16, needed: 0.93 },
+  { label: 'EDGE-CASE ACTIONS', generic: 0.26, needed: 0.96 },
 ];
 
 const POINTS = [
-  'Each new batch of everyday data teaches the model less than the one before.',
-  'Past the plateau, adding more of the same barely moves quality on the cases that matter.',
-  'Purpose-built data for narrow, rare scenarios restores the gain.',
+  'More everyday data keeps filling the same broad middle of the distribution.',
+  'Rare objects, odd lighting and unusual places stay uncovered, and that is where models fail.',
+  'Purpose-built data for those narrow cases closes the gap.',
 ];
 
-const barX = (i: number) => X0 + i * SLOT + (SLOT - BAR_W) / 2;
+const angle = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / AXES.length;
+const pt = (i: number, k: number) => ({
+  x: CX + Math.cos(angle(i)) * R * k,
+  y: CY + Math.sin(angle(i)) * R * k,
+});
+const poly = (k: (i: number) => number) =>
+  AXES.map((_, i) => {
+    const p = pt(i, k(i));
+    return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+  }).join(' ');
 
 export function Plateau() {
   const ref = useRef<HTMLDivElement>(null);
@@ -59,8 +62,6 @@ export function Plateau() {
     return () => observer.disconnect();
   }, []);
 
-  const kneeX = X0 + KNEE * SLOT;
-
   return (
     <section
       id='why'
@@ -76,13 +77,13 @@ export function Plateau() {
             stops paying off
           </h2>
           <p className={styles.plateauLead}>
-            Early on, every extra batch of everyday data lifts a model. Then the curve flattens:
-            the same kind of data keeps arriving and the model keeps learning less from it.
+            Everyday datasets cover the broad middle of what a model sees. Add more of them and the
+            shape barely changes: the same scenes, the same lighting, the same angles.
           </p>
           <p className={styles.plateauText}>
-            What&apos;s missing is the narrow, rare part of the distribution — the edge cases your
-            model actually fails on. Generic datasets never reach it. Data produced for those exact
-            cases is where the gain comes back.
+            What&apos;s missing sits at the edges — rare objects, odd lighting, unusual places,
+            unexpected actions. That is where models fail and where generic data never reaches.
+            Data produced for those exact cases fills the gap.
           </p>
           <ul className={styles.plateauPoints}>
             {POINTS.map((point) => (
@@ -100,127 +101,104 @@ export function Plateau() {
             className={styles.chart}
             viewBox={`0 0 ${W} ${H}`}
             role='img'
-            aria-label='Illustrative chart: the gain per added batch of generic data shrinks as the dataset grows, while targeted edge-case data restores the gain.'
+            aria-label='Illustrative radar chart: generic datasets cover everyday scenarios well but leave rare objects, odd lighting, unusual places and edge-case actions uncovered; targeted data fills that gap.'
           >
-            {/* opportunity space */}
-            <rect
-              className={styles.chartZone}
-              x={kneeX}
-              y={Y_TOP - 20}
-              width={X1 - kneeX + 12}
-              height={Y_BASE - Y_TOP + 36}
-              rx='14'
-            />
-            <text
-              className={styles.chartZoneLabel}
-              x={kneeX + (X1 - kneeX) / 2}
-              y={Y_TOP + 4}
-              textAnchor='middle'
-            >
-              TARGETED DATA OPPORTUNITY SPACE
-            </text>
-
-            {/* baseline and ticks */}
-            <line
-              className={styles.chartAxis}
-              x1={X0 - 8}
-              x2={X1 + 12}
-              y1={Y_BASE}
-              y2={Y_BASE}
-            />
-            {TICKS.map((tick) => (
-              <g key={tick.label}>
-                <line
-                  className={styles.chartAxis}
-                  x1={barX(tick.i) + BAR_W / 2}
-                  x2={barX(tick.i) + BAR_W / 2}
-                  y1={Y_BASE}
-                  y2={Y_BASE + 7}
-                />
-                <text
-                  className={styles.chartTick}
-                  x={barX(tick.i) + BAR_W / 2}
-                  y={Y_BASE + 26}
-                  textAnchor='middle'
-                >
-                  {tick.label}
-                </text>
-              </g>
+            {/* rings and spokes */}
+            {RINGS.map((k) => (
+              <polygon
+                key={k}
+                className={styles.radarRing}
+                points={poly(() => k)}
+              />
             ))}
-
-            {/* bars: targeted behind, generic in front */}
-            {targeted.map((value, i) =>
-              value > 0 ? (
-                <rect
-                  key={`t${i}`}
-                  className={`${styles.bar} ${styles.barTargeted}`}
-                  style={{ transitionDelay: `${0.5 + (i - KNEE) * 0.035}s` }}
-                  x={barX(i)}
-                  y={Y_BASE - value}
-                  width={BAR_W}
-                  height={value}
-                  rx='1.5'
-                />
-              ) : null,
-            )}
-            {generic.map((value, i) => (
-              <rect
-                key={`g${i}`}
-                className={`${styles.bar} ${styles.barGeneric}`}
-                style={{ transitionDelay: `${i * 0.03}s` }}
-                x={barX(i)}
-                y={Y_BASE - value}
-                width={BAR_W}
-                height={value}
-                rx='1.5'
+            {AXES.map((axis, i) => (
+              <line
+                key={axis.label}
+                className={styles.radarRing}
+                x1={CX}
+                y1={CY}
+                x2={pt(i, 1).x}
+                y2={pt(i, 1).y}
               />
             ))}
 
-            {/* plateau marker */}
-            <line
-              className={styles.chartMarker}
-              x1={kneeX}
-              x2={kneeX}
-              y1={46}
-              y2={Y_BASE}
+            {/* required coverage (targeted data fills it) */}
+            <polygon
+              className={`${styles.radarShape} ${styles.radarNeeded}`}
+              points={poly((i) => AXES[i]!.needed)}
             />
-            <g transform={`translate(${kneeX - 62} 20)`}>
+            {/* what generic datasets cover */}
+            <polygon
+              className={`${styles.radarShape} ${styles.radarGeneric}`}
+              style={{ transitionDelay: '0.25s' }}
+              points={poly((i) => AXES[i]!.generic)}
+            />
+            {AXES.map((axis, i) => (
+              <circle
+                key={`d${axis.label}`}
+                className={styles.radarDot}
+                cx={pt(i, axis.generic).x}
+                cy={pt(i, axis.generic).y}
+                r='3.5'
+              />
+            ))}
+
+            {/* axis labels */}
+            {AXES.map((axis, i) => {
+              const p = pt(i, 1.13);
+              const c = Math.cos(angle(i));
+              const anchor = Math.abs(c) < 0.2 ? 'middle' : c > 0 ? 'start' : 'end';
+              return (
+                <text
+                  key={`l${axis.label}`}
+                  className={styles.radarLabel}
+                  x={p.x + (anchor === 'start' ? 4 : anchor === 'end' ? -4 : 0)}
+                  y={p.y + 4}
+                  textAnchor={anchor}
+                >
+                  {axis.label}
+                </text>
+              );
+            })}
+
+            {/* callout on the gap */}
+            <g transform='translate(436 462)'>
               <rect
                 className={styles.chartChip}
-                width='124'
+                width='196'
                 height='28'
                 rx='7'
               />
               <text
                 className={styles.chartChipText}
-                x='62'
+                x='98'
                 y='18'
                 textAnchor='middle'
               >
-                GENERIC PLATEAU
+                TARGETED DATA SPACE
               </text>
             </g>
 
-            {/* y-axis chip */}
-            <g transform='translate(0 20)'>
+            {/* title chip */}
+            <g transform='translate(0 8)'>
               <rect
                 className={styles.chartChipLight}
-                width='128'
+                width='168'
                 height='28'
                 rx='7'
               />
               <text
                 className={styles.chartChipTextDark}
-                x='64'
+                x='84'
                 y='18'
                 textAnchor='middle'
               >
-                GAIN PER BATCH
+                SCENARIO COVERAGE
               </text>
             </g>
 
             {/* legend */}
-            <g transform='translate(396 20)'>
+            <g transform='translate(396 8)'>
               <rect
                 className={styles.chartChip}
                 width='108'
@@ -243,7 +221,7 @@ export function Plateau() {
                 GENERIC
               </text>
             </g>
-            <g transform='translate(512 20)'>
+            <g transform='translate(512 8)'>
               <rect
                 className={styles.chartChip}
                 width='120'
@@ -264,24 +242,6 @@ export function Plateau() {
                 y='18'
               >
                 TARGETED
-              </text>
-            </g>
-
-            {/* x-axis chip */}
-            <g transform={`translate(${(X0 + X1) / 2 - 104} 506)`}>
-              <rect
-                className={styles.chartChipSoft}
-                width='208'
-                height='30'
-                rx='8'
-              />
-              <text
-                className={styles.chartChipTextSoft}
-                x='104'
-                y='19'
-                textAnchor='middle'
-              >
-                TRAINING DATA VOLUME (SAMPLES)
               </text>
             </g>
           </svg>

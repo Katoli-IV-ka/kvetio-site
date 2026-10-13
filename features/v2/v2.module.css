@@ -1732,32 +1732,8 @@
   font-family: var(--mono);
 }
 
-.chartZone {
-  fill: rgba(77, 160, 94, 0.2);
-  stroke: rgba(111, 208, 138, 0.35);
-}
 
-.chartZoneLabel {
-  fill: #cfe9d6;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
 
-.chartAxis {
-  stroke: #5b635e;
-  stroke-width: 1;
-}
-
-.chartTick {
-  fill: #8d968f;
-  font-size: 11px;
-}
-
-.chartMarker {
-  stroke: #cfd5d1;
-  stroke-width: 1;
-}
 
 .chartChip {
   fill: rgba(11, 16, 14, 0.85);
@@ -1802,24 +1778,9 @@
   fill: #6fd08a;
 }
 
-.bar {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transform: scaleY(0);
-  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
 
-.chartWrap[data-seen='true'] .bar {
-  transform: scaleY(1);
-}
 
-.barGeneric {
-  fill: #9a93e0;
-}
 
-.barTargeted {
-  fill: #6fd08a;
-}
 
 .chartNote {
   margin: 12px 0 0;
@@ -1828,10 +1789,53 @@
   line-height: 18px;
 }
 
+
+.radarRing {
+  fill: none;
+  stroke: #333b36;
+  stroke-width: 1;
+}
+
+.radarShape {
+  transform-box: view-box;
+  transform-origin: 320px 292px;
+  transform: scale(0);
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.chartWrap[data-seen='true'] .radarShape {
+  transform: scale(1);
+}
+
+.radarNeeded {
+  fill: rgba(77, 160, 94, 0.22);
+  stroke: #6fd08a;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.radarGeneric {
+  fill: rgba(154, 147, 224, 0.55);
+  stroke: #9a93e0;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.radarDot {
+  fill: #cfcaf5;
+}
+
+.radarLabel {
+  fill: #9aa39d;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .bar {
+  .radarShape {
     transition: none;
-    transform: scaleY(1);
+    transform: scale(1);
   }
 }
 

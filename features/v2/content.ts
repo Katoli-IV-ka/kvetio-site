@@ -4,7 +4,6 @@ export const NAV_LINKS = [
   { label: 'Why custom data', href: '#why' },
   { label: 'Process', href: '#process' },
   { label: 'Worldwide', href: '#worldwide' },
-  { label: 'Contact', href: '#contact' },
 ];
 
 export type CardVariant = 'photo' | 'light' | 'dark' | 'warm' | 'paper';

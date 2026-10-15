@@ -5,6 +5,7 @@ import { DataTypes } from '../../features/v2/ui/DataTypes';
 import { Footer } from '../../features/v2/ui/Footer';
 import { Plateau } from '../../features/v2/ui/Plateau';
 import { MobileMenu } from '../../features/v2/ui/MobileMenu';
+import { Header } from '../../features/v2/ui/Header';
 import { Hero } from '../../features/v2/ui/Hero';
 import { Process } from '../../features/v2/ui/Process';
 import { UseCases } from '../../features/v2/ui/UseCases';
@@ -127,6 +128,7 @@ export default function V2Page() {
       </Head>
       <div className={styles.root}>
         <MobileMenu />
+        <Header />
         <Hero />
         <main>
           <UseCases />

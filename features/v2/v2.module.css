@@ -1228,7 +1228,7 @@
 .footerArt {
   display: block;
   width: 100%;
-  height: min(650px, 60vw);
+  height: clamp(140px, 22vw, 320px);
   object-fit: cover;
 }
 
@@ -1349,8 +1349,7 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding: var(--section-y) 0;
-    margin-top: -24px;
+    padding: var(--gap-head) 0 var(--section-y);
   }
 
   .footerCols {

@@ -8,7 +8,7 @@ export function Footer({ base = '' }: { base?: string }) {
     <footer className={styles.footer}>
       <img
         className={styles.footerArt}
-        src='/v2/footer-halftone-2.webp'
+        src='/v2/footer-gradient.webp'
         alt=''
         loading='lazy'
       />

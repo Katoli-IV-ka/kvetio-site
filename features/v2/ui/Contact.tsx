@@ -67,11 +67,7 @@ export function Contact() {
           alt=''
         />
         <h2 className={`${styles.heading} ${styles.contactTitle}`}>
-          Tell us what
-          <br />
-          your model
-          <br />
-          is missing
+          Tell us what training data your model is missing
         </h2>
         <form
           className={styles.form}

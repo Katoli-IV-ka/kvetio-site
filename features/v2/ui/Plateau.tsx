@@ -101,9 +101,10 @@ export function Plateau() {
   const [axis, setAxis] = useState(0);
 
   const values = AREAS[area]!.values;
-  const points = values.map(
-    (v, i): Point => [CX + R * v * Math.cos(ANGLES[i]!), CY + R * v * Math.sin(ANGLES[i]!)],
-  );
+  const points = values.map((v, i): Point => [
+    CX + R * v * Math.cos(ANGLES[i]!),
+    CY + R * v * Math.sin(ANGLES[i]!),
+  ]);
   const shape = smoothShape(points);
 
   return (
@@ -114,7 +115,7 @@ export function Plateau() {
       <div className={styles.coverageInner}>
         <div className={styles.coverageHead}>
           <h2 className={`${styles.heading} ${styles.coverageTitle}`}>
-            Ready-made data gets you most of the way. We make the rest.
+            Custom datasets where ready-made data stops
           </h2>
           <p className={styles.coverageLead}>
             Open and off-the-shelf datasets cover the common cases. Where your requirement gets

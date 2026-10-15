@@ -5,6 +5,7 @@ import { DataTypes } from '../../features/v2/ui/DataTypes';
 import { Footer } from '../../features/v2/ui/Footer';
 import { Plateau } from '../../features/v2/ui/Plateau';
 import { MobileMenu } from '../../features/v2/ui/MobileMenu';
+import { Header } from '../../features/v2/ui/Header';
 import { Hero } from '../../features/v2/ui/Hero';
 import { Process } from '../../features/v2/ui/Process';
 import { UseCases } from '../../features/v2/ui/UseCases';
@@ -17,6 +18,27 @@ const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
 const TITLE = 'Kvetio — Custom AI Training Data Production';
 const DESCRIPTION =
   'Custom AI training data for model builders. Kvetio collects, produces, annotates, reviews, and delivers datasets across modalities, domains, and formats.';
+
+const JSON_LD = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Kvetio',
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    email: 'contact@kvet.io',
+    sameAs: ['https://www.instagram.com/kvetio', 'https://www.linkedin.com/company/kvet-io'],
+    description: DESCRIPTION,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Kvetio',
+    url: SITE_URL,
+    description: DESCRIPTION,
+    inLanguage: 'en',
+  },
+];
 
 export default function V2Page() {
   return (
@@ -56,6 +78,26 @@ export default function V2Page() {
           content='Kvetio'
         />
         <meta
+          property='og:locale'
+          content='en_US'
+        />
+        <meta
+          name='twitter:title'
+          content={TITLE}
+        />
+        <meta
+          name='twitter:description'
+          content={DESCRIPTION}
+        />
+        <meta
+          name='twitter:image'
+          content={OG_IMAGE}
+        />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
+        <meta
           name='twitter:card'
           content='summary_large_image'
         />
@@ -86,6 +128,7 @@ export default function V2Page() {
       </Head>
       <div className={styles.root}>
         <MobileMenu />
+        <Header />
         <Hero />
         <main>
           <UseCases />

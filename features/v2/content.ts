@@ -1,11 +1,9 @@
 export const NAV_LINKS = [
-  { label: 'Philosophy', href: '#use-cases' },
-  { label: 'Projects', href: '#use-cases' },
-  { label: 'Infrastructure', href: '#process' },
-  { label: 'Datasets', href: '#data-types' },
-  { label: 'Research', href: '#worldwide' },
-  { label: 'Career', href: '/contact' },
-  { label: 'News', href: '/v1' },
+  { label: 'Use cases', href: '#use-cases' },
+  { label: 'Data types', href: '#data-types' },
+  { label: 'Why custom data', href: '#why' },
+  { label: 'Process', href: '#process' },
+  { label: 'Worldwide', href: '#worldwide' },
 ];
 
 export type CardVariant = 'photo' | 'light' | 'dark' | 'warm' | 'paper';
@@ -143,11 +141,10 @@ export const FOOTER_COLUMNS = [
   {
     label: 'Company',
     links: [
-      { label: 'Philosophy', href: '#use-cases' },
-      { label: 'Projects', href: '#use-cases' },
-      { label: 'Infrastructure', href: '#process' },
-      { label: 'Career', href: '/contact' },
-      { label: 'News', href: '/v1' },
+      { label: 'Use cases', href: '#use-cases' },
+      { label: 'Process', href: '#process' },
+      { label: 'Worldwide', href: '#worldwide' },
+      { label: 'Contact', href: '#contact' },
     ],
   },
   {
@@ -199,10 +196,18 @@ export const MENU_GROUPS: MenuGroup[] = [
     label: 'Use cases',
     items: [
       { label: 'Egocentric', text: 'First-person video of real tasks', href: '#use-cases' },
-      { label: 'Physical AI & Robotics', text: 'Manipulation, navigation, sensor data', href: '#use-cases' },
+      {
+        label: 'Physical AI & Robotics',
+        text: 'Manipulation, navigation, sensor data',
+        href: '#use-cases',
+      },
       { label: 'Agriculture', text: 'Field and farm-scene capture', href: '#use-cases' },
       { label: 'Construction', text: 'Building-site work filmed on location', href: '#use-cases' },
-      { label: 'Retail & Fashion', text: 'Products, shelves and in-store behaviour', href: '#use-cases' },
+      {
+        label: 'Retail & Fashion',
+        text: 'Products, shelves and in-store behaviour',
+        href: '#use-cases',
+      },
     ],
   },
   {
@@ -210,9 +215,21 @@ export const MENU_GROUPS: MenuGroup[] = [
     items: [
       { label: 'Visual Data', text: 'Images, video, frames, annotations', href: '#data-types' },
       { label: 'Audio & Speech', text: 'Voice, sound events, transcripts', href: '#data-types' },
-      { label: 'Text & Documents', text: 'Prompts, structured text, document data', href: '#data-types' },
-      { label: 'Sensor & Structured Data', text: 'Metadata, tabular data, device logs', href: '#data-types' },
-      { label: 'Domain-Specific Data', text: 'Healthcare, retail, safety, industrial', href: '#data-types' },
+      {
+        label: 'Text & Documents',
+        text: 'Prompts, structured text, document data',
+        href: '#data-types',
+      },
+      {
+        label: 'Sensor & Structured Data',
+        text: 'Metadata, tabular data, device logs',
+        href: '#data-types',
+      },
+      {
+        label: 'Domain-Specific Data',
+        text: 'Healthcare, retail, safety, industrial',
+        href: '#data-types',
+      },
     ],
   },
 ];

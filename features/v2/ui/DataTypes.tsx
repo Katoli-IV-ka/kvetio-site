@@ -9,7 +9,7 @@ export function DataTypes() {
     >
       <div className={styles.typesInner}>
         <div className={styles.typesLead}>
-          <h2 className={styles.heading}>Data types</h2>
+          <h2 className={styles.heading}>AI training data types we produce</h2>
           <p className={styles.typesText}>
             Photo and video are strong use cases for us, but the workflow is built around the model
             requirement: modality, domain rules, annotation schema, and delivery format.

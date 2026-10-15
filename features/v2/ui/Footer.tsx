@@ -14,11 +14,11 @@ export function Footer({ base = '' }: { base?: string }) {
       />
       <div className={styles.footerInner}>
         <div className={styles.footerCta}>
-          <h2 className={styles.footerHeading}>
+          <p className={styles.footerHeading}>
             <span>Data your model</span>
             <br />
             actually needs
-          </h2>
+          </p>
           <a
             className={styles.ctaButton}
             href={base ? '/contact' : '#contact'}
@@ -32,7 +32,7 @@ export function Footer({ base = '' }: { base?: string }) {
               key={column.label}
               aria-label={column.label}
             >
-              <h3 className={styles.footerLabel}>{column.label}</h3>
+              <p className={styles.footerLabel}>{column.label}</p>
               <ul className={styles.footerLinks}>
                 {column.links.map((link) => (
                   <li key={link.label}>

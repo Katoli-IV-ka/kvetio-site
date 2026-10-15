@@ -15,11 +15,7 @@ export function Worldwide() {
     >
       <div className={styles.worldInner}>
         <div className={styles.worldLead}>
-          <h2 className={styles.heading}>
-            We work
-            <br />
-            worldwide
-          </h2>
+          <h2 className={styles.heading}>On-location data collection, worldwide</h2>
           <p className={styles.worldText}>
             Our teams shoot and collect on location across the Americas, Europe and Africa, wherever
             your model needs its data. One brief, one contract, local crews in every city.

@@ -18,6 +18,27 @@ const TITLE = 'Kvetio — Custom AI Training Data Production';
 const DESCRIPTION =
   'Custom AI training data for model builders. Kvetio collects, produces, annotates, reviews, and delivers datasets across modalities, domains, and formats.';
 
+const JSON_LD = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Kvetio',
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    email: 'contact@kvet.io',
+    sameAs: ['https://www.instagram.com/kvetio', 'https://www.linkedin.com/company/kvet-io'],
+    description: DESCRIPTION,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Kvetio',
+    url: SITE_URL,
+    description: DESCRIPTION,
+    inLanguage: 'en',
+  },
+];
+
 export default function V2Page() {
   return (
     <>
@@ -54,6 +75,26 @@ export default function V2Page() {
         <meta
           property='og:site_name'
           content='Kvetio'
+        />
+        <meta
+          property='og:locale'
+          content='en_US'
+        />
+        <meta
+          name='twitter:title'
+          content={TITLE}
+        />
+        <meta
+          name='twitter:description'
+          content={DESCRIPTION}
+        />
+        <meta
+          name='twitter:image'
+          content={OG_IMAGE}
+        />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
         />
         <meta
           name='twitter:card'

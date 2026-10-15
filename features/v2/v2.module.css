@@ -1631,219 +1631,235 @@
   }
 }
 
-/* ---------- Why generic data stops paying off ---------- */
+/* ---------- Coverage radar: ready-made data vs. made to spec ---------- */
 
-.plateau {
-  position: relative;
-  overflow: hidden;
-  background: #0b100e;
-  color: #e9ece9;
+.coverage {
+  background: #fff;
+  color: #0e0f13;
 }
 
-.plateauGrain {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.35;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 -0.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
-}
-
-.plateauInner {
-  position: relative;
-  display: grid;
-  gap: 48px;
+.coverageInner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 72px 24px;
 }
 
-.plateauTag {
-  display: inline-block;
-  padding: 6px 12px;
-  border: 1px solid #b27a63;
-  border-radius: 8px;
-  color: #d9a48c;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.coverageHead {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.plateauTitle {
-  margin-top: 24px;
-  color: #fff;
+.coverageTitle {
+  max-width: 820px;
   font-size: clamp(36px, 8.5vw, 64px);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
-.plateauLead {
-  max-width: 480px;
-  margin: 28px 0 0;
-  font-size: 18px;
-  line-height: 26px;
+.coverageLead {
+  max-width: 380px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #3d3f45;
+}
+
+.coverageTabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.coverageTab {
+  height: 48px;
+  padding: 0 26px;
+  border: 1px solid #0e0f13;
+  border-radius: 999px;
+  background: transparent;
+  color: #0e0f13;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.coverageTab[aria-pressed='true'] {
+  background: #0e0f13;
   color: #fff;
 }
 
-.plateauText {
-  max-width: 480px;
-  margin: 16px 0 0;
-  font-size: 15px;
-  line-height: 23px;
-  color: #9aa39d;
+.coverageFigure {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
 }
 
-.plateauPoints {
-  display: grid;
-  gap: 14px;
-  max-width: 480px;
-  margin: 32px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.plateauPoints li {
-  position: relative;
-  padding-left: 26px;
-  font-size: 14px;
-  line-height: 21px;
-  color: #cfd5d1;
-}
-
-.plateauPoints li::before {
-  content: '';
-  position: absolute;
-  top: 7px;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #6fd08a;
-}
-
-.chartWrap {
-  min-width: 0;
-}
-
-.chart {
+.coverageChart {
   display: block;
   width: 100%;
   height: auto;
-  font-family: var(--mono);
 }
 
-
-
-
-.chartChip {
-  fill: rgba(11, 16, 14, 0.85);
-  stroke: #6a726d;
-}
-
-.chartChipText {
-  fill: #e9ece9;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.chartChipLight {
-  fill: #f4f3ec;
-}
-
-.chartChipTextDark {
-  fill: #111;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.chartChipSoft {
-  fill: #2c322f;
-  stroke: #444b47;
-}
-
-.chartChipTextSoft {
-  fill: #c3cac5;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.legendGeneric {
-  fill: #9a93e0;
-}
-
-.legendTargeted {
-  fill: #6fd08a;
-}
-
-
-
-
-
-.chartNote {
-  margin: 12px 0 0;
-  color: #7d867f;
-  font-size: 12px;
-  line-height: 18px;
-}
-
-
-.radarRing {
-  fill: none;
-  stroke: #333b36;
-  stroke-width: 1;
-}
-
-.radarShape {
-  transform-box: view-box;
-  transform-origin: 320px 292px;
-  transform: scale(0);
-  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.chartWrap[data-seen='true'] .radarShape {
-  transform: scale(1);
-}
-
-.radarNeeded {
-  fill: rgba(77, 160, 94, 0.22);
-  stroke: #6fd08a;
-  stroke-width: 1.5;
-  stroke-dasharray: 5 5;
-}
-
-.radarGeneric {
-  fill: rgba(154, 147, 224, 0.55);
-  stroke: #9a93e0;
+.coverageMade {
+  fill: #68a56a;
+  fill-opacity: 0.28;
+  stroke: #68a56a;
   stroke-width: 2;
   stroke-linejoin: round;
 }
 
-.radarDot {
-  fill: #cfcaf5;
+.coverageRing {
+  fill: #0e0f13;
+  fill-opacity: 0.03;
+  stroke: #0e0f13;
+  stroke-opacity: 0.14;
+  stroke-width: 1;
 }
 
-.radarLabel {
-  fill: #9aa39d;
-  font-size: 10.5px;
+.coverageShape {
+  fill: #fff;
+  fill-opacity: 0.6;
+  stroke: #0e0f13;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  transition: d 0.4s ease;
+}
+
+.coverageDot {
+  fill: #0e0f13;
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.coverageDot[data-active='true'] {
+  fill: #68a56a;
+  stroke: #0e0f13;
+}
+
+.coverageAxisLabel {
+  fill: #0e0f13;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.coverageLegend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 40px;
+}
+
+.coverageLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.coverageSwatchCovered,
+.coverageSwatchMade {
+  display: inline-block;
+  width: 28px;
+  height: 18px;
+  border: 2px solid #0e0f13;
+  border-radius: 3px;
+}
+
+.coverageSwatchCovered {
+  background: #fff;
+}
+
+.coverageSwatchMade {
+  background: rgba(104, 165, 106, 0.6);
+}
+
+.coverageAxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coverageAxes li {
+  display: flex;
+}
+
+.coverageAxis {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 4px 12px;
+  padding: 20px;
+  border: 1px solid #d9d9d4;
+  border-radius: 20px;
+  background: transparent;
+  color: #0e0f13;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.coverageAxis[data-active='true'] {
+  border-color: #0e0f13;
+  background: #f4f4f1;
+}
+
+.coverageAxisNum {
+  padding-top: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5b606b;
+}
+
+.coverageAxisBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coverageAxisName {
+  font-size: 19px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: -0.01em;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .radarShape {
-    transition: none;
-    transform: scale(1);
-  }
+.coverageAxisText {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #3d3f45;
+}
+
+.coverageNote {
+  margin: 0;
+  padding: 16px 20px;
+  border: 1px dashed #9a9ea8;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #5b606b;
 }
 
 @media (min-width: 1024px) {
-  .plateauInner {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: center;
-    gap: 72px;
-    padding: 112px 56px;
+  .coverageInner {
+    gap: 56px;
+    padding: 96px 56px;
+  }
+
+  .coverageHead {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 64px;
   }
 }

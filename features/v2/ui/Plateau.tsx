@@ -1,252 +1,228 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import styles from '../v2.module.css';
 
-/* Chart geometry (viewBox units). */
-const W = 640;
-const H = 560;
-const CX = 320;
-const CY = 292;
-const R = 178;
-const RINGS = [0.25, 0.5, 0.75, 1];
+/* Chart geometry (viewBox units). Axes run clockwise from the top. */
+const CX = 300;
+const CY = 300;
+const R = 190;
+const ANGLES = [-90, -30, 30, 90, 150, 210].map((d) => (d * Math.PI) / 180);
+const RING_LEVELS = [0.25, 0.5, 0.75];
+const CORNER = 30;
 
-/** Illustrative coverage, not measurements. */
+/** Illustrative coverage by ready-made data per axis (0..1), not measurements. */
+const AREAS = [
+  { name: 'Egocentric', values: [0.85, 0.7, 0.55, 0.4, 0.3, 0.45] },
+  { name: 'Physical AI', values: [0.6, 0.5, 0.4, 0.35, 0.45, 0.3] },
+  { name: 'Agro data', values: [0.7, 0.55, 0.6, 0.45, 0.5, 0.4] },
+  { name: 'Documents', values: [0.9, 0.8, 0.7, 0.6, 0.5, 0.55] },
+];
+
 const AXES = [
-  { label: 'EVERYDAY SCENES', generic: 0.92, needed: 0.98 },
-  { label: 'COMMON OBJECTS', generic: 0.9, needed: 0.95 },
-  { label: 'TYPICAL ANGLES', generic: 0.84, needed: 0.96 },
-  { label: 'STANDARD LIGHT', generic: 0.78, needed: 0.94 },
-  { label: 'RARE OBJECTS', generic: 0.3, needed: 0.95 },
-  { label: 'UNUSUAL PLACES', generic: 0.2, needed: 0.97 },
-  { label: 'ODD LIGHTING', generic: 0.16, needed: 0.93 },
-  { label: 'EDGE-CASE ACTIONS', generic: 0.26, needed: 0.96 },
-];
+  {
+    name: 'Scenario',
+    text: 'The exact action your model has to learn, often rare and rarely filmed.',
+    label: { x: 300, y: 74, anchor: 'middle' },
+  },
+  {
+    name: 'Conditions',
+    text: 'Your lighting, weather and time of day, not whatever was available.',
+    label: { x: 494, y: 187, anchor: 'start' },
+  },
+  {
+    name: 'Camera & gear',
+    text: 'Your mounting position, sensor and resolution.',
+    label: { x: 494, y: 418, anchor: 'start' },
+  },
+  {
+    name: 'Location',
+    text: 'Your city or your kind of place.',
+    label: { x: 300, y: 536, anchor: 'middle' },
+  },
+  {
+    name: 'Rights',
+    text: 'Signed likeness releases and terms that allow commercial training.',
+    label: { x: 106, y: 418, anchor: 'end' },
+  },
+  {
+    name: 'Labels & format',
+    text: 'Annotations on your schema, delivered in your format.',
+    label: { x: 106, y: 187, anchor: 'end' },
+  },
+] as const;
 
-const POINTS = [
-  'More everyday data keeps filling the same broad middle of the distribution.',
-  'Rare objects, odd lighting and unusual places stay uncovered, and that is where models fail.',
-  'Purpose-built data for those narrow cases closes the gap.',
-];
+type Point = [number, number];
 
-const angle = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / AXES.length;
-const pt = (i: number, k: number) => ({
-  x: CX + Math.cos(angle(i)) * R * k,
-  y: CY + Math.sin(angle(i)) * R * k,
-});
-const poly = (k: (i: number) => number) =>
-  AXES.map((_, i) => {
-    const p = pt(i, k(i));
-    return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
-  }).join(' ');
+const f1 = (n: number) => n.toFixed(1);
+
+const vertices = (k: number): Point[] =>
+  ANGLES.map((a): Point => [CX + R * k * Math.cos(a), CY + R * k * Math.sin(a)]);
+
+/** Hexagon with rounded corners, scaled by `k`. */
+function roundedHex(k: number) {
+  const pts = vertices(k);
+  const cut = CORNER * k;
+  const toward = (from: Point, to: Point): Point => {
+    const dx = to[0] - from[0];
+    const dy = to[1] - from[1];
+    const len = Math.hypot(dx, dy);
+    return [from[0] + (dx / len) * cut, from[1] + (dy / len) * cut];
+  };
+  let d = '';
+  pts.forEach((p, i) => {
+    const prev = pts[(i + 5) % 6]!;
+    const next = pts[(i + 1) % 6]!;
+    const a = toward(p, prev);
+    const b = toward(p, next);
+    d += `${i === 0 ? 'M' : 'L'}${f1(a[0])},${f1(a[1])} Q${f1(p[0])},${f1(p[1])} ${f1(b[0])},${f1(b[1])} `;
+  });
+  return `${d}Z`;
+}
+
+/** Smooth closed curve through the points (Catmull-Rom to Bezier). */
+function smoothShape(pts: Point[]) {
+  const n = pts.length;
+  const t = 1 / 5;
+  let d = `M${f1(pts[0]![0])},${f1(pts[0]![1])}`;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i + n - 1) % n]!;
+    const p1 = pts[i]!;
+    const p2 = pts[(i + 1) % n]!;
+    const p3 = pts[(i + 2) % n]!;
+    d += ` C${f1(p1[0] + (p2[0] - p0[0]) * t)},${f1(p1[1] + (p2[1] - p0[1]) * t)} ${f1(p2[0] - (p3[0] - p1[0]) * t)},${f1(p2[1] - (p3[1] - p1[1]) * t)} ${f1(p2[0])},${f1(p2[1])}`;
+  }
+  return `${d} Z`;
+}
+
+const OUTER_HEX = roundedHex(1);
+const RINGS = RING_LEVELS.map((k) => ({ k, d: roundedHex(k) }));
 
 export function Plateau() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [seen, setSeen] = useState(false);
+  const [area, setArea] = useState(0);
+  const [axis, setAxis] = useState(0);
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return undefined;
-    if (typeof IntersectionObserver === 'undefined') {
-      queueMicrotask(() => setSeen(true));
-      return undefined;
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setSeen(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.25 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const values = AREAS[area]!.values;
+  const points = values.map(
+    (v, i): Point => [CX + R * v * Math.cos(ANGLES[i]!), CY + R * v * Math.sin(ANGLES[i]!)],
+  );
+  const shape = smoothShape(points);
 
   return (
     <section
       id='why'
-      className={styles.plateau}
+      className={styles.coverage}
     >
-      <div className={styles.plateauGrain} />
-      <div className={styles.plateauInner}>
-        <div className={styles.plateauCopy}>
-          <span className={styles.plateauTag}>Why more isn&apos;t better</span>
-          <h2 className={`${styles.heading} ${styles.plateauTitle}`}>
-            Generic data
-            <br />
-            stops paying off
+      <div className={styles.coverageInner}>
+        <div className={styles.coverageHead}>
+          <h2 className={`${styles.heading} ${styles.coverageTitle}`}>
+            Ready-made data gets you most of the way. We make the rest.
           </h2>
-          <p className={styles.plateauLead}>
-            Everyday datasets cover the broad middle of what a model sees. Add more of them and the
-            shape barely changes: the same scenes, the same lighting, the same angles.
+          <p className={styles.coverageLead}>
+            Open and off-the-shelf datasets cover the common cases. Where your requirement gets
+            specific, we produce data to your spec.
           </p>
-          <p className={styles.plateauText}>
-            What&apos;s missing sits at the edges — rare objects, odd lighting, unusual places,
-            unexpected actions. That is where models fail and where generic data never reaches.
-            Data produced for those exact cases fills the gap.
-          </p>
-          <ul className={styles.plateauPoints}>
-            {POINTS.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
         </div>
 
         <div
-          ref={ref}
-          className={styles.chartWrap}
-          data-seen={seen}
+          className={styles.coverageTabs}
+          role='group'
+          aria-label='Area of application'
         >
+          {AREAS.map((item, i) => (
+            <button
+              key={item.name}
+              type='button'
+              className={styles.coverageTab}
+              aria-pressed={i === area}
+              onClick={() => setArea(i)}
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
+
+        <figure className={styles.coverageFigure}>
           <svg
-            className={styles.chart}
-            viewBox={`0 0 ${W} ${H}`}
+            className={styles.coverageChart}
+            viewBox='-60 40 740 530'
             role='img'
-            aria-label='Illustrative radar chart: generic datasets cover everyday scenarios well but leave rare objects, odd lighting, unusual places and edge-case actions uncovered; targeted data fills that gap.'
+            aria-label="Radar chart of how much of a buyer's requirement ready-made data covers on six axes: scenario, conditions, camera and gear, location, rights, labels and format. The list below the chart describes each axis."
           >
-            {/* rings and spokes */}
-            {RINGS.map((k) => (
-              <polygon
-                key={k}
-                className={styles.radarRing}
-                points={poly(() => k)}
-              />
-            ))}
-            {AXES.map((axis, i) => (
-              <line
-                key={axis.label}
-                className={styles.radarRing}
-                x1={CX}
-                y1={CY}
-                x2={pt(i, 1).x}
-                y2={pt(i, 1).y}
-              />
-            ))}
-
-            {/* required coverage (targeted data fills it) */}
-            <polygon
-              className={`${styles.radarShape} ${styles.radarNeeded}`}
-              points={poly((i) => AXES[i]!.needed)}
+            <path
+              className={styles.coverageMade}
+              fillRule='evenodd'
+              d={`${OUTER_HEX} ${shape}`}
             />
-            {/* what generic datasets cover */}
-            <polygon
-              className={`${styles.radarShape} ${styles.radarGeneric}`}
-              style={{ transitionDelay: '0.25s' }}
-              points={poly((i) => AXES[i]!.generic)}
-            />
-            {AXES.map((axis, i) => (
-              <circle
-                key={`d${axis.label}`}
-                className={styles.radarDot}
-                cx={pt(i, axis.generic).x}
-                cy={pt(i, axis.generic).y}
-                r='3.5'
+            {RINGS.map((ring) => (
+              <path
+                key={ring.k}
+                className={styles.coverageRing}
+                d={ring.d}
               />
             ))}
-
-            {/* axis labels */}
-            {AXES.map((axis, i) => {
-              const p = pt(i, 1.13);
-              const c = Math.cos(angle(i));
-              const anchor = Math.abs(c) < 0.2 ? 'middle' : c > 0 ? 'start' : 'end';
+            <path
+              className={styles.coverageShape}
+              d={shape}
+            />
+            {points.map((p, i) => {
+              const active = i === axis;
               return (
-                <text
-                  key={`l${axis.label}`}
-                  className={styles.radarLabel}
-                  x={p.x + (anchor === 'start' ? 4 : anchor === 'end' ? -4 : 0)}
-                  y={p.y + 4}
-                  textAnchor={anchor}
-                >
-                  {axis.label}
-                </text>
+                <circle
+                  key={AXES[i]!.name}
+                  className={styles.coverageDot}
+                  data-active={active}
+                  cx={f1(p[0])}
+                  cy={f1(p[1])}
+                  r={active ? 10 : 5.5}
+                />
               );
             })}
-
-            {/* callout on the gap */}
-            <g transform='translate(436 462)'>
-              <rect
-                className={styles.chartChip}
-                width='196'
-                height='28'
-                rx='7'
-              />
+            {AXES.map((item) => (
               <text
-                className={styles.chartChipText}
-                x='98'
-                y='18'
-                textAnchor='middle'
+                key={item.name}
+                className={styles.coverageAxisLabel}
+                x={item.label.x}
+                y={item.label.y}
+                textAnchor={item.label.anchor}
               >
-                TARGETED DATA SPACE
+                {item.name}
               </text>
-            </g>
-
-            {/* title chip */}
-            <g transform='translate(0 8)'>
-              <rect
-                className={styles.chartChipLight}
-                width='168'
-                height='28'
-                rx='7'
-              />
-              <text
-                className={styles.chartChipTextDark}
-                x='84'
-                y='18'
-                textAnchor='middle'
-              >
-                SCENARIO COVERAGE
-              </text>
-            </g>
-
-            {/* legend */}
-            <g transform='translate(396 8)'>
-              <rect
-                className={styles.chartChip}
-                width='108'
-                height='28'
-                rx='7'
-              />
-              <rect
-                className={styles.legendGeneric}
-                x='12'
-                y='10'
-                width='16'
-                height='8'
-                rx='1.5'
-              />
-              <text
-                className={styles.chartChipText}
-                x='36'
-                y='18'
-              >
-                GENERIC
-              </text>
-            </g>
-            <g transform='translate(512 8)'>
-              <rect
-                className={styles.chartChip}
-                width='120'
-                height='28'
-                rx='7'
-              />
-              <rect
-                className={styles.legendTargeted}
-                x='12'
-                y='10'
-                width='16'
-                height='8'
-                rx='1.5'
-              />
-              <text
-                className={styles.chartChipText}
-                x='36'
-                y='18'
-              >
-                TARGETED
-              </text>
-            </g>
+            ))}
           </svg>
-          <p className={styles.chartNote}>Illustrative schematic, not measured data.</p>
+        </figure>
+
+        <div className={styles.coverageLegend}>
+          <span className={styles.coverageLegendItem}>
+            <span className={styles.coverageSwatchCovered} />
+            Covered by ready-made data
+          </span>
+          <span className={styles.coverageLegendItem}>
+            <span className={styles.coverageSwatchMade} />
+            Made to your spec by Kvetio
+          </span>
         </div>
+
+        <ul className={styles.coverageAxes}>
+          {AXES.map((item, i) => (
+            <li key={item.name}>
+              <button
+                type='button'
+                className={styles.coverageAxis}
+                data-active={i === axis}
+                onClick={() => setAxis(i)}
+                onMouseEnter={() => setAxis(i)}
+                onFocus={() => setAxis(i)}
+              >
+                <span className={styles.coverageAxisNum}>{String(i + 1).padStart(2, '0')}</span>
+                <span className={styles.coverageAxisBody}>
+                  <span className={styles.coverageAxisName}>{item.name}</span>
+                  <span className={styles.coverageAxisText}>{item.text}</span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <p className={styles.coverageNote}>Illustrative shape, not measured data.</p>
       </div>
     </section>
   );

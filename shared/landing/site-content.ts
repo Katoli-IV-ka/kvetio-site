@@ -138,11 +138,30 @@ export const useCaseCards: UseCaseCard[] = [
 ];
 
 export const accuracyCopy = {
-  title: 'Data for Final AI Accuracy',
+  title: 'Ready-made data gets you most of the way. We make the rest.',
   description:
-    'The smarter the model, the harder it is to find fine-tuning data. Standard datasets no longer work, and creating rare cases in-house is too expensive. We deliver unique, ready-to-use edge cases that cannot be found in the wild.',
-  stages: ['Early stages', 'Plateau', 'Production ready'],
-  legend: ['Ready-made data availability', 'In-house simulation complexity'],
+    'Open and off-the-shelf datasets cover the common cases. Where your requirement gets specific, we produce data to your spec.',
+  areas: [
+    { name: 'Egocentric', values: [0.85, 0.7, 0.55, 0.4, 0.3, 0.45] },
+    { name: 'Physical AI', values: [0.6, 0.5, 0.4, 0.35, 0.45, 0.3] },
+    { name: 'Agro data', values: [0.7, 0.55, 0.6, 0.45, 0.5, 0.4] },
+    { name: 'Documents', values: [0.9, 0.8, 0.7, 0.6, 0.5, 0.55] },
+  ],
+  axes: [
+    {
+      name: 'Scenario',
+      text: 'The exact action your model has to learn, often rare and rarely filmed.',
+    },
+    {
+      name: 'Conditions',
+      text: 'Your lighting, weather and time of day, not whatever was available.',
+    },
+    { name: 'Camera & gear', text: 'Your mounting position, sensor and resolution.' },
+    { name: 'Location', text: 'Your city or your kind of place.' },
+    { name: 'Rights', text: 'Signed likeness releases and terms that allow commercial training.' },
+    { name: 'Labels & format', text: 'Annotations on your schema, delivered in your format.' },
+  ],
+  legend: ['Covered by ready-made data', 'Made to your spec by Kvetio'],
 };
 
 export const pillarsHeading = 'How we work';

@@ -1,31 +1,96 @@
 import { useState } from 'react';
-import { Box, Flex, Heading, Text, chakra } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { axisPoint, roundedHexPath, smoothClosedPath } from '../../../shared/landing/radar';
 import { accuracyCopy } from '../../../shared/landing/site-content';
-import { blue, hairline, ink, inkSoft, muted, textSoft } from '../../../shared/theme/palette';
+import { blue, ink, muted, mutedSoft, textSoft } from '../../../shared/theme/palette';
 
+const LINE = '#2a2d35';
+const MONO = "'JetBrains Mono', ui-monospace, monospace";
 const CX = 300;
 const CY = 300;
 const R = 190;
+
 const hexagon = (scale: number) => roundedHexPath(CX, CY, R * scale, 30 * scale);
 
+/** Where each axis name sits around the chart (viewBox units). */
 const LABELS = [
-  { x: 300, y: 74, anchor: 'middle' },
-  { x: 494, y: 187, anchor: 'start' },
-  { x: 494, y: 418, anchor: 'start' },
-  { x: 300, y: 536, anchor: 'middle' },
-  { x: 106, y: 418, anchor: 'end' },
-  { x: 106, y: 187, anchor: 'end' },
+  { x: 300, y: 82, anchor: 'middle' },
+  { x: 488, y: 193, anchor: 'start' },
+  { x: 488, y: 418, anchor: 'start' },
+  { x: 300, y: 528, anchor: 'middle' },
+  { x: 112, y: 418, anchor: 'end' },
+  { x: 112, y: 193, anchor: 'end' },
 ] as const;
 
-const OUTER = hexagon(1);
-const RINGS = [0.75, 0.5, 0.25].map(hexagon);
+const RINGS = [1, 0.66, 0.33].map(hexagon);
 
+function AxisRow({
+  index,
+  name,
+  text,
+  active,
+  onActivate,
+}: {
+  index: number;
+  name: string;
+  text: string;
+  active: boolean;
+  onActivate?: () => void;
+}) {
+  return (
+    <Box
+      as='li'
+      display='grid'
+      gridTemplateColumns='36px 1fr'
+      columnGap={3}
+      py={4}
+      borderTopWidth='1px'
+      borderColor={LINE}
+      tabIndex={onActivate ? 0 : undefined}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+    >
+      <Text
+        m='0'
+        pt='2px'
+        fontFamily={MONO}
+        fontSize='12px'
+        color={active ? blue : muted}
+        transition='color .2s'
+      >
+        {String(index + 1).padStart(2, '0')}
+      </Text>
+      <Box>
+        <Text
+          m='0'
+          fontSize='14px'
+          fontWeight='600'
+          letterSpacing='0.02em'
+          textTransform='uppercase'
+          color={active ? 'white' : textSoft}
+          transition='color .2s'
+        >
+          {name}
+        </Text>
+        <Text
+          m='0'
+          mt={1}
+          fontSize='14px'
+          lineHeight='1.5'
+          color={muted}
+        >
+          {text}
+        </Text>
+      </Box>
+    </Box>
+  );
+}
+
+/** Heading and axis list on the left, the radar on the right. */
 export function Accuracy() {
-  const [area, setArea] = useState(0);
   const [axis, setAxis] = useState(0);
   const { areas, axes, legend } = accuracyCopy;
-  const values = areas[area]?.values ?? [];
+  const values = areas[0]?.values ?? [];
   const points = values.map((value, i) => axisPoint(CX, CY, R * value, i));
   const shape = smoothClosedPath(points);
 
@@ -37,256 +102,211 @@ export function Accuracy() {
       px={{ base: 5, md: 16 }}
       py={{ base: 14, md: 24 }}
     >
-      <Flex
-        direction='column'
-        gap={{ base: 10, md: 14 }}
+      <Box
+        display='grid'
+        gridTemplateColumns={{ base: '1fr', lg: 'minmax(300px, 0.9fr) 1.1fr' }}
+        columnGap={16}
+        rowGap={10}
+        alignItems='center'
         maxW='1312px'
         mx='auto'
       >
         <Flex
-          wrap='wrap'
-          justify='space-between'
-          align='flex-end'
-          gap='24px 64px'
+          direction='column'
+          gap={10}
         >
-          <Heading
-            as='h2'
-            m='0'
-            maxW='820px'
-            fontSize={{ base: '30px', md: '40px' }}
-            lineHeight='1.08'
-            fontWeight='500'
-            letterSpacing='-0.01em'
-            textTransform='uppercase'
-            color='white'
+          <Flex
+            direction='column'
+            gap={5}
           >
-            {accuracyCopy.title}
-          </Heading>
-          <Text
-            m='0'
-            maxW='380px'
-            fontSize='15px'
-            lineHeight='1.55'
-            color={muted}
-          >
-            {accuracyCopy.description}
-          </Text>
-        </Flex>
-
-        <Flex
-          role='group'
-          aria-label='Area of application'
-          wrap='wrap'
-          justify='center'
-          gap={3}
-        >
-          {areas.map((item, index) => {
-            const active = index === area;
-            return (
-              <chakra.button
-                key={item.name}
-                type='button'
-                aria-pressed={active}
-                onClick={() => setArea(index)}
-                h='44px'
-                px={6}
-                borderRadius='full'
-                borderWidth='1px'
-                borderColor={active ? 'white' : '#2a2d35'}
-                bg={active ? 'white' : 'transparent'}
-                color={active ? ink : textSoft}
-                fontSize='13px'
-                fontWeight='500'
-                cursor='pointer'
-                transition='background .2s, color .2s, border-color .2s'
-                _hover={{ borderColor: 'white' }}
-              >
-                {item.name}
-              </chakra.button>
-            );
-          })}
-        </Flex>
-
-        <Box
-          mx='auto'
-          w='100%'
-          maxW='820px'
-        >
-          <svg
-            viewBox='-60 40 740 530'
-            role='img'
-            aria-label={`Radar chart of how much of a buyer's requirement ready-made data covers on six axes: ${axes.map((a) => a.name).join(', ')}. The cards below describe each axis.`}
-            style={{ display: 'block', width: '100%', height: 'auto' }}
-          >
-            <path
-              d={`${OUTER} ${shape}`}
-              fillRule='evenodd'
-              fill={blue}
-              fillOpacity='0.3'
-              stroke={blue}
-              strokeWidth='2'
-              strokeLinejoin='round'
-            />
-            {RINGS.map((d) => (
-              <path
-                key={d}
-                d={d}
-                fill='#ffffff'
-                fillOpacity='0.03'
-                stroke='#ffffff'
-                strokeOpacity='0.14'
-              />
-            ))}
-            <path
-              d={shape}
-              fill={ink}
-              fillOpacity='0.85'
-              stroke='#ffffff'
-              strokeWidth='2.5'
-              strokeLinejoin='round'
-              style={{ transition: 'd .4s ease' }}
-            />
-            {points.map(({ x, y }, i) => (
-              <circle
-                key={axes[i]?.name}
-                cx={x}
-                cy={y}
-                r={i === axis ? 10 : 5.5}
-                fill={i === axis ? blue : ink}
-                stroke={i === axis ? ink : '#ffffff'}
-                strokeWidth='2.5'
-              />
-            ))}
-            {axes.map((item, i) => {
-              const label = LABELS[i];
-              if (!label) return null;
-              return (
-                <text
-                  key={item.name}
-                  x={label.x}
-                  y={label.y}
-                  textAnchor={label.anchor}
-                  style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
-                    fontSize: 18,
-                    fontWeight: 500,
-                    fill: '#ffffff',
-                  }}
-                >
-                  {item.name}
-                </text>
-              );
-            })}
-          </svg>
-        </Box>
-
-        <Flex
-          wrap='wrap'
-          justify='center'
-          gap='16px 40px'
-          fontSize='13px'
-          fontWeight='500'
-          color={textSoft}
-        >
-          {[
-            { label: legend[0], bg: ink, opacity: 1 },
-            { label: legend[1], bg: blue, opacity: 0.6 },
-          ].map((item) => (
-            <Flex
-              key={item.label}
-              align='center'
-              gap={3}
+            <Heading
+              as='h2'
+              m='0'
+              fontSize={{ base: '26px', md: '32px' }}
+              lineHeight='1.12'
+              fontWeight='500'
+              letterSpacing='-0.01em'
+              textTransform='uppercase'
+              color='white'
             >
-              <Box
-                as='span'
-                display='inline-block'
-                w='28px'
-                h='18px'
-                borderRadius='3px'
-                borderWidth='2px'
-                borderColor='white'
-                bg={item.bg}
-                opacity={item.opacity}
+              {accuracyCopy.title}
+            </Heading>
+            <Text
+              m='0'
+              maxW='480px'
+              fontSize='15px'
+              lineHeight='1.55'
+              color={muted}
+            >
+              {accuracyCopy.description}
+            </Text>
+          </Flex>
+
+          <Box
+            as='ol'
+            m='0'
+            p='0'
+            listStyleType='none'
+            display={{ base: 'none', lg: 'block' }}
+          >
+            {axes.map((item, index) => (
+              <AxisRow
+                key={item.name}
+                index={index}
+                name={item.name}
+                text={item.text}
+                active={index === axis}
+                onActivate={() => setAxis(index)}
               />
-              <span>{item.label}</span>
-            </Flex>
-          ))}
+            ))}
+          </Box>
         </Flex>
 
+        <Flex
+          direction='column'
+          gap={6}
+          minW='0'
+        >
+          <Box
+            css={{
+              '& .lbl-num': { display: 'block' },
+              '& .lbl-name': { display: 'none' },
+              '@media (min-width: 62em)': {
+                '& .lbl-num': { display: 'none' },
+                '& .lbl-name': { display: 'block' },
+              },
+            }}
+          >
+            <svg
+              viewBox='-120 40 840 530'
+              role='img'
+              aria-label={`Radar chart of how much of a buyer's requirement ready-made data covers on six axes: ${axes.map((a) => a.name).join(', ')}.`}
+              style={{ display: 'block', width: '100%', height: 'auto' }}
+            >
+              <path
+                d={`${hexagon(1)} ${shape}`}
+                fillRule='evenodd'
+                fill={blue}
+                fillOpacity='0.2'
+                stroke={blue}
+                strokeWidth='1.5'
+                strokeLinejoin='round'
+              />
+              {RINGS.map((d) => (
+                <path
+                  key={d}
+                  d={d}
+                  fill='none'
+                  stroke={LINE}
+                />
+              ))}
+              <path
+                d={shape}
+                fill={ink}
+                stroke='#ffffff'
+                strokeWidth='1.5'
+                strokeLinejoin='round'
+              />
+              {points.map(({ x, y }, i) => (
+                <circle
+                  key={axes[i]?.name}
+                  cx={x}
+                  cy={y}
+                  r={i === axis ? 7 : 4}
+                  fill={i === axis ? blue : '#ffffff'}
+                  stroke={ink}
+                  strokeWidth='2'
+                />
+              ))}
+              {axes.map((item, i) => {
+                const label = LABELS[i];
+                if (!label) return null;
+                return (
+                  <g
+                    key={item.name}
+                    style={{ fill: i === axis ? '#ffffff' : mutedSoft, transition: 'fill .2s' }}
+                  >
+                    <text
+                      className='lbl-name'
+                      x={label.x}
+                      y={label.y}
+                      textAnchor={label.anchor}
+                      style={{
+                        fontFamily: "'Inter', system-ui, sans-serif",
+                        fontSize: 14,
+                        fontWeight: 500,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {item.name}
+                    </text>
+                    <text
+                      className='lbl-num'
+                      x={label.x}
+                      y={label.y}
+                      textAnchor={label.anchor}
+                      style={{ fontFamily: MONO, fontSize: 24 }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
+          </Box>
+
+          <Flex
+            wrap='wrap'
+            justify='center'
+            gap='12px 32px'
+            fontSize='13px'
+            color={textSoft}
+          >
+            {[
+              { label: legend[0], fill: ink, border: '#ffffff' },
+              { label: legend[1], fill: 'rgba(79,149,201,0.25)', border: blue },
+            ].map((item) => (
+              <Flex
+                key={item.label}
+                align='center'
+                gap={3}
+              >
+                <Box
+                  as='span'
+                  display='inline-block'
+                  w='14px'
+                  h='14px'
+                  borderRadius='3px'
+                  borderWidth='1.5px'
+                  borderColor={item.border}
+                  bg={item.fill}
+                />
+                <span>{item.label}</span>
+              </Flex>
+            ))}
+          </Flex>
+        </Flex>
+
+        {/* Mobile: the same axes as a plain list under the chart (the chart shows only numbers). */}
         <Box
-          as='ul'
+          as='ol'
           m='0'
           p='0'
           listStyleType='none'
-          display='grid'
-          gridTemplateColumns='repeat(auto-fit, minmax(min(300px, 100%), 1fr))'
-          gap={3}
+          display={{ base: 'block', lg: 'none' }}
         >
-          {axes.map((item, index) => {
-            const active = index === axis;
-            return (
-              <Box
-                as='li'
-                key={item.name}
-                display='flex'
-              >
-                <chakra.button
-                  type='button'
-                  onClick={() => setAxis(index)}
-                  onMouseEnter={() => setAxis(index)}
-                  onFocus={() => setAxis(index)}
-                  flex='1 1 auto'
-                  textAlign='left'
-                  display='grid'
-                  gridTemplateColumns='32px minmax(0, 1fr)'
-                  gap='4px 12px'
-                  alignItems='start'
-                  p={5}
-                  borderRadius='20px'
-                  borderWidth='1px'
-                  borderColor={active ? 'white' : hairline}
-                  bg={active ? inkSoft : 'transparent'}
-                  color='white'
-                  cursor='pointer'
-                  transition='border-color .2s, background .2s'
-                >
-                  <Text
-                    as='span'
-                    pt='3px'
-                    fontSize='13px'
-                    fontWeight='500'
-                    color={muted}
-                  >
-                    {String(index + 1).padStart(2, '0')}
-                  </Text>
-                  <Flex
-                    as='span'
-                    direction='column'
-                    gap='6px'
-                  >
-                    <Text
-                      as='span'
-                      fontSize='17px'
-                      fontWeight='600'
-                      letterSpacing='-0.01em'
-                    >
-                      {item.name}
-                    </Text>
-                    <Text
-                      as='span'
-                      fontSize='14px'
-                      lineHeight='1.5'
-                      color={muted}
-                    >
-                      {item.text}
-                    </Text>
-                  </Flex>
-                </chakra.button>
-              </Box>
-            );
-          })}
+          {axes.map((item, index) => (
+            <AxisRow
+              key={item.name}
+              index={index}
+              name={item.name}
+              text={item.text}
+              active={false}
+            />
+          ))}
         </Box>
-      </Flex>
+      </Box>
     </Box>
   );
 }

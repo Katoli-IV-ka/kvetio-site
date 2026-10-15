@@ -3,6 +3,21 @@
 .root {
   --heading-size: clamp(40px, 10vw, 81.6px);
   --mono: 'Cousine', 'Liberation Mono', 'Courier New', monospace;
+
+  /* Layout system — every block takes its sizes from here (8px grid) */
+  --container: 1280px;
+  --page-x: 24px; /* side padding of the page */
+  --section-y: 64px; /* top and bottom padding of a block */
+  --gap-head: 32px; /* heading → block content */
+  --gap-block: 40px; /* between major parts inside a block */
+  --gap-item: 16px; /* between cards and list items */
+  --col-gap: 16px; /* grid column gap */
+  --edge-x: max(
+    var(--page-x),
+    calc((100vw - var(--container)) / 2 + var(--page-x))
+  ); /* page-x measured from the screen edge, for full-bleed rows aligned to the container */
+  --block-min: auto; /* min height of a "large" block: one screen on desktop */
+
   margin: 0;
   background: #fff;
   color: #111;
@@ -21,6 +36,18 @@
   text-decoration: none;
 }
 
+@media (min-width: 1024px) {
+  .root {
+    --page-x: 48px;
+    --section-y: 96px;
+    --gap-head: 48px;
+    --gap-block: 64px;
+    --gap-item: 24px;
+    --col-gap: 32px;
+    --block-min: clamp(640px, 100dvh, 880px);
+  }
+}
+
 .heading {
   margin: 0;
   font-family: 'DM Sans', system-ui, sans-serif;
@@ -34,7 +61,6 @@
 .mono {
   font-family: var(--mono);
 }
-
 
 /* ---------- Mobile burger menu (below 1024px) ---------- */
 
@@ -138,7 +164,9 @@
   background: #fff;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
 }
 
 .menuPanel[data-open='true'] {
@@ -176,7 +204,9 @@
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: rotate(45deg);
-  transition: transform 0.2s, margin 0.2s;
+  transition:
+    transform 0.2s,
+    margin 0.2s;
 }
 
 .chevron[data-open='true'] {
@@ -359,8 +389,7 @@
   .heroInner {
     max-width: none;
     height: 100vh;
-    height: 100dvh;
-    min-height: 640px;
+    height: clamp(640px, 100dvh, 900px);
     margin: 0;
     padding: 0;
   }
@@ -426,16 +455,16 @@
 /* ---------- Use cases (cards) ---------- */
 
 .cases {
-  padding: 56px 0 0;
+  padding: var(--section-y) 0;
   background: #fbfbfb;
 }
 
 .casesTitle {
-  padding: 0 24px;
+  padding: 0 var(--edge-x);
 }
 
 .scroller {
-  margin-top: 56px;
+  margin-top: var(--gap-head);
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -448,9 +477,9 @@
 
 .track {
   display: flex;
-  gap: 16px;
+  gap: var(--gap-item);
   width: max-content;
-  padding: 0 24px 72px;
+  padding: 0 var(--edge-x);
 }
 
 /* poster cards: one shared frame, five treatments (photo, light, dark, warm, paper) */
@@ -466,7 +495,7 @@
   background: #efede7;
   color: #111;
   scroll-snap-align: start;
-  scroll-margin-left: 24px;
+  scroll-margin-left: var(--edge-x);
 }
 
 .cardImage {
@@ -481,7 +510,12 @@
 .cardShade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
 }
 
 .cardNum,
@@ -608,20 +642,6 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-@media (min-width: 1024px) {
-  .casesTitle {
-    padding: 0 48px;
-  }
-
-  .track {
-    padding: 0 48px 80px;
-  }
-
-  .card {
-    scroll-margin-left: 48px;
-  }
-}
-
 /* ---------- Data types (index) ---------- */
 
 .types {
@@ -630,17 +650,17 @@
 
 .typesInner {
   display: grid;
-  gap: 48px;
-  max-width: 1280px;
+  gap: var(--gap-block);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 64px 24px;
+  padding: var(--section-y) var(--page-x);
 }
 
 .typesLead {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
+  gap: var(--gap-head);
 }
 
 .typesText {
@@ -656,7 +676,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 44px;
+  gap: var(--gap-head);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -728,22 +748,16 @@
 @media (min-width: 1024px) {
   .typesInner {
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 32px;
-    min-height: 720px;
-    padding: 90px;
+    column-gap: var(--col-gap);
+    min-height: var(--block-min);
   }
 
   .typesLead {
     grid-column: 1 / span 5;
   }
 
-  .typesText {
-    margin-bottom: 16px;
-  }
-
   .typeList {
     grid-column: 7 / span 6;
-    padding: 26px 0 18px;
   }
 }
 
@@ -754,17 +768,17 @@
 }
 
 .processInner {
-  max-width: 1280px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 56px 24px 72px;
+  padding: var(--section-y) var(--page-x);
 }
 
 .timeline {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin: 48px 0 0;
+  gap: var(--gap-head);
+  margin: var(--gap-head) 0 0;
   padding: 0 0 0 32px;
   list-style: none;
 }
@@ -828,9 +842,7 @@
 
 @media (min-width: 1024px) {
   .processInner {
-    min-height: 600px;
-    padding: 56px 48px 0;
-    overflow: hidden;
+    overflow-x: clip;
   }
 
   .timeline {
@@ -838,8 +850,8 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 0;
-    margin: 81px -48px 0 0;
-    padding: 0 48px 0 0;
+    margin: var(--gap-block) calc(-1 * var(--page-x)) 0 0;
+    padding: 0 var(--page-x) 0 0;
   }
 
   .timeline::before {
@@ -902,17 +914,17 @@
 
 .worldInner {
   display: grid;
-  gap: 40px;
-  max-width: 1280px;
+  gap: var(--gap-block);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 56px 24px 48px;
+  padding: var(--section-y) var(--page-x);
 }
 
 .worldLead {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
+  gap: var(--gap-head);
 }
 
 .worldText {
@@ -997,19 +1009,14 @@
 
 @media (min-width: 1024px) {
   .worldInner {
-    grid-template-columns: minmax(0, 1fr) 640px;
-    gap: 0;
-    min-height: 720px;
-    padding: 56px 40px 40px 48px;
-  }
-
-  .worldLead {
-    padding-bottom: 100px;
+    /* the square map never gets taller than one screen */
+    grid-template-columns: minmax(0, 1fr) clamp(480px, calc(100dvh - 2 * var(--section-y)), 640px);
+    column-gap: var(--col-gap);
+    min-height: var(--block-min);
   }
 
   .mapWrap {
-    align-items: flex-start;
-    margin-top: -16px;
+    align-items: center;
   }
 }
 
@@ -1024,7 +1031,7 @@
   position: relative;
   width: 100%;
   margin: 0;
-  padding: 40px 24px 48px;
+  padding: var(--section-y) var(--page-x);
   overflow: hidden;
   background: #fff;
 }
@@ -1048,8 +1055,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin-top: 40px;
+  gap: var(--gap-head);
+  margin-top: var(--gap-head);
 }
 
 .fields {
@@ -1171,8 +1178,7 @@
 
 @media (min-width: 1024px) {
   .contactInner {
-    min-height: 544px;
-    padding: 48px 64px;
+    min-height: 544px; /* the collage art is 544px tall */
   }
 
   .collage {
@@ -1220,9 +1226,9 @@
 }
 
 .footerInner {
-  max-width: 1280px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--page-x);
 }
 
 .footerCta {
@@ -1261,8 +1267,8 @@
 .footerCols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px 24px;
-  padding-bottom: 72px;
+  gap: var(--gap-block) var(--gap-item);
+  padding-bottom: var(--section-y);
 }
 
 .footerLabel {
@@ -1298,9 +1304,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 1280px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 16px 24px 24px;
+  padding: 16px var(--page-x) 24px;
   font-family: var(--mono);
   font-size: 11px;
   line-height: 16px;
@@ -1332,24 +1338,17 @@
 }
 
 @media (min-width: 1024px) {
-  .footerInner,
-  .footerBarInner {
-    padding-right: 48px;
-    padding-left: 48px;
-  }
-
   .footerCta {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 130px 0 124px;
-    margin-top: -25px;
+    padding: var(--section-y) 0;
+    margin-top: -24px;
   }
 
   .footerCols {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0 24px;
-    padding-bottom: 80px;
+    gap: 0 var(--gap-item);
   }
 
   .footerBarInner {
@@ -1482,7 +1481,10 @@
   border-radius: 20px;
   font-size: 14px;
   color: #111;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .chip input:checked + span {
@@ -1641,10 +1643,10 @@
 .coverageInner {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  max-width: 1280px;
+  gap: var(--gap-head);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 72px 24px;
+  padding: var(--section-y) var(--page-x);
 }
 
 .coverageHead {
@@ -1850,16 +1852,64 @@
 }
 
 @media (min-width: 1024px) {
+  /* chart on the left, axis cards on the right, so the block stays near one screen */
   .coverageInner {
-    gap: 56px;
-    padding: 96px 56px;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas:
+      'head head'
+      'tabs tabs'
+      'figure axes'
+      'legend axes'
+      'note axes';
+    grid-template-rows: auto auto auto auto 1fr;
+    gap: var(--gap-head) var(--col-gap);
+    min-height: var(--block-min);
   }
 
   .coverageHead {
+    grid-area: head;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: space-between;
     gap: 24px 64px;
+  }
+
+  .coverageTitle {
+    flex: 1;
+    max-width: 760px;
+    font-size: clamp(48px, 5vw, 64px);
+  }
+
+  .coverageLead {
+    flex: none;
+  }
+
+  .coverageTabs {
+    grid-area: tabs;
+  }
+
+  .coverageFigure {
+    grid-area: figure;
+    align-self: center;
+  }
+
+  .coverageLegend {
+    grid-area: legend;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-item);
+  }
+
+  .coverageAxes {
+    grid-area: axes;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: center;
+    gap: var(--gap-item);
+  }
+
+  .coverageNote {
+    grid-area: note;
   }
 }

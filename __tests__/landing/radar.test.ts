@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { axisPoint, roundedHexPath, smoothClosedPath } from '../../shared/landing/radar';
-import { coverageCopy } from '../../shared/landing/site-content';
+import { accuracyCopy } from '../../shared/landing/site-content';
 
 describe('coverage radar', () => {
   it('puts the first axis straight up and the fourth straight down', () => {
@@ -17,8 +17,8 @@ describe('coverage radar', () => {
   });
 
   it('has one value in 0..1 per axis for every area', () => {
-    for (const area of coverageCopy.areas) {
-      expect(area.values).toHaveLength(coverageCopy.axes.length);
+    for (const area of accuracyCopy.areas) {
+      expect(area.values).toHaveLength(accuracyCopy.axes.length);
       for (const value of area.values) expect(value >= 0 && value <= 1).toBe(true);
     }
   });

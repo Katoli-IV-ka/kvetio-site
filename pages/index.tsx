@@ -6,7 +6,6 @@ import { Cases } from '../widgets/cases/ui/Cases';
 import { Accuracy } from '../widgets/accuracy/ui/Accuracy';
 import { Pillars } from '../widgets/pillars/ui/Pillars';
 import { Team } from '../widgets/team/ui/Team';
-import { Coverage } from '../widgets/coverage/ui/Coverage';
 import { Modalities } from '../widgets/modalities/ui/Modalities';
 import { Network } from '../widgets/network/ui/Network';
 import { LinkedInCard } from '../widgets/linkedin/ui/LinkedInCard';
@@ -141,7 +140,6 @@ export default function HomePage() {
           <Team />
           <ContactBand />
           <Modalities />
-          <Coverage />
           <Pillars />
           <LinkedInCard />
           <Accuracy />

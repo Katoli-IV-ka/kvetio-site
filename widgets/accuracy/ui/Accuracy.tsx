@@ -1,36 +1,13 @@
 import { useState } from 'react';
 import { Box, Flex, Heading, Text, chakra } from '@chakra-ui/react';
+import { axisPoint, roundedHexPath, smoothClosedPath } from '../../../shared/landing/radar';
 import { accuracyCopy } from '../../../shared/landing/site-content';
 import { blue, hairline, ink, inkSoft, muted, textSoft } from '../../../shared/theme/palette';
 
 const CX = 300;
 const CY = 300;
 const R = 190;
-/** Axis directions, degrees: top, then clockwise. */
-const ANGLES = [-90, -30, 30, 90, 150, 210].map((deg) => (deg * Math.PI) / 180);
-
-/** Rounded hexagon outline at scale 1 (R = 190); rings are scaled copies. */
-const hexagon = (scale: number) => {
-  const k = scale;
-  return `M${CX + 26 * k},${CY - 175 * k} L${CX + 138.6 * k},${CY - 110 * k} Q${CX + 164.5 * k},${CY - 95 * k} ${CX + 164.5 * k},${CY - 65 * k} L${CX + 164.5 * k},${CY + 65 * k} Q${CX + 164.5 * k},${CY + 95 * k} ${CX + 138.6 * k},${CY + 110 * k} L${CX + 26 * k},${CY + 175 * k} Q${CX},${CY + 190 * k} ${CX - 26 * k},${CY + 175 * k} L${CX - 138.6 * k},${CY + 110 * k} Q${CX - 164.5 * k},${CY + 95 * k} ${CX - 164.5 * k},${CY + 65 * k} L${CX - 164.5 * k},${CY - 65 * k} Q${CX - 164.5 * k},${CY - 95 * k} ${CX - 138.6 * k},${CY - 110 * k} L${CX - 26 * k},${CY - 175 * k} Q${CX},${CY - 190 * k} ${CX + 26 * k},${CY - 175 * k} Z`;
-};
-
-const f1 = (n: number) => n.toFixed(1);
-
-/** Smooth closed curve through the six points. */
-const smoothShape = (pts: (readonly [number, number])[]) => {
-  const at = (i: number) => pts[((i % 6) + 6) % 6] as readonly [number, number];
-  const k = 1 / 5;
-  let d = `M${f1(at(0)[0])},${f1(at(0)[1])}`;
-  for (let i = 0; i < 6; i += 1) {
-    const p0 = at(i - 1);
-    const p1 = at(i);
-    const p2 = at(i + 1);
-    const p3 = at(i + 2);
-    d += ` C${f1(p1[0] + (p2[0] - p0[0]) * k)},${f1(p1[1] + (p2[1] - p0[1]) * k)} ${f1(p2[0] - (p3[0] - p1[0]) * k)},${f1(p2[1] - (p3[1] - p1[1]) * k)} ${f1(p2[0])},${f1(p2[1])}`;
-  }
-  return `${d} Z`;
-};
+const hexagon = (scale: number) => roundedHexPath(CX, CY, R * scale, 30 * scale);
 
 const LABELS = [
   { x: 300, y: 74, anchor: 'middle' },
@@ -49,14 +26,8 @@ export function Accuracy() {
   const [axis, setAxis] = useState(0);
   const { areas, axes, legend } = accuracyCopy;
   const values = areas[area]?.values ?? [];
-  const points = values.map(
-    (value, i) =>
-      [
-        CX + R * value * Math.cos(ANGLES[i] ?? 0),
-        CY + R * value * Math.sin(ANGLES[i] ?? 0),
-      ] as const,
-  );
-  const shape = smoothShape(points);
+  const points = values.map((value, i) => axisPoint(CX, CY, R * value, i));
+  const shape = smoothClosedPath(points);
 
   return (
     <Box
@@ -175,7 +146,7 @@ export function Accuracy() {
               strokeLinejoin='round'
               style={{ transition: 'd .4s ease' }}
             />
-            {points.map(([x, y], i) => (
+            {points.map(({ x, y }, i) => (
               <circle
                 key={axes[i]?.name}
                 cx={x}

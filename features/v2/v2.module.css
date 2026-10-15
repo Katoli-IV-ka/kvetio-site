@@ -16,7 +16,6 @@
     var(--page-x),
     calc((100vw - var(--container)) / 2 + var(--page-x))
   ); /* page-x measured from the screen edge, for full-bleed rows aligned to the container */
-  --block-min: auto; /* min height of a "large" block: one screen on desktop */
 
   margin: 0;
   background: #fff;
@@ -44,7 +43,6 @@
     --gap-block: 64px;
     --gap-item: 24px;
     --col-gap: 32px;
-    --block-min: clamp(640px, 100dvh, 880px);
   }
 }
 
@@ -675,7 +673,6 @@
 .typeList {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: var(--gap-head);
   margin: 0;
   padding: 0;
@@ -749,7 +746,6 @@
   .typesInner {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--col-gap);
-    min-height: var(--block-min);
   }
 
   .typesLead {
@@ -1012,11 +1008,10 @@
     /* the square map never gets taller than one screen */
     grid-template-columns: minmax(0, 1fr) clamp(480px, calc(100dvh - 2 * var(--section-y)), 640px);
     column-gap: var(--col-gap);
-    min-height: var(--block-min);
   }
 
   .mapWrap {
-    align-items: center;
+    align-items: flex-start;
   }
 }
 
@@ -1864,7 +1859,6 @@
       'note axes';
     grid-template-rows: auto auto auto auto 1fr;
     gap: var(--gap-head) var(--col-gap);
-    min-height: var(--block-min);
   }
 
   .coverageHead {

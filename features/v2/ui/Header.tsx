@@ -79,12 +79,12 @@ export function Header({ base = '' }: { base?: string }) {
             </a>
           ))}
         </nav>
-        <Link
+        <a
           className={styles.headerCta}
-          href='/contact'
+          href={base ? '/contact' : '#contact'}
         >
-          Send a brief
-        </Link>
+          Let&apos;s talk
+        </a>
       </div>
     </header>
   );

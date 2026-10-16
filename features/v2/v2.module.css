@@ -478,10 +478,6 @@
   line-height: 1;
 }
 
-.nowrap {
-  white-space: nowrap; /* keeps hyphenated words on one line */
-}
-
 .heroLead {
   position: relative;
   margin: 24px 0 0;

@@ -740,8 +740,45 @@
 
 /* ---------- Data types (index) ---------- */
 
-.types {
+.physical {
   background: #fff;
+}
+
+.physicalInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--page-x);
+}
+
+.physicalHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.physicalGroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+}
+
+.physicalGroups .typeList {
+  gap: 24px; /* ten items, tighter than the five-item data types list */
+}
+
+.groupLabel {
+  margin: 0 0 var(--gap-item);
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-weight: 500;
+  color: #8a8a8a;
+}
+
+.types {
+  background: #fbfbfb;
 }
 
 .typesInner {
@@ -850,6 +887,27 @@
 
   .typeList {
     grid-column: 7 / span 6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .physicalHead {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--gap-block);
+  }
+
+  .physicalHead .typesText {
+    flex: none;
+    max-width: 416px;
+  }
+
+  .physicalGroups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--col-gap) var(--gap-block);
   }
 }
 

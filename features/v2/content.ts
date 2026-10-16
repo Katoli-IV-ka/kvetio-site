@@ -1,5 +1,6 @@
 export const NAV_LINKS = [
   { label: 'Use cases', href: '#use-cases' },
+  { label: 'Physical AI', href: '#physical-ai' },
   { label: 'Data types', href: '#data-types' },
   { label: 'Process', href: '#process' },
   { label: 'Worldwide', href: '#worldwide' },
@@ -29,7 +30,7 @@ export const USE_CASES: UseCaseCard[] = [
   },
   {
     title: ['Physical AI &', 'Robotics'],
-    text: 'Human demonstrations for teaching robots: hands, objects, manipulation, filmed from the angles your model needs.',
+    text: 'Egocentric and multi-camera RGB-D human demonstrations for teaching robots, captured to protocol and synchronized.',
     variant: 'dark',
     image: '/v2/uc/3.webp',
   },
@@ -67,6 +68,52 @@ export const USE_CASES: UseCaseCard[] = [
     text: "Don't see your case? We stage it: your city, your lighting, your rules.",
     variant: 'dark',
     image: '/v2/uc/9.webp',
+  },
+];
+
+export const PHYSICAL_AI_CAPTURE = [
+  {
+    title: 'Egocentric',
+    text: "First-person view from the demonstrator's head or chest, with hands and objects in frame.",
+  },
+  {
+    title: 'Synchronized multi-camera',
+    text: 'Several fixed and wearable views of the same action, recorded on one timeline.',
+  },
+  {
+    title: 'RGB-D',
+    text: 'Colour and depth captured together, so every frame carries scene geometry.',
+  },
+  {
+    title: 'Spatial capture',
+    text: '3D scene and object capture for tasks that depend on space, reach and placement.',
+  },
+  {
+    title: 'Motion',
+    text: 'Hand, arm and body movement captured alongside the video.',
+  },
+  {
+    title: 'IMU / sensors',
+    text: 'Inertial and other sensors added where the task requires them.',
+  },
+];
+
+export const PHYSICAL_AI_PROTOCOL = [
+  {
+    title: 'Human demonstrations',
+    text: 'Real people performing the task, repeated across operators, objects and conditions.',
+  },
+  {
+    title: 'Protocol design',
+    text: "Task scripts, scenarios and variation plans written around your model's requirements.",
+  },
+  {
+    title: 'Synchronization',
+    text: 'Cameras and sensors time-aligned, so every stream matches frame for frame.',
+  },
+  {
+    title: 'Metadata',
+    text: 'Task, environment, setup and sensor details stored with every recording.',
   },
 ];
 
@@ -160,7 +207,7 @@ export const FOOTER_COLUMNS = [
     label: 'Use cases',
     links: [
       { label: 'Egocentric', href: '#use-cases' },
-      { label: 'Physical AI & Robotics', href: '#use-cases' },
+      { label: 'Physical AI & Robotics', href: '#physical-ai' },
       { label: 'Agriculture', href: '#use-cases' },
       { label: 'Construction', href: '#use-cases' },
       { label: 'Retail & Fashion', href: '#use-cases' },
@@ -199,7 +246,7 @@ export const MENU_GROUPS: MenuGroup[] = [
       {
         label: 'Physical AI & Robotics',
         text: 'Manipulation, navigation, sensor data',
-        href: '#use-cases',
+        href: '#physical-ai',
       },
       { label: 'Agriculture', text: 'Field and farm-scene capture', href: '#use-cases' },
       { label: 'Construction', text: 'Building-site work filmed on location', href: '#use-cases' },

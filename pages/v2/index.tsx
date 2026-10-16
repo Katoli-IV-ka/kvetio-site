@@ -6,6 +6,7 @@ import { Footer } from '../../features/v2/ui/Footer';
 import { MobileMenu } from '../../features/v2/ui/MobileMenu';
 import { Header } from '../../features/v2/ui/Header';
 import { Hero } from '../../features/v2/ui/Hero';
+import { PhysicalAI } from '../../features/v2/ui/PhysicalAI';
 import { Process } from '../../features/v2/ui/Process';
 import { UseCases } from '../../features/v2/ui/UseCases';
 import { Worldwide } from '../../features/v2/ui/Worldwide';
@@ -121,6 +122,7 @@ export default function V2Page() {
         <Hero />
         <main>
           <UseCases />
+          <PhysicalAI />
           <DataTypes />
           <Contact />
           <Process />

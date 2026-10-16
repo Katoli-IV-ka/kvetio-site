@@ -1266,15 +1266,20 @@
     width: 360px;
   }
 
+  /* checkboxes span the two fields (360 + 40 + 360), the button sits below them */
   .formRow {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 144px;
+    gap: var(--gap-head);
+  }
+
+  .consents {
+    max-width: 760px;
   }
 
   .submitRow {
     margin-top: 0;
-    padding-top: 8px;
   }
 }
 

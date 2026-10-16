@@ -1097,7 +1097,7 @@
   position: relative;
   width: 100%;
   margin: 0;
-  padding: var(--section-y) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
+  padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
   overflow: hidden;
   background: #fff;
 }
@@ -1122,8 +1122,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-head);
-  margin-top: var(--gap-head);
+  gap: 32px;
+  margin-top: 32px;
 }
 
 .fields {
@@ -1244,16 +1244,13 @@
 }
 
 @media (min-width: 1024px) {
-  .contactInner {
-    min-height: 544px; /* the collage art is 544px tall */
-  }
-
+  /* the square collage fills the full height of the block */
   .collage {
     right: 0;
-    bottom: auto;
+    bottom: 0;
     top: 0;
-    width: 544px;
-    height: 544px;
+    width: auto;
+    height: 100%;
     opacity: 1;
   }
 
@@ -1271,7 +1268,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--gap-head);
+    gap: 32px;
   }
 
   .consents {

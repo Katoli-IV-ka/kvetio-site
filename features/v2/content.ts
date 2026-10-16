@@ -1,7 +1,6 @@
 export const NAV_LINKS = [
   { label: 'Use cases', href: '#use-cases' },
   { label: 'Data types', href: '#data-types' },
-  { label: 'Why custom data', href: '#why' },
   { label: 'Process', href: '#process' },
   { label: 'Worldwide', href: '#worldwide' },
 ];

@@ -315,8 +315,7 @@
 
   .headerBar[data-solid='true'] {
     border-bottom-color: #ececec;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(12px);
+    background: #fff;
   }
 
   .headerBrand {
@@ -373,7 +372,7 @@
     padding: 0 16px;
     border: 1px solid #000;
     border-radius: 999px;
-    background: transparent;
+    background: #fff; /* solid, so the button stays readable over the halftone art */
     font-size: var(--fs-body);
     font-weight: 500;
     transition:

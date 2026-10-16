@@ -6,68 +6,68 @@ export const NAV_LINKS = [
   { label: 'Worldwide', href: '#worldwide' },
 ];
 
-export type CardVariant = 'photo' | 'light' | 'dark' | 'warm' | 'paper';
+export type CardVariant = 'photo' | 'dark' | 'warm' | 'paper';
 
 export type UseCaseCard = {
-  title: string[];
+  id: string;
+  title: string;
   text: string;
+  tags: string[];
   variant: CardVariant;
-  /** processed poster image for the card, if the variant uses one */
-  image?: string;
+  /** processed poster image behind the card */
+  image: string;
 };
 
 export const USE_CASES: UseCaseCard[] = [
   {
-    title: ['Egocentric'],
-    text: 'First-person video of real tasks, filmed through the eyes of the person doing them: hands, tools, objects, in your chosen environments.',
-    variant: 'photo',
-    image: '/v2/uc/1.webp',
-  },
-  {
-    title: ['Home & everyday life'],
-    text: 'Daily routines in real interiors, staged and filmed from the side: kitchens, living spaces, household devices in use.',
-    variant: 'light',
-  },
-  {
-    title: ['Physical AI &', 'Robotics'],
-    text: 'Egocentric and multi-camera RGB-D human demonstrations for teaching robots, captured to protocol and synchronized.',
-    variant: 'dark',
-    image: '/v2/uc/3.webp',
-  },
-  {
-    title: ['Agriculture'],
-    text: 'Field work staged and filmed on location: machinery cabs, crops, tools and routines of the working day.',
+    id: 'visual',
+    title: 'Visual & Generative AI',
+    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled capture, multi-view data, RAW imagery, visual transformations, graphics, 2D/3D and VFX-based data production.',
+    tags: ['Images', 'Video', 'Multi-view', 'Editing', '3D', 'VFX'],
     variant: 'warm',
     image: '/v2/uc/4.webp',
   },
   {
-    title: ['Construction'],
-    text: 'Building-site work staged and filmed on location: installation, tools, team tasks, safety gear.',
-    variant: 'light',
+    id: 'human-activity',
+    title: 'Human Activity & Real-World Interaction',
+    text: 'Real-world human activities, skilled tasks, workflows and human-object interaction produced in controlled or natural environments.',
+    tags: [
+      'POV',
+      'Professional workflows',
+      'Multi-person interaction',
+      'Fine-grained movement',
+      'Tools / objects',
+      'Longer task sequences',
+    ],
+    variant: 'photo',
+    image: '/v2/uc/1.webp',
   },
   {
-    title: ['Documents &', 'privacy-safe data'],
-    text: "Forms, letters, receipts and handwriting made from scratch: realistic, yet free of anyone's real personal data.",
+    id: 'physical-ai',
+    title: 'Physical AI & Robotics',
+    text: 'Human demonstrations and multimodal real-world data for embodied systems — from egocentric and synchronized multi-camera capture to RGB-D, motion and sensor data.',
+    tags: [
+      'Egocentric',
+      'Synchronized multi-camera',
+      'RGB-D',
+      'Spatial capture',
+      'Human demonstrations',
+      'Motion',
+      'IMU / sensors',
+      'Protocol design',
+      'Synchronization',
+      'Metadata',
+    ],
+    variant: 'dark',
+    image: '/v2/uc/3.webp',
+  },
+  {
+    id: 'scale',
+    title: 'Data Collection & Production at Scale',
+    text: 'Controlled production, distributed collection and international sourcing built around a single dataset specification.',
+    tags: ['Contributors', 'Countries', 'Locations', 'Rights', 'Metadata', 'QA', 'Licensing'],
     variant: 'paper',
     image: '/v2/uc/6.webp',
-  },
-  {
-    title: ['People, crowds &', 'security'],
-    text: "Staged scenes for detection and tracking: crowds, rare incidents, behavior, with every participant's signed release.",
-    variant: 'photo',
-    image: '/v2/uc/7.webp',
-  },
-  {
-    title: ['Retail & Fashion'],
-    text: 'Products, shelves and outfits, shot and labeled attribute by attribute for e-commerce and visual search.',
-    variant: 'paper',
-    image: '/v2/uc/8.webp',
-  },
-  {
-    title: ['Anything oddly', 'specific'],
-    text: "Don't see your case? We stage it: your city, your lighting, your rules.",
-    variant: 'dark',
-    image: '/v2/uc/9.webp',
   },
 ];
 
@@ -206,11 +206,10 @@ export const FOOTER_COLUMNS = [
   {
     label: 'Use cases',
     links: [
-      { label: 'Egocentric', href: '#use-cases' },
+      { label: 'Visual & Generative AI', href: '#use-cases' },
+      { label: 'Human Activity', href: '#use-cases' },
       { label: 'Physical AI & Robotics', href: '#physical-ai' },
-      { label: 'Agriculture', href: '#use-cases' },
-      { label: 'Construction', href: '#use-cases' },
-      { label: 'Retail & Fashion', href: '#use-cases' },
+      { label: 'Collection at Scale', href: '#use-cases' },
     ],
   },
   {
@@ -242,17 +241,24 @@ export const MENU_GROUPS: MenuGroup[] = [
   {
     label: 'Use cases',
     items: [
-      { label: 'Egocentric', text: 'First-person video of real tasks', href: '#use-cases' },
+      {
+        label: 'Visual & Generative AI',
+        text: 'Images, video, multi-view, 3D, VFX',
+        href: '#use-cases',
+      },
+      {
+        label: 'Human Activity',
+        text: 'Workflows and human-object interaction',
+        href: '#use-cases',
+      },
       {
         label: 'Physical AI & Robotics',
-        text: 'Manipulation, navigation, sensor data',
+        text: 'Egocentric, multi-camera, RGB-D, sensors',
         href: '#physical-ai',
       },
-      { label: 'Agriculture', text: 'Field and farm-scene capture', href: '#use-cases' },
-      { label: 'Construction', text: 'Building-site work filmed on location', href: '#use-cases' },
       {
-        label: 'Retail & Fashion',
-        text: 'Products, shelves and in-store behaviour',
+        label: 'Collection at Scale',
+        text: 'Contributors, countries, rights, QA',
         href: '#use-cases',
       },
     ],

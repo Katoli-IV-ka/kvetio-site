@@ -509,12 +509,12 @@
   }
 
   .heroImage {
-    top: 0;
+    top: 64px; /* starts below the header */
     right: 0;
     bottom: auto;
     left: auto;
     width: min(42vw, 720px);
-    height: 100%;
+    height: calc(100% - 64px);
     object-fit: cover;
     object-position: left center;
     opacity: 1;
@@ -522,7 +522,7 @@
 
   .heroCopy {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 32px); /* centred in the area below the header */
     left: var(--edge-x);
     display: flex;
     flex-direction: column;

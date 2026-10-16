@@ -1,7 +1,7 @@
 export const PRIVACY_EMAIL = 'contact@kvet.io';
 export const PRIVACY_UPDATED = '9 October 2026';
 
-export type PolicySection = { title: string; body: string[]; list?: string[] };
+export type PolicySection = { id?: string; title: string; body: string[]; list?: string[] };
 
 export const PRIVACY_SECTIONS: PolicySection[] = [
   {
@@ -21,6 +21,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
   },
   {
+    id: 'processing',
     title: '3. Why we use it and on what legal basis',
     body: [
       'We process the data above for the following purposes (Regulation (EU) 2016/679, “GDPR”):',
@@ -82,6 +83,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
   },
   {
+    id: 'security',
     title: '11. Security',
     body: [
       'We apply reasonable technical and organisational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox where enquiries arrive and a limit on the number of form submissions.',
@@ -94,4 +96,3 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
   },
 ];
-

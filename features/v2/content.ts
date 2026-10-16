@@ -180,8 +180,9 @@ export const FOOTER_COLUMNS = [
 
 export const LEGAL_LINKS = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Data Processing Policy', href: '/privacy-policy#processing' },
   { label: 'Terms of Service', href: '/privacy-policy' },
-  { label: 'Security', href: '/privacy-policy' },
+  { label: 'Security', href: '/privacy-policy#security' },
 ];
 
 export type MenuGroup = {

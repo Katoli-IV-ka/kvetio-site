@@ -8,9 +8,7 @@ export function UseCases() {
       id='use-cases'
       className={styles.cases}
     >
-      <h2 className={`${styles.heading} ${styles.casesTitle}`}>
-        What we produce
-      </h2>
+      <h2 className={`${styles.heading} ${styles.casesTitle}`}>What we produce</h2>
       <div
         className={styles.scroller}
         tabIndex={0}

@@ -9,7 +9,7 @@ export function UseCases() {
       className={styles.cases}
     >
       <h2 className={`${styles.heading} ${styles.casesTitle}`}>
-        AI training data for your edge case
+        What we produce
       </h2>
       <div
         className={styles.scroller}

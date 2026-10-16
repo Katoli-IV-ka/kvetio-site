@@ -95,24 +95,20 @@ export const DATA_TYPES = [
 
 export const PROCESS_STEPS = [
   {
-    title: 'Brief',
+    title: 'Requirement',
     text: 'Define the model task, target classes, edge cases, constraints, and success criteria.',
   },
   {
-    title: 'Data Spec',
+    title: 'Dataset Design',
     text: 'Turn requirements into collection rules, metadata schema, and annotation guidelines.',
   },
   {
+    title: 'Pilot',
+    text: 'Produce a small sample batch, review it with your team, and lock the spec before scaling up.',
+  },
+  {
     title: 'Production',
-    text: 'Collect, capture, or source the required photo, video, audio, or domain-specific data.',
-  },
-  {
-    title: 'Rights',
-    text: 'Prepare consent, usage clarity, release handling, and sensitive-data constraints.',
-  },
-  {
-    title: 'Annotation',
-    text: 'Label, classify, segment, caption, and enrich the data according to your ML pipeline.',
+    text: 'Collect, capture, or source the data and label it to your schema, with consent and releases in place.',
   },
   {
     title: 'QA',
@@ -121,6 +117,10 @@ export const PROCESS_STEPS = [
   {
     title: 'Delivery',
     text: 'Export in your preferred format and hand over a clean, documented dataset package.',
+  },
+  {
+    title: 'Scale',
+    text: 'Grow volume, locations, and variations on the same pipeline as your model needs more data.',
   },
 ];
 
@@ -169,8 +169,8 @@ export const FOOTER_COLUMNS = [
   {
     label: 'Get started today',
     links: [
-      { label: 'Brief', href: '/contact' },
-      { label: 'Data Spec', href: '#process' },
+      { label: 'Requirement', href: '/contact' },
+      { label: 'Dataset Design', href: '#process' },
       { label: 'Datasets', href: '#data-types' },
       { label: 'Research', href: '#worldwide' },
       { label: 'Contact', href: '/contact' },

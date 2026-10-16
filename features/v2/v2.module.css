@@ -1300,7 +1300,7 @@
 .footerArt {
   display: block;
   width: 100%;
-  height: clamp(140px, 22vw, 320px);
+  height: clamp(120px, 18vw, 260px);
   object-fit: cover;
 }
 
@@ -1314,8 +1314,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
-  padding: 24px 0 64px;
+  gap: 24px;
+  padding: 16px 0 48px;
 }
 
 .footerHeading {
@@ -1346,28 +1346,26 @@
 .footerCols {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-block) var(--gap-item);
-  padding-bottom: var(--section-y);
+  gap: 32px var(--gap-item);
+  padding-bottom: var(--gap-block);
 }
 
 .footerLabel {
-  margin: 0 0 24px;
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  margin: 0 0 16px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-weight: 500;
   color: #8a8a8a;
 }
 
 .footerLinks {
   display: flex;
   flex-direction: column;
-  gap: 15.5px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 20px;
 }
 
@@ -1385,12 +1383,9 @@
   gap: 12px;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 16px var(--page-x) 24px;
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 16px var(--page-x);
+  font-size: var(--fs-body);
+  line-height: 20px;
   color: #8a8a8a;
 }
 
@@ -1421,7 +1416,7 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding: var(--gap-head) 0 var(--section-y);
+    padding: 24px 0 var(--gap-block);
   }
 
   .footerCols {
@@ -1433,8 +1428,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-top: 16px;
-    padding-bottom: 20px;
   }
 }
 
@@ -1673,4 +1666,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 24px 40px;
   }
+}
+
+.policy section[id] {
+  scroll-margin-top: 88px;
 }

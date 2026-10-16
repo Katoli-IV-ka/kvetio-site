@@ -15,7 +15,10 @@ export function PrivacyPageV2() {
           <p className={styles.policyDate}>Last updated: {PRIVACY_UPDATED}</p>
           <div className={styles.policy}>
             {PRIVACY_SECTIONS.map((section) => (
-              <section key={section.title}>
+              <section
+                key={section.title}
+                id={section.id}
+              >
                 <h2 className={styles.policyHeading}>{section.title}</h2>
                 {section.body.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>

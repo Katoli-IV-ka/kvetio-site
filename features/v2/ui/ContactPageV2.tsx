@@ -78,7 +78,8 @@ export function ContactPageV2() {
     }
   }
 
-  const note = status === 'error' || status === 'ratelimit' || status === 'invalid' ? MESSAGES[status] : null;
+  const note =
+    status === 'error' || status === 'ratelimit' || status === 'invalid' ? MESSAGES[status] : null;
 
   return (
     <PageShell>
@@ -90,11 +91,7 @@ export function ContactPageV2() {
         />
         <div className={styles.pageInner}>
           <h1 className={`${styles.heading} ${styles.pageTitle}`}>
-            Tell us what
-            <br />
-            your model
-            <br />
-            is missing
+            Tell us what data your model needs.
           </h1>
           {status === 'success' ? (
             <div
@@ -222,9 +219,8 @@ export function ContactPageV2() {
                     onChange={(event) => setMarketing(event.target.checked)}
                   />
                   <span>
-                    Optional: I agree to receive commercial information about Kvetio&apos;s
-                    datasets and services at this email address. I can withdraw this consent at any
-                    time.
+                    Optional: I agree to receive commercial information about Kvetio&apos;s datasets
+                    and services at this email address. I can withdraw this consent at any time.
                   </span>
                 </label>
               </div>

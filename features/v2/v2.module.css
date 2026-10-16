@@ -1477,6 +1477,7 @@
 
 .pageTitle {
   position: relative;
+  max-width: 640px; /* two lines, clear of the collage */
   font-size: var(--fs-display);
   line-height: 1;
 }

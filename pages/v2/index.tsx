@@ -101,16 +101,6 @@ export default function V2Page() {
           content='summary_large_image'
         />
         <link
-          rel='icon'
-          href='/logo.svg'
-          type='image/svg+xml'
-        />
-        <link
-          rel='icon'
-          href='/logo.png'
-          type='image/png'
-        />
-        <link
           rel='preconnect'
           href='https://fonts.googleapis.com'
         />

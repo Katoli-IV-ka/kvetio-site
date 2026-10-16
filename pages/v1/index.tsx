@@ -98,22 +98,6 @@ export default function HomePage() {
           content={OG_IMAGE}
         />
 
-        {/* Icons */}
-        <link
-          rel='icon'
-          href='/logo.svg'
-          type='image/svg+xml'
-        />
-        <link
-          rel='icon'
-          href='/logo.png'
-          type='image/png'
-        />
-        <link
-          rel='apple-touch-icon'
-          href='/logo.png'
-        />
-
         {/* JSON-LD */}
         <script
           type='application/ld+json'

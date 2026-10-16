@@ -923,7 +923,7 @@
   }
 
   .timeline::before {
-    top: 76px;
+    top: 72px; /* centre of the dots: step number 24 + gap 4 + title 24 + dot spacer 20 */
     right: 0;
     bottom: auto;
     left: 0;
@@ -949,8 +949,8 @@
     position: absolute;
     top: 14px;
     left: 0;
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     background: #000;
     content: '';

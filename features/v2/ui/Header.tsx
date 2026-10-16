@@ -12,6 +12,14 @@ import styles from '../v2.module.css';
 export function Header({ base = '' }: { base?: string }) {
   const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
   const [active, setActive] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Highlight the link of the section that crosses the middle of the viewport (landing only)
   useEffect(() => {
@@ -40,7 +48,10 @@ export function Header({ base = '' }: { base?: string }) {
 
   return (
     <header className={styles.siteHeader}>
-      <div className={styles.headerBar}>
+      <div
+        className={styles.headerBar}
+        data-solid={scrolled}
+      >
         <Link
           className={styles.headerBrand}
           href={base || '/v2'}
@@ -68,12 +79,12 @@ export function Header({ base = '' }: { base?: string }) {
             </a>
           ))}
         </nav>
-        <Link
+        <a
           className={styles.headerCta}
-          href='/contact'
+          href={base ? '/contact' : '#contact'}
         >
-          Send a brief
-        </Link>
+          Let&apos;s talk
+        </a>
       </div>
     </header>
   );

@@ -24,14 +24,14 @@ export const WAYS: {
 }[] = [
   {
     title: 'Controlled Production',
-    image: '/v2/ways/production.webp',
+    image: '/v2/ways/production-full.webp',
     variant: 'photo',
     tags: ['Sets & locations', 'Cast', 'Actions & objects', 'Camera setup', 'Protocol'],
     text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
   },
   {
     title: 'Content Sourcing & Licensing',
-    image: '/v2/ways/licensing.webp',
+    image: '/v2/ways/licensing-tall.webp',
     variant: 'paper',
     tags: ['Existing content', 'Licensing', 'Rights clearance', 'Metadata'],
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',

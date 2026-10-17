@@ -119,15 +119,8 @@ export const PHYSICAL_AI_CAPTURE = [
   { title: 'Motion', text: 'Hand, arm and body movement with the video' },
   { title: 'IMU / sensors', text: 'Inertial, force/contact and more where needed' },
   { title: 'Failure & recovery', text: 'Failed attempts and retries, recorded on purpose' },
-];
-
-export const PHYSICAL_AI_PROTOCOL = [
-  { title: 'Human demonstrations', text: 'Many operators, objects and conditions' },
-  { title: 'Protocol design', text: 'Task scripts and variation plans' },
-  { title: 'Synchronization', text: 'Every stream aligned frame for frame' },
-  { title: 'Calibration', text: 'Intrinsics, extrinsics and offsets logged' },
-  { title: 'Metadata', text: 'Task, setup and sensors per recording' },
-  { title: 'QA', text: 'Sync, coverage and protocol checked' },
+  { title: 'Synchronization', text: 'Every camera and sensor aligned frame for frame' },
+  { title: 'Calibration', text: 'Intrinsics, extrinsics and offsets logged per setup' },
 ];
 
 /* ---------- Data we produce: dataset patterns ---------- */

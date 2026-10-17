@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- decorative illustration beside the spec table */
-import { PHYSICAL_AI_CAPTURE, PHYSICAL_AI_PROTOCOL } from '../content';
+import { PHYSICAL_AI_CAPTURE } from '../content';
 import styles from '../v2.module.css';
 
 export function PhysicalAI() {
@@ -24,7 +24,7 @@ export function PhysicalAI() {
             loading='lazy'
           />
           <div>
-            <p className={styles.groupLabel}>What we capture</p>
+            <p className={styles.groupLabel}>Capture spec</p>
             <dl className={styles.paiSpec}>
               {PHYSICAL_AI_CAPTURE.map((item) => (
                 <div
@@ -37,21 +37,6 @@ export function PhysicalAI() {
               ))}
             </dl>
           </div>
-        </div>
-        <div>
-          <p className={styles.groupLabel}>How we run it</p>
-          <ol className={styles.paiSteps}>
-            {PHYSICAL_AI_PROTOCOL.map((step, index) => (
-              <li
-                key={step.title}
-                className={styles.paiStep}
-              >
-                <span className={styles.paiNum}>{String(index + 1).padStart(2, '0')}</span>
-                <h3 className={styles.paiTitle}>{step.title}</h3>
-                <p className={styles.paiText}>{step.text}</p>
-              </li>
-            ))}
-          </ol>
         </div>
       </div>
     </section>

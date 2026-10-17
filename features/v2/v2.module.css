@@ -548,7 +548,7 @@
   }
 }
 
-/* ---------- Physical AI: robot and spec table, then the run-it steps in one row ---------- */
+/* ---------- Physical AI: robot beside the capture spec table ---------- */
 
 .paiMain {
   display: grid;
@@ -596,52 +596,6 @@
   color: #737373;
 }
 
-.paiSteps {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-item) var(--col-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.paiStep {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-top: 14px;
-  border-top: 1px solid #000;
-}
-
-.paiNum {
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #8a8a8a;
-}
-
-.paiTitle {
-  margin: 0;
-  font-size: var(--fs-lead);
-  line-height: 22px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #171717;
-}
-
-.paiText {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
-}
-
-@media (min-width: 640px) {
-  .paiSteps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
 @media (min-width: 1024px) {
   .paiMain {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -650,10 +604,6 @@
 
   .paiArt {
     height: 520px;
-  }
-
-  .paiSteps {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 

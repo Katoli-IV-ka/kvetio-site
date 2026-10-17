@@ -40,8 +40,8 @@ export function WhatWeDo() {
         data-visible={visible}
       >
         <div className={styles.flowHead}>
-          <p className={styles.flowEyebrow}>What we do</p>
-          <h2 className={styles.flowTitle}>From model requirement to production-ready dataset</h2>
+          <p className={styles.flowEyebrow}>From model requirement to production-ready dataset</p>
+          <h2 className={styles.flowTitle}>What we do</h2>
           <p className={styles.flowLead}>
             We start from what your model has to learn, not from a catalog of existing files. Then
             we choose the route that gets you that data, or combine all three.

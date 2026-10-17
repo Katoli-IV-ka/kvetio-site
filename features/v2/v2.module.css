@@ -920,7 +920,7 @@
 .stack {
   --peek: 20px;
   --stack-top: calc(64px + 16px + var(--peek) * 2);
-  --hold: 30vh;
+  --hold: 12vh;
 
   display: flex;
   flex-direction: column;
@@ -933,7 +933,7 @@
 @media (min-width: 1024px) {
   .stack {
     --peek: 32px;
-    --hold: 40vh;
+    --hold: 15vh;
   }
 }
 
@@ -954,7 +954,7 @@
   min-height: 420px;
   padding: 24px;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 0;
   background: #efede7;
   color: #fff;
   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);

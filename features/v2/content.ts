@@ -30,18 +30,18 @@ export const WAYS: {
     text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
   },
   {
-    title: 'Distributed Collection',
-    image: '/v2/photos/pov-kitchen.webp',
-    variant: 'photo',
-    tags: ['Contributors', 'Local teams', 'Geography', 'Diversity', 'Long-term capture'],
-    text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',
-  },
-  {
     title: 'Content Sourcing & Licensing',
     image: '/v2/ways/licensing.webp',
     variant: 'paper',
     tags: ['Existing content', 'Licensing', 'Rights clearance', 'Metadata'],
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
+  },
+  {
+    title: 'Distributed Collection',
+    image: '/v2/photos/pov-kitchen.webp',
+    variant: 'photo',
+    tags: ['Contributors', 'Local teams', 'Geography', 'Diversity', 'Long-term capture'],
+    text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',
   },
 ];
 

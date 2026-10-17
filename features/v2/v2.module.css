@@ -548,7 +548,76 @@
   }
 }
 
-/* ---------- Physical AI: gradient frame with the hand collage ---------- */
+/* ---------- Physical AI: lists with the robot arm beside them ---------- */
+
+.splitLayout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+}
+
+.splitContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  min-width: 0;
+}
+
+.splitHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.splitHead .typesText {
+  max-width: 560px;
+}
+
+.splitGroups {
+  display: grid;
+  gap: var(--gap-block) var(--col-gap);
+}
+
+.splitGroups .typeList {
+  gap: 24px;
+}
+
+/* on phones the arm sits under the lists, centred and capped in height */
+.splitArt {
+  display: block;
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+  height: 420px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+@media (min-width: 1024px) {
+  .splitLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(280px, 30vw, 420px);
+    column-gap: var(--gap-block);
+    align-items: start;
+  }
+
+  /* the arm stays in view while the lists scroll past */
+  .splitArt {
+    position: sticky;
+    top: 96px;
+    width: 100%;
+    height: auto;
+    max-height: calc(100svh - 128px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .splitGroups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Gradient frame (production infrastructure) ---------- */
 
 .framed {
   padding: 8px;
@@ -560,73 +629,6 @@
   padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
   overflow: hidden;
   background: #fff;
-}
-
-.framedLayout {
-  display: flex;
-  flex-direction: column;
-}
-
-.framedContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-head);
-  min-width: 0;
-}
-
-.framedHead {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-item);
-}
-
-.framedHead .typesText {
-  max-width: 560px;
-}
-
-.framedGroups {
-  display: grid;
-  gap: var(--gap-block) var(--col-gap);
-}
-
-.framedGroups .typeList {
-  gap: 24px;
-}
-
-/* on phones the collage sits above the heading, tucked into the top right corner */
-.framedArt {
-  order: -1;
-  align-self: flex-end;
-  width: 200px;
-  height: 200px;
-  margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) 8px 0;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
-@media (min-width: 1024px) {
-  .framedLayout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(320px, 36vw, 560px);
-    column-gap: var(--col-gap);
-  }
-
-  /* the collage runs from the top to the bottom edge of the frame, hand at the bottom */
-  .framedArt {
-    order: 0;
-    align-self: stretch;
-    width: calc(100% + var(--edge-x) - 8px);
-    height: calc(100% + 2 * var(--gap-block));
-    margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) calc(-1 * var(--gap-block)) 0;
-    object-fit: contain;
-    object-position: right bottom;
-  }
-}
-
-@media (min-width: 1280px) {
-  .framedGroups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ---------- Numbered index lists (landing pages, infrastructure) ---------- */
@@ -1466,40 +1468,65 @@
   }
 }
 
-/* ---------- Production infrastructure (globe) ---------- */
+/* ---------- Production infrastructure: globe and the five building blocks ---------- */
 
-.world {
-  background: #fff;
-  overflow: hidden;
+.infra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
 }
 
-.worldInner {
+.infraGrid {
   display: grid;
   gap: var(--gap-block);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--section-y) var(--page-x);
 }
 
-.worldLead {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--gap-head);
-}
-
-.worldHead {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-item);
-}
-
-.worldText {
-  max-width: 416px;
+.infraList {
   margin: 0;
-  font-size: var(--fs-lead);
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.infraItem {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.infraNum {
+  padding-top: 2px;
+  font-family: var(--mono);
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #8a8a8a;
+}
+
+.infraTitle {
+  margin: 0;
+  font-size: var(--fs-h3);
   line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.infraText {
+  margin: 4px 0 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
   color: #737373;
+}
+
+@media (min-width: 1024px) {
+  /* globe on the left, never taller than one screen; the list centred beside it */
+  .infraGrid {
+    grid-template-columns: clamp(440px, calc(100svh - 2 * var(--section-y)), 600px) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--gap-block);
+  }
 }
 
 .mapWrap {
@@ -1570,18 +1597,6 @@
     font-size: 11px;
     line-height: 24px;
     letter-spacing: 0.08em;
-  }
-}
-
-@media (min-width: 1024px) {
-  .worldInner {
-    /* the square map never gets taller than one screen */
-    grid-template-columns: minmax(0, 1fr) clamp(480px, calc(100dvh - 2 * var(--section-y)), 640px);
-    column-gap: var(--col-gap);
-  }
-
-  .mapWrap {
-    align-items: flex-start;
   }
 }
 

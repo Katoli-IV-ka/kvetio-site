@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- decorative collage anchored to the frame corner */
+/* eslint-disable @next/next/no-img-element -- decorative illustration beside the lists */
 import { PHYSICAL_AI_CAPTURE, PHYSICAL_AI_PROTOCOL } from '../content';
 import styles from '../v2.module.css';
 import { IndexList } from './IndexList';
@@ -7,12 +7,12 @@ export function PhysicalAI() {
   return (
     <section
       id='physical-ai'
-      className={styles.framed}
+      className={styles.section}
     >
-      <div className={styles.framedInner}>
-        <div className={styles.framedLayout}>
-          <div className={styles.framedContent}>
-            <div className={styles.framedHead}>
+      <div className={styles.sectionInner}>
+        <div className={styles.splitLayout}>
+          <div className={styles.splitContent}>
+            <div className={styles.splitHead}>
               <h2 className={styles.heading}>Physical AI data capture</h2>
               <p className={styles.typesText}>
                 Human demonstrations for teaching robots: hands, objects and manipulation, captured
@@ -20,7 +20,7 @@ export function PhysicalAI() {
                 documented datasets.
               </p>
             </div>
-            <div className={styles.framedGroups}>
+            <div className={styles.splitGroups}>
               <IndexList
                 label='What we capture'
                 items={PHYSICAL_AI_CAPTURE}
@@ -33,8 +33,8 @@ export function PhysicalAI() {
             </div>
           </div>
           <img
-            className={styles.framedArt}
-            src='/v2/contact-collage.webp'
+            className={styles.splitArt}
+            src='/v2/photos/robot-arm.webp'
             alt=''
             loading='lazy'
           />

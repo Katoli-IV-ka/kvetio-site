@@ -60,8 +60,8 @@ export default function HomePage() {
           <Process />
           <Projects />
           <Proof />
-          <WhyKvet />
           <Contact />
+          <WhyKvet />
         </main>
         <Footer />
       </div>

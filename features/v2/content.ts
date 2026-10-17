@@ -68,7 +68,7 @@ export const CAPABILITIES: Capability[] = [
     id: 'human-activity',
     title: 'Human Activity & Real-World Interaction',
     text: 'Everyday and professional activities, produced in controlled or natural environments.',
-    image: '/v2/photos/home-fridge.webp',
+    image: '/v2/photos/pov-kitchen.webp',
     variant: 'photo',
     spec: [
       { title: 'Skilled tasks', text: 'Multi-step professional workflows' },
@@ -82,8 +82,8 @@ export const CAPABILITIES: Capability[] = [
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
     text: 'Human demonstrations for teaching robots, delivered synchronized, calibrated and documented.',
-    image: '/v2/photos/robot-arm.webp',
-    variant: 'paper',
+    image: '/v2/photos/robot-wireframe.webp',
+    variant: 'photo',
     spec: [
       { title: 'Egocentric', text: 'Head- or chest-mounted, hands in frame' },
       { title: 'Multi-camera & RGB-D', text: 'Synced views with depth' },

@@ -1466,19 +1466,8 @@
 }
 
 .infraItem {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 16px;
   padding: 20px 0;
   border-top: 1px solid #e5e5e5;
-}
-
-.infraNum {
-  padding-top: 2px;
-  font-family: var(--mono);
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #8a8a8a;
 }
 
 .infraTitle {

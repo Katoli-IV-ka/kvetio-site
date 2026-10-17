@@ -17,16 +17,13 @@ export function Infrastructure() {
             </p>
           </div>
           <ol className={styles.infraList}>
-            {INFRASTRUCTURE.map((item, index) => (
+            {INFRASTRUCTURE.map((item) => (
               <li
                 key={item.title}
                 className={styles.infraItem}
               >
-                <span className={styles.infraNum}>{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3 className={styles.infraTitle}>{item.title}</h3>
-                  <p className={styles.infraText}>{item.text}</p>
-                </div>
+                <h3 className={styles.infraTitle}>{item.title}</h3>
+                <p className={styles.infraText}>{item.text}</p>
               </li>
             ))}
           </ol>

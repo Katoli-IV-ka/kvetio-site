@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { NAV_LINKS } from '../content';
+import { BRAND, CTA_LABEL, NAV_LINKS } from '../content';
 import styles from '../v2.module.css';
 
 /**
  * Desktop site header (from 1024px; below that the burger menu takes over):
  * logo left, section links centered, contact button right.
- * `base` makes in-page anchors work from other pages (base='/v2' turns '#process' into '/v2#process').
+ * `base` makes in-page anchors work from other pages (base='/' turns '#process' into '/#process').
  */
 export function Header({ base = '' }: { base?: string }) {
   const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
@@ -54,16 +54,16 @@ export function Header({ base = '' }: { base?: string }) {
       >
         <Link
           className={styles.headerBrand}
-          href={base || '/v2'}
+          href={base || '/'}
         >
           <Image
             src='/v2/kvetio-mark-black.png'
-            alt='Kvetio'
+            alt={BRAND}
             width={32}
             height={32}
             priority
           />
-          <span className={styles.brandName}>Kvetio</span>
+          <span className={styles.brandName}>{BRAND}</span>
         </Link>
         <nav
           className={styles.headerNav}
@@ -83,7 +83,7 @@ export function Header({ base = '' }: { base?: string }) {
           className={styles.headerCta}
           href={base ? '/contact' : '#contact'}
         >
-          Let&apos;s talk
+          {CTA_LABEL}
         </a>
       </div>
     </header>

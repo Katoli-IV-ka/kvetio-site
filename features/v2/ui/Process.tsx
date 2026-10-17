@@ -8,7 +8,7 @@ export function Process() {
       className={styles.process}
     >
       <div className={styles.processInner}>
-        <h2 className={styles.heading}>Our process: from brief to dataset delivery</h2>
+        <h2 className={styles.heading}>Our process: from requirement to dataset delivery</h2>
         <ol className={styles.timeline}>
           {PROCESS_STEPS.map((step, index) => (
             <li

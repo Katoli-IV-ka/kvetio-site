@@ -14,23 +14,22 @@ export function Hero() {
           alt=''
         />
         <div className={styles.heroCopy}>
-          <h1 className={`${styles.heading} ${styles.heroTitle}`}>Produce AI Training Data</h1>
+          <h1 className={`${styles.heading} ${styles.heroTitle}`}>
+            Your model needs data that{' '}
+            <span className={styles.heroMark}>doesn&apos;t exist yet</span>. We produce it.
+          </h1>
+          <p className={styles.heroLead}>Custom real-world data production for AI.</p>
           <p className={styles.heroText}>
-            We produce training data that doesn&apos;t exist yet — for your model only.
-            High-throughput synthesis, pristine edge-case capture, and verified licensing.
+            Kvet designs and produces datasets around the requirements of specific models and
+            research teams — from controlled visual production and global data collection to
+            multimodal capture and Physical AI.
           </p>
           <div className={styles.heroActions}>
-            <a
-              className={`${styles.heroCta} ${styles.heroCtaGhost}`}
-              href='#use-cases'
-            >
-              Use cases
-            </a>
             <a
               className={styles.heroCta}
               href='#contact'
             >
-              Let&apos;s talk
+              Discuss a dataset
             </a>
           </div>
         </div>

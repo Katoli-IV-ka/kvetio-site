@@ -548,7 +548,88 @@
   }
 }
 
-/* ---------- Physical AI and numbered index lists ---------- */
+/* ---------- Physical AI: gradient frame with the hand collage ---------- */
+
+.framed {
+  padding: 8px;
+  background: linear-gradient(90deg, #4da05e 0%, #b24b44 45%, #7171b5 75%, #c0b8af 100%);
+}
+
+.framedInner {
+  position: relative;
+  padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
+  overflow: hidden;
+  background: #fff;
+}
+
+.framedLayout {
+  display: flex;
+  flex-direction: column;
+}
+
+.framedContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  min-width: 0;
+}
+
+.framedHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.framedHead .typesText {
+  max-width: 560px;
+}
+
+.framedGroups {
+  display: grid;
+  gap: var(--gap-block) var(--col-gap);
+}
+
+.framedGroups .typeList {
+  gap: 24px;
+}
+
+/* on phones the collage sits above the heading, tucked into the top right corner */
+.framedArt {
+  order: -1;
+  align-self: flex-end;
+  width: 200px;
+  height: 200px;
+  margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) 8px 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .framedLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 36vw, 560px);
+    column-gap: var(--col-gap);
+  }
+
+  /* the collage runs from the top to the bottom edge of the frame, hand at the bottom */
+  .framedArt {
+    order: 0;
+    align-self: stretch;
+    width: calc(100% + var(--edge-x) - 8px);
+    height: calc(100% + 2 * var(--gap-block));
+    margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) calc(-1 * var(--gap-block)) 0;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+}
+
+@media (min-width: 1280px) {
+  .framedGroups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Numbered index lists (landing pages, infrastructure) ---------- */
 
 .physical {
   background: #fff;
@@ -1500,36 +1581,41 @@
   }
 }
 
-/* ---------- Contact ---------- */
+/* ---------- Contact form ---------- */
 
-.contact {
-  padding: 8px;
-  background: linear-gradient(90deg, #4da05e 0%, #b24b44 45%, #7171b5 75%, #c0b8af 100%);
+.contactGrid {
+  display: grid;
+  gap: var(--gap-block);
 }
 
-.contactInner {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
-  overflow: hidden;
-  background: #fff;
+.contactLead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
 }
 
-.collage {
-  position: absolute;
-  right: -80px;
-  bottom: 0;
-  width: 360px;
-  height: 360px;
-  opacity: 0.35;
-  mix-blend-mode: multiply;
-  pointer-events: none;
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-lead);
+  line-height: 24px;
 }
 
-.contactTitle {
-  position: relative;
-  max-width: 560px; /* keeps the heading clear of the collage */
+.contactLinks a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 1024px) {
+  .contactGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--gap-block);
+  }
 }
 
 .form {
@@ -1658,16 +1744,6 @@
 }
 
 @media (min-width: 1024px) {
-  /* the square collage fills the full height of the block */
-  .collage {
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: auto;
-    height: 100%;
-    opacity: 1;
-  }
-
   .fields {
     flex-direction: row;
     gap: 40px;
@@ -1691,6 +1767,34 @@
 
   .submitRow {
     margin-top: 0;
+  }
+}
+
+/* landing contact form: fields fill the form column */
+.contactForm {
+  margin-top: 0;
+}
+
+.contactForm .fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.contactForm .field,
+.contactForm .requestField {
+  width: 100%;
+  max-width: none;
+}
+
+.contactForm .consents {
+  max-width: none;
+}
+
+@media (min-width: 640px) {
+  .contactForm .fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
   }
 }
 

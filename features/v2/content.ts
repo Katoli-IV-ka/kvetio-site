@@ -1,14 +1,37 @@
+export const BRAND = 'Kvet';
+
+export const CTA_LABEL = 'Discuss a dataset';
+
 export const NAV_LINKS = [
-  { label: 'Use cases', href: '#use-cases' },
+  { label: 'Capabilities', href: '#capabilities' },
   { label: 'Physical AI', href: '#physical-ai' },
-  { label: 'Data types', href: '#data-types' },
-  { label: 'Process', href: '#process' },
-  { label: 'Worldwide', href: '#worldwide' },
+  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'How we work', href: '#process' },
+  { label: 'Projects', href: '#projects' },
 ];
+
+/* ---------- What we do: three ways of creating data ---------- */
+
+export const WAYS = [
+  {
+    title: 'Controlled Production',
+    text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
+  },
+  {
+    title: 'Distributed Collection',
+    text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',
+  },
+  {
+    title: 'Content Sourcing & Licensing',
+    text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
+  },
+];
+
+/* ---------- Core capabilities (stacked cards) ---------- */
 
 export type CardVariant = 'photo' | 'dark' | 'warm' | 'paper';
 
-export type UseCaseCard = {
+export type CapabilityCard = {
   id: string;
   title: string;
   text: string;
@@ -18,26 +41,36 @@ export type UseCaseCard = {
   image: string;
 };
 
-export const USE_CASES: UseCaseCard[] = [
+export const CAPABILITIES: CapabilityCard[] = [
   {
     id: 'visual',
     title: 'Visual & Generative AI',
-    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled capture, multi-view data, RAW imagery, visual transformations, graphics, 2D/3D and VFX-based data production.',
-    tags: ['Images', 'Video', 'Multi-view', 'Editing', '3D', 'VFX'],
+    text: 'Controlled image and video data for training, post-training and evaluation — from RAW collections and multi-view capture to editing, transformation and 2D/3D/VFX-based production.',
+    tags: [
+      'Images',
+      'Video',
+      'RAW / ProRAW',
+      'Multi-view',
+      'Generative video',
+      'Source / instruction / output',
+      '3D',
+      'VFX',
+    ],
     variant: 'warm',
     image: '/v2/uc/4.webp',
   },
   {
     id: 'human-activity',
     title: 'Human Activity & Real-World Interaction',
-    text: 'Real-world human activities, skilled tasks, workflows and human-object interaction produced in controlled or natural environments.',
+    text: 'Everyday and professional activities, skilled multi-step tasks and human-object interaction, produced in controlled or natural environments.',
     tags: [
-      'POV',
+      'Skilled tasks',
       'Professional workflows',
-      'Multi-person interaction',
-      'Fine-grained movement',
-      'Tools / objects',
-      'Longer task sequences',
+      'Human-object interaction',
+      'Task sequences',
+      'Hands & body movement',
+      'Dialogue & multi-person',
+      'Rare scenarios',
     ],
     variant: 'photo',
     image: '/v2/uc/1.webp',
@@ -55,8 +88,7 @@ export const USE_CASES: UseCaseCard[] = [
       'Motion',
       'IMU / sensors',
       'Protocol design',
-      'Synchronization',
-      'Metadata',
+      'Calibration',
     ],
     variant: 'dark',
     image: '/v2/uc/3.webp',
@@ -64,12 +96,22 @@ export const USE_CASES: UseCaseCard[] = [
   {
     id: 'scale',
     title: 'Data Collection & Production at Scale',
-    text: 'Controlled production, distributed collection and international sourcing built around a single dataset specification.',
-    tags: ['Contributors', 'Countries', 'Locations', 'Rights', 'Metadata', 'QA', 'Licensing'],
+    text: 'Controlled production, distributed collection and content licensing built around a single dataset specification — and grown from pilot to full volume on the same pipeline.',
+    tags: [
+      'Contributors',
+      'Countries',
+      'Locations',
+      'Releases & rights',
+      'Metadata',
+      'QA',
+      'Licensing',
+    ],
     variant: 'paper',
     image: '/v2/uc/6.webp',
   },
 ];
+
+/* ---------- Physical AI capture ---------- */
 
 export const PHYSICAL_AI_CAPTURE = [
   {
@@ -94,7 +136,11 @@ export const PHYSICAL_AI_CAPTURE = [
   },
   {
     title: 'IMU / sensors',
-    text: 'Inertial and other sensors added where the task requires them.',
+    text: 'Inertial, force/contact and other sensors added where the task requires them.',
+  },
+  {
+    title: 'Failure & recovery',
+    text: 'Failed attempts, retries and recoveries recorded on purpose where your model needs them.',
   },
 ];
 
@@ -112,62 +158,86 @@ export const PHYSICAL_AI_PROTOCOL = [
     text: 'Cameras and sensors time-aligned, so every stream matches frame for frame.',
   },
   {
+    title: 'Calibration',
+    text: 'Camera intrinsics, extrinsics and sensor offsets calibrated and logged for every setup.',
+  },
+  {
     title: 'Metadata',
     text: 'Task, environment, setup and sensor details stored with every recording.',
   },
-];
-
-export const DATA_TYPES = [
-  {
-    title: 'Visual Data',
-    text: 'Images, video, frames, object scenes, action capture, and visual annotations.',
-  },
-  {
-    title: 'Audio & Speech',
-    text: 'Voice, environmental sound, conversations, sound events, and transcripts.',
-  },
-  {
-    title: 'Text & Documents',
-    text: 'Classification sets, prompts, transcripts, structured text, and document data.',
-  },
-  {
-    title: 'Sensor & Structured Data',
-    text: 'Metadata, tabular data, device logs, scenario attributes, and structured records.',
-  },
-  {
-    title: 'Domain-Specific Data',
-    text: 'Healthcare, agriculture, retail, safety, industrial, and niche workflows.',
-  },
-];
-
-export const PROCESS_STEPS = [
-  {
-    title: 'Requirement',
-    text: 'Define the model task, target classes, edge cases, constraints, and success criteria.',
-  },
-  {
-    title: 'Dataset Design',
-    text: 'Turn requirements into collection rules, metadata schema, and annotation guidelines.',
-  },
-  {
-    title: 'Pilot',
-    text: 'Produce a small sample batch, review it with your team, and lock the spec before scaling up.',
-  },
-  {
-    title: 'Production',
-    text: 'Collect, capture, or source the data and label it to your schema, with consent and releases in place.',
-  },
   {
     title: 'QA',
-    text: 'Review samples, fix inconsistencies, and validate labels, metadata, and structure.',
+    text: 'Every session checked for sync, coverage and protocol compliance before delivery.',
+  },
+];
+
+/* ---------- Data we produce: dataset patterns ---------- */
+
+export const DATASET_PATTERNS = [
+  {
+    title: 'Egocentric task recordings',
+    text: 'Household and professional tasks filmed from the head or chest, with hands, tools and objects in frame.',
+    spec: 'POV video · narration · task labels',
   },
   {
-    title: 'Delivery',
-    text: 'Export in your preferred format and hand over a clean, documented dataset package.',
+    title: 'Multi-camera manipulation',
+    text: 'The same grasp, place or assembly seen from fixed and wearable cameras on one timeline.',
+    spec: 'Synced views · RGB-D · hand pose',
   },
   {
-    title: 'Scale',
-    text: 'Grow volume, locations, and variations on the same pipeline as your model needs more data.',
+    title: 'Editing & transformation pairs',
+    text: 'A source frame, an instruction and the edited result: relighting, cleanup, object and background changes.',
+    spec: 'Source · instruction · output',
+  },
+  {
+    title: 'Generative video sets',
+    text: 'Shots planned for continuity, motion and controlled visual variation, for training and evaluation.',
+    spec: 'Video · camera & lighting metadata',
+  },
+  {
+    title: 'Controlled image collections',
+    text: 'People, objects and environments shot under planned variations of light, angle and lens.',
+    spec: 'RAW / ProRAW · multi-view',
+  },
+  {
+    title: 'Skilled workflows',
+    text: 'Multi-step professional procedures performed by trained people in real workplaces.',
+    spec: 'Step labels · before / after',
+  },
+  {
+    title: 'Dialogue & multi-person interaction',
+    text: 'Conversations and group activities with every participant released for training use.',
+    spec: 'Video · audio · transcripts',
+  },
+  {
+    title: 'Rare & controlled scenarios',
+    text: 'Situations that are hard to find in the wild, staged safely and repeated with variations.',
+    spec: 'Scenario scripts · variation plan',
+  },
+];
+
+/* ---------- Production infrastructure ---------- */
+
+export const INFRASTRUCTURE = [
+  {
+    title: 'People',
+    text: 'Casting of performers, skilled professionals and contributors, with signed releases.',
+  },
+  {
+    title: 'Locations & environments',
+    text: 'Homes, workplaces, studios and outdoor sites matched to the scenario.',
+  },
+  {
+    title: 'Equipment & capture systems',
+    text: 'POV rigs, multi-camera arrays, RGB-D and sensor setups built for the protocol.',
+  },
+  {
+    title: 'Post-production',
+    text: 'Editing, transformation, 2D/3D and VFX work done as part of the data pipeline.',
+  },
+  {
+    title: 'International teams',
+    text: 'Local producers and contributor networks running the same spec in every country.',
   },
 ];
 
@@ -183,43 +253,171 @@ export const CITIES = [
   { name: 'Cairo', x: 895, y: 370, dir: 'up', len: 45 },
 ] as const;
 
+/* ---------- How we work ---------- */
+
+export const PROCESS_STEPS = [
+  {
+    title: 'Requirement',
+    text: 'Define the model task, target behaviours, constraints and success criteria.',
+  },
+  {
+    title: 'Dataset Design',
+    text: 'Turn requirements into scenarios, capture setup, metadata schema and annotation guidelines.',
+  },
+  {
+    title: 'Pilot',
+    text: 'Produce a small sample batch, review it with your team, and lock the spec before scaling up.',
+  },
+  {
+    title: 'Production',
+    text: 'Collect, capture or source the data and label it to your schema, with consent and releases in place.',
+  },
+  {
+    title: 'QA',
+    text: 'Review samples, fix inconsistencies, and validate labels, metadata and structure.',
+  },
+  {
+    title: 'Delivery',
+    text: 'Hand over a clean, documented, rights-ready dataset in your preferred format.',
+  },
+  {
+    title: 'Scale',
+    text: 'Grow volume, locations and variations on the same pipeline as your model needs more data.',
+  },
+];
+
+/* ---------- Selected projects ----------
+   PLACEHOLDERS: replace every bracketed value with a real anonymized project before launch. */
+
+export const PROJECTS_ARE_PLACEHOLDERS = true;
+
+export const PROJECTS = [
+  {
+    area: 'Physical AI & Robotics',
+    title: '[Project title, e.g. household manipulation demonstrations]',
+    rows: [
+      { label: 'Task', text: '[What the model had to learn]' },
+      { label: 'Setup', text: '[Cameras, sensors, locations, performers]' },
+      { label: 'Scale', text: '[Hours / clips / participants / countries]' },
+      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
+    ],
+  },
+  {
+    area: 'Visual & Generative AI',
+    title: '[Project title, e.g. editing pairs for an image model]',
+    rows: [
+      { label: 'Task', text: '[What the model had to learn]' },
+      { label: 'Setup', text: '[Studio, lighting, capture and post-production]' },
+      { label: 'Scale', text: '[Images / pairs / variations]' },
+      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
+    ],
+  },
+  {
+    area: 'Data Collection at Scale',
+    title: '[Project title, e.g. multi-country everyday activities]',
+    rows: [
+      { label: 'Task', text: '[What the model had to learn]' },
+      { label: 'Setup', text: '[Contributors, local teams, protocol]' },
+      { label: 'Scale', text: '[Contributors / countries / hours]' },
+      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
+    ],
+  },
+];
+
+/* ---------- Scale & proof ----------
+   PLACEHOLDERS: the numbers below must be replaced with real figures before launch. */
+
+export const STATS = [
+  { value: '[XX]', label: 'countries with production or collection' },
+  { value: '[XX]', label: 'contributors and performers' },
+  { value: '[XX]', label: 'hours of data captured' },
+  { value: '[XX]', label: 'datasets delivered' },
+];
+
+export const RIGHTS_READY = [
+  {
+    title: 'Releases',
+    text: 'Signed likeness and location releases from every participant and site.',
+  },
+  {
+    title: 'Licensing',
+    text: 'Usage terms that allow commercial training, documented per asset.',
+  },
+  {
+    title: 'Metadata',
+    text: 'Setup, scenario, participant and capture details delivered with the data.',
+  },
+  {
+    title: 'QA',
+    text: 'Sample review and validation of labels, structure and coverage before handover.',
+  },
+];
+
+/* ---------- Why Kvet ---------- */
+
+export const WHY = [
+  {
+    them: 'Data marketplaces',
+    theyDo: 'Sell what already exists, as it is.',
+    weDo: 'We produce what does not exist yet, to your specification.',
+  },
+  {
+    them: 'Crowdsourcing platforms',
+    theyDo: 'Deliver volume of simple tasks with little control over setup.',
+    weDo: 'We design the protocol, capture setup and QA, then scale it.',
+  },
+  {
+    them: 'Production studios',
+    theyDo: 'Make great footage that is not built for training.',
+    weDo: 'We deliver datasets: metadata, annotation, releases and rights.',
+  },
+];
+
+/* ---------- Solutions (landing pages) ---------- */
+
+export const SOLUTION_LINKS = [
+  { label: 'Physical AI & Robotics', href: '/physical-ai' },
+  { label: 'Generative Video', href: '/generative-video' },
+  { label: 'Egocentric Data', href: '/egocentric-data' },
+  { label: 'Image Datasets', href: '/image-data' },
+  { label: 'AI Editing Data', href: '/ai-editing-data' },
+  { label: 'Custom Data Collection', href: '/custom-data-collection' },
+];
+
+/* ---------- Footer and mobile menu ---------- */
+
 export const FOOTER_COLUMNS = [
+  {
+    label: 'Capabilities',
+    links: [
+      { label: 'Visual & Generative AI', href: '#capabilities' },
+      { label: 'Human Activity', href: '#capabilities' },
+      { label: 'Physical AI & Robotics', href: '#physical-ai' },
+      { label: 'Collection at Scale', href: '#capabilities' },
+    ],
+  },
+  {
+    label: 'Solutions',
+    links: SOLUTION_LINKS,
+  },
   {
     label: 'Company',
     links: [
-      { label: 'Use cases', href: '#use-cases' },
-      { label: 'Process', href: '#process' },
-      { label: 'Worldwide', href: '#worldwide' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'What we do', href: '#what-we-do' },
+      { label: 'Datasets', href: '#datasets' },
+      { label: 'Infrastructure', href: '#infrastructure' },
+      { label: 'How we work', href: '#process' },
+      { label: 'Projects', href: '#projects' },
+      { label: 'Why Kvet', href: '#why' },
     ],
   },
   {
-    label: 'Data types',
+    label: 'Contact',
     links: [
-      { label: 'Visual Data', href: '#data-types' },
-      { label: 'Audio & Speech', href: '#data-types' },
-      { label: 'Text & Documents', href: '#data-types' },
-      { label: 'Sensor & Structured Data', href: '#data-types' },
-      { label: 'Domain-Specific Data', href: '#data-types' },
-    ],
-  },
-  {
-    label: 'Use cases',
-    links: [
-      { label: 'Visual & Generative AI', href: '#use-cases' },
-      { label: 'Human Activity', href: '#use-cases' },
-      { label: 'Physical AI & Robotics', href: '#physical-ai' },
-      { label: 'Collection at Scale', href: '#use-cases' },
-    ],
-  },
-  {
-    label: 'Get started today',
-    links: [
-      { label: 'Requirement', href: '/contact' },
-      { label: 'Dataset Design', href: '#process' },
-      { label: 'Datasets', href: '#data-types' },
-      { label: 'Research', href: '#worldwide' },
-      { label: 'Contact', href: '/contact' },
+      { label: CTA_LABEL, href: '/contact' },
+      { label: 'contact@kvet.io', href: 'mailto:contact@kvet.io' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/kvet-io' },
+      { label: 'Instagram', href: 'https://www.instagram.com/kvetio' },
     ],
   },
 ];
@@ -227,7 +425,6 @@ export const FOOTER_COLUMNS = [
 export const LEGAL_LINKS = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Data Processing Policy', href: '/privacy-policy#processing' },
-  { label: 'Terms of Service', href: '/privacy-policy' },
   { label: 'Security', href: '/privacy-policy#security' },
 ];
 
@@ -239,17 +436,17 @@ export type MenuGroup = {
 /** Mobile burger menu: accordion groups first, then plain links, mirroring the footer sections. */
 export const MENU_GROUPS: MenuGroup[] = [
   {
-    label: 'Use cases',
+    label: 'Capabilities',
     items: [
       {
         label: 'Visual & Generative AI',
-        text: 'Images, video, multi-view, 3D, VFX',
-        href: '#use-cases',
+        text: 'Images, video, editing, 3D, VFX',
+        href: '#capabilities',
       },
       {
         label: 'Human Activity',
-        text: 'Workflows and human-object interaction',
-        href: '#use-cases',
+        text: 'Skilled tasks and human-object interaction',
+        href: '#capabilities',
       },
       {
         label: 'Physical AI & Robotics',
@@ -259,36 +456,20 @@ export const MENU_GROUPS: MenuGroup[] = [
       {
         label: 'Collection at Scale',
         text: 'Contributors, countries, rights, QA',
-        href: '#use-cases',
+        href: '#capabilities',
       },
     ],
   },
   {
-    label: 'Data types',
-    items: [
-      { label: 'Visual Data', text: 'Images, video, frames, annotations', href: '#data-types' },
-      { label: 'Audio & Speech', text: 'Voice, sound events, transcripts', href: '#data-types' },
-      {
-        label: 'Text & Documents',
-        text: 'Prompts, structured text, document data',
-        href: '#data-types',
-      },
-      {
-        label: 'Sensor & Structured Data',
-        text: 'Metadata, tabular data, device logs',
-        href: '#data-types',
-      },
-      {
-        label: 'Domain-Specific Data',
-        text: 'Healthcare, retail, safety, industrial',
-        href: '#data-types',
-      },
-    ],
+    label: 'Solutions',
+    items: SOLUTION_LINKS,
   },
 ];
 
 export const MENU_LINKS = [
-  { label: 'Process', href: '#process' },
-  { label: 'Worldwide', href: '#worldwide' },
-  { label: 'News', href: '/v1' },
+  { label: 'Datasets', href: '#datasets' },
+  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'How we work', href: '#process' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Why Kvet', href: '#why' },
 ];

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { clearDraft, loadDraft } from '../../contact/lib/draft';
 import { contactForm } from '../../../shared/landing/site-content';
+import { CTA_LABEL } from '../content';
 import styles from '../v2.module.css';
 import { PageShell } from './PageShell';
 
@@ -13,7 +14,7 @@ const MESSAGES: Record<'error' | 'ratelimit' | 'invalid', string> = {
   error: 'Something went wrong. Please try again or write to contact@kvet.io.',
   ratelimit: 'Too many requests. Please try again in a few minutes.',
   invalid:
-    'Please fill in name, email and your request, choose a data type and accept the Privacy Policy.',
+    'Please fill in name, email and your request, choose what you need and accept the Privacy Policy.',
 };
 
 export function ContactPageV2() {
@@ -102,7 +103,7 @@ export function ContactPageV2() {
               <p>We&apos;ll get back to you soon.</p>
               <Link
                 className={styles.pageButton}
-                href='/v2'
+                href='/'
               >
                 Back to home
               </Link>
@@ -156,7 +157,7 @@ export function ContactPageV2() {
                 />
               </div>
               <fieldset className={styles.chips}>
-                <legend className={styles.chipsLabel}>Data type needed*</legend>
+                <legend className={styles.chipsLabel}>What do you need?*</legend>
                 {contactForm.dataTypes.map((type) => (
                   <label
                     key={type}
@@ -174,8 +175,8 @@ export function ContactPageV2() {
               <textarea
                 className={`${styles.field} ${styles.textarea}`}
                 name='message'
-                placeholder='Describe your request*'
-                aria-label='Describe your request'
+                placeholder='What data does your model need?*'
+                aria-label='What data does your model need?'
                 rows={3}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
@@ -230,7 +231,7 @@ export function ContactPageV2() {
                   type='submit'
                   disabled={status === 'loading'}
                 >
-                  {status === 'loading' ? 'Sending…' : "Let's talk"}
+                  {status === 'loading' ? 'Sending…' : CTA_LABEL}
                 </button>
                 {note && (
                   <p

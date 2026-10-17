@@ -1,25 +1,29 @@
 /* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
 import type { CSSProperties } from 'react';
-import { CITIES } from '../content';
+import { CITIES, INFRASTRUCTURE } from '../content';
 import styles from '../v2.module.css';
+import { IndexList } from './IndexList';
 
 const MAP_PX = 640;
 const IMG_PX = 1024;
 const toCqw = (px: number) => `${(px / MAP_PX) * 100}cqw`;
 
-export function Worldwide() {
+export function Infrastructure() {
   return (
     <section
-      id='worldwide'
+      id='infrastructure'
       className={styles.world}
     >
       <div className={styles.worldInner}>
         <div className={styles.worldLead}>
-          <h2 className={styles.heading}>Global production, one dataset specification.</h2>
-          <p className={styles.worldText}>
-            We build local production and contributor teams around project requirements — across
-            locations, countries and regions.
-          </p>
+          <div className={styles.worldHead}>
+            <h2 className={styles.heading}>Production infrastructure</h2>
+            <p className={styles.worldText}>
+              Global production, one dataset specification. We build local production and
+              contributor teams around each project — across locations, countries and regions.
+            </p>
+          </div>
+          <IndexList items={INFRASTRUCTURE} />
         </div>
         <div className={styles.mapWrap}>
           <div className={styles.map}>

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
-import { FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
+import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
 export function Footer({ base = '' }: { base?: string }) {
@@ -23,7 +23,7 @@ export function Footer({ base = '' }: { base?: string }) {
             className={styles.ctaButton}
             href={base ? '/contact' : '#contact'}
           >
-            Let&apos;s talk
+            {CTA_LABEL}
           </a>
         </div>
         <div className={styles.footerCols}>
@@ -46,7 +46,7 @@ export function Footer({ base = '' }: { base?: string }) {
       </div>
       <div className={styles.footerBar}>
         <div className={styles.footerBarInner}>
-          <span>© 2026 Kvetio. All rights reserved.</span>
+          <span>© 2026 {BRAND}. All rights reserved.</span>
           <div className={styles.legal}>
             {LEGAL_LINKS.map((link, index) => (
               <span

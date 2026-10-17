@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-page-custom-font -- fonts are shared with /v2 */
+/* eslint-disable @next/next/no-page-custom-font -- fonts are shared with the home page */
 import Head from 'next/head';
 import { ContactPageV2 } from '../features/v2/ui/ContactPageV2';
 
@@ -6,10 +6,10 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Contact us — Kvetio</title>
+        <title>Contact us — Kvet</title>
         <meta
           name='description'
-          content='Tell Kvetio what data your model needs: request custom AI training datasets across modalities, domains and formats.'
+          content='Tell Kvet what data your model needs: discuss a custom dataset for training, post-training or evaluation.'
         />
         <link
           rel='canonical'

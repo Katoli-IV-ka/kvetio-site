@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-page-custom-font -- fonts are shared with /v2 */
+/* eslint-disable @next/next/no-page-custom-font -- fonts are shared with the home page */
 import Head from 'next/head';
 import { PrivacyPageV2 } from '../features/v2/ui/PrivacyPageV2';
 
@@ -6,10 +6,10 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Head>
-        <title>Privacy Policy — Kvetio</title>
+        <title>Privacy Policy — Kvet</title>
         <meta
           name='description'
-          content='How Kvetio processes personal data submitted through the contact form: purposes, legal bases, retention and your GDPR rights.'
+          content='How Kvet processes personal data submitted through the contact form: purposes, legal bases, retention and your GDPR rights.'
         />
         <link
           rel='canonical'

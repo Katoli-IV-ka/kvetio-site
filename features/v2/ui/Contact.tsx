@@ -2,6 +2,7 @@ import Link from 'next/link';
 /* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { CTA_LABEL } from '../content';
 import styles from '../v2.module.css';
 
 type Status = 'idle' | 'loading' | 'success' | 'error' | 'ratelimit' | 'invalid';
@@ -16,6 +17,7 @@ const MESSAGES: Record<Exclude<Status, 'idle' | 'loading'>, string> = {
 export function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [request, setRequest] = useState('');
   const [privacy, setPrivacy] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
@@ -34,13 +36,20 @@ export function Contact() {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          message: `Request from the kvet.io/v2 contact form. Privacy Policy accepted: yes. Marketing emails: ${marketing ? 'yes' : 'no'}.`,
+          message: [
+            request.trim(),
+            `Request from the kvet.io${window.location.pathname} contact form. Privacy Policy accepted: yes. Marketing emails: ${marketing ? 'yes' : 'no'}.`,
+          ]
+            .filter(Boolean)
+            .join('\n\n'),
+          marketingConsent: marketing,
         }),
       });
       if (res.ok) {
         setStatus('success');
         setName('');
         setEmail('');
+        setRequest('');
         setPrivacy(false);
         setMarketing(false);
       } else if (res.status === 429) {
@@ -96,6 +105,15 @@ export function Contact() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
+          <textarea
+            className={`${styles.field} ${styles.textarea} ${styles.requestField}`}
+            name='request'
+            placeholder='What data does your model need?'
+            aria-label='What data does your model need?'
+            rows={2}
+            value={request}
+            onChange={(event) => setRequest(event.target.value)}
+          />
           <div className={styles.formRow}>
             <div className={styles.consents}>
               <label className={styles.consent}>
@@ -130,7 +148,7 @@ export function Contact() {
                 type='submit'
                 disabled={status === 'loading'}
               >
-                {status === 'loading' ? 'Sending…' : "Let's talk"}
+                {status === 'loading' ? 'Sending…' : CTA_LABEL}
               </button>
               {message && (
                 <p

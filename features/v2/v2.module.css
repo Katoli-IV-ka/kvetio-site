@@ -1,4 +1,4 @@
-/* Kvetio v2 — styles follow the 1280px mockups and collapse to one column on small screens */
+/* Kvet site — styles follow the 1280px mockups and collapse to one column on small screens */
 
 .root {
   --mono: 'Cousine', 'Liberation Mono', 'Courier New', monospace;
@@ -548,7 +548,7 @@
   }
 }
 
-/* ---------- Use cases (four category cards, stacked like a deck) ---------- */
+/* ---------- Core capabilities (four cards, stacked like a deck) ---------- */
 
 .cases {
   background: #fbfbfb;
@@ -583,7 +583,7 @@
   }
 }
 
-/* --depth (set from UseCases.tsx) grows from 0 as the following cards slide over this one */
+/* --depth (set from Capabilities.tsx) grows from 0 as the following cards slide over this one */
 .stackItem {
   --depth: 0;
 
@@ -744,7 +744,7 @@
   border-color: rgba(27, 26, 23, 0.35);
 }
 
-/* ---------- Data types (index) ---------- */
+/* ---------- Physical AI and numbered index lists ---------- */
 
 .physical {
   background: #fff;
@@ -781,25 +781,6 @@
   line-height: 20px;
   font-weight: 500;
   color: #8a8a8a;
-}
-
-.types {
-  background: #fbfbfb;
-}
-
-.typesInner {
-  display: grid;
-  gap: var(--gap-block);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--section-y) var(--page-x);
-}
-
-.typesLead {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--gap-head);
 }
 
 .typesText {
@@ -882,21 +863,6 @@
 }
 
 @media (min-width: 1024px) {
-  .typesInner {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: var(--col-gap);
-  }
-
-  .typesLead {
-    grid-column: 1 / span 5;
-  }
-
-  .typeList {
-    grid-column: 7 / span 6;
-  }
-}
-
-@media (min-width: 1024px) {
   .physicalHead {
     flex-direction: row;
     align-items: flex-end;
@@ -917,10 +883,360 @@
   }
 }
 
+/* ---------- Generic section frame (what we do, datasets, projects, proof, why) ---------- */
+
+.section {
+  background: #fff;
+}
+
+.root [data-tone='alt'] {
+  background: #fbfbfb;
+}
+
+.sectionInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--page-x);
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.sectionLead {
+  max-width: 416px;
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #737373;
+}
+
+@media (min-width: 1024px) {
+  .sectionHead {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--gap-block);
+  }
+
+  .sectionHead .heading {
+    max-width: 720px;
+  }
+
+  .sectionLead {
+    flex: none;
+  }
+}
+
+/* marks content that must be replaced with real material before launch */
+.draftNote {
+  align-self: flex-start;
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px dashed #b42318;
+  border-radius: 999px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #b42318;
+}
+
+/* What we do: three ways of creating data */
+.ways {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-head) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.way {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #000;
+}
+
+.wayNum {
+  font-family: var(--mono);
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  color: #000;
+}
+
+.wayTitle {
+  margin: 0;
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.wayText {
+  max-width: 360px;
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+@media (min-width: 1024px) {
+  .ways {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Data we produce: dataset patterns */
+.patterns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-head) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .patterns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .patterns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pattern {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #d4d4d4;
+}
+
+.patternTitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.patternText {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.patternSpec {
+  margin: auto 0 0;
+  padding-top: 8px;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #000;
+}
+
+/* Selected projects */
+.projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-item);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 1024px) {
+  .projects {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.projectArea {
+  margin: 0;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.projectTitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.projectRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 0;
+}
+
+.projectRows div {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #d1d5db;
+}
+
+.projectRows dt {
+  font-size: var(--fs-caption);
+  line-height: 20px;
+  color: #8a8a8a;
+}
+
+.projectRows dd {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #171717;
+}
+
+/* Scale & proof */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-head) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 1024px) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #000;
+}
+
+.statValue {
+  font-size: var(--fs-display);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.statLabel {
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.proofRights {
+  margin-top: var(--gap-item);
+}
+
+@media (min-width: 1024px) {
+  .proofRights .typeList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gap-block);
+  }
+}
+
+/* Why Kvet: comparison rows */
+.compare {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #000;
+}
+
+.compareRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.compareThem {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.compareTheirs {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  color: #8a8a8a;
+}
+
+.compareOurs {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #000;
+}
+
+.compareBrand {
+  display: inline-block;
+  margin-right: 12px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-size: var(--fs-caption);
+  line-height: 20px;
+  font-weight: 600;
+  vertical-align: 2px;
+}
+
+@media (min-width: 1024px) {
+  .compareRow {
+    grid-template-columns: 3fr 4fr 5fr;
+    align-items: baseline;
+    gap: var(--col-gap);
+  }
+}
+
 /* ---------- Process ---------- */
 
 .process {
-  background: #fff;
+  background: #fbfbfb;
 }
 
 .processInner {
@@ -1060,7 +1376,7 @@
   }
 }
 
-/* ---------- Worldwide ---------- */
+/* ---------- Production infrastructure (globe) ---------- */
 
 .world {
   background: #fff;
@@ -1080,6 +1396,12 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--gap-head);
+}
+
+.worldHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
 }
 
 .worldText {
@@ -1302,8 +1624,8 @@
 }
 
 .submit {
-  width: 116px;
   height: 48px;
+  padding: 0 28px;
   border: 0;
   border-radius: 24px;
   background: #000;
@@ -1365,6 +1687,12 @@
   .submitRow {
     margin-top: 0;
   }
+}
+
+/* the free-text request spans both fields */
+.form .requestField {
+  width: 100%;
+  max-width: 760px;
 }
 
 /* ---------- Footer ---------- */
@@ -1519,7 +1847,22 @@
   }
 }
 
-/* ---------- Inner pages (contact, privacy) ---------- */
+/* ---------- Inner pages (contact, privacy, solutions) ---------- */
+
+.eyebrow {
+  position: relative;
+  margin: 0 0 16px;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #737373;
+}
+
+.landingTitle {
+  max-width: 760px;
+}
 
 .pageMain {
   display: block;
@@ -1547,6 +1890,7 @@
 
 .pageArt {
   position: absolute;
+  object-fit: cover;
   right: -80px;
   top: 64px;
   width: 360px;
@@ -1729,7 +2073,7 @@
 
 @media (min-width: 1024px) {
   .pageInner {
-    padding: 176px 56px 112px;
+    padding: 176px var(--page-x) 112px;
   }
 
   .pageArt {

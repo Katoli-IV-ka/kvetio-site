@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element -- decorative poster art behind the cards */
 import { useEffect, useRef } from 'react';
-import { USE_CASES } from '../content';
+import { CAPABILITIES } from '../content';
 import styles from '../v2.module.css';
 
 /** How many cards may sit under the top one before the lowest fades out */
 const MAX_DEPTH = 2;
 
-export function UseCases() {
+export function Capabilities() {
   const listRef = useRef<HTMLOListElement>(null);
 
   // Deck effect: each card sticks under the header; while the next one slides up over it,
@@ -47,16 +47,16 @@ export function UseCases() {
 
   return (
     <section
-      id='use-cases'
+      id='capabilities'
       className={styles.cases}
     >
       <div className={styles.casesInner}>
-        <h2 className={styles.heading}>What we produce</h2>
+        <h2 className={styles.heading}>Core capabilities</h2>
         <ol
           ref={listRef}
           className={styles.stack}
         >
-          {USE_CASES.map((card, index) => (
+          {CAPABILITIES.map((card, index) => (
             <li
               key={card.id}
               className={styles.stackItem}
@@ -75,7 +75,7 @@ export function UseCases() {
                 <div className={styles.cardBody}>
                   <span className={styles.cardNum}>
                     {String(index + 1).padStart(2, '0')} /{' '}
-                    {String(USE_CASES.length).padStart(2, '0')}
+                    {String(CAPABILITIES.length).padStart(2, '0')}
                   </span>
                   <h3 className={styles.cardTitle}>{card.title}</h3>
                   <p className={styles.cardText}>{card.text}</p>

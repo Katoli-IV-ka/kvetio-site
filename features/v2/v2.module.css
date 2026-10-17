@@ -913,14 +913,16 @@
 /* What we do: three routes as full-width cards, stacked like a deck on scroll */
 
 /* --peek: how much of each card beneath shows above the top one;
-   --stack-top: where cards stick, below the 64px header with room for two peeking edges */
+   --stack-top: where cards stick, below the 64px header with room for two peeking edges;
+   --hold: scroll distance a stuck card stays fully visible before the next one arrives */
 .stack {
   --peek: 20px;
   --stack-top: calc(64px + 16px + var(--peek) * 2);
+  --hold: 30vh;
 
   display: flex;
   flex-direction: column;
-  gap: var(--gap-item);
+  gap: var(--hold);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -929,6 +931,7 @@
 @media (min-width: 1024px) {
   .stack {
     --peek: 32px;
+    --hold: 40vh;
   }
 }
 

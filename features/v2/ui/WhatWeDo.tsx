@@ -9,8 +9,9 @@ const MAX_DEPTH = 2;
 export function WhatWeDo() {
   const listRef = useRef<HTMLOListElement>(null);
 
-  // Deck effect: each card sticks under the header; while the next one slides up over it,
-  // the cards beneath shrink, lift and darken, so their top edges peek out above the stack
+  // Deck effect: each card sticks under the header and stays fully visible for the hold distance
+  // (the gap between cards). Only when the next card actually reaches its bottom edge does it
+  // start to shrink, lift and darken, so its top edge peeks out above the stack.
   useEffect(() => {
     const list = listRef.current;
     if (!list) return undefined;
@@ -19,12 +20,14 @@ export function WhatWeDo() {
 
     const update = () => {
       frame = 0;
-      const viewport = window.innerHeight;
       const stackTop = parseFloat(getComputedStyle(items[0]!).top) || 0;
-      const range = Math.max(viewport - stackTop, 1);
-      const progress = items.map((item) => {
+      // how far each card has slid over the one before it, 0..1
+      const progress = items.map((item, index) => {
+        if (index === 0) return 0;
+        const coveredBottom = stackTop + items[index - 1]!.offsetHeight;
         const top = item.getBoundingClientRect().top;
-        return Math.min(Math.max((viewport - top) / range, 0), 1);
+        const range = Math.max(coveredBottom - stackTop, 1);
+        return Math.min(Math.max((coveredBottom - top) / range, 0), 1);
       });
       items.forEach((item, index) => {
         const depth = progress.slice(index + 1).reduce((sum, p) => sum + p, 0);

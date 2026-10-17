@@ -10,42 +10,34 @@ export const NAV_LINKS = [
   { label: 'Projects', href: '#projects' },
 ];
 
-/* ---------- What we do: three ways of creating data (stacked cards) ---------- */
-
-/** photo: picture under a dark shade, white type; paper: light picture, dark type */
-export type CardVariant = 'photo' | 'paper';
+/* ---------- What we do: three ways of creating data ---------- */
 
 export const WAYS: {
   title: string;
-  image: string;
-  variant: CardVariant;
   tags: string[];
   text: string;
 }[] = [
   {
     title: 'Controlled Production',
-    image: '/v2/ways/production-full.webp',
-    variant: 'photo',
     tags: ['Sets & locations', 'Cast', 'Actions & objects', 'Camera setup', 'Protocol'],
     text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
   },
   {
     title: 'Content Sourcing & Licensing',
-    image: '/v2/ways/licensing-tall.webp',
-    variant: 'paper',
     tags: ['Existing content', 'Licensing', 'Rights clearance', 'Metadata'],
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
   },
   {
     title: 'Distributed Collection',
-    image: '/v2/photos/pov-kitchen.webp',
-    variant: 'photo',
     tags: ['Contributors', 'Local teams', 'Geography', 'Diversity', 'Long-term capture'],
     text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',
   },
 ];
 
 /* ---------- Core capabilities: photo cards, one per direction ---------- */
+
+/** photo: picture under a dark shade, white type; paper: light picture, dark type */
+export type CardVariant = 'photo' | 'paper';
 
 export type Capability = {
   /** anchor id, used by the menu and footer links */

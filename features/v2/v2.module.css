@@ -671,197 +671,68 @@
   }
 }
 
-/* ---------- What we do: accordion of routes beside the open route's photo ---------- */
+/* ---------- What we do: three routes as text columns under a black rule ---------- */
 
-.flowPanel {
-  display: flex;
-  flex-direction: column-reverse; /* phones: photo above the list */
-  gap: var(--gap-head);
-}
-
-.flowList {
+.ways {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-block) var(--col-gap);
   margin: 0;
   padding: 0;
   list-style: none;
-  border-bottom: 1px solid #e5e5e5;
 }
 
-.flowItem {
-  border-top: 1px solid #e5e5e5;
-}
-
-.flowItemHeading {
-  margin: 0;
-}
-
-.flowItemButton {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr) 18px;
-  align-items: center;
+.way {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid #000;
+}
+
+.wayTitle {
   margin: 0;
-  padding: 20px 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  text-align: left;
-  color: #b5b5b5;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.flowItemButton:hover,
-.flowItem[data-open='true'] .flowItemButton {
-  color: #000;
-}
-
-.flowItemButton:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-.flowNum {
-  font-family: var(--mono);
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #8a8a8a;
-}
-
-.flowName {
   font-size: var(--fs-h3-lg);
   line-height: var(--lh-heading);
   font-weight: 700;
   letter-spacing: -0.04em;
+  color: #000;
+  text-wrap: balance;
 }
 
-/* thin plus that turns into a minus when the route is open */
-.flowPlus {
-  position: relative;
-  width: 18px;
-  height: 18px;
-}
-
-.flowPlus::before,
-.flowPlus::after {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: currentColor;
-  content: '';
-  transition: transform 0.3s ease;
-}
-
-.flowPlus::after {
-  transform: rotate(90deg);
-}
-
-.flowItem[data-open='true'] .flowPlus::after {
-  transform: rotate(0deg);
-}
-
-.flowItemBody {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition:
-    grid-template-rows 0.4s ease,
-    opacity 0.3s ease;
-}
-
-.flowItem[data-open='true'] .flowItemBody {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.flowItemText {
-  min-height: 0;
-  max-width: 440px;
+.wayText {
   margin: 0;
-  padding-left: 56px; /* lines up with the title, past the number */
-  overflow: hidden;
-  font-size: var(--fs-lead);
-  line-height: 24px;
+  font-size: var(--fs-body);
+  line-height: 20px;
   color: #737373;
 }
 
-.flowItem[data-open='true'] .flowItemText {
-  padding-bottom: 24px;
-}
-
-.flowMedia {
-  position: relative;
-  margin: 0;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #efede7;
-}
-
-.flowPhoto {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.flowPhoto[data-active='true'] {
-  opacity: 1;
-}
-
-.flowMedia::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 30%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
-  content: '';
-  pointer-events: none;
-}
-
-/* caption bar over the photo: a hairline, the route number left and its name right */
-.flowCaption {
-  position: absolute;
-  right: 20px;
-  bottom: 16px;
-  left: 20px;
-  z-index: 1;
+.wayTags {
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
-  font-family: var(--mono);
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wayTags li {
+  padding: 4px 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 999px;
   font-size: var(--fs-caption);
   line-height: 16px;
-  color: #fff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .flowPhoto,
-  .flowItemBody,
-  .flowItemButton,
-  .flowPlus::before,
-  .flowPlus::after {
-    transition: none;
-  }
+  color: #444;
 }
 
 @media (min-width: 1024px) {
-  .flowPanel {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: var(--gap-block);
-    align-items: center;
+  .ways {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .flowMedia {
-    aspect-ratio: 5 / 4;
+  .wayText {
+    font-size: var(--fs-lead);
+    line-height: 24px;
   }
 }
 

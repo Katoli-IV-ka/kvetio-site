@@ -1325,7 +1325,7 @@
   }
 }
 
-/* ---------- Process ---------- */
+/* ---------- Process: Gantt-style timeline ---------- */
 
 .process {
   background: #fbfbfb;
@@ -1337,134 +1337,129 @@
   padding: var(--section-y) var(--page-x);
 }
 
-.timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-head);
-  margin: var(--gap-head) 0 0;
-  padding: 0 0 0 32px;
-  list-style: none;
+.processHead {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d4d4d4;
 }
 
-.timeline::before {
-  position: absolute;
-  top: 8px;
-  bottom: 8px;
-  left: 5px;
-  width: 1px;
-  background: #000;
-  content: '';
-}
-
-.step {
-  position: relative;
-}
-
-.step::before {
-  position: absolute;
-  top: 11px;
-  left: -32px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #000;
-  content: '';
-}
-
-.stepNum {
-  font-family: var(--mono);
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  color: #000;
-  display: none; /* numbers only on desktop */
-}
-
-@media (min-width: 1024px) {
-  .stepNum {
-    display: block;
-  }
-}
-
-.stepTitle {
-  margin-top: 4px;
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #000;
-}
-
-.stepText {
-  margin: 12px 0 0;
-  max-width: 320px;
+.processEyebrow {
+  margin: 0 0 8px;
   font-size: var(--fs-body);
   line-height: 20px;
   color: #737373;
 }
 
-@media (min-width: 1024px) {
-  .processInner {
-    overflow-x: clip;
-  }
-
-  .timeline {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0;
-    margin: var(--gap-block) calc(-1 * var(--page-x)) 0 0;
-    padding: 0 var(--page-x) 0 0;
-  }
-
-  .timeline::before {
-    top: 72px; /* centre of the dots: step number 24 + gap 4 + title 24 + dot spacer 20 */
-    right: 0;
-    bottom: auto;
-    left: 0;
-    width: auto;
-    height: 1px;
-  }
-
-  .step {
-    width: 160px;
-    padding-bottom: 0;
-  }
-
-  .step::before {
-    display: none;
-  }
-
-  .stepDot {
-    position: relative;
-    height: 40px;
-  }
-
-  .stepDot::after {
-    position: absolute;
-    top: 14px;
-    left: 0;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #000;
-    content: '';
-  }
-
-  .stepText {
-    margin: 0;
-    max-width: none;
-  }
+/* phones: steps stacked, each bar followed by its points */
+.gantt {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: var(--gap-head) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* The dot spacer only exists on desktop */
-.stepDot {
+.ganttGrid,
+.ganttNum {
   display: none;
 }
 
+.ganttBar {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #1f1f1f;
+  color: #fff;
+  font-size: var(--fs-lead);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.ganttPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #444;
+}
+
+.ganttPoints li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.ganttPoints li::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #1f1f1f;
+  content: '';
+}
+
+/* desktop: seven columns with dashed guides, bars stepping down, numbers and points underneath */
 @media (min-width: 1024px) {
-  .stepDot {
+  .gantt {
+    display: grid;
+    grid-template-columns: repeat(var(--steps), minmax(0, 1fr));
+    grid-template-rows: repeat(var(--steps), auto) auto auto;
+    gap: 8px 0;
+    margin-top: var(--gap-block);
+  }
+
+  .ganttStep {
+    display: contents;
+  }
+
+  /* dashed guide on the left of each column, from the first bar to the last point */
+  .ganttGrid {
     display: block;
+    grid-column: var(--col);
+    grid-row: 1 / -1;
+    margin-top: -16px;
+    border-left: 1px dashed #d1d5db;
+  }
+
+  .ganttStep:last-child .ganttGrid {
+    border-right: 1px dashed #d1d5db;
+  }
+
+  .ganttBar {
+    position: relative;
+    display: flex;
+    grid-column: var(--col) / span var(--span);
+    grid-row: var(--row);
+    min-height: 48px;
+    padding: 12px 20px;
+  }
+
+  .ganttNum {
+    display: block;
+    grid-column: var(--col);
+    grid-row: var(--num-row);
+    padding: 24px 0 8px;
+    font-family: var(--mono);
+    font-size: var(--fs-caption);
+    line-height: 16px;
+    text-align: center;
+    color: #8a8a8a;
+  }
+
+  .ganttPoints {
+    grid-column: var(--col);
+    grid-row: var(--points-row);
+    margin: 8px 0 0;
+    padding: 0 12px 0 16px;
   }
 }
 

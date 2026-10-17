@@ -241,34 +241,43 @@ export const INFRASTRUCTURE = [
 
 /* ---------- How we work ---------- */
 
+/** Timeline steps: `span` is how many of the seven columns the bar covers from its own column,
+    so Production runs on while QA starts beside it */
 export const PROCESS_STEPS = [
   {
     title: 'Requirement',
-    text: 'Define the model task, target behaviours, constraints and success criteria.',
+    span: 1,
+    points: ['Model task', 'Target behaviours', 'Constraints', 'Success criteria'],
   },
   {
     title: 'Dataset Design',
-    text: 'Turn requirements into scenarios, capture setup, metadata schema and annotation guidelines.',
+    span: 1,
+    points: ['Scenarios', 'Capture setup', 'Metadata schema', 'Annotation guidelines'],
   },
   {
     title: 'Pilot',
-    text: 'Produce a small sample batch, review it with your team, and lock the spec before scaling up.',
+    span: 1,
+    points: ['Sample batch', 'Review with your team', 'Spec locked'],
   },
   {
     title: 'Production',
-    text: 'Collect, capture or source the data and label it to your schema, with consent and releases in place.',
+    span: 2,
+    points: ['Capture & collection', 'Labels to your schema', 'Consent & releases'],
   },
   {
     title: 'QA',
-    text: 'Review samples, fix inconsistencies, and validate labels, metadata and structure.',
+    span: 2,
+    points: ['Sample review', 'Label validation', 'Metadata checks'],
   },
   {
     title: 'Delivery',
-    text: 'Hand over a clean, documented, rights-ready dataset in your preferred format.',
+    span: 1,
+    points: ['Documented package', 'Your format', 'Rights-ready'],
   },
   {
     title: 'Scale',
-    text: 'Grow volume, locations and variations on the same pipeline as your model needs more data.',
+    span: 1,
+    points: ['More volume', 'New locations', 'More variations'],
   },
 ];
 

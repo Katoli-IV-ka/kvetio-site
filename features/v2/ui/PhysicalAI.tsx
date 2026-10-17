@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element -- decorative illustration beside the lists */
+/* eslint-disable @next/next/no-img-element -- decorative illustration beside the spec table */
 import { PHYSICAL_AI_CAPTURE, PHYSICAL_AI_PROTOCOL } from '../content';
 import styles from '../v2.module.css';
-import { IndexList } from './IndexList';
 
 export function PhysicalAI() {
   return (
@@ -10,34 +9,49 @@ export function PhysicalAI() {
       className={styles.section}
     >
       <div className={styles.sectionInner}>
-        <div className={styles.splitLayout}>
-          <div className={styles.splitContent}>
-            <div className={styles.splitHead}>
-              <h2 className={styles.heading}>Physical AI data capture</h2>
-              <p className={styles.typesText}>
-                Human demonstrations for teaching robots: hands, objects and manipulation, captured
-                from the angles your model needs and delivered as synchronized, calibrated,
-                documented datasets.
-              </p>
-            </div>
-            <div className={styles.splitGroups}>
-              <IndexList
-                label='What we capture'
-                items={PHYSICAL_AI_CAPTURE}
-              />
-              <IndexList
-                label='How we run it'
-                items={PHYSICAL_AI_PROTOCOL}
-                start={PHYSICAL_AI_CAPTURE.length + 1}
-              />
-            </div>
-          </div>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.heading}>Physical AI data capture</h2>
+          <p className={styles.sectionLead}>
+            Human demonstrations for teaching robots, delivered as synchronized, calibrated,
+            documented datasets.
+          </p>
+        </div>
+        <div className={styles.paiMain}>
           <img
-            className={styles.splitArt}
+            className={styles.paiArt}
             src='/v2/photos/robot-arm.webp'
             alt=''
             loading='lazy'
           />
+          <div>
+            <p className={styles.groupLabel}>What we capture</p>
+            <dl className={styles.paiSpec}>
+              {PHYSICAL_AI_CAPTURE.map((item) => (
+                <div
+                  key={item.title}
+                  className={styles.paiRow}
+                >
+                  <dt>{item.title}</dt>
+                  <dd>{item.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+        <div>
+          <p className={styles.groupLabel}>How we run it</p>
+          <ol className={styles.paiSteps}>
+            {PHYSICAL_AI_PROTOCOL.map((step, index) => (
+              <li
+                key={step.title}
+                className={styles.paiStep}
+              >
+                <span className={styles.paiNum}>{String(index + 1).padStart(2, '0')}</span>
+                <h3 className={styles.paiTitle}>{step.title}</h3>
+                <p className={styles.paiText}>{step.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>

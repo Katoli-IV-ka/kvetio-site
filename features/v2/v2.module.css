@@ -548,72 +548,112 @@
   }
 }
 
-/* ---------- Physical AI: lists with the robot arm beside them ---------- */
+/* ---------- Physical AI: robot and spec table, then the run-it steps in one row ---------- */
 
-.splitLayout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-block);
-}
-
-.splitContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-head);
-  min-width: 0;
-}
-
-.splitHead {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-item);
-}
-
-.splitHead .typesText {
-  max-width: 560px;
-}
-
-.splitGroups {
+.paiMain {
   display: grid;
-  gap: var(--gap-block) var(--col-gap);
+  gap: var(--gap-head);
+  align-items: center;
 }
 
-.splitGroups .typeList {
-  gap: 24px;
-}
-
-/* on phones the arm sits under the lists, centred and capped in height */
-.splitArt {
+.paiArt {
   display: block;
-  align-self: center;
+  justify-self: center;
   width: auto;
   max-width: 100%;
-  height: 420px;
+  height: 300px;
   object-fit: contain;
   mix-blend-mode: multiply;
 }
 
-@media (min-width: 1024px) {
-  .splitLayout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(280px, 30vw, 420px);
-    column-gap: var(--gap-block);
-    align-items: start;
-  }
+/* spec table: name on the left, a short line on the right, hairlines between rows */
+.paiSpec {
+  margin: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
 
-  /* the arm stays in view while the lists scroll past */
-  .splitArt {
-    position: sticky;
-    top: 96px;
-    width: 100%;
-    height: auto;
-    max-height: calc(100svh - 128px);
+.paiRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.paiRow dt {
+  font-size: var(--fs-lead);
+  line-height: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #171717;
+}
+
+.paiRow dd {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.paiSteps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-item) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paiStep {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid #000;
+}
+
+.paiNum {
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #8a8a8a;
+}
+
+.paiTitle {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #171717;
+}
+
+.paiText {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+@media (min-width: 640px) {
+  .paiSteps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 1280px) {
-  .splitGroups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (min-width: 1024px) {
+  .paiMain {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--gap-block);
+  }
+
+  .paiArt {
+    height: 520px;
+  }
+
+  .paiSteps {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 

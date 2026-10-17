@@ -112,61 +112,22 @@ export const CAPABILITIES = [
 /* ---------- Physical AI capture ---------- */
 
 export const PHYSICAL_AI_CAPTURE = [
-  {
-    title: 'Egocentric',
-    text: "First-person view from the demonstrator's head or chest, with hands and objects in frame.",
-  },
-  {
-    title: 'Synchronized multi-camera',
-    text: 'Several fixed and wearable views of the same action, recorded on one timeline.',
-  },
-  {
-    title: 'RGB-D',
-    text: 'Colour and depth captured together, so every frame carries scene geometry.',
-  },
-  {
-    title: 'Spatial capture',
-    text: '3D scene and object capture for tasks that depend on space, reach and placement.',
-  },
-  {
-    title: 'Motion',
-    text: 'Hand, arm and body movement captured alongside the video.',
-  },
-  {
-    title: 'IMU / sensors',
-    text: 'Inertial, force/contact and other sensors added where the task requires them.',
-  },
-  {
-    title: 'Failure & recovery',
-    text: 'Failed attempts, retries and recoveries recorded on purpose where your model needs them.',
-  },
+  { title: 'Egocentric', text: 'Head- or chest-mounted, hands and objects in frame' },
+  { title: 'Synchronized multi-camera', text: 'Fixed and wearable views on one timeline' },
+  { title: 'RGB-D', text: 'Colour and depth in every frame' },
+  { title: 'Spatial capture', text: '3D scenes and objects for reach and placement' },
+  { title: 'Motion', text: 'Hand, arm and body movement with the video' },
+  { title: 'IMU / sensors', text: 'Inertial, force/contact and more where needed' },
+  { title: 'Failure & recovery', text: 'Failed attempts and retries, recorded on purpose' },
 ];
 
 export const PHYSICAL_AI_PROTOCOL = [
-  {
-    title: 'Human demonstrations',
-    text: 'Real people performing the task, repeated across operators, objects and conditions.',
-  },
-  {
-    title: 'Protocol design',
-    text: "Task scripts, scenarios and variation plans written around your model's requirements.",
-  },
-  {
-    title: 'Synchronization',
-    text: 'Cameras and sensors time-aligned, so every stream matches frame for frame.',
-  },
-  {
-    title: 'Calibration',
-    text: 'Camera intrinsics, extrinsics and sensor offsets calibrated and logged for every setup.',
-  },
-  {
-    title: 'Metadata',
-    text: 'Task, environment, setup and sensor details stored with every recording.',
-  },
-  {
-    title: 'QA',
-    text: 'Every session checked for sync, coverage and protocol compliance before delivery.',
-  },
+  { title: 'Human demonstrations', text: 'Many operators, objects and conditions' },
+  { title: 'Protocol design', text: 'Task scripts and variation plans' },
+  { title: 'Synchronization', text: 'Every stream aligned frame for frame' },
+  { title: 'Calibration', text: 'Intrinsics, extrinsics and offsets logged' },
+  { title: 'Metadata', text: 'Task, setup and sensors per recording' },
+  { title: 'QA', text: 'Sync, coverage and protocol checked' },
 ];
 
 /* ---------- Data we produce: dataset patterns ---------- */

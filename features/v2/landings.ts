@@ -10,6 +10,8 @@ export type Landing = {
   lead: string;
   text: string;
   description: string;
+  /** wide photo next to the hero copy; pages without one show the halftone art */
+  image?: string;
   produce: LandingItem[];
   howLabel: string;
   how: LandingItem[];
@@ -19,6 +21,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: 'physical-ai',
     name: 'Physical AI & Robotics',
+    image: '/v2/photos/robot-wireframe.webp',
     title: 'Real-world data for Physical AI & Robotics',
     lead: 'Human demonstrations and multimodal capture for embodied systems.',
     text: 'We design and run capture protocols for manipulation and real-world tasks — egocentric, synchronized multi-camera, RGB-D and sensor data, delivered calibrated and documented.',
@@ -73,6 +76,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: 'generative-video',
     name: 'Generative Video',
+    image: '/v2/ways/production.webp',
     title: 'Training & evaluation data for generative video models',
     lead: 'Video planned for continuity, motion and controlled visual variation.',
     text: 'We produce footage the way your model needs to see the world — with controlled camera, lighting, motion and scene changes, plus editing and transformation data built on top of it.',
@@ -127,6 +131,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: 'egocentric-data',
     name: 'Egocentric Data',
+    image: '/v2/photos/pov-kitchen.webp',
     title: 'Egocentric & first-person data',
     lead: 'Real activities filmed through the eyes of the person doing them.',
     text: 'We capture POV data of everyday and skilled tasks with wearable and stereo rigs, in real homes and workplaces, with narration and synchronized modalities where your model needs them.',
@@ -289,6 +294,7 @@ export const LANDINGS: Landing[] = [
   {
     slug: 'custom-data-collection',
     name: 'Custom Data Collection',
+    image: '/v2/photos/crowd.webp',
     title: 'Custom data collection at scale',
     lead: 'One dataset specification, run across contributors, teams and countries.',
     text: 'We combine distributed contributors, controlled production and content licensing to collect the data your model needs — with rights, metadata and QA built into the pipeline.',

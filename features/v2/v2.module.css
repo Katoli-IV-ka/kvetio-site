@@ -1973,6 +1973,32 @@
   max-width: 760px;
 }
 
+.landingCopy {
+  position: relative;
+}
+
+/* landing hero with a photo: copy and picture side by side from 1024px */
+.landingHero {
+  display: grid;
+  gap: var(--gap-block);
+}
+
+.landingPhoto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (min-width: 1024px) {
+  .landingHero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--gap-block);
+  }
+}
+
 .pageMain {
   display: block;
 }

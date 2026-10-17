@@ -13,26 +13,37 @@ export function LandingPage({ landing }: { landing: Landing }) {
   return (
     <PageShell>
       <section className={styles.pageHero}>
-        <img
-          className={styles.pageArt}
-          src='/v2/hero-halftone.webp'
-          alt=''
-        />
-        <div className={styles.pageInner}>
-          <p className={styles.eyebrow}>Solutions / {landing.name}</p>
-          <h1 className={`${styles.heading} ${styles.pageTitle} ${styles.landingTitle}`}>
-            {landing.title}
-          </h1>
-          <p className={styles.heroLead}>{landing.lead}</p>
-          <p className={styles.heroText}>{landing.text}</p>
-          <div className={styles.heroActions}>
-            <a
-              className={styles.heroCta}
-              href='#contact'
-            >
-              {CTA_LABEL}
-            </a>
+        {!landing.image && (
+          <img
+            className={styles.pageArt}
+            src='/v2/hero-halftone.webp'
+            alt=''
+          />
+        )}
+        <div className={`${styles.pageInner} ${landing.image ? styles.landingHero : ''}`}>
+          <div className={styles.landingCopy}>
+            <p className={styles.eyebrow}>Solutions / {landing.name}</p>
+            <h1 className={`${styles.heading} ${styles.pageTitle} ${styles.landingTitle}`}>
+              {landing.title}
+            </h1>
+            <p className={styles.heroLead}>{landing.lead}</p>
+            <p className={styles.heroText}>{landing.text}</p>
+            <div className={styles.heroActions}>
+              <a
+                className={styles.heroCta}
+                href='#contact'
+              >
+                {CTA_LABEL}
+              </a>
+            </div>
           </div>
+          {landing.image && (
+            <img
+              className={styles.landingPhoto}
+              src={landing.image}
+              alt=''
+            />
+          )}
         </div>
       </section>
       <section className={styles.physical}>

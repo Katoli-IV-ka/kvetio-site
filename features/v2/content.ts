@@ -31,7 +31,7 @@ export const WAYS: {
   },
   {
     title: 'Distributed Collection',
-    image: '/v2/ways/collection.webp',
+    image: '/v2/photos/pov-kitchen.webp',
     variant: 'photo',
     tags: ['Contributors', 'Local teams', 'Geography', 'Diversity', 'Long-term capture'],
     text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- photos cropped to the card frame with object-fit */
 import { WAYS } from '../content';
 import styles from '../v2.module.css';
 
@@ -15,15 +16,23 @@ export function WhatWeDo() {
             we choose the route that gets you that data, or combine all three.
           </p>
         </div>
-        <ol className={styles.ways}>
+        <ol className={styles.routes}>
           {WAYS.map((way, index) => (
             <li
               key={way.title}
-              className={styles.way}
+              className={styles.route}
             >
-              <span className={styles.wayNum}>{String(index + 1).padStart(2, '0')}</span>
-              <h3 className={styles.wayTitle}>{way.title}</h3>
-              <p className={styles.wayText}>{way.text}</p>
+              <img
+                className={styles.routeImage}
+                src={way.image}
+                alt=''
+                loading='lazy'
+              />
+              <div className={styles.routeBody}>
+                <span className={styles.wayNum}>{String(index + 1).padStart(2, '0')}</span>
+                <h3 className={styles.wayTitle}>{way.title}</h3>
+                <p className={styles.wayText}>{way.text}</p>
+              </div>
             </li>
           ))}
         </ol>

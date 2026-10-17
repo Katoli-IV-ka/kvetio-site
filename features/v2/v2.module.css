@@ -548,202 +548,6 @@
   }
 }
 
-/* ---------- Core capabilities (four cards, stacked like a deck) ---------- */
-
-.cases {
-  background: #fbfbfb;
-}
-
-.casesInner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-head);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--section-y) var(--page-x);
-}
-
-/* --peek: how much of each card beneath shows above the top one;
-   --stack-top: where cards stick, below the 64px header with room for two peeking edges */
-.stack {
-  --peek: 20px;
-  --stack-top: calc(64px + 16px + var(--peek) * 2);
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-item);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .stack {
-    --peek: 32px;
-  }
-}
-
-/* --depth (set from Capabilities.tsx) grows from 0 as the following cards slide over this one */
-.stackItem {
-  --depth: 0;
-
-  position: sticky;
-  top: var(--stack-top);
-}
-
-/* poster card: full-width frame, copy at the bottom left, four treatments (warm, photo, dark, paper) */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: clamp(440px, calc(100svh - var(--stack-top) - 24px), 640px);
-  padding: 24px;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #efede7;
-  color: #fff;
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
-  transform-origin: 50% 0;
-  transform: translateY(calc(var(--depth) * var(--peek) * -1)) scale(calc(1 - var(--depth) * 0.04));
-  opacity: clamp(0, calc(3 - var(--depth)), 1);
-  will-change: transform;
-}
-
-/* darkens a card as it sinks into the deck */
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #000;
-  opacity: calc(var(--depth) * 0.3);
-  pointer-events: none;
-}
-
-@media (min-width: 1024px) {
-  .card {
-    padding: 56px 64px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card {
-    transform: none;
-    opacity: 1;
-  }
-
-  .card::after {
-    opacity: 0;
-  }
-}
-
-.cardImage {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cardShade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.78) 0%,
-      rgba(0, 0, 0, 0.35) 55%,
-      rgba(0, 0, 0, 0.15) 100%
-    ),
-    linear-gradient(to right, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
-}
-
-.cardBody {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 640px;
-}
-
-.cardNum {
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  opacity: 0.8;
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: var(--fs-h2);
-  line-height: var(--lh-heading);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-.cardText {
-  margin: 0;
-  font-size: var(--fs-lead);
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.cardTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cardTags li {
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-}
-
-/* warm: blurred, tinted picture, lighter shade */
-.card[data-variant='warm'] {
-  background: #c9856f;
-}
-
-.card[data-variant='warm'] .cardShade {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 100%);
-}
-
-/* dark: darkened picture */
-.card[data-variant='dark'] {
-  background: #111;
-}
-
-/* paper: cream poster with the picture multiplied into it, dark type */
-.card[data-variant='paper'] {
-  color: #1b1a17;
-}
-
-.card[data-variant='paper'] .cardImage {
-  mix-blend-mode: multiply;
-  opacity: 0.3;
-}
-
-.card[data-variant='paper'] .cardShade {
-  display: none;
-}
-
-.card[data-variant='paper'] .cardText {
-  color: #3d3b36;
-}
-
-.card[data-variant='paper'] .cardTags li {
-  border-color: rgba(27, 26, 23, 0.35);
-}
-
 /* ---------- Physical AI and numbered index lists ---------- */
 
 .physical {
@@ -977,6 +781,7 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   color: #000;
+  text-wrap: balance;
 }
 
 .wayText {
@@ -991,6 +796,86 @@
   .ways {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* Core capabilities: the same columns, four across, with tags */
+@media (min-width: 640px) {
+  .waysFour {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .waysFour {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.wayTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wayTags li {
+  padding: 4px 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 999px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #444;
+}
+
+/* What we do: three routes as photo cards */
+.routes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-item);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 1024px) {
+  .routes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--col-gap);
+  }
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f4f4f2;
+}
+
+.routeImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .routeImage {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+.routeBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.routeBody .wayText {
+  max-width: none;
 }
 
 /* Data we produce: dataset patterns */

@@ -15,33 +15,24 @@ export const NAV_LINKS = [
 export const WAYS = [
   {
     title: 'Controlled Production',
+    image: '/v2/ways/production.webp',
     text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
   },
   {
     title: 'Distributed Collection',
+    image: '/v2/ways/collection.webp',
     text: 'Contributors and local teams collect data in their own places when geography, diversity, scale or duration matter most.',
   },
   {
     title: 'Content Sourcing & Licensing',
+    image: '/v2/ways/licensing.webp',
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
   },
 ];
 
-/* ---------- Core capabilities (stacked cards) ---------- */
+/* ---------- Core capabilities ---------- */
 
-export type CardVariant = 'photo' | 'dark' | 'warm' | 'paper';
-
-export type CapabilityCard = {
-  id: string;
-  title: string;
-  text: string;
-  tags: string[];
-  variant: CardVariant;
-  /** processed poster image behind the card */
-  image: string;
-};
-
-export const CAPABILITIES: CapabilityCard[] = [
+export const CAPABILITIES = [
   {
     id: 'visual',
     title: 'Visual & Generative AI',
@@ -56,8 +47,6 @@ export const CAPABILITIES: CapabilityCard[] = [
       '3D',
       'VFX',
     ],
-    variant: 'warm',
-    image: '/v2/uc/4.webp',
   },
   {
     id: 'human-activity',
@@ -72,8 +61,6 @@ export const CAPABILITIES: CapabilityCard[] = [
       'Dialogue & multi-person',
       'Rare scenarios',
     ],
-    variant: 'photo',
-    image: '/v2/uc/1.webp',
   },
   {
     id: 'physical-ai',
@@ -90,8 +77,6 @@ export const CAPABILITIES: CapabilityCard[] = [
       'Protocol design',
       'Calibration',
     ],
-    variant: 'dark',
-    image: '/v2/uc/3.webp',
   },
   {
     id: 'scale',
@@ -106,8 +91,6 @@ export const CAPABILITIES: CapabilityCard[] = [
       'QA',
       'Licensing',
     ],
-    variant: 'paper',
-    image: '/v2/uc/6.webp',
   },
 ];
 

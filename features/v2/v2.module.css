@@ -1534,21 +1534,51 @@
 }
 
 @media (min-width: 1024px) {
-  .infra {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(320px, 40vw, 600px);
-    column-gap: var(--gap-block);
+  /* the copy sits over the collage and stops just past its left edge, so only that edge is under text */
+  .infraContent {
+    position: relative;
+    z-index: 1;
+    width: max(440px, 46%);
+    /* a soft white halo keeps the copy legible where it crosses the picture; invisible on white */
+    text-shadow:
+      0 0 2px #fff,
+      0 0 8px #fff,
+      0 0 16px #fff;
   }
 
-  /* the collage runs from the top to the bottom edge of the frame, hand in the bottom right corner */
+  .infraHead .heading {
+    max-width: 420px; /* two lines, clear of the monitor */
+  }
+
+  /* the collage is the block's background: full panel height, right edge on the container edge,
+     never wider than 60% of the container so the copy keeps its column on narrow screens */
   .infraArt {
+    position: absolute;
+    top: 0;
+    right: calc(var(--edge-x) - 8px);
+    bottom: 0;
     order: 0;
-    align-self: stretch;
-    width: calc(100% + var(--edge-x) - 8px);
-    height: calc(100% + 2 * var(--gap-block));
-    margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) calc(-1 * var(--gap-block)) 0;
+    width: min(100%, calc((100% - 2 * (var(--edge-x) - 8px)) * 0.6));
+    height: 100%;
+    margin: 0;
     object-fit: contain;
     object-position: right bottom;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* wide screens: the collage takes the full panel height and only its light left edge sits under the copy */
+  .infraContent {
+    width: 560px;
+  }
+
+  .infraHead .sectionLead {
+    max-width: 380px; /* ends before the monitor */
+  }
+
+  .infraArt {
+    width: auto;
+    aspect-ratio: 1;
   }
 }
 

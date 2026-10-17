@@ -657,20 +657,6 @@
   }
 }
 
-/* ---------- Gradient frame (production infrastructure) ---------- */
-
-.framed {
-  padding: 8px;
-  background: linear-gradient(90deg, #4da05e 0%, #b24b44 45%, #7171b5 75%, #c0b8af 100%);
-}
-
-.framedInner {
-  position: relative;
-  padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
-  overflow: hidden;
-  background: #fff;
-}
-
 /* ---------- Numbered index lists (landing pages, infrastructure) ---------- */
 
 .physical {
@@ -1503,18 +1489,11 @@
   }
 }
 
-/* ---------- Production infrastructure: five building blocks with the hand collage ---------- */
+/* ---------- Production infrastructure: heading on the left, the five building blocks on the right ---------- */
 
 .infra {
-  display: flex;
-  flex-direction: column;
-}
-
-.infraContent {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--gap-head);
-  min-width: 0;
 }
 
 .infraHead {
@@ -1562,101 +1541,48 @@
   color: #737373;
 }
 
-/* on phones the collage sits above the heading, tucked into the top right corner */
-.infraArt {
-  order: -1;
-  align-self: flex-end;
-  width: 200px;
-  height: 200px;
-  margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) 8px 0;
+@media (min-width: 1024px) {
+  .infra {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--gap-block);
+    align-items: start;
+  }
+
+  .infraHead .heading {
+    max-width: 420px;
+  }
+}
+
+/* ---------- Contact ---------- */
+
+.contact {
+  padding: 8px;
+  background: linear-gradient(90deg, #4da05e 0%, #b24b44 45%, #7171b5 75%, #c0b8af 100%);
+}
+
+.contactInner {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: var(--gap-block) calc(var(--edge-x) - 8px); /* aligns with the container, minus the 8px frame */
+  overflow: hidden;
+  background: #fff;
+}
+
+.collage {
+  position: absolute;
+  right: -80px;
+  bottom: 0;
+  width: 360px;
+  height: 360px;
+  opacity: 0.35;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
 
-@media (min-width: 1024px) {
-  /* the copy sits over the collage and stops just past its left edge, so only that edge is under text */
-  .infraContent {
-    position: relative;
-    z-index: 1;
-    width: max(440px, 46%);
-    /* a soft white halo keeps the copy legible where it crosses the picture; invisible on white */
-    text-shadow:
-      0 0 2px #fff,
-      0 0 8px #fff,
-      0 0 16px #fff;
-  }
-
-  .infraHead .heading {
-    max-width: 420px; /* two lines, clear of the monitor */
-  }
-
-  /* the collage is the block's background: full panel height, right edge on the container edge,
-     never wider than 60% of the container so the copy keeps its column on narrow screens */
-  .infraArt {
-    position: absolute;
-    top: 0;
-    right: calc(var(--edge-x) - 8px);
-    bottom: 0;
-    order: 0;
-    width: min(100%, calc((100% - 2 * (var(--edge-x) - 8px)) * 0.6));
-    height: 100%;
-    margin: 0;
-    object-fit: contain;
-    object-position: right bottom;
-  }
-}
-
-@media (min-width: 1280px) {
-  /* wide screens: the collage takes the full panel height and only its light left edge sits under the copy */
-  .infraContent {
-    width: 560px;
-  }
-
-  .infraHead .sectionLead {
-    max-width: 380px; /* ends before the monitor */
-  }
-
-  .infraArt {
-    width: auto;
-    aspect-ratio: 1;
-  }
-}
-
-/* ---------- Contact form ---------- */
-
-.contactGrid {
-  display: grid;
-  gap: var(--gap-block);
-}
-
-.contactLead {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-item);
-}
-
-.contactLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: var(--fs-lead);
-  line-height: 24px;
-}
-
-.contactLinks a {
-  color: #000;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-@media (min-width: 1024px) {
-  .contactGrid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: var(--gap-block);
-  }
+.contactTitle {
+  position: relative;
+  max-width: 560px; /* keeps the heading clear of the collage */
 }
 
 .form {
@@ -1785,6 +1711,16 @@
 }
 
 @media (min-width: 1024px) {
+  /* the square collage fills the full height of the block */
+  .collage {
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: auto;
+    height: 100%;
+    opacity: 1;
+  }
+
   .fields {
     flex-direction: row;
     gap: 40px;
@@ -1808,34 +1744,6 @@
 
   .submitRow {
     margin-top: 0;
-  }
-}
-
-/* landing contact form: fields fill the form column */
-.contactForm {
-  margin-top: 0;
-}
-
-.contactForm .fields {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-
-.contactForm .field,
-.contactForm .requestField {
-  width: 100%;
-  max-width: none;
-}
-
-.contactForm .consents {
-  max-width: none;
-}
-
-@media (min-width: 640px) {
-  .contactForm .fields {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
   }
 }
 

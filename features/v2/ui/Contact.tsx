@@ -1,4 +1,5 @@
 import Link from 'next/link';
+/* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { CTA_LABEL } from '../content';
@@ -66,116 +67,100 @@ export function Contact() {
   return (
     <section
       id='contact'
-      className={styles.section}
-      data-tone='alt'
+      className={styles.contact}
     >
-      <div className={styles.sectionInner}>
-        <div className={styles.contactGrid}>
-          <div className={styles.contactLead}>
-            <h2 className={styles.heading}>Tell us what data your model needs.</h2>
-            <p className={styles.sectionLead}>
-              Describe the model, the data it is missing and the scale you have in mind. We will
-              come back with questions and a proposed setup.
-            </p>
-            <ul className={styles.contactLinks}>
-              <li>
-                <a href='mailto:contact@kvet.io'>contact@kvet.io</a>
-              </li>
-              <li>
-                <a
-                  href='https://www.linkedin.com/company/kvet-io'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-          </div>
-          <form
-            className={`${styles.form} ${styles.contactForm}`}
-            onSubmit={onSubmit}
-            noValidate
-          >
-            <div className={styles.fields}>
-              <input
-                className={styles.field}
-                type='text'
-                name='name'
-                placeholder='Name*'
-                aria-label='Name'
-                autoComplete='name'
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-              <input
-                className={styles.field}
-                type='email'
-                name='email'
-                placeholder='Email*'
-                aria-label='Email'
-                autoComplete='email'
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
-            <textarea
-              className={`${styles.field} ${styles.textarea} ${styles.requestField}`}
-              name='request'
-              placeholder='What data does your model need?'
-              aria-label='What data does your model need?'
-              rows={2}
-              value={request}
-              onChange={(event) => setRequest(event.target.value)}
+      <div className={styles.contactInner}>
+        <img
+          className={styles.collage}
+          src='/v2/contact-collage.webp'
+          alt=''
+        />
+        <h2 className={`${styles.heading} ${styles.contactTitle}`}>
+          Tell us what data your model needs.
+        </h2>
+        <form
+          className={styles.form}
+          onSubmit={onSubmit}
+          noValidate
+        >
+          <div className={styles.fields}>
+            <input
+              className={styles.field}
+              type='text'
+              name='name'
+              placeholder='Name*'
+              aria-label='Name'
+              autoComplete='name'
+              value={name}
+              onChange={(event) => setName(event.target.value)}
             />
-            <div className={styles.formRow}>
-              <div className={styles.consents}>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='privacy'
-                    checked={privacy}
-                    onChange={(event) => setPrivacy(event.target.checked)}
-                  />
-                  <span>
-                    I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
-                    that Kvetio may process my name, email address and the details I provide in this
-                    form in order to reply to my enquiry.
-                  </span>
-                </label>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='marketing'
-                    checked={marketing}
-                    onChange={(event) => setMarketing(event.target.checked)}
-                  />
-                  <span>
-                    Optional: I agree to receive commercial information about Kvetio&apos;s datasets
-                    and services at this email address. I can withdraw this consent at any time.
-                  </span>
-                </label>
-              </div>
-              <div className={styles.submitRow}>
-                <button
-                  className={styles.submit}
-                  type='submit'
-                  disabled={status === 'loading'}
-                >
-                  {status === 'loading' ? 'Sending…' : CTA_LABEL}
-                </button>
-                {message && (
-                  <p
-                    className={`${styles.status} ${status === 'success' ? '' : styles.statusError}`}
-                    role='status'
-                  >
-                    {message}
-                  </p>
-                )}
-              </div>
+            <input
+              className={styles.field}
+              type='email'
+              name='email'
+              placeholder='Email*'
+              aria-label='Email'
+              autoComplete='email'
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <textarea
+            className={`${styles.field} ${styles.textarea} ${styles.requestField}`}
+            name='request'
+            placeholder='What data does your model need?'
+            aria-label='What data does your model need?'
+            rows={2}
+            value={request}
+            onChange={(event) => setRequest(event.target.value)}
+          />
+          <div className={styles.formRow}>
+            <div className={styles.consents}>
+              <label className={styles.consent}>
+                <input
+                  type='checkbox'
+                  name='privacy'
+                  checked={privacy}
+                  onChange={(event) => setPrivacy(event.target.checked)}
+                />
+                <span>
+                  I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
+                  that Kvetio may process my name, email address and the details I provide in this
+                  form in order to reply to my enquiry.
+                </span>
+              </label>
+              <label className={styles.consent}>
+                <input
+                  type='checkbox'
+                  name='marketing'
+                  checked={marketing}
+                  onChange={(event) => setMarketing(event.target.checked)}
+                />
+                <span>
+                  Optional: I agree to receive commercial information about Kvetio&apos;s datasets
+                  and services at this email address. I can withdraw this consent at any time.
+                </span>
+              </label>
             </div>
-          </form>
-        </div>
+            <div className={styles.submitRow}>
+              <button
+                className={styles.submit}
+                type='submit'
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? 'Sending…' : CTA_LABEL}
+              </button>
+              {message && (
+                <p
+                  className={`${styles.status} ${status === 'success' ? '' : styles.statusError}`}
+                  role='status'
+                >
+                  {message}
+                </p>
+              )}
+            </div>
+          </div>
+        </form>
       </div>
     </section>
   );

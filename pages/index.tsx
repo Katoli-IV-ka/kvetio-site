@@ -7,7 +7,6 @@ import { Header } from '../features/v2/ui/Header';
 import { Hero } from '../features/v2/ui/Hero';
 import { Infrastructure } from '../features/v2/ui/Infrastructure';
 import { MobileMenu } from '../features/v2/ui/MobileMenu';
-import { PhysicalAI } from '../features/v2/ui/PhysicalAI';
 import { Process } from '../features/v2/ui/Process';
 import { Projects } from '../features/v2/ui/Projects';
 import { Proof } from '../features/v2/ui/Proof';
@@ -56,7 +55,6 @@ export default function HomePage() {
         <main>
           <WhatWeDo />
           <Capabilities />
-          <PhysicalAI />
           <DatasetPatterns />
           <Infrastructure />
           <Process />

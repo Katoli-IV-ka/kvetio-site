@@ -548,25 +548,269 @@
   }
 }
 
-/* ---------- Physical AI: robot beside the capture spec table ---------- */
+/* ---------- Core capabilities: pinned showcase on desktop, stacked panels on phones ---------- */
 
-.paiMain {
-  display: grid;
-  gap: var(--gap-head);
-  align-items: center;
+.caps {
+  background: #fbfbfb;
 }
 
-.paiArt {
+.capsTrack {
+  position: relative;
+}
+
+/* link targets for each direction, placed from Capabilities.tsx */
+.capsAnchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.capsInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--page-x);
+}
+
+.capsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.capsHeading {
+  margin: 0;
+}
+
+.capsTitle {
   display: block;
-  justify-self: center;
-  width: auto;
-  max-width: 100%;
-  height: 300px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-align: left;
+  color: #000;
+  cursor: default;
+}
+
+.capsChevron {
+  display: none;
+}
+
+.capsDetailInner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.capsInlineImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #efede7;
+}
+
+.capsInlineImage[data-fit='contain'] {
   object-fit: contain;
+  background: transparent;
   mix-blend-mode: multiply;
 }
 
-/* spec table: name on the left, a short line on the right, hairlines between rows */
+.capsText {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #444;
+}
+
+.capsMedia {
+  display: none;
+}
+
+/* desktop: the section pins for one screen per direction; titles switch, text opens, art fades */
+@media (min-width: 1024px) and (min-height: 680px) {
+  .capsTrack {
+    height: calc(var(--count) * 100svh);
+  }
+
+  .capsPin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .capsInner {
+    height: 100%;
+    padding-top: calc(64px + 32px); /* clear of the fixed header */
+    padding-bottom: 40px;
+  }
+
+  .capsBody {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--gap-block);
+    align-items: center;
+  }
+
+  .capsList {
+    gap: 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .capsItem {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .capsTitle {
+    padding: 16px 0;
+    font-size: var(--fs-h3-lg);
+    color: #b5b5b5;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .capsTitle:hover {
+    color: #555;
+  }
+
+  .capsItem[data-active='true'] .capsTitle {
+    color: #000;
+  }
+
+  .capsTitle:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+  /* sits right after the last word, also when the title wraps */
+  .capsChevron {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin: 0 0 0.14em 12px;
+    vertical-align: middle;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  /* closed panels collapse to their title; the open one grows smoothly */
+  .capsDetail {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.5s ease,
+      opacity 0.4s ease;
+  }
+
+  .capsItem[data-active='true'] .capsDetail {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .capsDetailInner {
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 0 20px;
+  }
+
+  .capsInlineImage {
+    display: none;
+  }
+
+  .capsMedia {
+    position: relative;
+    display: block;
+    height: 100%;
+    max-height: 640px;
+  }
+
+  .capsImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.04);
+    transition:
+      opacity 0.6s ease,
+      transform 0.9s ease;
+  }
+
+  .capsImage[data-fit='contain'] {
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .capsImage[data-active='true'] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* laptop screens: a tighter panel so the open direction and all four titles fit */
+@media (min-width: 1024px) and (min-height: 680px) and (max-height: 960px) {
+  .capsInner {
+    gap: 24px;
+    padding-top: calc(64px + 24px);
+    padding-bottom: 24px;
+  }
+
+  .capsTitle {
+    padding: 10px 0;
+    font-size: 22px;
+  }
+
+  .capsDetailInner {
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .capsText {
+    font-size: var(--fs-body);
+    line-height: 20px;
+  }
+
+  .capsDetail .paiRow {
+    padding: 8px 0;
+  }
+
+  .capsDetail .paiRow dt {
+    font-size: var(--fs-body);
+    line-height: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capsDetail,
+  .capsImage,
+  .capsTitle {
+    transition: none;
+  }
+}
+
+/* capability spec table: name on the left, a short line on the right, hairlines between rows */
 .paiSpec {
   margin: 0;
   border-bottom: 1px solid #e5e5e5;
@@ -594,17 +838,6 @@
   font-size: var(--fs-body);
   line-height: 20px;
   color: #737373;
-}
-
-@media (min-width: 1024px) {
-  .paiMain {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: var(--gap-block);
-  }
-
-  .paiArt {
-    height: 520px;
-  }
 }
 
 /* ---------- Numbered index lists (landing pages, infrastructure) ---------- */
@@ -806,86 +1039,6 @@
   font-size: var(--fs-caption);
   line-height: 16px;
   color: #b42318;
-}
-
-/* What we do: three ways of creating data */
-.ways {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-head) var(--col-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.way {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid #000;
-}
-
-.wayNum {
-  font-family: var(--mono);
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  color: #000;
-}
-
-.wayTitle {
-  margin: 0;
-  font-size: var(--fs-h3-lg);
-  line-height: var(--lh-heading);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #000;
-  text-wrap: balance;
-}
-
-.wayText {
-  max-width: 360px;
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
-}
-
-@media (min-width: 1024px) {
-  .ways {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* Core capabilities: the same columns, four across, with tags */
-@media (min-width: 640px) {
-  .waysFour {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .waysFour {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.wayTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 4px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.wayTags li {
-  padding: 4px 10px;
-  border: 1px solid #d1d1d1;
-  border-radius: 999px;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #444;
 }
 
 /* What we do: three routes as photo cards in a row */

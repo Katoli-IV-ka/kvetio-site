@@ -45,82 +45,76 @@ export const WAYS: {
   },
 ];
 
-/* ---------- Core capabilities ---------- */
+/* ---------- Core capabilities: one pinned showcase, one panel per direction ---------- */
 
-export const CAPABILITIES = [
+export type Capability = {
+  /** anchor id, used by the menu and footer links */
+  id: string;
+  title: string;
+  text: string;
+  image: string;
+  /** 'contain' for cut-out art on white, 'cover' for photos */
+  fit: 'cover' | 'contain';
+  spec: { title: string; text: string }[];
+};
+
+export const CAPABILITIES: Capability[] = [
   {
-    id: 'visual',
+    id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Controlled image and video data for training, post-training and evaluation — from RAW collections and multi-view capture to editing, transformation and 2D/3D/VFX-based production.',
-    tags: [
-      'Images',
-      'Video',
-      'RAW / ProRAW',
-      'Multi-view',
-      'Generative video',
-      'Source / instruction / output',
-      '3D',
-      'VFX',
+    text: 'Controlled image and video data for training, post-training and evaluation.',
+    image: '/v2/uc/9.webp',
+    fit: 'cover',
+    spec: [
+      { title: 'Images & RAW', text: 'Controlled collections, RAW / ProRAW' },
+      { title: 'Multi-view', text: 'Several cameras on one subject or scene' },
+      { title: 'Generative video', text: 'Continuity, motion and visual variation' },
+      { title: 'Editing pairs', text: 'Source, instruction and output' },
+      { title: '2D, 3D & VFX', text: 'Controlled and transformation data' },
     ],
   },
   {
     id: 'human-activity',
     title: 'Human Activity & Real-World Interaction',
-    text: 'Everyday and professional activities, skilled multi-step tasks and human-object interaction, produced in controlled or natural environments.',
-    tags: [
-      'Skilled tasks',
-      'Professional workflows',
-      'Human-object interaction',
-      'Task sequences',
-      'Hands & body movement',
-      'Dialogue & multi-person',
-      'Rare scenarios',
+    text: 'Everyday and professional activities, produced in controlled or natural environments.',
+    image: '/v2/photos/home-fridge.webp',
+    fit: 'cover',
+    spec: [
+      { title: 'Skilled tasks', text: 'Multi-step professional workflows' },
+      { title: 'Human-object interaction', text: 'Hands, tools and objects in use' },
+      { title: 'Task sequences', text: 'Demonstrations from start to finish' },
+      { title: 'Hands & body', text: 'Fine-grained gestures and movement' },
+      { title: 'Dialogue & groups', text: 'Conversations and multi-person scenes' },
     ],
   },
   {
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
-    text: 'Human demonstrations and multimodal real-world data for embodied systems — from egocentric and synchronized multi-camera capture to RGB-D, motion and sensor data.',
-    tags: [
-      'Egocentric',
-      'Synchronized multi-camera',
-      'RGB-D',
-      'Spatial capture',
-      'Human demonstrations',
-      'Motion',
-      'IMU / sensors',
-      'Protocol design',
-      'Calibration',
+    text: 'Human demonstrations for teaching robots, delivered synchronized, calibrated and documented.',
+    image: '/v2/photos/robot-arm.webp',
+    fit: 'contain',
+    spec: [
+      { title: 'Egocentric', text: 'Head- or chest-mounted, hands in frame' },
+      { title: 'Multi-camera & RGB-D', text: 'Synced views with depth' },
+      { title: 'Motion & sensors', text: 'Hand and body motion, IMU, force/contact' },
+      { title: 'Sync & calibration', text: 'Streams aligned, setups logged' },
+      { title: 'Failure & recovery', text: 'Retries recorded on purpose' },
     ],
   },
   {
-    id: 'scale',
+    id: 'collection-at-scale',
     title: 'Data Collection & Production at Scale',
-    text: 'Controlled production, distributed collection and content licensing built around a single dataset specification — and grown from pilot to full volume on the same pipeline.',
-    tags: [
-      'Contributors',
-      'Countries',
-      'Locations',
-      'Releases & rights',
-      'Metadata',
-      'QA',
-      'Licensing',
+    text: 'One dataset specification, run from pilot to full volume across teams and countries.',
+    image: '/v2/photos/crowd.webp',
+    fit: 'cover',
+    spec: [
+      { title: 'Controlled production', text: 'Sets, cast and protocol' },
+      { title: 'Distributed collection', text: 'Contributors and local teams' },
+      { title: 'Multi-country', text: 'The same spec in every location' },
+      { title: 'Rights', text: 'Releases and licensing for training' },
+      { title: 'Metadata & QA', text: 'Annotation and checks built in' },
     ],
   },
-];
-
-/* ---------- Physical AI capture ---------- */
-
-export const PHYSICAL_AI_CAPTURE = [
-  { title: 'Egocentric', text: 'Head- or chest-mounted, hands and objects in frame' },
-  { title: 'Synchronized multi-camera', text: 'Fixed and wearable views on one timeline' },
-  { title: 'RGB-D', text: 'Colour and depth in every frame' },
-  { title: 'Spatial capture', text: '3D scenes and objects for reach and placement' },
-  { title: 'Motion', text: 'Hand, arm and body movement with the video' },
-  { title: 'IMU / sensors', text: 'Inertial, force/contact and more where needed' },
-  { title: 'Failure & recovery', text: 'Failed attempts and retries, recorded on purpose' },
-  { title: 'Synchronization', text: 'Every camera and sensor aligned frame for frame' },
-  { title: 'Calibration', text: 'Intrinsics, extrinsics and offsets logged per setup' },
 ];
 
 /* ---------- Data we produce: dataset patterns ---------- */
@@ -330,10 +324,10 @@ export const FOOTER_COLUMNS = [
   {
     label: 'Capabilities',
     links: [
-      { label: 'Visual & Generative AI', href: '#capabilities' },
-      { label: 'Human Activity', href: '#capabilities' },
+      { label: 'Visual & Generative AI', href: '#visual-ai' },
+      { label: 'Human Activity', href: '#human-activity' },
       { label: 'Physical AI & Robotics', href: '#physical-ai' },
-      { label: 'Collection at Scale', href: '#capabilities' },
+      { label: 'Collection at Scale', href: '#collection-at-scale' },
     ],
   },
   {
@@ -381,12 +375,12 @@ export const MENU_GROUPS: MenuGroup[] = [
       {
         label: 'Visual & Generative AI',
         text: 'Images, video, editing, 3D, VFX',
-        href: '#capabilities',
+        href: '#visual-ai',
       },
       {
         label: 'Human Activity',
         text: 'Skilled tasks and human-object interaction',
-        href: '#capabilities',
+        href: '#human-activity',
       },
       {
         label: 'Physical AI & Robotics',
@@ -396,7 +390,7 @@ export const MENU_GROUPS: MenuGroup[] = [
       {
         label: 'Collection at Scale',
         text: 'Contributors, countries, rights, QA',
-        href: '#capabilities',
+        href: '#collection-at-scale',
       },
     ],
   },

@@ -1519,12 +1519,21 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .infraItem {
   padding: 20px 0;
   border-top: 1px solid #e5e5e5;
+}
+
+/* hairlines only between rows, none above the first or below the last */
+.infraItem:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.infraItem:last-child {
+  padding-bottom: 0;
 }
 
 .infraTitle {

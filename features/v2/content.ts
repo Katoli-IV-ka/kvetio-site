@@ -239,18 +239,6 @@ export const INFRASTRUCTURE = [
   },
 ];
 
-// x / y are positions on the 1024x1024 globe image; len is the stick length in px at a 640px map.
-export const CITIES = [
-  { name: 'Los Angeles', x: 225, y: 320, dir: 'up', len: 70 },
-  { name: 'New York', x: 392, y: 345, dir: 'up', len: 95 },
-  { name: 'Mexico City', x: 290, y: 455, dir: 'down', len: 75 },
-  { name: 'São Paulo', x: 590, y: 735, dir: 'down', len: 85 },
-  { name: 'Buenos Aires', x: 495, y: 860, dir: 'down', len: 55 },
-  { name: 'London', x: 800, y: 250, dir: 'up', len: 105 },
-  { name: 'Lagos', x: 840, y: 470, dir: 'down', len: 80 },
-  { name: 'Cairo', x: 895, y: 370, dir: 'up', len: 45 },
-] as const;
-
 /* ---------- How we work ---------- */
 
 export const PROCESS_STEPS = [

@@ -1468,17 +1468,24 @@
   }
 }
 
-/* ---------- Production infrastructure: globe and the five building blocks ---------- */
+/* ---------- Production infrastructure: five building blocks with the hand collage ---------- */
 
 .infra {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-block);
 }
 
-.infraGrid {
-  display: grid;
-  gap: var(--gap-block);
+.infraContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-head);
+  min-width: 0;
+}
+
+.infraHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
 }
 
 .infraList {
@@ -1520,83 +1527,33 @@
   color: #737373;
 }
 
+/* on phones the collage sits above the heading, tucked into the top right corner */
+.infraArt {
+  order: -1;
+  align-self: flex-end;
+  width: 200px;
+  height: 200px;
+  margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) 8px 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
 @media (min-width: 1024px) {
-  /* globe on the left, never taller than one screen; the list centred beside it */
-  .infraGrid {
-    grid-template-columns: clamp(440px, calc(100svh - 2 * var(--section-y)), 600px) minmax(0, 1fr);
-    align-items: center;
+  .infra {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 40vw, 600px);
     column-gap: var(--gap-block);
   }
-}
 
-.mapWrap {
-  display: flex;
-  justify-content: center;
-}
-
-.map {
-  position: relative;
-  container-type: inline-size;
-  width: 100%;
-  max-width: 640px;
-  aspect-ratio: 1;
-}
-
-.globe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: multiply;
-}
-
-.pin {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.pinDot {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #000;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
-}
-
-.pinStick {
-  position: absolute;
-  left: 0;
-  width: 1px;
-  background: #000;
-}
-
-.pinPlate {
-  position: absolute;
-  left: 0;
-  transform: translateX(-50%);
-  height: 18px;
-  padding: 0 5px;
-  background: #000;
-  color: #fff;
-  font-family: var(--mono);
-  font-size: 8px;
-  line-height: 18px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-@media (min-width: 640px) {
-  .pinPlate {
-    height: 24px;
-    padding: 0 10px;
-    font-size: 11px;
-    line-height: 24px;
-    letter-spacing: 0.08em;
+  /* the collage runs from the top to the bottom edge of the frame, hand in the bottom right corner */
+  .infraArt {
+    order: 0;
+    align-self: stretch;
+    width: calc(100% + var(--edge-x) - 8px);
+    height: calc(100% + 2 * var(--gap-block));
+    margin: calc(-1 * var(--gap-block)) calc(8px - var(--edge-x)) calc(-1 * var(--gap-block)) 0;
+    object-fit: contain;
+    object-position: right bottom;
   }
 }
 

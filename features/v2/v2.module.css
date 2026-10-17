@@ -579,6 +579,49 @@
   }
 }
 
+/* wide screens: all four in one row, tighter cards */
+@media (min-width: 1280px) {
+  .capCards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap-item);
+  }
+
+  .capCard .card {
+    min-height: 560px;
+    padding: 24px;
+  }
+
+  .capCard .cardTitle {
+    font-size: var(--fs-h3);
+    line-height: 24px;
+  }
+
+  .capCard .cardText {
+    font-size: var(--fs-body);
+    line-height: 20px;
+  }
+
+  .capCard .cardShade {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  /* the robot fills the narrow light card again, faint behind the copy */
+  .capCard .card[data-variant='paper'] .cardImage {
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.35;
+  }
+
+  .capCard .card[data-variant='paper'] .cardBody {
+    max-width: none;
+  }
+}
+
 /* ---------- What we do: dark full-bleed band, three routes as columns ---------- */
 
 .flow {

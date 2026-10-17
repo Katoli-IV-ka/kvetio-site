@@ -477,6 +477,14 @@
   line-height: 1;
 }
 
+/* accent marker behind the key words, in light tints of the frame gradient; wraps line by line */
+.heroMark {
+  padding: 0 0.08em;
+  background: linear-gradient(90deg, #a8dcb2 0%, #f0b2ac 50%, #c3c3ef 100%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .heroLead {
   position: relative;
   margin: 24px 0 0;

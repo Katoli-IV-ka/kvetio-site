@@ -15,7 +15,8 @@ export function Hero() {
         />
         <div className={styles.heroCopy}>
           <h1 className={`${styles.heading} ${styles.heroTitle}`}>
-            Your model needs data that doesn&apos;t exist yet. We produce it.
+            Your model needs data that{' '}
+            <span className={styles.heroMark}>doesn&apos;t exist yet</span>. We produce it.
           </h1>
           <p className={styles.heroLead}>Custom real-world data production for AI.</p>
           <p className={styles.heroText}>

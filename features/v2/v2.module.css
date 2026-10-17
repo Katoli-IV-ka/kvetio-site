@@ -579,42 +579,91 @@
   }
 }
 
-/* wide screens: all four in one row, tighter cards */
+/* wide screens: all four in one row on a shared row grid (subgrid), so numbers, titles, text and
+   tags start on the same lines in every card; the photo shows in the first, flexible row */
 @media (min-width: 1280px) {
   .capCards {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--gap-item);
+    grid-template-rows: minmax(300px, 1fr) auto auto auto auto;
+    gap: 0 var(--gap-item);
+  }
+
+  .capCard {
+    display: grid;
+    grid-row: 1 / span 5;
+    grid-template-rows: subgrid;
   }
 
   .capCard .card {
-    min-height: 560px;
-    padding: 24px;
+    display: grid;
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+    row-gap: 12px;
+    min-height: 640px;
+    padding: 24px 24px 28px;
+  }
+
+  .capCard .cardBody {
+    display: contents;
+  }
+
+  .capCard .cardNum,
+  .capCard .cardTitle,
+  .capCard .cardText,
+  .capCard .cardTags {
+    position: relative;
+  }
+
+  .capCard .cardNum {
+    grid-row: 2;
+    align-self: end;
   }
 
   .capCard .cardTitle {
+    grid-row: 3;
     font-size: var(--fs-h3);
     line-height: 24px;
   }
 
   .capCard .cardText {
+    grid-row: 4;
     font-size: var(--fs-body);
     line-height: 20px;
   }
 
+  .capCard .cardTags {
+    grid-row: 5;
+    align-content: start;
+    margin: 4px 0 0;
+  }
+
+  /* photos: a deep shade under the whole copy area */
   .capCard .cardShade {
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.88) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
-      rgba(0, 0, 0, 0.15) 100%
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.82) 45%,
+      rgba(0, 0, 0, 0.35) 70%,
+      rgba(0, 0, 0, 0.05) 100%
     );
   }
 
-  /* the robot fills the narrow light card again, faint behind the copy */
+  /* light card: the robot fills it faintly, a paper-coloured veil keeps the copy clear */
   .capCard .card[data-variant='paper'] .cardImage {
     object-fit: cover;
     object-position: center top;
-    opacity: 0.35;
+    opacity: 0.4;
+  }
+
+  .capCard .card[data-variant='paper'] .cardShade {
+    display: block;
+    background: linear-gradient(
+      to top,
+      rgba(239, 237, 231, 0.97) 0%,
+      rgba(239, 237, 231, 0.92) 45%,
+      rgba(239, 237, 231, 0.4) 70%,
+      rgba(239, 237, 231, 0) 100%
+    );
   }
 
   .capCard .card[data-variant='paper'] .cardBody {

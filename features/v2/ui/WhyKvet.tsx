@@ -15,21 +15,34 @@ export function WhyKvet() {
             company built around your model&apos;s requirements.
           </p>
         </div>
-        <ul className={styles.compare}>
-          {WHY.map((row) => (
-            <li
-              key={row.them}
-              className={styles.compareRow}
-            >
-              <h3 className={styles.compareThem}>{row.them}</h3>
-              <p className={styles.compareTheirs}>{row.theyDo}</p>
-              <p className={styles.compareOurs}>
-                <span className={styles.compareBrand}>{BRAND}</span>
-                {row.weDo}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <table className={styles.compareTable}>
+          <thead>
+            <tr>
+              <th scope='col'>Alternative</th>
+              <th scope='col'>How they work</th>
+              <th
+                scope='col'
+                className={styles.compareUs}
+              >
+                {BRAND}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {WHY.map((row) => (
+              <tr key={row.them}>
+                <th scope='row'>{row.them}</th>
+                <td data-label='How they work'>{row.theyDo}</td>
+                <td
+                  data-label={BRAND}
+                  className={styles.compareUs}
+                >
+                  {row.weDo}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

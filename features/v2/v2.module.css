@@ -477,34 +477,6 @@
   line-height: 1;
 }
 
-/* accent behind the key words: three soft colour clouds from the frame gradient that fade out
-   towards every edge, so the marker has no hard border; each wrapped line gets its own cloud */
-.heroMark {
-  padding: 0.14em 0.32em;
-  margin: 0 -0.2em;
-  background:
-    radial-gradient(
-      48% 54% at 30% 50%,
-      rgba(150, 212, 163, 0.95) 0%,
-      rgba(150, 212, 163, 0.75) 40%,
-      rgba(150, 212, 163, 0) 92%
-    ),
-    radial-gradient(
-      48% 54% at 52% 52%,
-      rgba(242, 172, 163, 0.9) 0%,
-      rgba(242, 172, 163, 0.7) 40%,
-      rgba(242, 172, 163, 0) 92%
-    ),
-    radial-gradient(
-      48% 54% at 72% 48%,
-      rgba(184, 186, 238, 0.95) 0%,
-      rgba(184, 186, 238, 0.75) 40%,
-      rgba(184, 186, 238, 0) 92%
-    );
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
 .heroLead {
   position: relative;
   margin: 24px 0 0;
@@ -1269,26 +1241,35 @@
   }
 }
 
-/* Why Kvet: comparison rows */
-.compare {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid #000;
+/* Why Kvet: comparison table, the Kvet column highlighted */
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  line-height: 20px;
 }
 
-.compareRow {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  padding: 24px 0;
-  border-bottom: 1px solid #e5e5e5;
+.compareTable th,
+.compareTable td {
+  padding: 20px 24px;
+  border: 1px solid #e5e5e5;
+  text-align: left;
+  vertical-align: top;
 }
 
-.compareThem {
-  margin: 0;
+.compareTable thead th {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.compareTable tbody th {
+  width: 26%;
   font-size: var(--fs-h3);
   line-height: 24px;
   font-weight: 700;
@@ -1296,38 +1277,70 @@
   color: #171717;
 }
 
-.compareTheirs {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 24px;
-  color: #8a8a8a;
+.compareTable tbody td {
+  color: #737373;
 }
 
-.compareOurs {
-  margin: 0;
+.compareTable .compareUs {
+  width: 40%;
+  background: #f6f6f4;
   font-size: var(--fs-lead);
   line-height: 24px;
   color: #000;
 }
 
-.compareBrand {
-  display: inline-block;
-  margin-right: 12px;
-  padding: 0 10px;
-  border-radius: 999px;
+.compareTable thead .compareUs {
+  border-color: #000;
   background: #000;
-  color: #fff;
   font-size: var(--fs-caption);
-  line-height: 20px;
-  font-weight: 600;
-  vertical-align: 2px;
+  line-height: 16px;
+  color: #fff;
 }
 
-@media (min-width: 1024px) {
-  .compareRow {
-    grid-template-columns: 3fr 4fr 5fr;
-    align-items: baseline;
-    gap: var(--col-gap);
+/* phones: each row becomes a card, cells labelled from data-label */
+@media (max-width: 767px) {
+  .compareTable thead {
+    display: none;
+  }
+
+  .compareTable,
+  .compareTable tbody,
+  .compareTable tr,
+  .compareTable th,
+  .compareTable td {
+    display: block;
+    width: auto;
+  }
+
+  .compareTable tbody th,
+  .compareTable .compareUs {
+    width: auto;
+  }
+
+  .compareTable tr {
+    margin-bottom: var(--gap-item);
+    border: 1px solid #e5e5e5;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 16px;
+    border: 0;
+  }
+
+  .compareTable tbody td {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .compareTable td::before {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--fs-caption);
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    content: attr(data-label);
   }
 }
 

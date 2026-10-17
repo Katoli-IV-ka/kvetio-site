@@ -17,12 +17,11 @@ export function Capabilities() {
           </p>
         </div>
         <ol className={`${styles.ways} ${styles.waysFour}`}>
-          {CAPABILITIES.map((card, index) => (
+          {CAPABILITIES.map((card) => (
             <li
               key={card.id}
               className={styles.way}
             >
-              <span className={styles.wayNum}>{String(index + 1).padStart(2, '0')}</span>
               <h3 className={styles.wayTitle}>{card.title}</h3>
               <p className={styles.wayText}>{card.text}</p>
               <ul className={styles.wayTags}>

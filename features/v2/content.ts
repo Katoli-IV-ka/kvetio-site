@@ -45,7 +45,7 @@ export const WAYS: {
   },
 ];
 
-/* ---------- Core capabilities: one pinned showcase, one panel per direction ---------- */
+/* ---------- Core capabilities: photo cards, one per direction ---------- */
 
 export type Capability = {
   /** anchor id, used by the menu and footer links */
@@ -53,8 +53,7 @@ export type Capability = {
   title: string;
   text: string;
   image: string;
-  /** 'contain' for cut-out art on white, 'cover' for photos */
-  fit: 'cover' | 'contain';
+  variant: CardVariant;
   spec: { title: string; text: string }[];
 };
 
@@ -64,7 +63,7 @@ export const CAPABILITIES: Capability[] = [
     title: 'Visual & Generative AI',
     text: 'Controlled image and video data for training, post-training and evaluation.',
     image: '/v2/uc/9.webp',
-    fit: 'cover',
+    variant: 'photo',
     spec: [
       { title: 'Images & RAW', text: 'Controlled collections, RAW / ProRAW' },
       { title: 'Multi-view', text: 'Several cameras on one subject or scene' },
@@ -78,7 +77,7 @@ export const CAPABILITIES: Capability[] = [
     title: 'Human Activity & Real-World Interaction',
     text: 'Everyday and professional activities, produced in controlled or natural environments.',
     image: '/v2/photos/home-fridge.webp',
-    fit: 'cover',
+    variant: 'photo',
     spec: [
       { title: 'Skilled tasks', text: 'Multi-step professional workflows' },
       { title: 'Human-object interaction', text: 'Hands, tools and objects in use' },
@@ -92,7 +91,7 @@ export const CAPABILITIES: Capability[] = [
     title: 'Physical AI & Robotics',
     text: 'Human demonstrations for teaching robots, delivered synchronized, calibrated and documented.',
     image: '/v2/photos/robot-arm.webp',
-    fit: 'contain',
+    variant: 'paper',
     spec: [
       { title: 'Egocentric', text: 'Head- or chest-mounted, hands in frame' },
       { title: 'Multi-camera & RGB-D', text: 'Synced views with depth' },
@@ -106,7 +105,7 @@ export const CAPABILITIES: Capability[] = [
     title: 'Data Collection & Production at Scale',
     text: 'One dataset specification, run from pilot to full volume across teams and countries.',
     image: '/v2/photos/crowd.webp',
-    fit: 'cover',
+    variant: 'photo',
     spec: [
       { title: 'Controlled production', text: 'Sets, cast and protocol' },
       { title: 'Distributed collection', text: 'Contributors and local teams' },

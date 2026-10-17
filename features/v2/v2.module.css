@@ -548,296 +548,352 @@
   }
 }
 
-/* ---------- Core capabilities: pinned showcase on desktop, stacked panels on phones ---------- */
+/* ---------- Core capabilities: four photo cards ---------- */
 
-.caps {
-  background: #fbfbfb;
-}
-
-.capsTrack {
-  position: relative;
-}
-
-/* link targets for each direction, placed from Capabilities.tsx */
-.capsAnchor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
-
-.capsInner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-head);
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--section-y) var(--page-x);
-}
-
-.capsList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-block);
+.capCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-item);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.capsHeading {
-  margin: 0;
+.capCard {
+  scroll-margin-top: 80px; /* menu links land below the sticky bar */
 }
 
-.capsTitle {
-  display: block;
-  width: 100%;
+@media (min-width: 640px) {
+  .capCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .capCards {
+    gap: var(--col-gap);
+  }
+
+  .capCard .cardBody {
+    max-width: 440px;
+  }
+}
+
+/* ---------- What we do: the heading drawn as a flow, on a dark full-bleed band ---------- */
+
+.flow {
+  --flow-line: rgba(255, 255, 255, 0.32);
+  --flow-gap: 56px; /* space between the nodes and the routes, the connectors live in it */
+
+  background: #0e0e0e;
+  color: #fff;
+  scroll-margin-top: 64px;
+}
+
+.flowInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--page-x);
+}
+
+.flowHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+  max-width: 880px;
+}
+
+.flowEyebrow {
   margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.flowTitle {
+  margin: 0;
+  font-size: var(--fs-display);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.flowLead {
+  max-width: 560px;
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #a3a3a3;
+}
+
+.flowMap {
+  display: flex;
+  flex-direction: column;
+}
+
+/* input and output nodes */
+.flowNode {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.flowNode[data-end='finish'] {
+  border-color: #fff;
+  background: #fff;
+  color: #000;
+}
+
+.flowNodeLabel {
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+/* routes; phones: a vertical chain with the line on the left */
+.flowRoutes {
+  margin: 0;
+  padding: 0 0 0 24px;
+  border-left: 1px solid var(--flow-line);
+  margin-left: 20px;
+  list-style: none;
+}
+
+.flowRoute {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px;
+  gap: 8px 16px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.flowRoute:first-child {
+  border-top: 0;
+}
+
+.flowNum {
+  grid-column: 1 / -1;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #8a8a8a;
+}
+
+.flowCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.flowRouteTitle {
+  margin: 0;
   font-size: var(--fs-h3-lg);
   line-height: var(--lh-heading);
   font-weight: 700;
   letter-spacing: -0.04em;
-  text-align: left;
-  color: #000;
-  cursor: default;
 }
 
-.capsChevron {
-  display: none;
+.flowText {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #a3a3a3;
 }
 
-.capsDetailInner {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-top: 16px;
+.flowTags {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 18px;
+  color: #737373;
 }
 
-.capsInlineImage {
+.flowThumb {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  background: #efede7;
+  filter: grayscale(1) brightness(0.85);
+  transition:
+    filter 0.4s ease,
+    transform 0.4s ease;
 }
 
-.capsInlineImage[data-fit='contain'] {
-  object-fit: contain;
-  background: transparent;
-  mix-blend-mode: multiply;
+.flowRoute:hover .flowThumb {
+  filter: none;
+  transform: scale(1.04);
 }
 
-.capsText {
-  margin: 0;
-  font-size: var(--fs-lead);
-  line-height: 24px;
-  color: #444;
+/* entrance: nodes fade in, routes slide in one after another */
+.flowNode,
+.flowRoute {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
-.capsMedia {
-  display: none;
+.flowRoute {
+  transition-delay: calc(0.2s + var(--i) * 0.15s);
 }
 
-/* desktop: the section pins for one screen per direction; titles switch, text opens, art fades */
-@media (min-width: 1024px) and (min-height: 680px) {
-  .capsTrack {
-    height: calc(var(--count) * 100svh);
-  }
-
-  .capsPin {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    overflow: hidden;
-  }
-
-  .capsInner {
-    height: 100%;
-    padding-top: calc(64px + 32px); /* clear of the fixed header */
-    padding-bottom: 40px;
-  }
-
-  .capsBody {
-    display: grid;
-    flex: 1;
-    min-height: 0;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: var(--gap-block);
-    align-items: center;
-  }
-
-  .capsList {
-    gap: 0;
-    border-bottom: 1px solid #e5e5e5;
-  }
-
-  .capsItem {
-    border-top: 1px solid #e5e5e5;
-  }
-
-  .capsTitle {
-    padding: 16px 0;
-    font-size: var(--fs-h3-lg);
-    color: #b5b5b5;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-
-  .capsTitle:hover {
-    color: #555;
-  }
-
-  .capsItem[data-active='true'] .capsTitle {
-    color: #000;
-  }
-
-  .capsTitle:focus-visible {
-    outline: 2px solid #000;
-    outline-offset: 2px;
-  }
-
-  /* sits right after the last word, also when the title wraps */
-  .capsChevron {
-    display: inline-block;
-    width: 9px;
-    height: 9px;
-    margin: 0 0 0.14em 12px;
-    vertical-align: middle;
-    border-top: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-    transform: rotate(45deg);
-  }
-
-  /* closed panels collapse to their title; the open one grows smoothly */
-  .capsDetail {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transition:
-      grid-template-rows 0.5s ease,
-      opacity 0.4s ease;
-  }
-
-  .capsItem[data-active='true'] .capsDetail {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-
-  .capsDetailInner {
-    min-height: 0;
-    overflow: hidden;
-    padding: 0 0 20px;
-  }
-
-  .capsInlineImage {
-    display: none;
-  }
-
-  .capsMedia {
-    position: relative;
-    display: block;
-    height: 100%;
-    max-height: 640px;
-  }
-
-  .capsImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transform: scale(1.04);
-    transition:
-      opacity 0.6s ease,
-      transform 0.9s ease;
-  }
-
-  .capsImage[data-fit='contain'] {
-    object-fit: contain;
-    mix-blend-mode: multiply;
-  }
-
-  .capsImage[data-active='true'] {
-    opacity: 1;
-    transform: none;
-  }
+.flowNode[data-end='finish'] {
+  transition-delay: 0.75s;
 }
 
-/* laptop screens: a tighter panel so the open direction and all four titles fit */
-@media (min-width: 1024px) and (min-height: 680px) and (max-height: 960px) {
-  .capsInner {
-    gap: 24px;
-    padding-top: calc(64px + 24px);
-    padding-bottom: 24px;
-  }
-
-  .capsTitle {
-    padding: 10px 0;
-    font-size: 22px;
-  }
-
-  .capsDetailInner {
-    gap: 12px;
-    padding-bottom: 14px;
-  }
-
-  .capsText {
-    font-size: var(--fs-body);
-    line-height: 20px;
-  }
-
-  .capsDetail .paiRow {
-    padding: 8px 0;
-  }
-
-  .capsDetail .paiRow dt {
-    font-size: var(--fs-body);
-    line-height: 20px;
-  }
+.flowInner[data-visible='true'] .flowNode,
+.flowInner[data-visible='true'] .flowRoute {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .capsDetail,
-  .capsImage,
-  .capsTitle {
+  .flowNode,
+  .flowRoute {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }
 
-/* capability spec table: name on the left, a short line on the right, hairlines between rows */
-.paiSpec {
-  margin: 0;
-  border-bottom: 1px solid #e5e5e5;
-}
+/* desktop: input | routes | output, connectors branch from the input and merge into the output */
+@media (min-width: 1024px) {
+  .flowMap {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    column-gap: var(--flow-gap);
+    align-items: center;
+  }
 
-.paiRow {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 16px;
-  align-items: baseline;
-  padding: 14px 0;
-  border-top: 1px solid #e5e5e5;
-}
+  .flowRoutes {
+    margin: 0;
+    padding: 0;
+    border-left: 0;
+  }
 
-.paiRow dt {
-  font-size: var(--fs-lead);
-  line-height: 22px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #171717;
-}
+  .flowRoute {
+    grid-template-columns: 48px minmax(0, 1fr) 168px;
+    gap: 24px;
+    align-items: center;
+    padding: 28px 0;
+  }
 
-.paiRow dd {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
+  .flowNum {
+    grid-column: auto;
+    font-size: var(--fs-h3);
+    line-height: 24px;
+  }
+
+  .flowRouteTitle {
+    font-size: 32px;
+  }
+
+  /* spine + branch on each side of a route: the vertical part runs between the first and the last
+     route's centre, the horizontal part reaches the route at its middle */
+  .flowRoute::before,
+  .flowRoute::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--flow-gap) / 2);
+    background:
+      linear-gradient(var(--flow-line), var(--flow-line)) 0 0 / 1px 100% no-repeat,
+      linear-gradient(var(--flow-line), var(--flow-line)) 0 50% / 100% 1px no-repeat;
+    content: '';
+  }
+
+  .flowRoute::before {
+    left: calc(var(--flow-gap) / -2);
+  }
+
+  .flowRoute::after {
+    right: calc(var(--flow-gap) / -2);
+    background-position:
+      100% 0,
+      0 50%;
+  }
+
+  .flowRoute:first-child::before,
+  .flowRoute:first-child::after {
+    background-size:
+      1px 50%,
+      100% 1px;
+    background-position:
+      0 100%,
+      0 50%;
+  }
+
+  .flowRoute:first-child::after {
+    background-position:
+      100% 100%,
+      0 50%;
+  }
+
+  .flowRoute:last-child::before,
+  .flowRoute:last-child::after {
+    background-size:
+      1px 50%,
+      100% 1px;
+    background-position:
+      0 0,
+      0 50%;
+  }
+
+  .flowRoute:last-child::after {
+    background-position:
+      100% 0,
+      0 50%;
+  }
+
+  /* the input reaches the left spine, the output takes the arrow from the right one */
+  .flowNode[data-end='start']::after,
+  .flowNode[data-end='finish']::before {
+    position: absolute;
+    top: 50%;
+    width: calc(var(--flow-gap) / 2);
+    height: 1px;
+    background: var(--flow-line);
+    content: '';
+  }
+
+  .flowNode[data-end='start']::after {
+    left: 100%;
+  }
+
+  .flowNode[data-end='finish']::before {
+    right: 100%;
+  }
+
+  .flowNode[data-end='finish']::after {
+    position: absolute;
+    top: calc(50% - 5px);
+    right: calc(100% + 1px);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid #fff;
+    content: '';
+  }
 }
 
 /* ---------- Numbered index lists (landing pages, infrastructure) ---------- */
@@ -1041,23 +1097,6 @@
   color: #b42318;
 }
 
-/* What we do: three routes as photo cards in a row */
-.routes {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-item);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .routes {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--col-gap);
-  }
-}
-
 /* poster card: photo frame, copy at the bottom left, two treatments (photo, paper) */
 .card {
   position: relative;
@@ -1157,7 +1196,20 @@
 
 .card[data-variant='paper'] .cardImage {
   mix-blend-mode: multiply;
-  opacity: 0.3;
+  opacity: 0.5;
+}
+
+/* cut-out art on the light card stands whole at the right edge, clear of the copy */
+@media (min-width: 640px) {
+  .card[data-variant='paper'] .cardImage {
+    object-fit: contain;
+    object-position: right center;
+    opacity: 0.6;
+  }
+
+  .card[data-variant='paper'] .cardBody {
+    max-width: 52%;
+  }
 }
 
 .card[data-variant='paper'] .cardShade {

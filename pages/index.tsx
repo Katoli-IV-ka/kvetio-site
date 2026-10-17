@@ -53,8 +53,8 @@ export default function HomePage() {
         <Header />
         <Hero />
         <main>
-          <WhatWeDo />
           <Capabilities />
+          <WhatWeDo />
           <DatasetPatterns />
           <Infrastructure />
           <Process />

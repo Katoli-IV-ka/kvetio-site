@@ -671,54 +671,23 @@
   }
 }
 
-/* ---------- What we do: white split panel on a dark band (accordion + photo) ---------- */
-
-.flow {
-  background: #0e0e0e;
-  scroll-margin-top: 64px;
-}
-
-.flowInner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--section-y) var(--page-x);
-}
+/* ---------- What we do: accordion of routes beside the open route's photo ---------- */
 
 .flowPanel {
   display: flex;
   flex-direction: column-reverse; /* phones: photo above the list */
-  background: #fff;
-}
-
-.flowSide {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 32px 24px;
-}
-
-.flowLabel {
-  margin: 0;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #000;
+  gap: var(--gap-head);
 }
 
 .flowList {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .flowItem {
-  border-bottom: 1px solid #1a1a1a;
-}
-
-.flowItem:last-child {
-  border-bottom: 0;
+  border-top: 1px solid #e5e5e5;
 }
 
 .flowItemHeading {
@@ -726,23 +695,25 @@
 }
 
 .flowItemButton {
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 18px;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   width: 100%;
   margin: 0;
-  padding: 14px 0;
+  padding: 20px 0;
   border: 0;
   background: none;
   font: inherit;
-  font-size: var(--fs-h3-lg);
-  line-height: var(--lh-heading);
-  font-weight: 400;
-  letter-spacing: -0.03em;
   text-align: left;
-  color: #000;
+  color: #b5b5b5;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.flowItemButton:hover,
+.flowItem[data-open='true'] .flowItemButton {
+  color: #000;
 }
 
 .flowItemButton:focus-visible {
@@ -750,10 +721,23 @@
   outline-offset: 2px;
 }
 
+.flowNum {
+  font-family: var(--mono);
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #8a8a8a;
+}
+
+.flowName {
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
 /* thin plus that turns into a minus when the route is open */
 .flowPlus {
   position: relative;
-  flex: none;
   width: 18px;
   height: 18px;
 }
@@ -764,7 +748,7 @@
   top: 50%;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 1.5px;
   background: currentColor;
   content: '';
   transition: transform 0.3s ease;
@@ -794,24 +778,17 @@
 
 .flowItemText {
   min-height: 0;
-  max-width: 400px;
+  max-width: 440px;
   margin: 0;
+  padding-left: 56px; /* lines up with the title, past the number */
   overflow: hidden;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #555;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #737373;
 }
 
 .flowItem[data-open='true'] .flowItemText {
-  padding-bottom: 16px;
-}
-
-.flowLead {
-  max-width: 400px;
-  margin: 8px 0 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #8a8a8a;
+  padding-bottom: 24px;
 }
 
 .flowMedia {
@@ -819,7 +796,7 @@
   margin: 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #1a1a1a;
+  background: #efede7;
 }
 
 .flowPhoto {
@@ -836,23 +813,6 @@
   opacity: 1;
 }
 
-/* caption bar over the photo: a hairline, the route number left and its name right */
-.flowCaption {
-  position: absolute;
-  right: 20px;
-  bottom: 16px;
-  left: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #fff;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
-}
-
 .flowMedia::after {
   position: absolute;
   right: 0;
@@ -864,17 +824,28 @@
   pointer-events: none;
 }
 
+/* caption bar over the photo: a hairline, the route number left and its name right */
 .flowCaption {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  left: 20px;
   z-index: 1;
-}
-
-.flowArrow {
-  margin-left: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .flowPhoto,
   .flowItemBody,
+  .flowItemButton,
   .flowPlus::before,
   .flowPlus::after {
     transition: none;
@@ -884,22 +855,13 @@
 @media (min-width: 1024px) {
   .flowPanel {
     display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    min-height: 600px;
-  }
-
-  .flowSide {
-    justify-content: center;
-    padding: 64px clamp(40px, 4.5vw, 64px);
-  }
-
-  .flowItemButton {
-    padding: 18px 0;
-    font-size: 32px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--gap-block);
+    align-items: center;
   }
 
   .flowMedia {
-    aspect-ratio: auto;
+    aspect-ratio: 5 / 4;
   }
 }
 

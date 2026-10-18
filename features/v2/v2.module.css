@@ -1422,6 +1422,195 @@
   max-width: 760px;
 }
 
+/* ---------- LinkedIn: heading on the left, a profile card on the right ---------- */
+
+.liLayout {
+  display: grid;
+  gap: var(--gap-head);
+}
+
+.liLead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.liCard {
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.liBanner {
+  position: relative;
+  height: 120px;
+  background: #1c1c21;
+}
+
+.liBanner img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.liBanner p {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: #fff;
+}
+
+.liBody {
+  padding: 0 24px 20px;
+}
+
+.liTop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -36px;
+}
+
+.liLogo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.liLogo img {
+  display: block;
+}
+
+.liActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.liFollow,
+.liMessage {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.root a.liFollow {
+  background: #000;
+  color: #fff;
+}
+
+.root a.liFollow:hover {
+  background: #333;
+}
+
+.root a.liMessage {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.root a.liMessage:hover {
+  background: #000;
+  color: #fff;
+}
+
+.liName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.liVerified {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.liVerified circle {
+  fill: #0a66c2;
+}
+
+.liVerified path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.6;
+}
+
+.liTagline {
+  margin: 8px 0 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #171717;
+}
+
+.liMeta {
+  margin: 8px 0 0;
+  font-size: var(--fs-caption);
+  line-height: 18px;
+  color: #8a8a8a;
+}
+
+.liFoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.liFoot img {
+  display: block;
+  border-radius: 50%;
+}
+
+.liFoot strong {
+  font-weight: 600;
+  color: #000;
+}
+
+@media (min-width: 1024px) {
+  .liLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    column-gap: var(--gap-block);
+    align-items: center;
+  }
+}
+
 /* ---------- Footer ---------- */
 
 .footer {

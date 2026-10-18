@@ -635,7 +635,23 @@
 
 .capPhoto {
   object-fit: cover;
-  filter: brightness(0.62) saturate(0.9);
+  filter: brightness(0.66);
+}
+
+/* film grain over the photo, in its own colours; it also breaks up busy detail behind the copy */
+.capCard[data-look='photo']::after {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+  pointer-events: none;
+  content: '';
+}
+
+.capNum,
+.capCopy {
+  z-index: 1;
 }
 
 /* what the direction covers: a short list on hairlines, small type */
@@ -748,6 +764,289 @@
   .capCard,
   .capMore {
     transition: none;
+  }
+}
+
+/* Data we produce: dataset patterns as white cards on the grey section */
+.patterns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-item);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .patterns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .patterns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pattern {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+.patternTitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.patternText {
+  margin: 0 0 16px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.patternSpec {
+  margin: auto 0 0;
+  padding-top: 16px;
+  border-top: 1px dashed #e0e0e0;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #000;
+}
+
+/* Selected projects */
+.projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-item);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 1024px) {
+  .projects {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.projectArea {
+  margin: 0;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.projectTitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.projectRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 0;
+}
+
+.projectRows div {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #d1d5db;
+}
+
+.projectRows dt {
+  font-size: var(--fs-caption);
+  line-height: 20px;
+  color: #8a8a8a;
+}
+
+.projectRows dd {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #171717;
+}
+
+/* Scale & proof */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-head) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 1024px) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #000;
+}
+
+.statValue {
+  font-size: var(--fs-display);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.statLabel {
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.proofRights {
+  margin-top: var(--gap-item);
+}
+
+@media (min-width: 1024px) {
+  .proofRights .typeList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gap-block);
+  }
+}
+
+/* Why Kvet: comparison table, the Kvet column highlighted */
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  line-height: 20px;
+}
+
+.compareTable th,
+.compareTable td {
+  padding: 20px 24px;
+  border: 1px solid #e5e5e5;
+  text-align: left;
+  vertical-align: top;
+}
+
+.compareTable thead th {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.compareTable tbody th {
+  width: 26%;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.compareTable tbody td {
+  color: #737373;
+}
+
+.compareTable .compareUs {
+  width: 40%;
+  background: #f6f6f4;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #000;
+}
+
+.compareTable thead .compareUs {
+  border-color: #000;
+  background: #000;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #fff;
+}
+
+/* phones: each row becomes a card, cells labelled from data-label */
+@media (max-width: 767px) {
+  .compareTable thead {
+    display: none;
+  }
+
+  .compareTable,
+  .compareTable tbody,
+  .compareTable tr,
+  .compareTable th,
+  .compareTable td {
+    display: block;
+    width: auto;
+  }
+
+  .compareTable tbody th,
+  .compareTable .compareUs {
+    width: auto;
+  }
+
+  .compareTable tr {
+    margin-bottom: var(--gap-item);
+    border: 1px solid #e5e5e5;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 16px;
+    border: 0;
+  }
+
+  .compareTable tbody td {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .compareTable td::before {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--fs-caption);
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    content: attr(data-label);
   }
 }
 

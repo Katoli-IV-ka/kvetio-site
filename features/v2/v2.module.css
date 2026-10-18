@@ -627,7 +627,7 @@
   color: #fff;
 }
 
-/* photo: black and white like the hero art, evenly dimmed (no fade) so white copy reads anywhere */
+/* photo: evenly dimmed (no fade) so white copy reads anywhere */
 .capCard[data-look='photo'] {
   background: #111;
   color: #fff;
@@ -635,7 +635,7 @@
 
 .capPhoto {
   object-fit: cover;
-  filter: grayscale(1) brightness(0.55) contrast(1.1);
+  filter: brightness(0.62) saturate(0.9);
 }
 
 /* what the direction covers: a short list on hairlines, small type */

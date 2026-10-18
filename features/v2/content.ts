@@ -55,7 +55,8 @@ export const CAPABILITIES: Capability[] = [
     id: 'visual-ai',
     title: 'Visual & Generative AI',
     text: 'Controlled image and video data for training, post-training and evaluation: RAW, multi-view, editing pairs, 2D/3D and VFX.',
-    look: 'halftone',
+    look: 'photo',
+    image: '/v2/photos/field-desk.webp',
     details: [
       'Images & RAW / ProRAW',
       'Multi-view capture',
@@ -82,7 +83,8 @@ export const CAPABILITIES: Capability[] = [
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
     text: 'Human demonstrations for robots: egocentric, multi-camera, RGB-D and sensor data, synchronized and calibrated.',
-    look: 'dark',
+    look: 'photo',
+    image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
       'Multi-camera & RGB-D',

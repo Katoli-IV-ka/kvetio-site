@@ -29,7 +29,13 @@ export const navLinks = [
 
 export const contactForm = {
   title: 'Contact Us',
-  dataTypes: ['Healthcare', 'Media', 'Audio', 'Motion capture', 'Company data', 'Other'],
+  dataTypes: [
+    'Visual & Generative AI',
+    'Human Activity',
+    'Physical AI & Robotics',
+    'Collection at Scale',
+    'Not sure yet',
+  ],
   sources: [
     'Google Search',
     'AI Search',

@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { MENU_GROUPS, MENU_LINKS } from '../content';
+import { BRAND, CTA_LABEL, MENU_GROUPS, MENU_LINKS } from '../content';
 import styles from '../v2.module.css';
 
-/** `base` makes in-page anchors work from other pages (e.g. base='/v2' turns '#process' into '/v2#process'). */
+/** `base` makes in-page anchors work from other pages (e.g. base='/' turns '#process' into '/#process'). */
 export function MobileMenu({ base = '' }: { base?: string }) {
   const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
   const [open, setOpen] = useState(false);
@@ -49,13 +48,13 @@ export function MobileMenu({ base = '' }: { base?: string }) {
           onClick={close}
         >
           <Image
-            src='/v2/kvetio-mark-black.png'
-            alt='Kvetio'
+            src='/v2/kvet-mark.png'
+            alt={BRAND}
             width={40}
             height={40}
             priority
           />
-          <span className={styles.brandName}>Kvetio</span>
+          <span className={styles.brandName}>{BRAND}</span>
         </a>
         <button
           type='button'
@@ -133,14 +132,8 @@ export function MobileMenu({ base = '' }: { base?: string }) {
               href={base ? '/contact' : '#contact'}
               onClick={close}
             >
-              Let&apos;s talk
+              {CTA_LABEL}
             </a>
-            <Link
-              className={styles.menuSecondary}
-              href='/contact'
-            >
-              Send a brief
-            </Link>
           </div>
         </nav>
       </div>

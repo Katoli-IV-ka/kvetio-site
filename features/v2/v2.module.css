@@ -708,12 +708,12 @@
   }
 
   .capCards:hover .capCard,
-  .capCards:focus-within .capCard {
+  .capCards:has(.capCard:focus-visible) .capCard {
     flex-grow: 0.8;
   }
 
   .capCards .capCard:hover,
-  .capCards .capCard:focus-within {
+  .capCards:not(:hover) .capCard:focus-visible {
     flex-grow: 1.8;
   }
 
@@ -729,7 +729,7 @@
   }
 
   .capCard:hover .capText,
-  .capCard:focus-within .capText {
+  .capCards:not(:hover) .capCard:focus-visible .capText {
     display: block;
   }
 
@@ -743,7 +743,7 @@
   }
 
   .capCard:hover .capMore,
-  .capCard:focus-within .capMore {
+  .capCards:not(:hover) .capCard:focus-visible .capMore {
     grid-template-rows: 1fr;
     opacity: 1;
     transition-delay: 0.1s;

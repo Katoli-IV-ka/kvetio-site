@@ -9,8 +9,6 @@ import { Infrastructure } from '../features/v2/ui/Infrastructure';
 import { LinkedIn } from '../features/v2/ui/LinkedIn';
 import { MobileMenu } from '../features/v2/ui/MobileMenu';
 import { Process } from '../features/v2/ui/Process';
-import { Projects } from '../features/v2/ui/Projects';
-import { Proof } from '../features/v2/ui/Proof';
 import { SITE_URL, SiteHead } from '../features/v2/ui/SiteHead';
 import { WhatWeDo } from '../features/v2/ui/WhatWeDo';
 import { WhyKvet } from '../features/v2/ui/WhyKvet';
@@ -59,8 +57,6 @@ export default function HomePage() {
           <DatasetPatterns />
           <Infrastructure />
           <Process />
-          <Projects />
-          <Proof />
           <Contact />
           <WhyKvet />
           <LinkedIn />

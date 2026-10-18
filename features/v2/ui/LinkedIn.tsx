@@ -33,7 +33,7 @@ export function LinkedIn() {
               <div className={styles.liTop}>
                 <span className={styles.liLogo}>
                   <img
-                    src='/v2/kvetio-mark-black.png'
+                    src='/v2/kvet-mark.png'
                     alt=''
                     width={44}
                     height={44}

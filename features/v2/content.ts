@@ -7,7 +7,6 @@ export const NAV_LINKS = [
   { label: 'Physical AI', href: '#physical-ai' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
-  { label: 'Projects', href: '#projects' },
 ];
 
 /* ---------- What we do: three ways of creating data ---------- */
@@ -212,73 +211,6 @@ export const PROCESS_STEPS = [
   },
 ];
 
-/* ---------- Selected projects ----------
-   PLACEHOLDERS: replace every bracketed value with a real anonymized project before launch. */
-
-export const PROJECTS_ARE_PLACEHOLDERS = true;
-
-export const PROJECTS = [
-  {
-    area: 'Physical AI & Robotics',
-    title: '[Project title, e.g. household manipulation demonstrations]',
-    rows: [
-      { label: 'Task', text: '[What the model had to learn]' },
-      { label: 'Setup', text: '[Cameras, sensors, locations, performers]' },
-      { label: 'Scale', text: '[Hours / clips / participants / countries]' },
-      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
-    ],
-  },
-  {
-    area: 'Visual & Generative AI',
-    title: '[Project title, e.g. editing pairs for an image model]',
-    rows: [
-      { label: 'Task', text: '[What the model had to learn]' },
-      { label: 'Setup', text: '[Studio, lighting, capture and post-production]' },
-      { label: 'Scale', text: '[Images / pairs / variations]' },
-      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
-    ],
-  },
-  {
-    area: 'Data Collection at Scale',
-    title: '[Project title, e.g. multi-country everyday activities]',
-    rows: [
-      { label: 'Task', text: '[What the model had to learn]' },
-      { label: 'Setup', text: '[Contributors, local teams, protocol]' },
-      { label: 'Scale', text: '[Contributors / countries / hours]' },
-      { label: 'QA & delivery', text: '[Checks, format, metadata, rights]' },
-    ],
-  },
-];
-
-/* ---------- Scale & proof ----------
-   PLACEHOLDERS: the numbers below must be replaced with real figures before launch. */
-
-export const STATS = [
-  { value: '[XX]', label: 'countries with production or collection' },
-  { value: '[XX]', label: 'contributors and performers' },
-  { value: '[XX]', label: 'hours of data captured' },
-  { value: '[XX]', label: 'datasets delivered' },
-];
-
-export const RIGHTS_READY = [
-  {
-    title: 'Releases',
-    text: 'Signed likeness and location releases from every participant and site.',
-  },
-  {
-    title: 'Licensing',
-    text: 'Usage terms that allow commercial training, documented per asset.',
-  },
-  {
-    title: 'Metadata',
-    text: 'Setup, scenario, participant and capture details delivered with the data.',
-  },
-  {
-    title: 'QA',
-    text: 'Sample review and validation of labels, structure and coverage before handover.',
-  },
-];
-
 /* ---------- Why Kvet ---------- */
 
 export const WHY = [
@@ -333,7 +265,6 @@ export const FOOTER_COLUMNS = [
       { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
       { label: 'How we work', href: '#process' },
-      { label: 'Projects', href: '#projects' },
       { label: 'Why Kvet', href: '#why' },
     ],
   },
@@ -396,6 +327,5 @@ export const MENU_LINKS = [
   { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Why Kvet', href: '#why' },
 ];

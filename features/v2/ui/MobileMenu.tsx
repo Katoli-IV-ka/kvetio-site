@@ -48,7 +48,7 @@ export function MobileMenu({ base = '' }: { base?: string }) {
           onClick={close}
         >
           <Image
-            src='/v2/kvetio-mark-black.png'
+            src='/v2/kvet-mark.png'
             alt={BRAND}
             width={40}
             height={40}

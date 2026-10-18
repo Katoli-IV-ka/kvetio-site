@@ -57,7 +57,7 @@ export function Header({ base = '' }: { base?: string }) {
           href={base || '/'}
         >
           <Image
-            src='/v2/kvetio-mark-black.png'
+            src='/v2/kvet-mark.png'
             alt={BRAND}
             width={32}
             height={32}

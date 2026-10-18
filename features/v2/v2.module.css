@@ -824,129 +824,6 @@
   color: #000;
 }
 
-/* Selected projects */
-.projects {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-item);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .projects {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.project {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px;
-  border: 1px solid #e5e5e5;
-  border-radius: 16px;
-  background: #fff;
-}
-
-.projectArea {
-  margin: 0;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8a8a8a;
-}
-
-.projectTitle {
-  margin: 0;
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #171717;
-}
-
-.projectRows {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 8px 0 0;
-}
-
-.projectRows div {
-  display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
-  gap: 12px;
-  padding-top: 12px;
-  border-top: 1px dashed #d1d5db;
-}
-
-.projectRows dt {
-  font-size: var(--fs-caption);
-  line-height: 20px;
-  color: #8a8a8a;
-}
-
-.projectRows dd {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #171717;
-}
-
-/* Scale & proof */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-head) var(--col-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #000;
-}
-
-.statValue {
-  font-size: var(--fs-display);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #000;
-}
-
-.statLabel {
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
-}
-
-.proofRights {
-  margin-top: var(--gap-item);
-}
-
-@media (min-width: 1024px) {
-  .proofRights .typeList {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--gap-block);
-  }
-}
-
 /* Why Kvet: comparison table, the Kvet column highlighted */
 .compareTable {
   width: 100%;
@@ -1254,7 +1131,7 @@
   }
 }
 
-/* ---------- Generic section frame (what we do, datasets, projects, proof, why) ---------- */
+/* ---------- Generic section frame (what we do, datasets, why) ---------- */
 
 .section {
   background: #fff;
@@ -1302,18 +1179,6 @@
   .sectionLead {
     flex: none;
   }
-}
-
-/* marks content that must be replaced with real material before launch */
-.draftNote {
-  align-self: flex-start;
-  margin: 0;
-  padding: 6px 12px;
-  border: 1px dashed #b42318;
-  border-radius: 999px;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #b42318;
 }
 
 /* ---------- Process ---------- */
@@ -1917,13 +1782,6 @@
   color: #d4d4d4;
 }
 
-.footerArt {
-  display: block;
-  width: 100%;
-  height: clamp(120px, 18vw, 260px);
-  object-fit: cover;
-}
-
 .footerInner {
   max-width: var(--container);
   margin: 0 auto;
@@ -1935,7 +1793,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  padding: 16px 0 48px;
+  padding: 48px 0;
 }
 
 .footerHeading {
@@ -2036,7 +1894,7 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 24px 0 var(--gap-block);
+    padding: var(--gap-block) 0;
   }
 
   .footerCols {

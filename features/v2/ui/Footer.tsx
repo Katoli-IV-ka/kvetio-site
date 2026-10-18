@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- decorative art positioned with exact crops */
 import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
@@ -6,12 +5,6 @@ export function Footer({ base = '' }: { base?: string }) {
   const to = (href: string) => (href.startsWith('#') ? `${base}${href}` : href);
   return (
     <footer className={styles.footer}>
-      <img
-        className={styles.footerArt}
-        src='/v2/footer-gradient.webp'
-        alt=''
-        loading='lazy'
-      />
       <div className={styles.footerInner}>
         <div className={styles.footerCta}>
           <p className={styles.footerHeading}>

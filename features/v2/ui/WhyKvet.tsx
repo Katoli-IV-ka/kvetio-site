@@ -10,10 +10,6 @@ export function WhyKvet() {
       <div className={styles.sectionInner}>
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Why {BRAND}</h2>
-          <p className={styles.sectionLead}>
-            Not a marketplace, a crowdsourcing platform or a production studio: a data production
-            company built around your model&apos;s requirements.
-          </p>
         </div>
         <table className={styles.compareTable}>
           <thead>

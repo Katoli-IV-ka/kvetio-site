@@ -36,7 +36,7 @@ export const WAYS: {
 
 /* ---------- Core capabilities: tall cards, colour or photo grounds ---------- */
 
-/** halftone: light ground with a dot pattern; dark: plain dark ground; photo: dimmed, screened photo */
+/** halftone: plain light ground; dark: plain dark ground; photo: black-and-white, evenly dimmed */
 export type CapabilityLook = 'halftone' | 'dark' | 'photo';
 
 export type Capability = {

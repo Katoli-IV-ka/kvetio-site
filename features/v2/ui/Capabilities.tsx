@@ -34,10 +34,6 @@ export function Capabilities() {
                   loading='lazy'
                 />
               )}
-              <span
-                className={styles.capTexture}
-                aria-hidden='true'
-              />
               <span className={styles.capNum}>/{String(index + 1).padStart(2, '0')}</span>
               <div className={styles.capCopy}>
                 <h3 className={styles.capTitle}>{item.title}</h3>

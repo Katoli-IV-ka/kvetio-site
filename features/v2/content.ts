@@ -34,76 +34,75 @@ export const WAYS: {
   },
 ];
 
-/* ---------- Core capabilities: photo cards, one per direction ---------- */
+/* ---------- Core capabilities: tall cards, colour or photo grounds ---------- */
 
-/** photo: picture under a dark shade, white type; paper: light picture, dark type */
-export type CardVariant = 'photo' | 'paper';
+/** halftone: light ground with a dot pattern; dark: plain dark ground; photo: dimmed, screened photo */
+export type CapabilityLook = 'halftone' | 'dark' | 'photo';
 
 export type Capability = {
   /** anchor id, used by the menu and footer links */
   id: string;
   title: string;
   text: string;
-  image: string;
-  variant: CardVariant;
-  spec: { title: string; text: string }[];
+  look: CapabilityLook;
+  image?: string;
+  /** what the direction covers, revealed when the card opens */
+  details: string[];
 };
 
 export const CAPABILITIES: Capability[] = [
   {
     id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Controlled image and video data for training, post-training and evaluation.',
-    image: '/v2/uc/9.webp',
-    variant: 'photo',
-    spec: [
-      { title: 'Images & RAW', text: 'Controlled collections, RAW / ProRAW' },
-      { title: 'Multi-view', text: 'Several cameras on one subject or scene' },
-      { title: 'Generative video', text: 'Continuity, motion and visual variation' },
-      { title: 'Editing pairs', text: 'Source, instruction and output' },
-      { title: '2D, 3D & VFX', text: 'Controlled and transformation data' },
+    text: 'Controlled image and video data for training, post-training and evaluation: RAW, multi-view, editing pairs, 2D/3D and VFX.',
+    look: 'halftone',
+    details: [
+      'Images & RAW / ProRAW',
+      'Multi-view capture',
+      'Generative video',
+      'Editing pairs',
+      '2D, 3D & VFX',
     ],
   },
   {
     id: 'human-activity',
     title: 'Human Activity & Real-World Interaction',
-    text: 'Everyday and professional activities, produced in controlled or natural environments.',
+    text: 'Everyday and professional tasks, human-object interaction and multi-person scenes, in controlled or natural settings.',
+    look: 'photo',
     image: '/v2/photos/pov-kitchen.webp',
-    variant: 'photo',
-    spec: [
-      { title: 'Skilled tasks', text: 'Multi-step professional workflows' },
-      { title: 'Human-object interaction', text: 'Hands, tools and objects in use' },
-      { title: 'Task sequences', text: 'Demonstrations from start to finish' },
-      { title: 'Hands & body', text: 'Fine-grained gestures and movement' },
-      { title: 'Dialogue & groups', text: 'Conversations and multi-person scenes' },
+    details: [
+      'Skilled tasks',
+      'Human-object interaction',
+      'Task sequences',
+      'Hands & body',
+      'Dialogue & groups',
     ],
   },
   {
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
-    text: 'Human demonstrations for teaching robots, delivered synchronized, calibrated and documented.',
-    image: '/v2/photos/robot-wireframe.webp',
-    variant: 'photo',
-    spec: [
-      { title: 'Egocentric', text: 'Head- or chest-mounted, hands in frame' },
-      { title: 'Multi-camera & RGB-D', text: 'Synced views with depth' },
-      { title: 'Motion & sensors', text: 'Hand and body motion, IMU, force/contact' },
-      { title: 'Sync & calibration', text: 'Streams aligned, setups logged' },
-      { title: 'Failure & recovery', text: 'Retries recorded on purpose' },
+    text: 'Human demonstrations for robots: egocentric, multi-camera, RGB-D and sensor data, synchronized and calibrated.',
+    look: 'dark',
+    details: [
+      'Egocentric / POV',
+      'Multi-camera & RGB-D',
+      'Motion & sensors',
+      'Sync & calibration',
+      'Failure & recovery',
     ],
   },
   {
     id: 'collection-at-scale',
     title: 'Data Collection & Production at Scale',
-    text: 'One dataset specification, run from pilot to full volume across teams and countries.',
+    text: 'One dataset specification, run from pilot to full volume across contributors, teams and countries.',
+    look: 'photo',
     image: '/v2/photos/crowd.webp',
-    variant: 'photo',
-    spec: [
-      { title: 'Controlled production', text: 'Sets, cast and protocol' },
-      { title: 'Distributed collection', text: 'Contributors and local teams' },
-      { title: 'Multi-country', text: 'The same spec in every location' },
-      { title: 'Rights', text: 'Releases and licensing for training' },
-      { title: 'Metadata & QA', text: 'Annotation and checks built in' },
+    details: [
+      'Controlled production',
+      'Distributed collection',
+      'Multi-country',
+      'Releases & rights',
+      'Metadata & QA',
     ],
   },
 ];

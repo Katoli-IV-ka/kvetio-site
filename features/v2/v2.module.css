@@ -548,138 +548,227 @@
   }
 }
 
-/* ---------- Core capabilities: four cards, photo on top, copy below on a dark ground ---------- */
+/* ---------- Core capabilities: tall cards, number on top, copy at the bottom, no fades ---------- */
 
 .capCards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--gap-item);
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .capCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 14px;
   scroll-margin-top: 80px; /* menu links land below the sticky bar */
 }
 
-/* the photo is no longer behind the copy: it takes the top of the card and fades into the ground */
-.capCard .card {
-  justify-content: flex-start;
-  min-height: 0;
-  background: #111;
-}
-
-.capCard .cardImage,
-.capCard .cardShade {
+.capNum,
+.capCopy {
   position: relative;
-  inset: auto;
-  flex: none;
-  max-width: none; /* overrides the global img cap so the photo reaches both card edges */
-  width: calc(100% + 48px);
-  height: 240px;
-  margin: -24px -24px 0;
 }
 
-.capCard .cardShade {
-  margin-top: -240px; /* lies over the photo */
-  background: linear-gradient(to bottom, rgba(17, 17, 17, 0) 55%, #111 100%);
+.capNum {
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  opacity: 0.75;
 }
 
-.capCard .cardBody {
-  margin-top: 20px;
+.capCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.capTitle {
+  margin: 0;
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.capText {
+  max-width: 360px;
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  opacity: 0.85;
+}
+
+.capPhoto,
+.capTexture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* light ground with a halftone blot fading out of the left edge */
+.capCard[data-look='halftone'] {
+  background: #bdbcb1;
+  color: #141414;
+}
+
+.capCard[data-look='halftone'] .capTexture {
+  background: radial-gradient(circle, #1a1a1a 0 36%, transparent 40%) 0 0 / 9px 9px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 40% at 0% 34%, #000 0%, transparent 100%);
+  mask-image: radial-gradient(ellipse 55% 40% at 0% 34%, #000 0%, transparent 100%);
+}
+
+/* plain dark ground with a faint dot screen */
+.capCard[data-look='dark'] {
+  background: #1c1c21;
+  color: #fff;
+}
+
+.capCard[data-look='dark'] .capTexture {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0 30%, transparent 34%) 0 0 / 6px
+    6px;
+}
+
+/* photo: evenly dimmed (no fade) and covered by a fine dot screen, so white copy reads anywhere */
+.capCard[data-look='photo'] {
+  background: #111;
+  color: #fff;
+}
+
+.capPhoto {
+  object-fit: cover;
+  filter: brightness(0.58) contrast(1.05) saturate(0.9);
+}
+
+.capCard[data-look='photo'] .capTexture {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.45) 0 35%, transparent 40%) 0 0 / 4px 4px;
+}
+
+.capCard[data-look='photo'] .capTitle,
+.capCard[data-look='photo'] .capText {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* what the direction covers: a short list on hairlines, small type */
+.capDetails {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+}
+
+.capDetails li {
+  padding: 7px 0;
+  border-top: 1px solid currentColor;
+  border-top-color: color-mix(in srgb, currentColor 25%, transparent);
+}
+
+.capCard:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+}
+
+/* phones and tablets: everything is shown, cards grow with their copy */
+.capCard {
+  aspect-ratio: auto;
+  min-height: 440px;
 }
 
 @media (min-width: 640px) {
   .capCards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (min-width: 1024px) {
-  .capCards {
-    gap: var(--col-gap);
-  }
-
-  .capCard .cardImage,
-  .capCard .cardShade {
-    width: calc(100% + 64px);
-    height: 300px;
-    margin: -32px -32px 0;
-  }
-
-  .capCard .cardShade {
-    margin-top: -300px;
-  }
-
-  .capCard .cardBody {
-    max-width: 440px;
+  .capCard {
+    min-height: 520px;
   }
 }
 
-/* wide screens: all four in one row on a shared row grid (subgrid), so numbers, titles, text and
-   tags start on the same lines in every card; the photo fills the first row */
-@media (min-width: 1280px) {
+/* desktop with a mouse: four tall cards in a row; title and the start of the text by default, the
+   hovered card widens while the others narrow, and the rest of the text and the list open */
+@media (min-width: 1280px) and (hover: hover) {
   .capCards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: 280px auto auto auto auto;
-    gap: 0 var(--gap-item);
+    display: flex;
+    gap: 16px;
   }
 
   .capCard {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 580px;
+    min-height: 0;
+    padding: 24px;
+    transition: flex-grow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .capCards:hover .capCard,
+  .capCards:focus-within .capCard {
+    flex-grow: 0.8;
+  }
+
+  .capCards .capCard:hover,
+  .capCards .capCard:focus-within {
+    flex-grow: 1.8;
+  }
+
+  .capTitle {
+    font-size: var(--fs-h3-lg);
+  }
+
+  .capText {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .capCard:hover .capText,
+  .capCard:focus-within .capText {
+    display: block;
+  }
+
+  .capMore {
     display: grid;
-    grid-row: 1 / span 5;
-    grid-template-rows: subgrid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.45s ease,
+      opacity 0.35s ease;
   }
 
-  .capCard .card {
-    display: grid;
-    grid-row: 1 / -1;
-    grid-template-rows: subgrid;
-    row-gap: 12px;
-    padding: 24px 24px 28px;
+  .capCard:hover .capMore,
+  .capCard:focus-within .capMore {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition-delay: 0.1s;
   }
 
-  .capCard .cardImage,
-  .capCard .cardShade {
-    grid-row: 1;
-    width: calc(100% + 48px);
-    height: calc(100% + 24px);
-    margin: -24px -24px 8px;
+  .capDetails {
+    min-height: 0;
+    overflow: hidden;
   }
 
-  .capCard .cardBody {
-    display: contents;
+  /* the copy keeps a fixed width while the card grows, so it does not re-wrap mid-animation */
+  .capCopy {
+    width: min(100%, 360px);
   }
+}
 
-  .capCard .cardNum,
-  .capCard .cardTitle,
-  .capCard .cardText,
-  .capCard .cardTags {
-    position: relative;
-  }
-
-  .capCard .cardNum {
-    grid-row: 2;
-    align-self: end;
-  }
-
-  .capCard .cardTitle {
-    grid-row: 3;
-    font-size: var(--fs-h3);
-    line-height: 24px;
-  }
-
-  .capCard .cardText {
-    grid-row: 4;
-    font-size: var(--fs-body);
-    line-height: 20px;
-  }
-
-  .capCard .cardTags {
-    grid-row: 5;
-    align-content: start;
-    margin: 4px 0 0;
+@media (prefers-reduced-motion: reduce) {
+  .capCard,
+  .capMore {
+    transition: none;
   }
 }
 
@@ -947,416 +1036,6 @@
   font-size: var(--fs-caption);
   line-height: 16px;
   color: #b42318;
-}
-
-/* poster card: photo frame, copy at the bottom left, two treatments (photo, paper) */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 100%;
-  min-height: 420px;
-  padding: 24px;
-  overflow: hidden;
-  background: #efede7;
-  color: #fff;
-}
-
-@media (min-width: 1024px) {
-  .card {
-    min-height: 520px;
-    padding: 32px;
-  }
-}
-
-.cardImage {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cardShade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.78) 0%,
-      rgba(0, 0, 0, 0.35) 55%,
-      rgba(0, 0, 0, 0.15) 100%
-    ),
-    linear-gradient(to right, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
-}
-
-.cardBody {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 640px;
-}
-
-.cardNum {
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  opacity: 0.8;
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: var(--fs-h3-lg);
-  line-height: var(--lh-heading);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-.cardText {
-  margin: 0;
-  font-size: var(--fs-lead);
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.cardTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.cardTags li {
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-}
-
-/* paper: cream poster with the picture multiplied into it, dark type */
-.card[data-variant='paper'] {
-  color: #1b1a17;
-}
-
-.card[data-variant='paper'] .cardImage {
-  mix-blend-mode: multiply;
-  opacity: 0.5;
-}
-
-/* cut-out art on the light card stands whole at the right edge, clear of the copy */
-@media (min-width: 640px) {
-  .card[data-variant='paper'] .cardImage {
-    object-fit: contain;
-    object-position: right center;
-    opacity: 0.6;
-  }
-
-  .card[data-variant='paper'] .cardBody {
-    max-width: 52%;
-  }
-}
-
-.card[data-variant='paper'] .cardShade {
-  display: none;
-}
-
-.card[data-variant='paper'] .cardText {
-  color: #3d3b36;
-}
-
-.card[data-variant='paper'] .cardTags li {
-  border-color: rgba(27, 26, 23, 0.35);
-}
-
-/* Data we produce: dataset patterns as white cards on the grey section */
-.patterns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-item);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 640px) {
-  .patterns {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .patterns {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.pattern {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 24px;
-  border: 1px solid #e5e5e5;
-  background: #fff;
-}
-
-.patternTitle {
-  margin: 0;
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #171717;
-}
-
-.patternText {
-  margin: 0 0 16px;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
-}
-
-.patternSpec {
-  margin: auto 0 0;
-  padding-top: 16px;
-  border-top: 1px dashed #e0e0e0;
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #000;
-}
-
-/* Selected projects */
-.projects {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap-item);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .projects {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.project {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px;
-  border: 1px solid #e5e5e5;
-  border-radius: 16px;
-  background: #fff;
-}
-
-.projectArea {
-  margin: 0;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8a8a8a;
-}
-
-.projectTitle {
-  margin: 0;
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #171717;
-}
-
-.projectRows {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 8px 0 0;
-}
-
-.projectRows div {
-  display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
-  gap: 12px;
-  padding-top: 12px;
-  border-top: 1px dashed #d1d5db;
-}
-
-.projectRows dt {
-  font-size: var(--fs-caption);
-  line-height: 20px;
-  color: #8a8a8a;
-}
-
-.projectRows dd {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #171717;
-}
-
-/* Scale & proof */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-head) var(--col-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 1024px) {
-  .stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #000;
-}
-
-.statValue {
-  font-size: var(--fs-display);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #000;
-}
-
-.statLabel {
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #737373;
-}
-
-.proofRights {
-  margin-top: var(--gap-item);
-}
-
-@media (min-width: 1024px) {
-  .proofRights .typeList {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--gap-block);
-  }
-}
-
-/* Why Kvet: comparison table, the Kvet column highlighted */
-.compareTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--fs-body);
-  line-height: 20px;
-}
-
-.compareTable th,
-.compareTable td {
-  padding: 20px 24px;
-  border: 1px solid #e5e5e5;
-  text-align: left;
-  vertical-align: top;
-}
-
-.compareTable thead th {
-  padding-top: 14px;
-  padding-bottom: 14px;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8a8a8a;
-}
-
-.compareTable tbody th {
-  width: 26%;
-  font-size: var(--fs-h3);
-  line-height: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #171717;
-}
-
-.compareTable tbody td {
-  color: #737373;
-}
-
-.compareTable .compareUs {
-  width: 40%;
-  background: #f6f6f4;
-  font-size: var(--fs-lead);
-  line-height: 24px;
-  color: #000;
-}
-
-.compareTable thead .compareUs {
-  border-color: #000;
-  background: #000;
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #fff;
-}
-
-/* phones: each row becomes a card, cells labelled from data-label */
-@media (max-width: 767px) {
-  .compareTable thead {
-    display: none;
-  }
-
-  .compareTable,
-  .compareTable tbody,
-  .compareTable tr,
-  .compareTable th,
-  .compareTable td {
-    display: block;
-    width: auto;
-  }
-
-  .compareTable tbody th,
-  .compareTable .compareUs {
-    width: auto;
-  }
-
-  .compareTable tr {
-    margin-bottom: var(--gap-item);
-    border: 1px solid #e5e5e5;
-  }
-
-  .compareTable th,
-  .compareTable td {
-    padding: 16px;
-    border: 0;
-  }
-
-  .compareTable tbody td {
-    border-top: 1px solid #e5e5e5;
-  }
-
-  .compareTable td::before {
-    display: block;
-    margin-bottom: 6px;
-    font-size: var(--fs-caption);
-    line-height: 16px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #8a8a8a;
-    content: attr(data-label);
-  }
 }
 
 /* ---------- Process ---------- */

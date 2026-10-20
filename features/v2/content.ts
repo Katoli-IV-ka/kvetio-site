@@ -206,7 +206,7 @@ export const PROCESS_STEPS = [
   },
   {
     title: 'QA',
-    text: 'Review samples, fix inconsistencies, and validate labels, metadata and structure.',
+    text: 'Review samples, fix inconsistencies, and validate metadata, structure and annotations where required.',
   },
   {
     title: 'Delivery',

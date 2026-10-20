@@ -123,19 +123,24 @@ export const DATASET_PATTERNS = [
     spec: 'Synced views · RGB-D · hand pose',
   },
   {
-    title: 'Editing & transformation pairs',
-    text: 'A source frame, an instruction and the edited result: relighting, cleanup, object and background changes.',
-    spec: 'Source · instruction · output',
+    title: 'Creative workflow & edit trajectories',
+    text: 'Datasets that capture the editing process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
+    spec: 'Source → instruction → actions → versions → output',
   },
   {
-    title: 'Generative video sets',
+    title: '3D, graphics & VFX production',
+    text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects, including animation, compositing, cleanup, controlled visual variations and synthetic assets.',
+    spec: 'Animation · compositing · synthetic assets',
+  },
+  {
+    title: 'Video data for generative AI',
     text: 'Shots planned for continuity, motion and controlled visual variation, for training and evaluation.',
     spec: 'Video · camera & lighting metadata',
   },
   {
     title: 'Controlled image collections',
     text: 'People, objects and environments shot under planned variations of light, angle and lens.',
-    spec: 'RAW / ProRAW · multi-view',
+    spec: 'RAW · multi-view · planned variations',
   },
   {
     title: 'Skilled workflows',
@@ -170,8 +175,8 @@ export const INFRASTRUCTURE = [
     text: 'POV rigs, multi-camera arrays, RGB-D and sensor setups built for the protocol.',
   },
   {
-    title: 'Post-production',
-    text: 'Editing, transformation, 2D/3D and VFX work done as part of the data pipeline.',
+    title: 'Post-production, 3D & VFX',
+    text: 'Editing, animation, compositing and VFX teams for standalone projects or inside the data pipeline.',
   },
   {
     title: 'International teams',
@@ -239,7 +244,7 @@ export const SOLUTION_LINKS = [
   { label: 'Generative Video', href: '/generative-video' },
   { label: 'Egocentric Data', href: '/egocentric-data' },
   { label: 'Image Datasets', href: '/image-data' },
-  { label: 'AI Editing Data', href: '/ai-editing-data' },
+  { label: 'Creative Workflow Data', href: '/ai-editing-data' },
   { label: 'Custom Data Collection', href: '/custom-data-collection' },
 ];
 
@@ -298,7 +303,7 @@ export const MENU_GROUPS: MenuGroup[] = [
     items: [
       {
         label: 'Visual & Generative AI',
-        text: 'Images, video, editing, 3D, VFX',
+        text: 'Images, video, edit trajectories, 3D & VFX',
         href: '#visual-ai',
       },
       {

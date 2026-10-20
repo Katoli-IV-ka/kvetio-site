@@ -11,8 +11,8 @@ export function WhatWeDo() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>What we do</h2>
           <p className={styles.sectionLead}>
-            We start from what your model has to learn, not from a catalog of existing files. Then
-            we choose the route that gets you that data, or combine all three.
+            Every project starts with a specific data requirement. We build the right production and
+            collection approach around it.
           </p>
         </div>
         <ul className={styles.ways}>

@@ -18,8 +18,8 @@ export const WAYS: {
 }[] = [
   {
     title: 'Controlled Production',
-    tags: ['Sets & locations', 'Cast', 'Actions & objects', 'Camera setup', 'Protocol'],
-    text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
+    tags: ['Sets & locations', 'Participants', 'Actions & objects', 'Capture setup', 'Protocol'],
+    text: 'We build the environment, participants, actions, objects, capture setup and protocol around the requirements of the project.',
   },
   {
     title: 'Content Sourcing & Licensing',
@@ -87,7 +87,7 @@ export const CAPABILITIES: Capability[] = [
     image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
-      'Human-object interaction & manipulation',
+      'Manipulation & tool use',
       'Multi-camera & RGB-D',
       'Motion & sensors',
       'Sync & calibration',
@@ -177,11 +177,11 @@ export const INFRASTRUCTURE = [
   },
   {
     title: 'Post-production, 3D & VFX',
-    text: 'Editing, animation, compositing and VFX teams for standalone projects or inside the data pipeline.',
+    text: 'Editing, creative workflows, graphics, 3D and VFX production — delivered as standalone data projects or integrated into larger dataset pipelines.',
   },
   {
     title: 'International teams',
-    text: 'Local producers and contributor networks running the same spec in every country.',
+    text: 'Local production teams and contributor networks working to a consistent specification across countries and regions.',
   },
 ];
 
@@ -323,7 +323,7 @@ export const MENU_GROUPS: MenuGroup[] = [
       },
       {
         label: 'Physical AI & Robotics',
-        text: 'Egocentric, multi-camera, RGB-D, sensors',
+        text: 'Egocentric, manipulation, RGB-D, sensors',
         href: '#physical-ai',
       },
       {

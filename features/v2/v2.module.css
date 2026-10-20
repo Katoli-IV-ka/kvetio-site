@@ -824,7 +824,7 @@
   color: #000;
 }
 
-/* Why Kvet: numbered columns — a mono numeral over a title and a short text, one numeral black */
+/* Why Kvet: numbered columns, three by two — a mono numeral over a title and a short text, one numeral black */
 .whyList {
   display: grid;
   grid-template-columns: 1fr;
@@ -871,13 +871,6 @@
 @media (min-width: 1024px) {
   .whyList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-/* one row of six, as in the reference layout */
-@media (min-width: 1280px) {
-  .whyList {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 

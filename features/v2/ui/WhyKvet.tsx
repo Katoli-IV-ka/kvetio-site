@@ -1,6 +1,9 @@
 import { BRAND, WHY } from '../content';
 import styles from '../v2.module.css';
 
+/** which advantage carries the black numeral until another one is hovered */
+const ACCENT_INDEX = 1;
+
 export function WhyKvet() {
   return (
     <section
@@ -11,17 +14,24 @@ export function WhyKvet() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Why {BRAND}</h2>
         </div>
-        <ul className={`${styles.ways} ${styles.whyGrid}`}>
-          {WHY.map((item) => (
+        <ol className={styles.whyList}>
+          {WHY.map((item, index) => (
             <li
               key={item.title}
-              className={styles.way}
+              className={styles.whyItem}
+              data-accent={index === ACCENT_INDEX || undefined}
             >
-              <h3 className={styles.wayTitle}>{item.title}</h3>
-              <p className={styles.wayText}>{item.text}</p>
+              <span
+                className={styles.whyNum}
+                aria-hidden='true'
+              >
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className={styles.whyTitle}>{item.title}</h3>
+              <p className={styles.whyText}>{item.text}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

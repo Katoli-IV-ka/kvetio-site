@@ -1,7 +1,7 @@
 import { BRAND, WHY } from '../content';
 import styles from '../v2.module.css';
 
-/** which advantage carries the black numeral until another one is hovered */
+/** which advantage carries the black numeral */
 const ACCENT_INDEX = 1;
 
 export function WhyKvet() {

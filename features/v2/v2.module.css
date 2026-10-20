@@ -824,7 +824,7 @@
   color: #000;
 }
 
-/* Why Kvet: big cropped numerals over a title and a short text; one numeral black, the rest grey */
+/* Why Kvet: numbered columns — a mono numeral over a title and a short text, one numeral black */
 .whyList {
   display: grid;
   grid-template-columns: 1fr;
@@ -834,47 +834,29 @@
   list-style: none;
 }
 
-.whyItem {
-  display: flex;
-  flex-direction: column;
-}
-
-/* the lower part of each numeral is cut off by the box, as in the reference layout */
 .whyNum {
   display: block;
-  height: 0.62em;
-  margin-bottom: 20px;
-  overflow: hidden;
-  font-size: 72px;
-  line-height: 0.82;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-family: var(--mono);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
   color: #d9d9d9;
-  transition: color 0.2s;
 }
 
-.whyItem[data-accent] .whyNum,
-.whyItem:hover .whyNum {
+.whyItem[data-accent] .whyNum {
   color: #000;
 }
 
-/* hovering another advantage moves the black numeral to it */
-.whyList:hover .whyItem[data-accent]:not(:hover) .whyNum {
-  color: #d9d9d9;
-}
-
 .whyTitle {
-  margin: 0;
+  margin: var(--gap-item) 0 0;
   font-size: var(--fs-h3);
   line-height: 24px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: #171717;
+  color: #000;
 }
 
 .whyText {
-  max-width: 360px;
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   font-size: var(--fs-body);
   line-height: 20px;
   color: #737373;
@@ -890,9 +872,12 @@
   .whyList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .whyNum {
-    font-size: 112px;
+/* one row of six, as in the reference layout */
+@media (min-width: 1280px) {
+  .whyList {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 

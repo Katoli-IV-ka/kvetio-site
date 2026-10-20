@@ -11,10 +11,7 @@ export function Infrastructure() {
         <div className={styles.infra}>
           <div className={styles.infraHead}>
             <h2 className={styles.heading}>Production infrastructure</h2>
-            <p className={styles.sectionLead}>
-              Global production, one dataset specification. We build local production and
-              contributor teams around each project — across locations, countries and regions.
-            </p>
+            <p className={styles.sectionLead}>Global production, one dataset specification.</p>
           </div>
           <ol className={styles.infraList}>
             {INFRASTRUCTURE.map((item) => (

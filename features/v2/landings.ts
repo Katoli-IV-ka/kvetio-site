@@ -79,9 +79,9 @@ export const LANDINGS: Landing[] = [
     image: '/v2/ways/production.webp',
     title: 'Training & evaluation data for generative video models',
     lead: 'Video planned for continuity, motion and controlled visual variation.',
-    text: 'We produce footage the way your model needs to see the world — with controlled camera, lighting, motion and scene changes, plus editing and transformation data built on top of it.',
+    text: 'We produce footage the way your model needs to see the world — with controlled camera, lighting, motion and scene changes, plus edit trajectories and 3D/VFX data built on top of it.',
     description:
-      'Custom video datasets for generative video models: continuity, motion, controlled visual variation, editing and transformation data produced by Kvet.',
+      'Custom video datasets for generative video models: continuity, motion, controlled visual variation, edit trajectories and 3D/VFX data produced by Kvet.',
     produce: [
       {
         title: 'Continuity & motion',
@@ -96,8 +96,8 @@ export const LANDINGS: Landing[] = [
         text: 'Several synchronized cameras recording one action for 3D-aware models.',
       },
       {
-        title: 'Editing & transformation',
-        text: 'Source, instruction and output clips for video editing models.',
+        title: 'Edit trajectories',
+        text: 'Source clips, instructions, editing steps and results for video editing models.',
       },
       {
         title: 'Evaluation sets',
@@ -120,7 +120,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'Post-production',
-        text: '2D/3D and VFX work used to create controlled and transformation data.',
+        text: '3D, graphics and VFX production for controlled, synthetic and transformation data.',
       },
       {
         title: 'Rights-ready delivery',
@@ -239,16 +239,20 @@ export const LANDINGS: Landing[] = [
   },
   {
     slug: 'ai-editing-data',
-    name: 'AI Editing Data',
-    title: 'Editing & transformation datasets',
-    lead: 'Source, instruction and output — produced, not scraped.',
-    text: 'We create paired data for image and video editing models: the original, the instruction and the result, made with real production and post-production rather than synthetic guesses.',
+    name: 'Creative Workflow Data',
+    title: 'Creative workflow & edit trajectory datasets',
+    lead: 'Not just the result — every step between the source and the final output.',
+    text: 'Datasets that capture the editing process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs — from simple edit pairs to full workflow trajectories.',
     description:
-      'Editing and transformation datasets for AI: source + instruction + output pairs, cleanup, compositing, relighting, object and background changes, temporal edits.',
+      'Creative workflow and edit trajectory datasets for AI: source → instruction → result pairs and full trajectories with editing actions, project data, intermediate versions and metadata.',
     produce: [
       {
-        title: 'Source / instruction / output',
-        text: 'Every sample delivered as the original, the edit request and the result.',
+        title: 'Edit trajectories',
+        text: 'Source assets, brief, editing actions, project data, intermediate versions and the final output.',
+      },
+      {
+        title: 'Edit pairs',
+        text: 'The simplest form: source → instruction → result.',
       },
       {
         title: 'Cleanup & retouch',
@@ -266,10 +270,6 @@ export const LANDINGS: Landing[] = [
         title: 'Object & background changes',
         text: 'Swaps, replacements and attribute edits with exact before / after.',
       },
-      {
-        title: 'Temporal edits',
-        text: 'Video edits that stay consistent across frames.',
-      },
     ],
     howLabel: 'How we produce it',
     how: [
@@ -278,8 +278,8 @@ export const LANDINGS: Landing[] = [
         text: 'Before and after shot on set, so the ground truth is real.',
       },
       {
-        title: '2D, 3D & VFX',
-        text: 'Post-production tools used to make controlled transformations.',
+        title: '3D, graphics & VFX',
+        text: 'Animation, compositing and VFX production, standalone or inside the dataset.',
       },
       {
         title: 'Instruction writing',

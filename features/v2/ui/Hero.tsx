@@ -19,9 +19,9 @@ export function Hero() {
           </h1>
           <p className={styles.heroLead}>Custom real-world data production for AI.</p>
           <p className={styles.heroText}>
-            Kvet designs and produces datasets around the requirements of specific models and
-            research teams — from controlled visual production and global data collection to
-            multimodal capture and Physical AI.
+            Kvet builds custom datasets around the requirements of specific models and research
+            teams — from controlled visual production and global data collection to multimodal
+            capture and Physical AI.
           </p>
           <div className={styles.heroActions}>
             <a

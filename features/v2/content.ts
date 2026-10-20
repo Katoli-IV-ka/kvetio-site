@@ -18,8 +18,8 @@ export const WAYS: {
 }[] = [
   {
     title: 'Controlled Production',
-    tags: ['Sets & locations', 'Cast', 'Actions & objects', 'Camera setup', 'Protocol'],
-    text: 'We build the environment, cast, actions, objects, camera setup and protocol around the exact requirements of your dataset.',
+    tags: ['Sets & locations', 'Participants', 'Actions & objects', 'Capture setup', 'Protocol'],
+    text: 'We build the environment, participants, actions, objects, capture setup and protocol around the requirements of the project.',
   },
   {
     title: 'Content Sourcing & Licensing',
@@ -53,15 +53,16 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Controlled image and video data for training, post-training and evaluation: RAW, multi-view, editing pairs, 2D/3D and VFX.',
+    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled visual production, multi-view capture, human actions and interactions, video data for generative AI, creative workflows, 2D/3D, graphics and VFX.',
     look: 'photo',
     image: '/v2/photos/field-desk.webp',
     details: [
-      'Images & RAW / ProRAW',
-      'Multi-view capture',
-      'Generative video',
-      'Editing pairs',
-      '2D, 3D & VFX',
+      'Custom Image Data',
+      'Video Data for Generative AI',
+      'Human Actions & Interactions',
+      'Multi-view & Controlled Capture',
+      'Creative Workflow & Edit Trajectories',
+      '3D, Graphics & VFX Production',
     ],
   },
   {
@@ -81,11 +82,12 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
-    text: 'Human demonstrations for robots: egocentric, multi-camera, RGB-D and sensor data, synchronized and calibrated.',
+    text: 'Human demonstrations and multimodal real-world data for Physical AI and robotics — including egocentric and synchronized multi-camera capture, human-object interaction, object manipulation, tool use, RGB-D, motion and sensor data.',
     look: 'photo',
     image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
+      'Manipulation & tool use',
       'Multi-camera & RGB-D',
       'Motion & sensors',
       'Sync & calibration',
@@ -122,19 +124,24 @@ export const DATASET_PATTERNS = [
     spec: 'Synced views · RGB-D · hand pose',
   },
   {
-    title: 'Editing & transformation pairs',
-    text: 'A source frame, an instruction and the edited result: relighting, cleanup, object and background changes.',
-    spec: 'Source · instruction · output',
+    title: 'Creative workflow & edit trajectories',
+    text: 'Datasets that capture the editing process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
+    spec: 'Source → instruction → actions → versions → output',
   },
   {
-    title: 'Generative video sets',
+    title: '3D, graphics & VFX production',
+    text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects, including animation, compositing, cleanup, controlled visual variations and synthetic assets.',
+    spec: 'Animation · compositing · synthetic assets',
+  },
+  {
+    title: 'Video data for generative AI',
     text: 'Shots planned for continuity, motion and controlled visual variation, for training and evaluation.',
     spec: 'Video · camera & lighting metadata',
   },
   {
     title: 'Controlled image collections',
     text: 'People, objects and environments shot under planned variations of light, angle and lens.',
-    spec: 'RAW / ProRAW · multi-view',
+    spec: 'RAW · multi-view · planned variations',
   },
   {
     title: 'Skilled workflows',
@@ -169,12 +176,12 @@ export const INFRASTRUCTURE = [
     text: 'POV rigs, multi-camera arrays, RGB-D and sensor setups built for the protocol.',
   },
   {
-    title: 'Post-production',
-    text: 'Editing, transformation, 2D/3D and VFX work done as part of the data pipeline.',
+    title: 'Post-production, 3D & VFX',
+    text: 'Editing, creative workflows, graphics, 3D and VFX production — delivered as standalone data projects or integrated into larger dataset pipelines.',
   },
   {
     title: 'International teams',
-    text: 'Local producers and contributor networks running the same spec in every country.',
+    text: 'Local production teams and contributor networks working to a consistent specification across countries and regions.',
   },
 ];
 
@@ -182,12 +189,12 @@ export const INFRASTRUCTURE = [
 
 export const PROCESS_STEPS = [
   {
-    title: 'Requirement',
+    title: 'Requirements',
     text: 'Define the model task, target behaviours, constraints and success criteria.',
   },
   {
-    title: 'Dataset Design',
-    text: 'Turn requirements into scenarios, capture setup, metadata schema and annotation guidelines.',
+    title: 'Data Specification',
+    text: 'Translate project requirements into scenarios, capture parameters, metadata structure, deliverables and QA criteria.',
   },
   {
     title: 'Pilot',
@@ -195,11 +202,11 @@ export const PROCESS_STEPS = [
   },
   {
     title: 'Production',
-    text: 'Collect, capture or source the data and label it to your schema, with consent and releases in place.',
+    text: 'Produce, collect or source the data with the required metadata, rights and releases in place.',
   },
   {
     title: 'QA',
-    text: 'Review samples, fix inconsistencies, and validate labels, metadata and structure.',
+    text: 'Review samples, fix inconsistencies, and validate metadata, structure and annotations where required.',
   },
   {
     title: 'Delivery',
@@ -215,19 +222,28 @@ export const PROCESS_STEPS = [
 
 export const WHY = [
   {
-    them: 'Data marketplaces',
-    theyDo: 'Sell what already exists, as it is.',
-    weDo: 'We produce what does not exist yet, to your specification.',
+    title: 'Built around your requirements',
+    text: 'Every project is built around the specific data, environments, actions and capture conditions required.',
   },
   {
-    them: 'Crowdsourcing platforms',
-    theyDo: 'Deliver volume of simple tasks with little control over setup.',
-    weDo: 'We design the protocol, capture setup and QA, then scale it.',
+    title: 'Production-first',
+    text: 'We can create the people, environments, interactions and capture setups needed to produce data that does not already exist.',
   },
   {
-    them: 'Production studios',
-    theyDo: 'Make great footage that is not built for training.',
-    weDo: 'We deliver datasets: metadata, annotation, releases and rights.',
+    title: 'Multiple production models',
+    text: 'Controlled production, distributed collection and content sourcing can be used independently or combined within one project.',
+  },
+  {
+    title: 'Visual and technical depth',
+    text: 'Image and video production, egocentric and multi-camera capture, RGB-D, creative workflows, 3D, VFX and multimodal data within one production ecosystem.',
+  },
+  {
+    title: 'From pilot to scale',
+    text: 'Validate the approach with a focused pilot, then scale across participants, locations and countries.',
+  },
+  {
+    title: 'Structured delivery',
+    text: 'Rights, releases, metadata, QA and technical requirements are integrated into the production pipeline.',
   },
 ];
 
@@ -238,7 +254,7 @@ export const SOLUTION_LINKS = [
   { label: 'Generative Video', href: '/generative-video' },
   { label: 'Egocentric Data', href: '/egocentric-data' },
   { label: 'Image Datasets', href: '/image-data' },
-  { label: 'AI Editing Data', href: '/ai-editing-data' },
+  { label: 'Creative Workflow Data', href: '/ai-editing-data' },
   { label: 'Custom Data Collection', href: '/custom-data-collection' },
 ];
 
@@ -262,7 +278,6 @@ export const FOOTER_COLUMNS = [
     label: 'Company',
     links: [
       { label: 'What we do', href: '#what-we-do' },
-      { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
@@ -297,7 +312,7 @@ export const MENU_GROUPS: MenuGroup[] = [
     items: [
       {
         label: 'Visual & Generative AI',
-        text: 'Images, video, editing, 3D, VFX',
+        text: 'Images, video, edit trajectories, 3D & VFX',
         href: '#visual-ai',
       },
       {
@@ -307,7 +322,7 @@ export const MENU_GROUPS: MenuGroup[] = [
       },
       {
         label: 'Physical AI & Robotics',
-        text: 'Egocentric, multi-camera, RGB-D, sensors',
+        text: 'Egocentric, manipulation, RGB-D, sensors',
         href: '#physical-ai',
       },
       {
@@ -324,7 +339,6 @@ export const MENU_GROUPS: MenuGroup[] = [
 ];
 
 export const MENU_LINKS = [
-  { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },

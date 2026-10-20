@@ -1,6 +1,9 @@
 import { BRAND, WHY } from '../content';
 import styles from '../v2.module.css';
 
+/** which advantage carries the black numeral */
+const ACCENT_INDEX = 1;
+
 export function WhyKvet() {
   return (
     <section
@@ -11,34 +14,24 @@ export function WhyKvet() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Why {BRAND}</h2>
         </div>
-        <table className={styles.compareTable}>
-          <thead>
-            <tr>
-              <th scope='col'>Alternative</th>
-              <th scope='col'>How they work</th>
-              <th
-                scope='col'
-                className={styles.compareUs}
+        <ol className={styles.whyList}>
+          {WHY.map((item, index) => (
+            <li
+              key={item.title}
+              className={styles.whyItem}
+              data-accent={index === ACCENT_INDEX || undefined}
+            >
+              <span
+                className={styles.whyNum}
+                aria-hidden='true'
               >
-                {BRAND}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {WHY.map((row) => (
-              <tr key={row.them}>
-                <th scope='row'>{row.them}</th>
-                <td data-label='How they work'>{row.theyDo}</td>
-                <td
-                  data-label={BRAND}
-                  className={styles.compareUs}
-                >
-                  {row.weDo}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className={styles.whyTitle}>{item.title}</h3>
+              <p className={styles.whyText}>{item.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

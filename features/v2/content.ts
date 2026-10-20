@@ -278,7 +278,6 @@ export const FOOTER_COLUMNS = [
     label: 'Company',
     links: [
       { label: 'What we do', href: '#what-we-do' },
-      { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
@@ -340,7 +339,6 @@ export const MENU_GROUPS: MenuGroup[] = [
 ];
 
 export const MENU_LINKS = [
-  { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },

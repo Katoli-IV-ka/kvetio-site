@@ -11,34 +11,17 @@ export function WhyKvet() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Why {BRAND}</h2>
         </div>
-        <table className={styles.compareTable}>
-          <thead>
-            <tr>
-              <th scope='col'>Alternative</th>
-              <th scope='col'>How they work</th>
-              <th
-                scope='col'
-                className={styles.compareUs}
-              >
-                {BRAND}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {WHY.map((row) => (
-              <tr key={row.them}>
-                <th scope='row'>{row.them}</th>
-                <td data-label='How they work'>{row.theyDo}</td>
-                <td
-                  data-label={BRAND}
-                  className={styles.compareUs}
-                >
-                  {row.weDo}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ul className={`${styles.ways} ${styles.whyGrid}`}>
+          {WHY.map((item) => (
+            <li
+              key={item.title}
+              className={styles.way}
+            >
+              <h3 className={styles.wayTitle}>{item.title}</h3>
+              <p className={styles.wayText}>{item.text}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

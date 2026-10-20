@@ -82,11 +82,12 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'physical-ai',
     title: 'Physical AI & Robotics',
-    text: 'Human demonstrations for robots: egocentric, multi-camera, RGB-D and sensor data, synchronized and calibrated.',
+    text: 'Human demonstrations and multimodal real-world data for Physical AI and robotics — including egocentric and synchronized multi-camera capture, human-object interaction, object manipulation, tool use, RGB-D, motion and sensor data.',
     look: 'photo',
     image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
+      'Human-object interaction & manipulation',
       'Multi-camera & RGB-D',
       'Motion & sensors',
       'Sync & calibration',
@@ -221,19 +222,28 @@ export const PROCESS_STEPS = [
 
 export const WHY = [
   {
-    them: 'Data marketplaces',
-    theyDo: 'Sell what already exists, as it is.',
-    weDo: 'We produce what does not exist yet, to your specification.',
+    title: 'Built around your requirements',
+    text: 'Every project is built around the specific data, environments, actions and capture conditions required.',
   },
   {
-    them: 'Crowdsourcing platforms',
-    theyDo: 'Deliver volume of simple tasks with little control over setup.',
-    weDo: 'We design the protocol, capture setup and QA, then scale it.',
+    title: 'Production-first',
+    text: 'We can create the people, environments, interactions and capture setups needed to produce data that does not already exist.',
   },
   {
-    them: 'Production studios',
-    theyDo: 'Make great footage that is not built for training.',
-    weDo: 'We deliver datasets: metadata, annotation, releases and rights.',
+    title: 'Multiple production models',
+    text: 'Controlled production, distributed collection and content sourcing can be used independently or combined within one project.',
+  },
+  {
+    title: 'Visual and technical depth',
+    text: 'Image and video production, egocentric and multi-camera capture, RGB-D, creative workflows, 3D, VFX and multimodal data within one production ecosystem.',
+  },
+  {
+    title: 'From pilot to scale',
+    text: 'Validate the approach with a focused pilot, then scale across participants, locations and countries.',
+  },
+  {
+    title: 'Structured delivery',
+    text: 'Rights, releases, metadata, QA and technical requirements are integrated into the production pipeline.',
   },
 ];
 

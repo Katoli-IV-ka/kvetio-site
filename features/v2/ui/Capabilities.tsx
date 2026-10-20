@@ -13,8 +13,7 @@ export function Capabilities() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Core capabilities</h2>
           <p className={styles.sectionLead}>
-            Four directions where we design and produce data for training, post-training and
-            evaluation.
+            Four core areas of custom data production for training, post-training and evaluation.
           </p>
         </div>
         <ol className={styles.capCards}>

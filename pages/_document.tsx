@@ -11,12 +11,12 @@ export default class MyDocument extends Document {
           <link
             rel='icon'
             href='/favicon.ico'
-            sizes='any'
+            sizes='48x48'
           />
           <link
             rel='icon'
-            href='/logo.png'
-            type='image/png'
+            href='/favicon.svg'
+            type='image/svg+xml'
           />
           <link
             rel='apple-touch-icon'

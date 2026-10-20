@@ -53,15 +53,16 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Controlled image and video data for training, post-training and evaluation: RAW, multi-view, editing pairs, 2D/3D and VFX.',
+    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled visual production, multi-view capture, human actions and interactions, video data for generative AI, creative workflows, 2D/3D, graphics and VFX.',
     look: 'photo',
     image: '/v2/photos/field-desk.webp',
     details: [
-      'Images & RAW / ProRAW',
-      'Multi-view capture',
-      'Generative video',
-      'Editing pairs',
-      '2D, 3D & VFX',
+      'Custom Image Data',
+      'Video Data for Generative AI',
+      'Human Actions & Interactions',
+      'Multi-view & Controlled Capture',
+      'Creative Workflow & Edit Trajectories',
+      '3D, Graphics & VFX Production',
     ],
   },
   {

@@ -21,6 +21,7 @@
   --gap-block: 40px; /* between major parts inside a block */
   --gap-item: 16px; /* between cards and list items */
   --col-gap: 16px; /* grid column gap */
+  --ease-cap: cubic-bezier(0.22, 1, 0.36, 1); /* soft ease-out for the capability cards */
   --edge-x: max(
     var(--page-x),
     calc((100vw - var(--container)) / 2 + var(--page-x))
@@ -548,7 +549,7 @@
   }
 }
 
-/* ---------- Core capabilities: tall cards, number on top, copy at the bottom, no fades ---------- */
+/* ---------- Core capabilities: tall cards, number on top, copy at the bottom over a dark fade ---------- */
 
 .capCards {
   display: grid;
@@ -627,7 +628,7 @@
   color: #fff;
 }
 
-/* photo: evenly dimmed (no fade) so white copy reads anywhere */
+/* photo: evenly dimmed, with a darker fade at the bottom behind the copy */
 .capCard[data-look='photo'] {
   background: #111;
   color: #fff;
@@ -649,9 +650,31 @@
   content: '';
 }
 
+/* dark fade from the bottom edge so the title, text and list read on any photo; it covers the whole
+   card wherever the copy is open, and only the lower part of a closed card on desktop */
+.capCard[data-look='photo']::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.82) 0%,
+      rgb(0 0 0 / 0.6) 38%,
+      rgb(0 0 0 / 0.25) 72%,
+      rgb(0 0 0 / 0) 100%
+    )
+    bottom / 100% 115% no-repeat;
+  pointer-events: none;
+  content: '';
+}
+
+.capCard[data-look='photo']::after {
+  z-index: 1;
+}
+
 .capNum,
 .capCopy {
-  z-index: 1;
+  z-index: 2;
 }
 
 /* what the direction covers: a short list on hairlines, small type */
@@ -704,16 +727,17 @@
     height: 580px;
     min-height: 0;
     padding: 24px;
-    transition: flex-grow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition: flex-grow 0.7s var(--ease-cap);
   }
 
-  .capCards:hover .capCard,
+  /* only a hovered card counts, so passing over the gaps between cards does not make them jump */
+  .capCards:has(.capCard:hover) .capCard,
   .capCards:has(.capCard:focus-visible) .capCard {
     flex-grow: 0.8;
   }
 
   .capCards .capCard:hover,
-  .capCards:not(:hover) .capCard:focus-visible {
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible {
     flex-grow: 1.8;
   }
 
@@ -721,16 +745,28 @@
     font-size: var(--fs-h3-lg);
   }
 
+  /* two lines by default, fading out at the end; the full text slides open on hover */
   .capText {
-    display: -webkit-box;
+    max-height: 40px;
     overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    mask-image: linear-gradient(to bottom, #000 50%, transparent);
+    transition: max-height 0.7s var(--ease-cap);
+  }
+
+  .capCard[data-look='photo']::before {
+    background-size: 100% 72%;
+    transition: background-size 0.7s var(--ease-cap);
+  }
+
+  .capCard[data-look='photo']:hover::before,
+  .capCards:not(:has(.capCard:hover)) .capCard[data-look='photo']:focus-visible::before {
+    background-size: 100% 115%;
   }
 
   .capCard:hover .capText,
-  .capCards:not(:hover) .capCard:focus-visible .capText {
-    display: block;
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capText {
+    max-height: 140px;
+    mask-image: none;
   }
 
   .capMore {
@@ -738,15 +774,17 @@
     grid-template-rows: 0fr;
     opacity: 0;
     transition:
-      grid-template-rows 0.45s ease,
-      opacity 0.35s ease;
+      grid-template-rows 0.7s var(--ease-cap),
+      opacity 0.3s ease;
   }
 
   .capCard:hover .capMore,
-  .capCards:not(:hover) .capCard:focus-visible .capMore {
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capMore {
     grid-template-rows: 1fr;
     opacity: 1;
-    transition-delay: 0.1s;
+    transition:
+      grid-template-rows 0.7s var(--ease-cap) 0.05s,
+      opacity 0.5s ease 0.2s;
   }
 
   .capDetails {
@@ -762,7 +800,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .capCard,
-  .capMore {
+  .capCard::before,
+  .capText,
+  .capMore,
+  .capCard:hover .capMore {
     transition: none;
   }
 }

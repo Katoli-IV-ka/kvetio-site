@@ -1228,7 +1228,7 @@
   }
 
   .timeline::before {
-    top: 72px; /* centre of the dots: step number 24 + gap 4 + title 24 + dot spacer 20 */
+    top: 96px; /* centre of the dots: step number 24 + gap 4 + title 48 + dot spacer 20 */
     right: 0;
     bottom: auto;
     left: 0;
@@ -1243,6 +1243,13 @@
 
   .step::before {
     display: none;
+  }
+
+  /* room for a two-line title; the last line sits on the dots so every dot stays on the line */
+  .stepTitle {
+    display: flex;
+    align-items: flex-end;
+    min-height: 48px;
   }
 
   .stepDot {

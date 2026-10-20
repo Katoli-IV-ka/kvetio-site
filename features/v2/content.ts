@@ -189,12 +189,12 @@ export const INFRASTRUCTURE = [
 
 export const PROCESS_STEPS = [
   {
-    title: 'Requirement',
+    title: 'Requirements',
     text: 'Define the model task, target behaviours, constraints and success criteria.',
   },
   {
-    title: 'Dataset Design',
-    text: 'Turn requirements into scenarios, capture setup, metadata schema and annotation guidelines.',
+    title: 'Data Specification',
+    text: 'Translate project requirements into scenarios, capture parameters, metadata structure, deliverables and QA criteria.',
   },
   {
     title: 'Pilot',
@@ -202,7 +202,7 @@ export const PROCESS_STEPS = [
   },
   {
     title: 'Production',
-    text: 'Collect, capture or source the data and label it to your schema, with consent and releases in place.',
+    text: 'Produce, collect or source the data with the required metadata, rights and releases in place.',
   },
   {
     title: 'QA',

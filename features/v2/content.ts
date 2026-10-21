@@ -53,7 +53,7 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled visual production, multi-view capture, human actions and interactions, video data for generative AI, creative workflows, 2D/3D, graphics and VFX.',
+    text: 'Custom image and video datasets for training, post-training and evaluation — spanning controlled visual production, human actions and interactions, video data for generative AI, creative workflows, 3D, graphics and VFX.',
     look: 'photo',
     image: '/v2/photos/field-desk.webp',
     details: [
@@ -87,7 +87,8 @@ export const CAPABILITIES: Capability[] = [
     image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
-      'Manipulation & tool use',
+      'Human-object interaction & manipulation',
+      'Tool use',
       'Multi-camera & RGB-D',
       'Motion & sensors',
       'Sync & calibration',
@@ -165,7 +166,7 @@ export const DATASET_PATTERNS = [
 export const INFRASTRUCTURE = [
   {
     title: 'People',
-    text: 'Casting of performers, skilled professionals and contributors, with signed releases.',
+    text: 'Participants, skilled professionals and contributors, with signed releases.',
   },
   {
     title: 'Locations & environments',
@@ -227,7 +228,7 @@ export const WHY = [
   },
   {
     title: 'Production-first',
-    text: 'We can create the people, environments, interactions and capture setups needed to produce data that does not already exist.',
+    text: 'We can build the environments, workflows and capture setups, and organize the participants required to produce data that does not already exist.',
   },
   {
     title: 'Multiple production models',
@@ -251,7 +252,7 @@ export const WHY = [
 
 export const SOLUTION_LINKS = [
   { label: 'Physical AI & Robotics', href: '/physical-ai' },
-  { label: 'Generative Video', href: '/generative-video' },
+  { label: 'Video Data for Generative AI', href: '/generative-video' },
   { label: 'Egocentric Data', href: '/egocentric-data' },
   { label: 'Image Datasets', href: '/image-data' },
   { label: 'Creative Workflow Data', href: '/ai-editing-data' },

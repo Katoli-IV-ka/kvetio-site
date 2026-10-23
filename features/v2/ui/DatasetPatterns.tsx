@@ -12,8 +12,8 @@ export function DatasetPatterns() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>Data we produce</h2>
           <p className={styles.sectionLead}>
-            Typical dataset patterns we design and produce. Every project starts from your spec, so
-            these are starting points, not a catalog.
+            Real-world, visual and multimodal datasets built around specific model and research
+            requirements.
           </p>
         </div>
         <ul className={styles.patterns}>
@@ -24,7 +24,18 @@ export function DatasetPatterns() {
             >
               <h3 className={styles.patternTitle}>{pattern.title}</h3>
               <p className={styles.patternText}>{pattern.text}</p>
-              <p className={styles.patternSpec}>{pattern.spec}</p>
+              {pattern.flow && (
+                <ol className={styles.patternFlow}>
+                  {pattern.flow.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              )}
+              <p className={styles.patternSpec}>
+                {pattern.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </p>
             </li>
           ))}
         </ul>

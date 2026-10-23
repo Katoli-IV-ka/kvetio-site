@@ -27,7 +27,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
       'We process the data above for the following purposes (Regulation (EU) 2016/679, “GDPR”):',
     ],
     list: [
-      'to reply to your enquiry and, if you wish, prepare a cooperation — Art. 6(1)(b) GDPR (steps taken at your request before a contract) and your consent given by ticking the box next to the form, Art. 6(1)(a) GDPR;',
+      'to reply to your inquiry and, if you wish, prepare a cooperation — Art. 6(1)(b) GDPR (steps taken at your request before a contract) and your consent given by ticking the box next to the form, Art. 6(1)(a) GDPR;',
       'to send you commercial information about our datasets and services by email — only if you tick the separate, optional box next to the form — Art. 6(1)(a) GDPR and Art. 398 of the Polish Electronic Communications Law (Prawo komunikacji elektronicznej);',
       'to keep business correspondence, protect the website against abuse and defend against or pursue legal claims — our legitimate interest, Art. 6(1)(f) GDPR.',
     ],
@@ -35,8 +35,8 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '4. Who receives your data',
     body: [
-      'We do not use a CRM system, we do not sell your data, we do not use it for advertising and we do not share it with third parties for their own purposes. Your enquiry is only delivered to our team.',
-      'To deliver it we rely on service providers that process data strictly on our behalf and under their data-processing terms: an email service (Google Workspace / Gmail), a messenger used for an internal notification about a new enquiry (Telegram) and the hosting platform of this website (Vercel). We may also disclose data where a law or a competent authority requires it.',
+      'We do not use a CRM system, we do not sell your data, we do not use it for advertising and we do not share it with third parties for their own purposes. Your inquiry is only delivered to our team.',
+      'To deliver it we rely on service providers that process data strictly on our behalf and under their data-processing terms: an email service (Google Workspace / Gmail), a messenger used for an internal notification about a new inquiry (Telegram) and the hosting platform of this website (Vercel). We may also disclose data where a law or a competent authority requires it.',
     ],
   },
   {
@@ -48,7 +48,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '6. How long we keep it',
     body: [
-      'We keep your enquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. Data processed for the optional marketing consent is kept until you withdraw it. When you give us the consents we record the date and time of the consent and the version of this policy as proof.',
+      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. Data processed for the optional marketing consent is kept until you withdraw it. When you give us the consents we record the date and time of the consent and the version of this policy as proof.',
     ],
   },
   {
@@ -72,7 +72,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '9. Two separate consents',
     body: [
-      'The contact form contains two separate boxes, neither is ticked in advance. The first one (required to send the form) covers replying to your enquiry. The second one (optional) covers commercial emails; leaving it unticked has no effect on how we handle your enquiry.',
+      'The contact form contains two separate boxes, neither is ticked in advance. The first one (required to send the form) covers replying to your inquiry. The second one (optional) covers commercial emails; leaving it unticked has no effect on how we handle your inquiry.',
       'Giving us your data is voluntary, but without name, email and your request we are not able to answer you. We do not make decisions about you by automated means and we do not profile you.',
     ],
   },
@@ -86,7 +86,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     id: 'security',
     title: '11. Security',
     body: [
-      'We apply reasonable technical and organisational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox where enquiries arrive and a limit on the number of form submissions.',
+      'We apply reasonable technical and organizational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox where inquiries arrive and a limit on the number of form submissions.',
     ],
   },
   {

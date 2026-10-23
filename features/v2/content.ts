@@ -53,7 +53,7 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'visual-ai',
     title: 'Visual & Generative AI',
-    text: 'Custom image and video datasets for training, post-training and evaluation — including controlled visual production, multi-view capture, human actions and interactions, video data for generative AI, creative workflows, 2D/3D, graphics and VFX.',
+    text: 'Custom image and video datasets for training, post-training and evaluation — spanning controlled visual production, human actions and interactions, video data for generative AI, creative workflows, 3D, graphics and VFX.',
     look: 'photo',
     image: '/v2/photos/field-desk.webp',
     details: [
@@ -87,7 +87,8 @@ export const CAPABILITIES: Capability[] = [
     image: '/v2/photos/robot-tall.webp',
     details: [
       'Egocentric / POV',
-      'Manipulation & tool use',
+      'Human-object interaction & manipulation',
+      'Tool use',
       'Multi-camera & RGB-D',
       'Motion & sensors',
       'Sync & calibration',
@@ -97,7 +98,7 @@ export const CAPABILITIES: Capability[] = [
   {
     id: 'collection-at-scale',
     title: 'Data Collection & Production at Scale',
-    text: 'One dataset specification, run from pilot to full volume across contributors, teams and countries.',
+    text: 'One consistent specification, scaled from pilot to full production across contributors, teams and countries.',
     look: 'photo',
     image: '/v2/photos/crowd.webp',
     details: [
@@ -112,51 +113,52 @@ export const CAPABILITIES: Capability[] = [
 
 /* ---------- Data we produce: dataset patterns ---------- */
 
-export const DATASET_PATTERNS = [
+export type DatasetPattern = {
+  title: string;
+  text: string;
+  /** optional chain of steps, shown with arrows under the text */
+  flow?: string[];
+  tags: string[];
+};
+
+export const DATASET_PATTERNS: DatasetPattern[] = [
   {
-    title: 'Egocentric task recordings',
-    text: 'Household and professional tasks filmed from the head or chest, with hands, tools and objects in frame.',
-    spec: 'POV video · narration · task labels',
+    title: 'Controlled Image & Video Data',
+    text: 'People, objects, environments and activities captured under controlled variations of viewpoint, lighting, motion, setting and scenario.',
+    tags: ['Image', 'Video', 'Multi-view', 'Controlled variations'],
   },
   {
-    title: 'Multi-camera manipulation',
-    text: 'The same grasp, place or assembly seen from fixed and wearable cameras on one timeline.',
-    spec: 'Synced views · RGB-D · hand pose',
+    title: 'Human Actions & Interactions',
+    text: 'Structured visual data covering everyday activities, professional workflows, human-object interaction, tool use and multi-step actions.',
+    tags: ['Actions', 'Interactions', 'Workflows', 'Tool use'],
   },
   {
-    title: 'Creative workflow & edit trajectories',
-    text: 'Datasets that capture the editing process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
-    spec: 'Source → instruction → actions → versions → output',
+    title: 'Video Data for Generative AI',
+    text: 'Purpose-built video data covering motion, human actions and interactions, continuity, camera movement and controlled visual variation.',
+    tags: ['Motion', 'Continuity', 'Camera variation', 'Human interaction'],
   },
   {
-    title: '3D, graphics & VFX production',
-    text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects, including animation, compositing, cleanup, controlled visual variations and synthetic assets.',
-    spec: 'Animation · compositing · synthetic assets',
+    title: 'Creative Workflow & Edit Trajectories',
+    text: 'Source assets, instructions, editing actions, project data, intermediate versions, metadata and final outputs captured as a structured creative workflow.',
+    flow: [
+      'Source',
+      'Instruction',
+      'Actions',
+      'Project Data',
+      'Intermediate Versions',
+      'Final Output',
+    ],
+    tags: ['Editing', 'Project data', 'Metadata', 'Decision traces'],
   },
   {
-    title: 'Video data for generative AI',
-    text: 'Shots planned for continuity, motion and controlled visual variation, for training and evaluation.',
-    spec: 'Video · camera & lighting metadata',
+    title: 'Egocentric & Multimodal Activity Data',
+    text: 'First-person and synchronized multi-camera data for real-world tasks, with RGB-D, motion and sensor modalities where required.',
+    tags: ['POV', 'Multi-camera', 'RGB-D', 'Sensors'],
   },
   {
-    title: 'Controlled image collections',
-    text: 'People, objects and environments shot under planned variations of light, angle and lens.',
-    spec: 'RAW · multi-view · planned variations',
-  },
-  {
-    title: 'Skilled workflows',
-    text: 'Multi-step professional procedures performed by trained people in real workplaces.',
-    spec: 'Step labels · before / after',
-  },
-  {
-    title: 'Dialogue & multi-person interaction',
-    text: 'Conversations and group activities with every participant released for training use.',
-    spec: 'Video · audio · transcripts',
-  },
-  {
-    title: 'Rare & controlled scenarios',
-    text: 'Situations that are hard to find in the wild, staged safely and repeated with variations.',
-    spec: 'Scenario scripts · variation plan',
+    title: '3D, Graphics & VFX Data Production',
+    text: 'Standalone or integrated 3D, graphics, animation and VFX data projects, including compositing, controlled transformations and synthetic assets.',
+    tags: ['3D', 'Graphics', 'Animation', 'VFX'],
   },
 ];
 
@@ -165,7 +167,7 @@ export const DATASET_PATTERNS = [
 export const INFRASTRUCTURE = [
   {
     title: 'People',
-    text: 'Casting of performers, skilled professionals and contributors, with signed releases.',
+    text: 'Participants, skilled professionals and contributors, with signed releases.',
   },
   {
     title: 'Locations & environments',
@@ -190,7 +192,7 @@ export const INFRASTRUCTURE = [
 export const PROCESS_STEPS = [
   {
     title: 'Requirements',
-    text: 'Define the model task, target behaviours, constraints and success criteria.',
+    text: 'Define the model task, target behaviors, constraints and success criteria.',
   },
   {
     title: 'Data Specification',
@@ -227,7 +229,7 @@ export const WHY = [
   },
   {
     title: 'Production-first',
-    text: 'We can create the people, environments, interactions and capture setups needed to produce data that does not already exist.',
+    text: 'We organize the participants, environments, interactions and capture setups required to produce data that does not already exist.',
   },
   {
     title: 'Multiple production models',
@@ -251,7 +253,7 @@ export const WHY = [
 
 export const SOLUTION_LINKS = [
   { label: 'Physical AI & Robotics', href: '/physical-ai' },
-  { label: 'Generative Video', href: '/generative-video' },
+  { label: 'Video Data for Generative AI', href: '/generative-video' },
   { label: 'Egocentric Data', href: '/egocentric-data' },
   { label: 'Image Datasets', href: '/image-data' },
   { label: 'Creative Workflow Data', href: '/ai-editing-data' },
@@ -278,6 +280,7 @@ export const FOOTER_COLUMNS = [
     label: 'Company',
     links: [
       { label: 'What we do', href: '#what-we-do' },
+      { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
@@ -339,6 +342,7 @@ export const MENU_GROUPS: MenuGroup[] = [
 ];
 
 export const MENU_LINKS = [
+  { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },

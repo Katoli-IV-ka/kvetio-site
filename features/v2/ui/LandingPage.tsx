@@ -28,6 +28,13 @@ export function LandingPage({ landing }: { landing: Landing }) {
             </h1>
             <p className={styles.heroLead}>{landing.lead}</p>
             <p className={styles.heroText}>{landing.text}</p>
+            {landing.flow && (
+              <ol className={styles.landingFlow}>
+                {landing.flow.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            )}
             <div className={styles.heroActions}>
               <a
                 className={styles.heroCta}

@@ -12,6 +12,8 @@ export type Landing = {
   description: string;
   /** wide photo next to the hero copy; pages without one show the halftone art */
   image?: string;
+  /** steps of the data structure, shown as a chain under the hero copy */
+  flow?: string[];
   produce: LandingItem[];
   howLabel: string;
   how: LandingItem[];
@@ -33,6 +35,14 @@ export const LANDINGS: Landing[] = [
         text: 'Real people performing the task, repeated across operators, objects and conditions.',
       },
       {
+        title: 'Human-object interaction & manipulation',
+        text: 'Grasping, placing, assembling and handling objects, with hands and objects in view.',
+      },
+      {
+        title: 'Tool use',
+        text: 'Real tools used for real tasks, with the hand, tool and workpiece captured together.',
+      },
+      {
         title: 'Egocentric / POV',
         text: "First-person view from the demonstrator's head or chest, hands and objects in frame.",
       },
@@ -42,7 +52,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'RGB-D & spatial capture',
-        text: 'Colour, depth and 3D scene geometry for reach, placement and navigation.',
+        text: 'Color, depth and 3D scene geometry for reach, placement and navigation.',
       },
       {
         title: 'Hand & body motion',
@@ -75,7 +85,7 @@ export const LANDINGS: Landing[] = [
   },
   {
     slug: 'generative-video',
-    name: 'Generative Video',
+    name: 'Video Data for Generative AI',
     image: '/v2/ways/production.webp',
     title: 'Training & evaluation data for generative video models',
     lead: 'Video planned for continuity, motion and controlled visual variation.',
@@ -101,7 +111,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'Evaluation sets',
-        text: 'Held-out shots and prompts built to measure specific model behaviours.',
+        text: 'Held-out shots and prompts built to measure specific model behaviors.',
       },
       {
         title: 'Camera & scene metadata',
@@ -119,8 +129,8 @@ export const LANDINGS: Landing[] = [
         text: 'Cast, locations, lighting and camera crews working to the dataset spec.',
       },
       {
-        title: 'Post-production',
-        text: '3D, graphics and VFX production for controlled, synthetic and transformation data.',
+        title: '3D, graphics & VFX',
+        text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects.',
       },
       {
         title: 'Rights-ready delivery',
@@ -242,7 +252,16 @@ export const LANDINGS: Landing[] = [
     name: 'Creative Workflow Data',
     title: 'Creative workflow & edit trajectory datasets',
     lead: 'Not just the result — every step between the source and the final output.',
-    text: 'Datasets that capture the editing process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs — from simple edit pairs to full workflow trajectories.',
+    text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
+    flow: [
+      'Source assets',
+      'Brief / instruction',
+      'Editing actions',
+      'Project data',
+      'Intermediate versions',
+      'Metadata',
+      'Final output',
+    ],
     description:
       'Creative workflow and edit trajectory datasets for AI: source → instruction → result pairs and full trajectories with editing actions, project data, intermediate versions and metadata.',
     produce: [
@@ -251,8 +270,8 @@ export const LANDINGS: Landing[] = [
         text: 'Source assets, brief, editing actions, project data, intermediate versions and the final output.',
       },
       {
-        title: 'Edit pairs',
-        text: 'The simplest form: source → instruction → result.',
+        title: 'Editing & transformation pairs',
+        text: 'One data type within a trajectory: source → instruction → result.',
       },
       {
         title: 'Cleanup & retouch',
@@ -279,7 +298,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: '3D, graphics & VFX',
-        text: 'Animation, compositing and VFX production, standalone or inside the dataset.',
+        text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects: 3D assets, animation, graphics, compositing, cleanup, VFX and controlled visual variations.',
       },
       {
         title: 'Instruction writing',
@@ -287,7 +306,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'QA',
-        text: 'Every pair checked for alignment, artefacts and instruction match.',
+        text: 'Every pair checked for alignment, artifacts and instruction match.',
       },
     ],
   },

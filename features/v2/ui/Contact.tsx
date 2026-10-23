@@ -126,7 +126,7 @@ export function Contact() {
                 <span>
                   I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
                   that Kvetio may process my name, email address and the details I provide in this
-                  form in order to reply to my enquiry.
+                  form in order to reply to my inquiry.
                 </span>
               </label>
               <label className={styles.consent}>

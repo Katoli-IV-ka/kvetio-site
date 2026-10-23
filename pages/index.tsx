@@ -1,6 +1,7 @@
 import { BRAND } from '../features/v2/content';
 import { Capabilities } from '../features/v2/ui/Capabilities';
 import { Contact } from '../features/v2/ui/Contact';
+import { DatasetPatterns } from '../features/v2/ui/DatasetPatterns';
 import { Footer } from '../features/v2/ui/Footer';
 import { Header } from '../features/v2/ui/Header';
 import { Hero } from '../features/v2/ui/Hero';
@@ -53,7 +54,7 @@ export default function HomePage() {
         <main>
           <Capabilities />
           <WhatWeDo />
-          {/* Data we produce (DatasetPatterns) is hidden until the block is rebuilt */}
+          <DatasetPatterns />
           <Infrastructure />
           <Process />
           <Contact />

@@ -52,7 +52,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'RGB-D & spatial capture',
-        text: 'Colour, depth and 3D scene geometry for reach, placement and navigation.',
+        text: 'Color, depth and 3D scene geometry for reach, placement and navigation.',
       },
       {
         title: 'Hand & body motion',
@@ -111,7 +111,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'Evaluation sets',
-        text: 'Held-out shots and prompts built to measure specific model behaviours.',
+        text: 'Held-out shots and prompts built to measure specific model behaviors.',
       },
       {
         title: 'Camera & scene metadata',
@@ -306,7 +306,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         title: 'QA',
-        text: 'Every pair checked for alignment, artefacts and instruction match.',
+        text: 'Every pair checked for alignment, artifacts and instruction match.',
       },
     ],
   },

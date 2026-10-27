@@ -1,6 +1,7 @@
 import { BRAND, FAQ } from '../features/v2/content';
 import { Capabilities } from '../features/v2/ui/Capabilities';
 import { Contact } from '../features/v2/ui/Contact';
+import { CreativeWorkflow } from '../features/v2/ui/CreativeWorkflow';
 import { DatasetPatterns } from '../features/v2/ui/DatasetPatterns';
 import { Faq } from '../features/v2/ui/Faq';
 import { Footer } from '../features/v2/ui/Footer';
@@ -65,6 +66,7 @@ export default function HomePage() {
           <Capabilities />
           <WhatWeDo />
           <DatasetPatterns />
+          <CreativeWorkflow />
           <Infrastructure />
           <Process />
           <Contact />

@@ -162,6 +162,15 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
   },
 ];
 
+/* ---------- Creative Workflow & Edit Trajectories ---------- */
+
+export const CREATIVE_WORKFLOW = {
+  title: 'Creative Workflow & Edit Trajectories',
+  text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
+  image: '/v2/photos/creative-workflow.webp',
+  alt: 'Two people working at monitors and laptops in a home kitchen while a third makes coffee',
+};
+
 /* ---------- Production infrastructure ---------- */
 
 export const INFRASTRUCTURE = [

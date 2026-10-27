@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- photos cropped to the card with object-fit */
+import Link from 'next/link';
 import { CAPABILITIES } from '../content';
 import styles from '../v2.module.css';
 
@@ -29,7 +30,7 @@ export function Capabilities() {
                 <img
                   className={styles.capPhoto}
                   src={item.image}
-                  alt=''
+                  alt={item.imageAlt ?? ''}
                   loading='lazy'
                 />
               )}
@@ -38,11 +39,21 @@ export function Capabilities() {
                 <h3 className={styles.capTitle}>{item.title}</h3>
                 <p className={styles.capText}>{item.text}</p>
                 <div className={styles.capMore}>
-                  <ul className={styles.capDetails}>
-                    {item.details.map((detail) => (
-                      <li key={detail}>{detail}</li>
-                    ))}
-                  </ul>
+                  <div className={styles.capMoreInner}>
+                    <ul className={styles.capDetails}>
+                      {item.details.map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                    {item.href && (
+                      <Link
+                        className={styles.capLink}
+                        href={item.href}
+                      >
+                        Learn more →<span className={styles.srOnly}> about {item.title}</span>
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
             </li>

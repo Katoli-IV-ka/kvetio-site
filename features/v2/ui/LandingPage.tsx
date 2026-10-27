@@ -40,7 +40,7 @@ export function LandingPage({ landing }: { landing: Landing }) {
                 className={styles.heroCta}
                 href='#contact'
               >
-                {CTA_LABEL}
+                {landing.cta ?? CTA_LABEL}
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ export function LandingPage({ landing }: { landing: Landing }) {
             <img
               className={styles.landingPhoto}
               src={landing.image}
-              alt=''
+              alt={landing.imageAlt ?? ''}
             />
           )}
         </div>

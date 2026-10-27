@@ -100,7 +100,7 @@ export function ContactPageV2() {
               role='status'
             >
               <p className={styles.thanksTitle}>Thank you — message received.</p>
-              <p>We&apos;ll get back to you soon.</p>
+              <p>We&apos;ll review your requirements and suggest the next step.</p>
               <Link
                 className={styles.pageButton}
                 href='/'
@@ -175,8 +175,8 @@ export function ContactPageV2() {
               <textarea
                 className={`${styles.field} ${styles.textarea}`}
                 name='message'
-                placeholder='What data does your model need?*'
-                aria-label='What data does your model need?'
+                placeholder='What data do you need?*'
+                aria-label='What data do you need?'
                 rows={3}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}

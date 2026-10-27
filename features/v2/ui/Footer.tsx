@@ -1,4 +1,4 @@
-import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
+import { CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS, LEGAL_LOCATION, LEGAL_NAME } from '../content';
 import styles from '../v2.module.css';
 
 export function Footer({ base = '' }: { base?: string }) {
@@ -39,7 +39,9 @@ export function Footer({ base = '' }: { base?: string }) {
       </div>
       <div className={styles.footerBar}>
         <div className={styles.footerBarInner}>
-          <span>© 2026 {BRAND}. All rights reserved.</span>
+          <span>
+            © 2026 {LEGAL_NAME} · {LEGAL_LOCATION}. All rights reserved.
+          </span>
           <div className={styles.legal}>
             {LEGAL_LINKS.map((link, index) => (
               <span

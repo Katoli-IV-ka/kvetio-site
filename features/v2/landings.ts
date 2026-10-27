@@ -12,9 +12,6 @@ export type Landing = {
   description: string;
   /** wide photo next to the hero copy; pages without one show the halftone art */
   image?: string;
-  imageAlt?: string;
-  /** hero button label; the shared CTA when not set */
-  cta?: string;
   /** steps of the data structure, shown as a chain under the hero copy */
   flow?: string[];
   produce: LandingItem[];
@@ -27,7 +24,6 @@ export const LANDINGS: Landing[] = [
     slug: 'physical-ai',
     name: 'Physical AI & Robotics',
     image: '/v2/photos/robot-wireframe.webp',
-    imageAlt: 'Wireframe render of a robotic arm with a gripper',
     title: 'Real-world data for Physical AI & Robotics',
     lead: 'Human demonstrations and multimodal capture for embodied systems.',
     text: 'We design and run capture protocols for manipulation and real-world tasks — egocentric, synchronized multi-camera, RGB-D and sensor data, delivered calibrated and documented.',
@@ -91,7 +87,6 @@ export const LANDINGS: Landing[] = [
     slug: 'generative-video',
     name: 'Video Data for Generative AI',
     image: '/v2/ways/production.webp',
-    imageAlt: 'Motion capture studio: performers on set and their 3D skeletons on a monitor',
     title: 'Training & evaluation data for generative video models',
     lead: 'Video planned for continuity, motion and controlled visual variation.',
     text: 'We produce footage the way your model needs to see the world — with controlled camera, lighting, motion and scene changes, plus edit trajectories and 3D/VFX data built on top of it.',
@@ -147,7 +142,6 @@ export const LANDINGS: Landing[] = [
     slug: 'egocentric-data',
     name: 'Egocentric Data',
     image: '/v2/photos/pov-kitchen.webp',
-    imageAlt: 'First-person view of hands cutting vegetables over a stove',
     title: 'Egocentric & first-person data',
     lead: 'Real activities filmed through the eyes of the person doing them.',
     text: 'We capture POV data of everyday and skilled tasks with wearable and stereo rigs, in real homes and workplaces, with narration and synchronized modalities where your model needs them.',
@@ -255,18 +249,18 @@ export const LANDINGS: Landing[] = [
   },
   {
     slug: 'ai-editing-data',
-    name: 'Creative Workflow & Edit Trajectories',
-    cta: 'Discuss a workflow dataset',
+    name: 'Creative Workflow Data',
     title: 'Creative workflow & edit trajectory datasets',
     lead: 'Not just the result — every step between the source and the final output.',
     text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
     flow: [
-      'Source Assets',
-      'Instruction',
-      'Editing Actions',
-      'Project Data',
-      'Intermediate Versions',
-      'Final Output',
+      'Source assets',
+      'Brief / instruction',
+      'Editing actions',
+      'Project data',
+      'Intermediate versions',
+      'Metadata',
+      'Final output',
     ],
     description:
       'Creative workflow and edit trajectory datasets for AI: source → instruction → result pairs and full trajectories with editing actions, project data, intermediate versions and metadata.',
@@ -320,7 +314,6 @@ export const LANDINGS: Landing[] = [
     slug: 'custom-data-collection',
     name: 'Custom Data Collection',
     image: '/v2/photos/crowd.webp',
-    imageAlt: 'A crowd of people seen from behind',
     title: 'Custom data collection at scale',
     lead: 'One dataset specification, run across contributors, teams and countries.',
     text: 'We combine distributed contributors, controlled production and content licensing to collect the data your model needs — with rights, metadata and QA built into the pipeline.',

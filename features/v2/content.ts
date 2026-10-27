@@ -2,12 +2,11 @@ export const BRAND = 'Kvet';
 
 export const CTA_LABEL = 'Discuss a dataset';
 
-/** Main navigation after the Solutions dropdown; the desktop header and the mobile menu share it. */
 export const NAV_LINKS = [
   { label: 'Capabilities', href: '#capabilities' },
+  { label: 'Physical AI', href: '#physical-ai' },
+  { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
-  { label: 'Why Kvet', href: '#why' },
-  { label: 'FAQ', href: '#faq' },
 ];
 
 /* ---------- What we do: three ways of creating data ---------- */
@@ -46,9 +45,6 @@ export type Capability = {
   text: string;
   look: CapabilityLook;
   image?: string;
-  imageAlt?: string;
-  /** solution page with the full story; only set where that page exists */
-  href?: string;
   /** what the direction covers, revealed when the card opens */
   details: string[];
 };
@@ -60,7 +56,6 @@ export const CAPABILITIES: Capability[] = [
     text: 'Custom image and video datasets for training, post-training and evaluation — spanning controlled visual production, human actions and interactions, video data for generative AI, creative workflows, 3D, graphics and VFX.',
     look: 'photo',
     image: '/v2/photos/field-desk.webp',
-    imageAlt: 'A person working at a desk with a computer in an open field',
     details: [
       'Custom Image Data',
       'Video Data for Generative AI',
@@ -76,7 +71,6 @@ export const CAPABILITIES: Capability[] = [
     text: 'Everyday and professional tasks, human-object interaction and multi-person scenes, in controlled or natural settings.',
     look: 'photo',
     image: '/v2/photos/pov-kitchen.webp',
-    imageAlt: 'First-person view of hands cutting vegetables over a stove',
     details: [
       'Skilled tasks',
       'Human-object interaction',
@@ -91,8 +85,6 @@ export const CAPABILITIES: Capability[] = [
     text: 'Human demonstrations and multimodal real-world data for Physical AI and robotics — including egocentric and synchronized multi-camera capture, human-object interaction, object manipulation, tool use, RGB-D, motion and sensor data.',
     look: 'photo',
     image: '/v2/photos/robot-tall.webp',
-    imageAlt: 'Wireframe render of a robotic arm',
-    href: '/physical-ai',
     details: [
       'Egocentric / POV',
       'Human-object interaction & manipulation',
@@ -109,8 +101,6 @@ export const CAPABILITIES: Capability[] = [
     text: 'One consistent specification, scaled from pilot to full production across contributors, teams and countries.',
     look: 'photo',
     image: '/v2/photos/crowd.webp',
-    imageAlt: 'A crowd of people seen from behind',
-    href: '/custom-data-collection',
     details: [
       'Controlled production',
       'Distributed collection',
@@ -151,9 +141,9 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
     title: 'Creative Workflow & Edit Trajectories',
     text: 'Source assets, instructions, editing actions, project data, intermediate versions, metadata and final outputs captured as a structured creative workflow.',
     flow: [
-      'Source Assets',
+      'Source',
       'Instruction',
-      'Editing Actions',
+      'Actions',
       'Project Data',
       'Intermediate Versions',
       'Final Output',
@@ -176,7 +166,7 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
 
 export const INFRASTRUCTURE = [
   {
-    title: 'Participants & specialists',
+    title: 'People',
     text: 'Participants, skilled professionals and contributors, with signed releases.',
   },
   {
@@ -184,23 +174,15 @@ export const INFRASTRUCTURE = [
     text: 'Homes, workplaces, studios and outdoor sites matched to the scenario.',
   },
   {
-    title: 'Capture systems',
-    text: 'POV rigs, wearable cameras and capture setups built around the protocol.',
+    title: 'Equipment & capture systems',
+    text: 'POV rigs, multi-camera arrays, RGB-D and sensor setups built for the protocol.',
   },
   {
-    title: 'Multi-camera / RGB-D / sensors',
-    text: 'Synchronized camera arrays, depth cameras and sensor setups, calibrated and logged.',
+    title: 'Post-production, 3D & VFX',
+    text: 'Editing, creative workflows, graphics, 3D and VFX production — delivered as standalone data projects or integrated into larger dataset pipelines.',
   },
   {
-    title: 'Post-production',
-    text: 'Editing, cleanup and processing of captured material into dataset-ready form.',
-  },
-  {
-    title: '3D, Graphics & VFX',
-    text: 'Standalone or integrated 3D, graphics and VFX production for AI data projects.',
-  },
-  {
-    title: 'International production teams',
+    title: 'International teams',
     text: 'Local production teams and contributor networks working to a consistent specification across countries and regions.',
   },
 ];
@@ -242,12 +224,12 @@ export const PROCESS_STEPS = [
 
 export const WHY = [
   {
-    title: 'Built around specific requirements',
-    text: 'Every project is built around the required people, actions, environments, capture conditions and deliverables.',
+    title: 'Built around your requirements',
+    text: 'Every project is built around the specific data, environments, actions and capture conditions required.',
   },
   {
     title: 'Production-first',
-    text: 'We build the production required to create data that does not already exist.',
+    text: 'We organize the participants, environments, interactions and capture setups required to produce data that does not already exist.',
   },
   {
     title: 'Multiple production models',
@@ -255,15 +237,15 @@ export const WHY = [
   },
   {
     title: 'Visual and technical depth',
-    text: 'Image and video production, multi-camera, egocentric, RGB-D, creative workflows, 3D, VFX and multimodal capture within one production ecosystem.',
+    text: 'Image and video production, egocentric and multi-camera capture, RGB-D, creative workflows, 3D, VFX and multimodal data within one production ecosystem.',
   },
   {
     title: 'From pilot to scale',
     text: 'Validate the approach with a focused pilot, then scale across participants, locations and countries.',
   },
   {
-    title: 'Rights & structured delivery',
-    text: 'Participant releases, licensing, metadata, QA and delivery requirements are integrated into the production workflow.',
+    title: 'Structured delivery',
+    text: 'Rights, releases, metadata, QA and technical requirements are integrated into the production pipeline.',
   },
 ];
 
@@ -304,12 +286,12 @@ export const FAQ = [
 
 /* ---------- Solutions (landing pages) ---------- */
 
-/** Solution pages in the header dropdown, the mobile menu and the footer */
 export const SOLUTION_LINKS = [
   { label: 'Physical AI & Robotics', href: '/physical-ai' },
   { label: 'Video Data for Generative AI', href: '/generative-video' },
   { label: 'Egocentric Data', href: '/egocentric-data' },
-  { label: 'Creative Workflow & Edit Trajectories', href: '/ai-editing-data' },
+  { label: 'Image Datasets', href: '/image-data' },
+  { label: 'Creative Workflow Data', href: '/ai-editing-data' },
   { label: 'Custom Data Collection', href: '/custom-data-collection' },
 ];
 
@@ -351,10 +333,6 @@ export const FOOTER_COLUMNS = [
   },
 ];
 
-/** legal entity behind the site, as named in the Privacy Policy */
-export const LEGAL_NAME = 'Kvetio';
-export const LEGAL_LOCATION = 'Warsaw, Poland';
-
 export const LEGAL_LINKS = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Data Processing Policy', href: '/privacy-policy#processing' },
@@ -366,7 +344,43 @@ export type MenuGroup = {
   items: { label: string; text?: string; href: string }[];
 };
 
-/** Mobile burger menu: the same items as the desktop header — Solutions as an accordion, then the main links. */
-export const MENU_GROUPS: MenuGroup[] = [{ label: 'Solutions', items: SOLUTION_LINKS }];
+/** Mobile burger menu: accordion groups first, then plain links, mirroring the footer sections. */
+export const MENU_GROUPS: MenuGroup[] = [
+  {
+    label: 'Capabilities',
+    items: [
+      {
+        label: 'Visual & Generative AI',
+        text: 'Images, video, edit trajectories, 3D & VFX',
+        href: '#visual-ai',
+      },
+      {
+        label: 'Human Activity',
+        text: 'Skilled tasks and human-object interaction',
+        href: '#human-activity',
+      },
+      {
+        label: 'Physical AI & Robotics',
+        text: 'Egocentric, manipulation, RGB-D, sensors',
+        href: '#physical-ai',
+      },
+      {
+        label: 'Collection at Scale',
+        text: 'Contributors, countries, rights, QA',
+        href: '#collection-at-scale',
+      },
+    ],
+  },
+  {
+    label: 'Solutions',
+    items: SOLUTION_LINKS,
+  },
+];
 
-export const MENU_LINKS = NAV_LINKS;
+export const MENU_LINKS = [
+  { label: 'Datasets', href: '#datasets' },
+  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'How we work', href: '#process' },
+  { label: 'Why Kvet', href: '#why' },
+  { label: 'FAQ', href: '#faq' },
+];

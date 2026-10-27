@@ -354,7 +354,7 @@
     color: #000;
   }
 
-  .headerNav > a[aria-current='location']::after {
+  .headerNav a[aria-current='location']::after {
     position: absolute;
     right: 0;
     bottom: -1px;
@@ -362,85 +362,6 @@
     height: 2px;
     background: #000;
     content: '';
-  }
-
-  /* Solutions: a button styled like the links, opening a white panel under the bar */
-  .navDrop {
-    position: relative;
-    display: flex;
-  }
-
-  .navDropButton {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 8px;
-    border: 0;
-    background: none;
-    font: inherit;
-    color: #737373;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-
-  .navDropButton:hover,
-  .navDropButton[aria-expanded='true'],
-  .navDropButton[data-current] {
-    color: #000;
-  }
-
-  .navDropButton:focus-visible {
-    outline: 2px solid #000;
-    outline-offset: -2px;
-  }
-
-  .navCaret {
-    width: 6px;
-    height: 6px;
-    margin-top: -3px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-    transform: rotate(45deg);
-    transition: transform 0.2s;
-  }
-
-  .navDropButton[aria-expanded='true'] .navCaret {
-    margin-top: 3px;
-    transform: rotate(-135deg);
-  }
-
-  .navDropList {
-    position: absolute;
-    top: calc(100% - 4px);
-    left: -8px;
-    display: none;
-    min-width: 300px;
-    margin: 0;
-    padding: 8px;
-    border: 1px solid #ececec;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 12px 32px rgb(0 0 0 / 0.08);
-    list-style: none;
-  }
-
-  .navDropList[data-open='true'] {
-    display: block;
-  }
-
-  .headerNav .navDropList a {
-    display: block;
-    padding: 10px 12px;
-    border-radius: 8px;
-    color: #171717;
-    white-space: nowrap;
-  }
-
-  .headerNav .navDropList a:hover,
-  .headerNav .navDropList a:focus-visible,
-  .headerNav .navDropList a[aria-current='page'] {
-    background: #f5f5f5;
-    color: #000;
   }
 
   /* same outline pill as the hero 'Use cases' button, at header size */
@@ -756,30 +677,6 @@
   z-index: 2;
 }
 
-/* link to the solution page, under the list */
-.capLink {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  font-weight: 500;
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 4px;
-  transition: text-decoration-color 0.2s;
-}
-
-.capLink:hover,
-.capLink:focus-visible {
-  text-decoration-color: currentColor;
-}
-
-.capLink:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
 /* what the direction covers: a short list on hairlines, small type */
 .capDetails {
   margin: 4px 0 0;
@@ -790,7 +687,7 @@
 }
 
 .capDetails li {
-  padding: 6px 0;
+  padding: 7px 0;
   border-top: 1px solid currentColor;
   border-top-color: color-mix(in srgb, currentColor 25%, transparent);
 }
@@ -803,7 +700,7 @@
 /* phones and tablets: everything is shown, cards grow with their copy */
 .capCard {
   aspect-ratio: auto;
-  min-height: 400px;
+  min-height: 440px;
 }
 
 @media (min-width: 640px) {
@@ -812,7 +709,7 @@
   }
 
   .capCard {
-    min-height: 460px;
+    min-height: 520px;
   }
 }
 
@@ -827,7 +724,7 @@
   .capCard {
     flex: 1 1 0;
     min-width: 0;
-    height: 560px;
+    height: 580px;
     min-height: 0;
     padding: 24px;
     transition: flex-grow 0.7s var(--ease-cap);
@@ -835,14 +732,12 @@
 
   /* only a hovered card counts, so passing over the gaps between cards does not make them jump */
   .capCards:has(.capCard:hover) .capCard,
-  .capCards:has(.capCard:focus-visible) .capCard,
-  .capCards:has(.capLink:focus-visible) .capCard {
+  .capCards:has(.capCard:focus-visible) .capCard {
     flex-grow: 0.8;
   }
 
   .capCards .capCard:hover,
-  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible,
-  .capCards:not(:has(.capCard:hover)) .capCard:has(.capLink:focus-visible) {
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible {
     flex-grow: 1.8;
   }
 
@@ -864,16 +759,13 @@
   }
 
   .capCard[data-look='photo']:hover::before,
-  .capCards:not(:has(.capCard:hover)) .capCard[data-look='photo']:focus-visible::before,
-  .capCards:not(:has(.capCard:hover))
-    .capCard[data-look='photo']:has(.capLink:focus-visible)::before {
+  .capCards:not(:has(.capCard:hover)) .capCard[data-look='photo']:focus-visible::before {
     background-size: 100% 115%;
   }
 
   .capCard:hover .capText,
-  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capText,
-  .capCards:not(:has(.capCard:hover)) .capCard:has(.capLink:focus-visible) .capText {
-    max-height: 180px;
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capText {
+    max-height: 140px;
     mask-image: none;
   }
 
@@ -887,8 +779,7 @@
   }
 
   .capCard:hover .capMore,
-  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capMore,
-  .capCards:not(:has(.capCard:hover)) .capCard:has(.capLink:focus-visible) .capMore {
+  .capCards:not(:has(.capCard:hover)) .capCard:focus-visible .capMore {
     grid-template-rows: 1fr;
     opacity: 1;
     transition:
@@ -896,7 +787,7 @@
       opacity 0.5s ease 0.2s;
   }
 
-  .capMoreInner {
+  .capDetails {
     min-height: 0;
     overflow: hidden;
   }
@@ -1819,6 +1710,195 @@
   max-width: 760px;
 }
 
+/* ---------- LinkedIn: heading on the left, a profile card on the right ---------- */
+
+.liLayout {
+  display: grid;
+  gap: var(--gap-head);
+}
+
+.liLead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.liCard {
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.liBanner {
+  position: relative;
+  height: 120px;
+  background: #1c1c21;
+}
+
+.liBanner img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.liBanner p {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: #fff;
+}
+
+.liBody {
+  padding: 0 24px 20px;
+}
+
+.liTop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -36px;
+}
+
+.liLogo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.liLogo img {
+  display: block;
+}
+
+.liActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.liFollow,
+.liMessage {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.root a.liFollow {
+  background: #000;
+  color: #fff;
+}
+
+.root a.liFollow:hover {
+  background: #333;
+}
+
+.root a.liMessage {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.root a.liMessage:hover {
+  background: #000;
+  color: #fff;
+}
+
+.liName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  font-size: var(--fs-h3-lg);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.liVerified {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.liVerified circle {
+  fill: #0a66c2;
+}
+
+.liVerified path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.6;
+}
+
+.liTagline {
+  margin: 8px 0 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #171717;
+}
+
+.liMeta {
+  margin: 8px 0 0;
+  font-size: var(--fs-caption);
+  line-height: 18px;
+  color: #8a8a8a;
+}
+
+.liFoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.liFoot img {
+  display: block;
+  border-radius: 50%;
+}
+
+.liFoot strong {
+  font-weight: 600;
+  color: #000;
+}
+
+@media (min-width: 1024px) {
+  .liLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    column-gap: var(--gap-block);
+    align-items: center;
+  }
+}
+
 /* ---------- Footer ---------- */
 
 .footer {
@@ -2258,14 +2338,4 @@
 
 .policy section[id] {
   scroll-margin-top: 88px;
-}
-
-/* text read by screen readers but not shown */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
 }

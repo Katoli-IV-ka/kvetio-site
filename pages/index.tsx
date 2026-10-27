@@ -7,6 +7,7 @@ import { Footer } from '../features/v2/ui/Footer';
 import { Header } from '../features/v2/ui/Header';
 import { Hero } from '../features/v2/ui/Hero';
 import { Infrastructure } from '../features/v2/ui/Infrastructure';
+import { LinkedIn } from '../features/v2/ui/LinkedIn';
 import { MobileMenu } from '../features/v2/ui/MobileMenu';
 import { Process } from '../features/v2/ui/Process';
 import { SITE_URL, SiteHead } from '../features/v2/ui/SiteHead';
@@ -66,9 +67,10 @@ export default function HomePage() {
           <DatasetPatterns />
           <Infrastructure />
           <Process />
-          <WhyKvet />
-          <Faq />
           <Contact />
+          <WhyKvet />
+          <LinkedIn />
+          <Faq />
         </main>
         <Footer />
       </div>

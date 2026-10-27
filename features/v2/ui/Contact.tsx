@@ -8,7 +8,7 @@ import styles from '../v2.module.css';
 type Status = 'idle' | 'loading' | 'success' | 'error' | 'ratelimit' | 'invalid';
 
 const MESSAGES: Record<Exclude<Status, 'idle' | 'loading'>, string> = {
-  success: 'Thank you. We’ll review your requirements and suggest the next step.',
+  success: 'Thanks! We got your request and will reply by email.',
   error: 'Something went wrong. Please try again or write to contact@kvet.io.',
   ratelimit: 'Too many requests. Please try again in a few minutes.',
   invalid: 'Please fill in your name, email and accept the Privacy Policy.',
@@ -108,8 +108,8 @@ export function Contact() {
           <textarea
             className={`${styles.field} ${styles.textarea} ${styles.requestField}`}
             name='request'
-            placeholder='What data do you need?'
-            aria-label='What data do you need?'
+            placeholder='What data does your model need?'
+            aria-label='What data does your model need?'
             rows={2}
             value={request}
             onChange={(event) => setRequest(event.target.value)}

@@ -898,6 +898,86 @@
   margin: 0 8px;
 }
 
+/* FAQ: questions in rows with a plus that turns into a minus */
+.faqList {
+  border-top: 1px solid #000;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion h3 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.faqQuestion:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+.faqIcon {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.faqIcon::before,
+.faqIcon::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 16px;
+  height: 2px;
+  background: #000;
+  transition: transform 0.3s ease;
+}
+
+.faqIcon::after {
+  transform: rotate(90deg);
+}
+
+.faqItem[open] .faqIcon::after {
+  transform: rotate(0deg);
+}
+
+.faqAnswer {
+  max-width: 760px;
+  margin: -8px 0 0;
+  padding: 0 0 24px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+@media (min-width: 1024px) {
+  .faqAnswer {
+    font-size: var(--fs-lead);
+    line-height: 24px;
+  }
+}
+
 /* Why Kvet: numbered columns, three by two — a numeral cut in half over a title and a short text, one numeral black */
 .whyList {
   display: grid;

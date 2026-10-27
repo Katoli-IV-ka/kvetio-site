@@ -1,7 +1,8 @@
-import { BRAND } from '../features/v2/content';
+import { BRAND, FAQ } from '../features/v2/content';
 import { Capabilities } from '../features/v2/ui/Capabilities';
 import { Contact } from '../features/v2/ui/Contact';
 import { DatasetPatterns } from '../features/v2/ui/DatasetPatterns';
+import { Faq } from '../features/v2/ui/Faq';
 import { Footer } from '../features/v2/ui/Footer';
 import { Header } from '../features/v2/ui/Header';
 import { Hero } from '../features/v2/ui/Hero';
@@ -36,6 +37,15 @@ const JSON_LD = [
     description: DESCRIPTION,
     inLanguage: 'en',
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
 ];
 
 export default function HomePage() {
@@ -60,6 +70,7 @@ export default function HomePage() {
           <Contact />
           <WhyKvet />
           <LinkedIn />
+          <Faq />
         </main>
         <Footer />
       </div>

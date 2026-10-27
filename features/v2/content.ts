@@ -249,6 +249,41 @@ export const WHY = [
   },
 ];
 
+/* ---------- FAQ ---------- */
+
+export const FAQ = [
+  {
+    question: 'How do you scope and price custom data projects?',
+    answer:
+      'Each project is scoped individually, based on data requirements, capture complexity, participants, locations, modalities, volume and delivery specifications. We start by reviewing your requirements and defining the most efficient production approach.',
+  },
+  {
+    question: 'What is the typical pilot size and timeline?',
+    answer:
+      'It depends on the type of data and the capture setup. We usually recommend a focused, reviewable batch that validates the capture protocol, metadata and quality requirements before production scales.',
+  },
+  {
+    question: 'What delivery formats do you support?',
+    answer:
+      'Formats and metadata schemas follow your project requirements: standard image and video formats, structured metadata such as CSV or JSON, and cloud-based delivery. Other formats can be supported when the project needs them.',
+  },
+  {
+    question: 'How do you handle participant consent and releases?',
+    answer:
+      'Consent and usage rights are built into the production workflow. For projects involving identifiable people, we collect the appropriate releases and organize documentation according to the agreed requirements and intended data use.',
+  },
+  {
+    question: 'Who owns the data and IP after delivery?',
+    answer:
+      'Ownership and licensing terms are agreed for each project before production begins — for example work-for-hire, exclusive licensing or another agreed structure.',
+  },
+  {
+    question: 'Can you work under NDA and in specific countries?',
+    answer:
+      'Yes. We work under NDA and organize production across countries through local production teams and contributor networks. Geographic availability depends on project requirements, local regulations and capture conditions.',
+  },
+];
+
 /* ---------- Solutions (landing pages) ---------- */
 
 export const SOLUTION_LINKS = [
@@ -284,6 +319,7 @@ export const FOOTER_COLUMNS = [
       { label: 'Infrastructure', href: '#infrastructure' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
+      { label: 'FAQ', href: '#faq' },
     ],
   },
   {
@@ -346,4 +382,5 @@ export const MENU_LINKS = [
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },
+  { label: 'FAQ', href: '#faq' },
 ];

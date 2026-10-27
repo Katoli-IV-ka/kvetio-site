@@ -116,8 +116,6 @@ export const CAPABILITIES: Capability[] = [
 export type DatasetPattern = {
   title: string;
   text: string;
-  /** optional chain of steps, shown with arrows under the text */
-  flow?: string[];
   tags: string[];
 };
 
@@ -136,19 +134,6 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
     title: 'Video Data for Generative AI',
     text: 'Purpose-built video data covering motion, human actions and interactions, continuity, camera movement and controlled visual variation.',
     tags: ['Motion', 'Continuity', 'Camera variation', 'Human interaction'],
-  },
-  {
-    title: 'Creative Workflow & Edit Trajectories',
-    text: 'Source assets, instructions, editing actions, project data, intermediate versions, metadata and final outputs captured as a structured creative workflow.',
-    flow: [
-      'Source',
-      'Instruction',
-      'Actions',
-      'Project Data',
-      'Intermediate Versions',
-      'Final Output',
-    ],
-    tags: ['Editing', 'Project data', 'Metadata', 'Decision traces'],
   },
   {
     title: 'Egocentric & Multimodal Activity Data',

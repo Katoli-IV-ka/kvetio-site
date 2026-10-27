@@ -34,7 +34,7 @@ const glow =
   'drop-shadow(0 0 10px rgba(255,246,190,0.55)) drop-shadow(0 0 28px rgba(255,246,190,0.3))';
 
 /** Splits the intro paragraph: the first sentence is bright, the rest dimmed. */
-const [lead, ...restParts] = introCopy.description.replace(" —", "\u00a0—").split(/(?<=—)\s/);
+const [lead, ...restParts] = introCopy.description.replace(' —', '\u00a0—').split(/(?<=—)\s/);
 const rest = restParts.join(' ');
 
 function Flower({ style }: { style: React.CSSProperties }) {
@@ -44,7 +44,13 @@ function Flower({ style }: { style: React.CSSProperties }) {
       preserveAspectRatio='none'
       fill='none'
       aria-hidden='true'
-      style={{ position: 'absolute', aspectRatio: '3/4', pointerEvents: 'none', filter: glow, ...style }}
+      style={{
+        position: 'absolute',
+        aspectRatio: '3/4',
+        pointerEvents: 'none',
+        filter: glow,
+        ...style,
+      }}
     >
       <path
         d={FLOWER_PATH}
@@ -360,7 +366,9 @@ export function Intro() {
                 backgroundSize: 'auto, 25% 25%, 25% 25%',
               }}
             />
-            <Flower style={{ left: '50%', top: '18%', width: '30%', transform: 'translateX(-50%)' }} />
+            <Flower
+              style={{ left: '50%', top: '18%', width: '30%', transform: 'translateX(-50%)' }}
+            />
           </Box>
         </Box>
       </Box>

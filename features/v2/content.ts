@@ -23,7 +23,7 @@ export const WAYS: {
     text: 'We build the environment, participants, actions, objects, capture setup and protocol around the requirements of the project.',
   },
   {
-    title: 'Content Sourcing & Licensing',
+    title: 'Sourcing & Licensing',
     tags: ['Existing content', 'Licensing', 'Rights clearance', 'Metadata'],
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
   },

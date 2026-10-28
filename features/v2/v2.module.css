@@ -855,26 +855,6 @@
   color: #737373;
 }
 
-/* step chain inside a card (Creative Workflow): steps joined by arrows */
-.patternFlow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 0;
-  margin: -8px 0 16px;
-  padding: 0;
-  list-style: none;
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #444;
-}
-
-.patternFlow li:not(:last-child)::after {
-  content: '→';
-  margin: 0 6px;
-  color: #a3a3a3;
-}
-
 .patternSpec {
   display: flex;
   flex-wrap: wrap;
@@ -896,6 +876,82 @@
 .patternSpec span:not(:last-child)::after {
   content: '·';
   margin: 0 8px;
+}
+
+/* FAQ: questions in rows with a plus that turns into a minus */
+.faqItem {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion h3 {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #171717;
+}
+
+.faqQuestion:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+.faqIcon {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.faqIcon::before,
+.faqIcon::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 16px;
+  height: 2px;
+  background: #000;
+  transition: transform 0.3s ease;
+}
+
+.faqIcon::after {
+  transform: rotate(90deg);
+}
+
+.faqItem[open] .faqIcon::after {
+  transform: rotate(0deg);
+}
+
+.faqAnswer {
+  max-width: 760px;
+  margin: -8px 0 0;
+  padding: 0 0 24px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+@media (min-width: 1024px) {
+  .faqAnswer {
+    font-size: var(--fs-lead);
+    line-height: 24px;
+  }
 }
 
 /* Why Kvet: numbered columns, three by two — a numeral cut in half over a title and a short text, one numeral black */
@@ -1006,21 +1062,9 @@
   color: #444;
 }
 
-.waysNote {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #444;
-}
-
 @media (min-width: 1024px) {
   .ways {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .waysNote {
-    font-size: var(--fs-lead);
-    line-height: 24px;
   }
 
   .wayText {
@@ -1224,6 +1268,10 @@
   background: #fbfbfb;
 }
 
+.processWhite {
+  background: #fff;
+}
+
 .processInner {
   max-width: var(--container);
   margin: 0 auto;
@@ -1269,7 +1317,7 @@
   font-family: var(--mono);
   font-size: var(--fs-h3);
   line-height: 24px;
-  color: #000;
+  color: #737373;
   display: none; /* numbers only on desktop */
 }
 
@@ -1365,6 +1413,127 @@
 @media (min-width: 1024px) {
   .stepDot {
     display: block;
+  }
+}
+
+/* ---------- Creative Workflow: a tall narrow photo on the left, copy on the right ---------- */
+
+.workflow {
+  display: grid;
+  gap: var(--gap-head);
+}
+
+.workflowCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
+}
+
+.workflowHeading {
+  max-width: 720px;
+  margin: 0;
+}
+
+.workflowText {
+  max-width: 416px;
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 24px;
+  color: #737373;
+}
+
+/* the example trajectory: a session log */
+.workflowLogLabel {
+  margin: var(--gap-item) 0 -8px;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.workflowLog {
+  max-width: 600px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #000;
+}
+
+.workflowStep {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 2px 12px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.workflowStep:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.workflowStepNum,
+.workflowStepDetail {
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.workflowStepNum {
+  padding-top: 2px;
+}
+
+.workflowStepLabel {
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-weight: 500;
+  color: #171717;
+}
+
+.workflowStepDetail {
+  grid-column: 2;
+}
+
+@media (min-width: 640px) {
+  .workflowStep {
+    grid-template-columns: 28px 200px minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .workflowStepDetail {
+    grid-column: auto;
+  }
+}
+
+.workflowMedia {
+  position: relative;
+}
+
+.workflowPhoto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .workflow {
+    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+    column-gap: var(--gap-block);
+  }
+
+  /* the photo fills the whole height of the block, from the heading to the end of the log */
+  .workflowMedia {
+    order: -1;
+  }
+
+  .workflowPhoto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    aspect-ratio: auto;
   }
 }
 

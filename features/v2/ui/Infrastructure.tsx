@@ -6,6 +6,7 @@ export function Infrastructure() {
     <section
       id='infrastructure'
       className={styles.section}
+      data-tone='alt'
     >
       <div className={styles.sectionInner}>
         <div className={styles.infra}>

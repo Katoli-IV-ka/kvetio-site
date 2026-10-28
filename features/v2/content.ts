@@ -2,9 +2,10 @@ export const BRAND = 'Kvet';
 
 export const CTA_LABEL = 'Discuss a dataset';
 
+/** header links, in the order the sections appear on the home page */
 export const NAV_LINKS = [
   { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Physical AI', href: '#physical-ai' },
+  { label: 'Data we produce', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'How we work', href: '#process' },
 ];
@@ -22,7 +23,7 @@ export const WAYS: {
     text: 'We build the environment, participants, actions, objects, capture setup and protocol around the requirements of the project.',
   },
   {
-    title: 'Content Sourcing & Licensing',
+    title: 'Sourcing & Licensing',
     tags: ['Existing content', 'Licensing', 'Rights clearance', 'Metadata'],
     text: 'We find and license existing content when that is faster and more cost-effective than producing it from scratch.',
   },
@@ -116,8 +117,6 @@ export const CAPABILITIES: Capability[] = [
 export type DatasetPattern = {
   title: string;
   text: string;
-  /** optional chain of steps, shown with arrows under the text */
-  flow?: string[];
   tags: string[];
 };
 
@@ -140,14 +139,6 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
   {
     title: 'Creative Workflow & Edit Trajectories',
     text: 'Source assets, instructions, editing actions, project data, intermediate versions, metadata and final outputs captured as a structured creative workflow.',
-    flow: [
-      'Source',
-      'Instruction',
-      'Actions',
-      'Project Data',
-      'Intermediate Versions',
-      'Final Output',
-    ],
     tags: ['Editing', 'Project data', 'Metadata', 'Decision traces'],
   },
   {
@@ -161,6 +152,25 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
     tags: ['3D', 'Graphics', 'Animation', 'VFX'],
   },
 ];
+
+/* ---------- Creative Workflow & Edit Trajectories ---------- */
+
+export const CREATIVE_WORKFLOW = {
+  title: 'Creative Workflow & Edit Trajectories',
+  text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
+  image: '/v2/photos/creative-workflow.webp',
+  alt: 'A person working at a laptop and monitor in a dimly lit room with bookshelves behind',
+  /** one illustrative trajectory, shown as a session log */
+  logLabel: 'Example trajectory',
+  steps: [
+    { label: 'Source Assets', detail: 'raw clips, audio track' },
+    { label: 'Instruction', detail: '“Cut a 15-second teaser, warm tones”' },
+    { label: 'Editing Actions', detail: 'trim · reorder · grade · add title' },
+    { label: 'Project Data', detail: 'timeline, layers, effect parameters' },
+    { label: 'Intermediate Versions', detail: 'v1 → v2 → v3' },
+    { label: 'Final Output', detail: 'teaser.mp4 + metadata' },
+  ],
+};
 
 /* ---------- Production infrastructure ---------- */
 
@@ -195,7 +205,7 @@ export const PROCESS_STEPS = [
     text: 'Define the model task, target behaviors, constraints and success criteria.',
   },
   {
-    title: 'Data Specification',
+    title: 'Specification',
     text: 'Translate project requirements into scenarios, capture parameters, metadata structure, deliverables and QA criteria.',
   },
   {
@@ -249,6 +259,41 @@ export const WHY = [
   },
 ];
 
+/* ---------- FAQ ---------- */
+
+export const FAQ = [
+  {
+    question: 'How do you scope and price custom data projects?',
+    answer:
+      'Each project is scoped individually, based on data requirements, capture complexity, participants, locations, modalities, volume and delivery specifications. We start by reviewing your requirements and defining the most efficient production approach.',
+  },
+  {
+    question: 'What is the typical pilot size and timeline?',
+    answer:
+      'It depends on the type of data and the capture setup. We usually recommend a focused, reviewable batch that validates the capture protocol, metadata and quality requirements before production scales.',
+  },
+  {
+    question: 'What delivery formats do you support?',
+    answer:
+      'Formats and metadata schemas follow your project requirements: standard image and video formats, structured metadata such as CSV or JSON, and cloud-based delivery. Other formats can be supported when the project needs them.',
+  },
+  {
+    question: 'How do you handle participant consent and releases?',
+    answer:
+      'Consent and usage rights are built into the production workflow. For projects involving identifiable people, we collect the appropriate releases and organize documentation according to the agreed requirements and intended data use.',
+  },
+  {
+    question: 'Who owns the data and IP after delivery?',
+    answer:
+      'Ownership and licensing terms are agreed for each project before production begins — for example work-for-hire, exclusive licensing or another agreed structure.',
+  },
+  {
+    question: 'Can you work under NDA and in specific countries?',
+    answer:
+      'Yes. We work under NDA and organize production across countries through local production teams and contributor networks. Geographic availability depends on project requirements, local regulations and capture conditions.',
+  },
+];
+
 /* ---------- Solutions (landing pages) ---------- */
 
 export const SOLUTION_LINKS = [
@@ -282,8 +327,10 @@ export const FOOTER_COLUMNS = [
       { label: 'What we do', href: '#what-we-do' },
       { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
+      { label: 'Creative Workflow', href: '#creative-workflow' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
+      { label: 'FAQ', href: '#faq' },
     ],
   },
   {
@@ -344,6 +391,8 @@ export const MENU_GROUPS: MenuGroup[] = [
 export const MENU_LINKS = [
   { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Creative Workflow', href: '#creative-workflow' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },
+  { label: 'FAQ', href: '#faq' },
 ];

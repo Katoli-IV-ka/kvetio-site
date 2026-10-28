@@ -31,9 +31,6 @@ export function WhatWeDo() {
             </li>
           ))}
         </ul>
-        <p className={styles.waysNote}>
-          Depending on the project, we use one approach or combine several.
-        </p>
       </div>
     </section>
   );

@@ -879,10 +879,6 @@
 }
 
 /* FAQ: questions in rows with a plus that turns into a minus */
-.faqList {
-  border-top: 1px solid #000;
-}
-
 .faqItem {
   border-bottom: 1px solid #e0e0e0;
 }

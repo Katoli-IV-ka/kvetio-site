@@ -855,6 +855,26 @@
   color: #737373;
 }
 
+/* step chain inside a card (Creative Workflow): steps joined by arrows */
+.patternFlow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 0;
+  margin: -8px 0 16px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #444;
+}
+
+.patternFlow li:not(:last-child)::after {
+  content: '→';
+  margin: 0 6px;
+  color: #a3a3a3;
+}
+
 .patternSpec {
   display: flex;
   flex-wrap: wrap;

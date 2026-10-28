@@ -24,6 +24,13 @@ export function DatasetPatterns() {
             >
               <h3 className={styles.patternTitle}>{pattern.title}</h3>
               <p className={styles.patternText}>{pattern.text}</p>
+              {pattern.flow && (
+                <ol className={styles.patternFlow}>
+                  {pattern.flow.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              )}
               <p className={styles.patternSpec}>
                 {pattern.tags.map((tag) => (
                   <span key={tag}>{tag}</span>

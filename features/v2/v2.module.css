@@ -1444,7 +1444,6 @@
 .workflowHeading {
   max-width: 720px;
   margin: 0;
-  font-size: var(--fs-display);
 }
 
 .workflowText {

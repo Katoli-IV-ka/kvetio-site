@@ -12,7 +12,7 @@ export function Faq() {
         <div className={styles.sectionHead}>
           <h2 className={styles.heading}>FAQ</h2>
         </div>
-        <div className={styles.faqList}>
+        <div>
           {FAQ.map((item) => (
             <details
               key={item.question}

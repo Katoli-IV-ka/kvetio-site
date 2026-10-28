@@ -568,7 +568,6 @@
   gap: 24px;
   padding: 20px;
   overflow: hidden;
-  border-radius: 14px;
   scroll-margin-top: 80px; /* menu links land below the sticky bar */
 }
 
@@ -733,12 +732,12 @@
   /* only a hovered card counts, so passing over the gaps between cards does not make them jump */
   .capCards:has(.capCard:hover) .capCard,
   .capCards:has(.capCard:focus-visible) .capCard {
-    flex-grow: 0.8;
+    flex-grow: 0.9;
   }
 
   .capCards .capCard:hover,
   .capCards:not(:has(.capCard:hover)) .capCard:focus-visible {
-    flex-grow: 1.8;
+    flex-grow: 1.35;
   }
 
   .capTitle {
@@ -1259,6 +1258,16 @@
 
   .sectionLead {
     flex: none;
+  }
+}
+
+/* heading with the lead underneath, also on desktop */
+@media (min-width: 1024px) {
+  .sectionHeadStack {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-item);
   }
 }
 

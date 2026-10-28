@@ -1315,7 +1315,7 @@
 
 .stepNum {
   font-family: var(--mono);
-  font-size: var(--fs-caption);
+  font-size: var(--fs-h3);
   line-height: 24px;
   color: #737373;
   display: none; /* numbers only on desktop */

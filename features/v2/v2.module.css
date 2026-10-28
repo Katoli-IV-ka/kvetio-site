@@ -1428,19 +1428,17 @@
   }
 }
 
-/* ---------- Creative Workflow: bordered block, copy on the left and a photo on the right ---------- */
+/* ---------- Creative Workflow: copy on the left and a photo on the right ---------- */
 
 .workflow {
   display: grid;
-  border: 1px solid #e5e5e5;
-  background: #fff;
+  gap: var(--gap-head);
 }
 
 .workflowCopy {
   display: flex;
   flex-direction: column;
   gap: var(--gap-head);
-  padding: 24px;
 }
 
 .workflowText {
@@ -1449,10 +1447,6 @@
   font-size: var(--fs-lead);
   line-height: 24px;
   color: #737373;
-}
-
-.workflowMedia {
-  border-top: 1px solid #e5e5e5;
 }
 
 .workflowPhoto {
@@ -1466,12 +1460,12 @@
 @media (min-width: 1024px) {
   .workflow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gap-block);
     min-height: 528px;
   }
 
   .workflowCopy {
     justify-content: space-between;
-    padding: 48px;
   }
 
   .workflowCopy .heading {
@@ -1480,8 +1474,6 @@
 
   .workflowMedia {
     position: relative;
-    border-top: 0;
-    border-left: 1px solid #e5e5e5;
   }
 
   .workflowPhoto {

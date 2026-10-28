@@ -1416,7 +1416,7 @@
   }
 }
 
-/* ---------- Creative Workflow: copy on the left, a tall narrow photo on the right ---------- */
+/* ---------- Creative Workflow: a tall narrow photo on the left, copy on the right ---------- */
 
 .workflow {
   display: grid;
@@ -1519,11 +1519,15 @@
 
 @media (min-width: 1024px) {
   .workflow {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
     column-gap: var(--gap-block);
   }
 
   /* the photo fills the whole height of the block, from the heading to the end of the log */
+  .workflowMedia {
+    order: -1;
+  }
+
   .workflowPhoto {
     position: absolute;
     top: 0;

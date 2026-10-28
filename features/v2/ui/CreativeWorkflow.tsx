@@ -14,10 +14,7 @@ export function CreativeWorkflow() {
           <h2 className={`${styles.heading} ${styles.workflowHeading}`}>
             {CREATIVE_WORKFLOW.title}
           </h2>
-          <div className={styles.workflowMeta}>
-            <p className={styles.workflowText}>{CREATIVE_WORKFLOW.text}</p>
-            <p className={styles.workflowCaption}>Data we produce</p>
-          </div>
+          <p className={styles.workflowText}>{CREATIVE_WORKFLOW.text}</p>
           <img
             className={styles.workflowPhoto}
             src={CREATIVE_WORKFLOW.image}

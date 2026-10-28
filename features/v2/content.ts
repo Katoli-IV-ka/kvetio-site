@@ -5,12 +5,9 @@ export const CTA_LABEL = 'Discuss a dataset';
 /** header links, in the order the sections appear on the home page */
 export const NAV_LINKS = [
   { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Datasets', href: '#datasets' },
+  { label: 'Data we produce', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
-  { label: 'Creative Workflow', href: '#creative-workflow' },
   { label: 'How we work', href: '#process' },
-  { label: 'Why Kvet', href: '#why' },
-  { label: 'FAQ', href: '#faq' },
 ];
 
 /* ---------- What we do: three ways of creating data ---------- */

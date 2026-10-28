@@ -204,7 +204,7 @@ export const PROCESS_STEPS = [
     text: 'Define the model task, target behaviors, constraints and success criteria.',
   },
   {
-    title: 'Data Specification',
+    title: 'Specification',
     text: 'Translate project requirements into scenarios, capture parameters, metadata structure, deliverables and QA criteria.',
   },
   {

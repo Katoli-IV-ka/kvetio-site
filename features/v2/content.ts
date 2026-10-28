@@ -116,8 +116,6 @@ export const CAPABILITIES: Capability[] = [
 export type DatasetPattern = {
   title: string;
   text: string;
-  /** optional chain of steps, shown with arrows under the text */
-  flow?: string[];
   tags: string[];
 };
 
@@ -140,14 +138,6 @@ export const DATASET_PATTERNS: DatasetPattern[] = [
   {
     title: 'Creative Workflow & Edit Trajectories',
     text: 'Source assets, instructions, editing actions, project data, intermediate versions, metadata and final outputs captured as a structured creative workflow.',
-    flow: [
-      'Source',
-      'Instruction',
-      'Actions',
-      'Project Data',
-      'Intermediate Versions',
-      'Final Output',
-    ],
     tags: ['Editing', 'Project data', 'Metadata', 'Decision traces'],
   },
   {

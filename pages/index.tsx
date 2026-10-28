@@ -66,8 +66,8 @@ export default function HomePage() {
           <Capabilities />
           <WhatWeDo />
           <DatasetPatterns />
-          <Infrastructure />
           <CreativeWorkflow />
+          <Infrastructure />
           <Process white />
           <Contact />
           <WhyKvet />

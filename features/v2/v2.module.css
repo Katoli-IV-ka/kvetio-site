@@ -1455,7 +1455,7 @@
   color: #737373;
 }
 
-/* the example trajectory: a session log whose rows appear one by one when it scrolls into view */
+/* the example trajectory: a session log */
 .workflowLogLabel {
   margin: var(--gap-item) 0 -8px;
   font-family: var(--mono);
@@ -1503,29 +1503,6 @@
   grid-column: 2;
 }
 
-@keyframes workflowStepIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  .workflowStep {
-    opacity: 0;
-  }
-
-  .workflowLog[data-play='true'] .workflowStep {
-    animation: workflowStepIn 0.5s var(--ease-cap) forwards;
-    animation-delay: calc(var(--i) * 0.45s);
-  }
-}
-
 @media (min-width: 640px) {
   .workflowStep {
     grid-template-columns: 28px 200px minmax(0, 1fr);
@@ -1535,6 +1512,10 @@
   .workflowStepDetail {
     grid-column: auto;
   }
+}
+
+.workflowMedia {
+  position: relative;
 }
 
 .workflowPhoto {
@@ -1548,6 +1529,15 @@
   .workflow {
     grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
     column-gap: var(--gap-block);
+  }
+
+  /* the photo fills the whole height of the block, from the heading to the end of the log */
+  .workflowPhoto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    aspect-ratio: auto;
   }
 }
 

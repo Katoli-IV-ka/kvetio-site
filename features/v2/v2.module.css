@@ -387,6 +387,13 @@
   }
 }
 
+/* seven links need tighter spacing on narrow desktops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .headerNav {
+    gap: 0;
+  }
+}
+
 /* ---------- Hero ---------- */
 
 .hero {

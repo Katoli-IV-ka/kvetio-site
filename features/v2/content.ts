@@ -2,11 +2,15 @@ export const BRAND = 'Kvet';
 
 export const CTA_LABEL = 'Discuss a dataset';
 
+/** header links, in the order the sections appear on the home page */
 export const NAV_LINKS = [
   { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Physical AI', href: '#physical-ai' },
+  { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Creative Workflow', href: '#creative-workflow' },
   { label: 'How we work', href: '#process' },
+  { label: 'Why Kvet', href: '#why' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
 /* ---------- What we do: three ways of creating data ---------- */
@@ -326,6 +330,7 @@ export const FOOTER_COLUMNS = [
       { label: 'What we do', href: '#what-we-do' },
       { label: 'Datasets', href: '#datasets' },
       { label: 'Infrastructure', href: '#infrastructure' },
+      { label: 'Creative Workflow', href: '#creative-workflow' },
       { label: 'How we work', href: '#process' },
       { label: 'Why Kvet', href: '#why' },
       { label: 'FAQ', href: '#faq' },
@@ -389,6 +394,7 @@ export const MENU_GROUPS: MenuGroup[] = [
 export const MENU_LINKS = [
   { label: 'Datasets', href: '#datasets' },
   { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Creative Workflow', href: '#creative-workflow' },
   { label: 'How we work', href: '#process' },
   { label: 'Why Kvet', href: '#why' },
   { label: 'FAQ', href: '#faq' },

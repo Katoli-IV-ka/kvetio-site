@@ -1062,21 +1062,9 @@
   color: #444;
 }
 
-.waysNote {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 20px;
-  color: #444;
-}
-
 @media (min-width: 1024px) {
   .ways {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .waysNote {
-    font-size: var(--fs-lead);
-    line-height: 24px;
   }
 
   .wayText {

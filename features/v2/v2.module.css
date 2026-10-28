@@ -1304,6 +1304,10 @@
   background: #fbfbfb;
 }
 
+.processWhite {
+  background: #fff;
+}
+
 .processInner {
   max-width: var(--container);
   margin: 0 auto;

@@ -68,7 +68,7 @@ export default function HomePage() {
           <DatasetPatterns />
           <Infrastructure />
           <CreativeWorkflow />
-          <Process />
+          <Process white />
           <Contact />
           <WhyKvet />
           <LinkedIn />

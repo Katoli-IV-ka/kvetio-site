@@ -1,11 +1,12 @@
 import { PROCESS_STEPS } from '../content';
 import styles from '../v2.module.css';
 
-export function Process() {
+/** `white` drops the grey ground, for where the neighbouring section is grey already */
+export function Process({ white = false }: { white?: boolean }) {
   return (
     <section
       id='process'
-      className={styles.process}
+      className={white ? `${styles.process} ${styles.processWhite}` : styles.process}
     >
       <div className={styles.processInner}>
         <h2 className={styles.heading}>Our process</h2>

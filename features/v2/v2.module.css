@@ -1428,24 +1428,39 @@
   }
 }
 
-/* ---------- Creative Workflow: copy on the left and a photo on the right ---------- */
+/* ---------- Creative Workflow: big centred heading, a small caption row, then a wide photo ---------- */
 
 .workflow {
   display: grid;
   gap: var(--gap-head);
 }
 
-.workflowCopy {
+.workflowHeading {
+  max-width: 960px;
+  margin: 0 auto;
+  font-size: var(--fs-display);
+  text-align: center;
+}
+
+.workflowMeta {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-head);
+  gap: var(--gap-item);
 }
 
 .workflowText {
   max-width: 416px;
   margin: 0;
-  font-size: var(--fs-lead);
-  line-height: 24px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  color: #737373;
+}
+
+.workflowCaption {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
   color: #737373;
 }
 
@@ -1458,29 +1473,16 @@
 }
 
 @media (min-width: 1024px) {
-  .workflow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--gap-block);
-    min-height: 528px;
-  }
-
-  .workflowCopy {
+  .workflowMeta {
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
   }
 
-  .workflowCopy .heading {
-    max-width: 560px;
-  }
-
-  .workflowMedia {
-    position: relative;
-  }
-
   .workflowPhoto {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7;
+    object-position: 50% 36%;
   }
 }
 

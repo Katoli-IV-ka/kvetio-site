@@ -11,10 +11,12 @@ export function CreativeWorkflow() {
     >
       <div className={styles.sectionInner}>
         <div className={styles.workflow}>
-          <h2 className={`${styles.heading} ${styles.workflowHeading}`}>
-            {CREATIVE_WORKFLOW.title}
-          </h2>
-          <p className={styles.workflowText}>{CREATIVE_WORKFLOW.text}</p>
+          <div className={styles.workflowCopy}>
+            <h2 className={`${styles.heading} ${styles.workflowHeading}`}>
+              {CREATIVE_WORKFLOW.title}
+            </h2>
+            <p className={styles.workflowText}>{CREATIVE_WORKFLOW.text}</p>
+          </div>
           <img
             className={styles.workflowPhoto}
             src={CREATIVE_WORKFLOW.image}

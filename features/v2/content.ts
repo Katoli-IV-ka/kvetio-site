@@ -158,7 +158,7 @@ export const CREATIVE_WORKFLOW = {
   title: 'Creative Workflow & Edit Trajectories',
   text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
   image: '/v2/photos/creative-workflow.webp',
-  alt: 'Two people working at monitors and laptops in a home kitchen while a third makes coffee',
+  alt: 'A person working at a laptop and monitor in a dimly lit room with bookshelves behind',
 };
 
 /* ---------- Production infrastructure ---------- */

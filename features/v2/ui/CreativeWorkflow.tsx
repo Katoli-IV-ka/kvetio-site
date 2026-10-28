@@ -7,7 +7,6 @@ export function CreativeWorkflow() {
     <section
       id='creative-workflow'
       className={styles.section}
-      data-tone='alt'
     >
       <div className={styles.sectionInner}>
         <div className={styles.workflow}>

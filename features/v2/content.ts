@@ -159,6 +159,16 @@ export const CREATIVE_WORKFLOW = {
   text: 'Datasets that capture the creative process from source assets and instructions through editing actions, project data, intermediate versions, metadata and final outputs.',
   image: '/v2/photos/creative-workflow.webp',
   alt: 'A person working at a laptop and monitor in a dimly lit room with bookshelves behind',
+  /** one illustrative trajectory, shown as a session log */
+  logLabel: 'Example trajectory',
+  steps: [
+    { label: 'Source Assets', detail: 'raw clips, audio track' },
+    { label: 'Instruction', detail: '“Cut a 15-second teaser, warm tones”' },
+    { label: 'Editing Actions', detail: 'trim · reorder · grade · add title' },
+    { label: 'Project Data', detail: 'timeline, layers, effect parameters' },
+    { label: 'Intermediate Versions', detail: 'v1 → v2 → v3' },
+    { label: 'Final Output', detail: 'teaser.mp4 + metadata' },
+  ],
 };
 
 /* ---------- Production infrastructure ---------- */

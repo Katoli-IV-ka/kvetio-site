@@ -1455,6 +1455,88 @@
   color: #737373;
 }
 
+/* the example trajectory: a session log whose rows appear one by one when it scrolls into view */
+.workflowLogLabel {
+  margin: var(--gap-item) 0 -8px;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.workflowLog {
+  max-width: 600px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #000;
+}
+
+.workflowStep {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 2px 12px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.workflowStepNum,
+.workflowStepDetail {
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
+.workflowStepNum {
+  padding-top: 2px;
+}
+
+.workflowStepLabel {
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-weight: 500;
+  color: #171717;
+}
+
+.workflowStepDetail {
+  grid-column: 2;
+}
+
+@keyframes workflowStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .workflowStep {
+    opacity: 0;
+  }
+
+  .workflowLog[data-play='true'] .workflowStep {
+    animation: workflowStepIn 0.5s var(--ease-cap) forwards;
+    animation-delay: calc(var(--i) * 0.45s);
+  }
+}
+
+@media (min-width: 640px) {
+  .workflowStep {
+    grid-template-columns: 28px 200px minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .workflowStepDetail {
+    grid-column: auto;
+  }
+}
+
 .workflowPhoto {
   display: block;
   width: 100%;

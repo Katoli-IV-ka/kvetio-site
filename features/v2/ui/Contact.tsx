@@ -32,7 +32,6 @@ export function Contact() {
   const [dataTypes, setDataTypes] = useState<string[]>([]);
   const [volume, setVolume] = useState('');
   const [timeline, setTimeline] = useState('');
-  const [regions, setRegions] = useState('');
   const [ndaNeeded, setNdaNeeded] = useState(false);
   const [source, setSource] = useState('');
   const [trap, setTrap] = useState('');
@@ -65,7 +64,6 @@ export function Contact() {
           dataTypes,
           volume,
           timeline,
-          regions: regions.trim(),
           ndaNeeded,
           source,
         }),
@@ -145,7 +143,6 @@ export function Contact() {
             onSubmit={onQuickSubmit}
             noValidate
           >
-            <p className={styles.formStep}>Step 1 of 2</p>
             <div className={styles.fields}>
               <input
                 className={styles.field}
@@ -245,10 +242,6 @@ export function Contact() {
             onSubmit={onDetailsSubmit}
             noValidate
           >
-            <p className={styles.formStep}>
-              Step 2 of 2. Your request is sent. A few details help us scope it faster; all
-              optional.
-            </p>
             <div className={styles.fields}>
               <input
                 className={styles.field}
@@ -322,15 +315,6 @@ export function Contact() {
                   </option>
                 ))}
               </select>
-              <input
-                className={styles.field}
-                type='text'
-                name='regions'
-                placeholder='Countries or regions'
-                aria-label='Countries or regions'
-                value={regions}
-                onChange={(event) => setRegions(event.target.value)}
-              />
               <select
                 className={`${styles.field} ${styles.select}`}
                 name='source'
@@ -362,20 +346,22 @@ export function Contact() {
                 </label>
               </div>
               <div className={styles.submitRow}>
-                <button
-                  className={styles.submit}
-                  type='submit'
-                  disabled={status === 'loading'}
-                >
-                  {status === 'loading' ? 'Sending…' : 'Send details'}
-                </button>
-                <button
-                  className={styles.skip}
-                  type='button'
-                  onClick={() => setStep('done')}
-                >
-                  Skip
-                </button>
+                <div className={styles.submitButtons}>
+                  <button
+                    className={styles.submit}
+                    type='submit'
+                    disabled={status === 'loading'}
+                  >
+                    {status === 'loading' ? 'Sending…' : 'Send details'}
+                  </button>
+                  <button
+                    className={styles.skip}
+                    type='button'
+                    onClick={() => setStep('done')}
+                  >
+                    Skip
+                  </button>
+                </div>
                 {statusNote}
               </div>
             </div>

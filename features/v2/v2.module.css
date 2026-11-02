@@ -1754,14 +1754,11 @@
   cursor: default;
 }
 
-/* two-step form: step caption, skip link and the closing note */
-.formStep {
-  margin: 0;
-  max-width: 500px;
-  font-family: var(--mono);
-  font-size: var(--fs-caption);
-  line-height: 16px;
-  color: #444;
+/* two-step form: buttons in one row, skip link and the closing note */
+.submitButtons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .skip {

@@ -53,10 +53,7 @@ export function Contact() {
         website: trap,
         name: name.trim(),
         email: email.trim(),
-        message: [
-          request.trim(),
-          `Request from the kvet.io${window.location.pathname} contact form. Privacy Policy accepted: yes. Marketing emails: ${marketing ? 'yes' : 'no'}.`,
-        ].join('\n\n'),
+        message: request.trim(),
         marketingConsent: marketing,
         ...(stage === 'details' && {
           company: company.trim(),

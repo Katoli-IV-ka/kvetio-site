@@ -163,12 +163,15 @@ export const CREATIVE_WORKFLOW = {
   /** one illustrative trajectory, shown as a session log */
   logLabel: 'Example trajectory',
   steps: [
-    { label: 'Source Assets', detail: 'raw clips, audio track' },
-    { label: 'Instruction', detail: '“Cut a 15-second teaser, warm tones”' },
-    { label: 'Editing Actions', detail: 'trim · reorder · grade · add title' },
-    { label: 'Project Data', detail: 'timeline, layers, effect parameters' },
+    { label: 'Source Assets', detail: 'original files' },
+    {
+      label: 'Instruction',
+      detail: '“Relight the scene as golden hour, remove the object on the left”',
+    },
+    { label: 'Editing Actions', detail: 'select · remove · relight · refine' },
+    { label: 'Project Data', detail: 'project file, layers, parameters' },
     { label: 'Intermediate Versions', detail: 'v1 → v2 → v3' },
-    { label: 'Final Output', detail: 'teaser.mp4 + metadata' },
+    { label: 'Final Output', detail: 'final asset + metadata' },
   ],
 };
 

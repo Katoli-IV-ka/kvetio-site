@@ -1633,9 +1633,6 @@
   opacity: 0.35;
   mix-blend-mode: multiply;
   pointer-events: none;
-  /* the artwork is cut at its left edge: let it fade into the page instead of ending in a hard line */
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28%);
-  mask-image: linear-gradient(to right, transparent 0, #000 28%);
 }
 
 .contactTitle {

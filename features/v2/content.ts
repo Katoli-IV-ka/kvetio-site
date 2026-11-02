@@ -172,6 +172,22 @@ export const CREATIVE_WORKFLOW = {
   ],
 };
 
+/* ---------- Contact form: second-step choices (the first-step areas and sources live in site-content) ---------- */
+
+export const CONTACT_VOLUMES = [
+  'Pilot (small sample batch)',
+  'Production run',
+  'Ongoing, at scale',
+  'Not sure yet',
+];
+
+export const CONTACT_TIMELINES = [
+  'As soon as possible',
+  '1–3 months',
+  '3–6 months',
+  'Just exploring',
+];
+
 /* ---------- Production infrastructure ---------- */
 
 export const INFRASTRUCTURE = [

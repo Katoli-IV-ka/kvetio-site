@@ -9,7 +9,7 @@ export function DatasetPatterns() {
       data-tone='alt'
     >
       <div className={styles.sectionInner}>
-        <div className={styles.sectionHead}>
+        <div className={`${styles.sectionHead} ${styles.sectionHeadStack}`}>
           <h2 className={styles.heading}>Data we produce</h2>
           <p className={styles.sectionLead}>
             Real-world, visual and multimodal datasets built around specific model and research

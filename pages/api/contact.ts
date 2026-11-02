@@ -16,7 +16,6 @@ const detailsRateLimitCache = new LRUCache<string, number>({
 const PRIVACY_POLICY_VERSION = '2026-10-09';
 const RATE_LIMIT = 5; // max new requests per IP per TTL window
 const DETAILS_RATE_LIMIT = 10; // max detail updates per IP per TTL window
-const TELEGRAM_MAX = 4000; // Telegram rejects messages over 4096 characters
 
 export type ContactPayload = {
   name: string;
@@ -34,7 +33,6 @@ export type ContactPayload = {
   telegramMessageId?: number;
   volume?: string;
   timeline?: string;
-  regions?: string;
   ndaNeeded?: boolean;
 };
 
@@ -84,10 +82,8 @@ export function normalizeContactPayload(body: unknown): ContactPayload | null {
   }
   const volume = text(payload.volume, 100);
   const timeline = text(payload.timeline, 100);
-  const regions = text(payload.regions, 300);
   if (volume) result.volume = volume;
   if (timeline) result.timeline = timeline;
-  if (regions) result.regions = regions;
   if (payload.ndaNeeded === true) result.ndaNeeded = true;
   return result;
 }
@@ -126,15 +122,55 @@ async function telegramRequest(method: string, body: Record<string, unknown>): P
 }
 
 /** Sends a message and returns its id, so a later step can update the same message. */
-export async function sendTelegramMessage(text: string): Promise<number | undefined> {
-  const data = (await telegramRequest('sendMessage', { text })) as
-    | { result?: { message_id?: number } }
-    | undefined;
+export async function sendTelegramMessage(
+  text: string,
+  parseMode?: 'HTML',
+): Promise<number | undefined> {
+  const data = (await telegramRequest('sendMessage', {
+    text,
+    ...(parseMode && { parse_mode: parseMode }),
+  })) as { result?: { message_id?: number } } | undefined;
   return data?.result?.message_id;
 }
 
-export async function editTelegramMessage(messageId: number, text: string): Promise<void> {
-  await telegramRequest('editMessageText', { message_id: messageId, text });
+export async function editTelegramMessage(
+  messageId: number,
+  text: string,
+  parseMode?: 'HTML',
+): Promise<void> {
+  await telegramRequest('editMessageText', {
+    message_id: messageId,
+    text,
+    ...(parseMode && { parse_mode: parseMode }),
+  });
+}
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/** The Telegram message (HTML mode): groups of filled-in fields, then the request text. */
+export function formatTelegramMessage(payload: ContactPayload): string {
+  const line = (label: string, value: string | undefined) =>
+    value ? `<b>${label}:</b> ${escapeHtml(value)}` : undefined;
+  const group = (lines: (string | undefined)[]) => lines.filter(Boolean).join('\n');
+  const blocks = [
+    group([
+      line('Имя', payload.name),
+      line('Email', payload.email),
+      line('Role', payload.jobTitle),
+      line('Company', payload.company),
+    ]),
+    group([
+      line('Data type', payload.dataTypes?.join(', ')),
+      line('Scale', payload.volume),
+      line('Timeline', payload.timeline),
+      line('NDA needed', payload.ndaNeeded ? 'yes' : undefined),
+      line('Heard about us', payload.source),
+    ]),
+    payload.datasetTitle ? line('Датасет', payload.datasetTitle) : '',
+    `<b>Сообщение:</b> ${escapeHtml(payload.message.slice(0, 3000))}`,
+  ].filter(Boolean);
+  return `🆕 Новая заявка <b>Kvetio</b>\n\n${blocks.join('\n\n')}`;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -170,7 +206,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     name,
     email,
     message,
-    datasetTitle,
     jobTitle,
     company,
     dataTypes,
@@ -178,7 +213,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     marketingConsent,
     volume,
     timeline,
-    regions,
     ndaNeeded,
     telegramMessageId,
   } = payload;
@@ -188,7 +222,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     dataTypes && `Data type: ${dataTypes.join(', ')}`,
     volume && `Scale: ${volume}`,
     timeline && `Timeline: ${timeline}`,
-    regions && `Countries / regions: ${regions}`,
     ndaNeeded && 'NDA needed: yes',
     source && `Heard about us: ${source}`,
     `Consent to reply (Privacy Policy ${PRIVACY_POLICY_VERSION}): given ${new Date().toISOString()}`,
@@ -223,32 +256,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (telegramConfigured()) {
-    const header =
-      payload.stage === 'initial'
-        ? '📬 Новая заявка (шаг 1 из 2, детали могут прийти позже)'
-        : isDetails
-          ? '📬 Заявка (шаг 2 из 2: детали добавлены)'
-          : '📬 Новое сообщение с формы';
-    const telegramText = (
-      `${header}\n\n` +
-      (datasetTitle ? `📦 Датасет: ${datasetTitle}\n\n` : '') +
-      `Имя: ${name}\n` +
-      `Email: ${email}\n` +
-      (details.length ? `${details.join('\n')}\n` : '') +
-      '\n' +
-      `Сообщение:\n${message}`
-    ).slice(0, TELEGRAM_MAX);
+    const telegramText = formatTelegramMessage(payload);
     try {
       if (isDetails && telegramMessageId) {
         try {
-          await editTelegramMessage(telegramMessageId, telegramText);
+          await editTelegramMessage(telegramMessageId, telegramText, 'HTML');
         } catch (error) {
           // the first message may be gone or unchanged; send the full request again instead
           console.error('Contact form: Telegram edit failed, sending a new message', error);
-          newTelegramId = await sendTelegramMessage(telegramText);
+          newTelegramId = await sendTelegramMessage(telegramText, 'HTML');
         }
       } else {
-        newTelegramId = await sendTelegramMessage(telegramText);
+        newTelegramId = await sendTelegramMessage(telegramText, 'HTML');
       }
       delivered = true;
     } catch (error) {

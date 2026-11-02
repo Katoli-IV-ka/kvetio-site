@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { BRAND } from '../content';
 
 export const SITE_URL = 'https://kvet.io';
-const OG_IMAGE = `${SITE_URL}/images/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/images/og-image-v4.png`;
 
 type Props = {
   title: string;
@@ -46,6 +46,14 @@ export function SiteHead({ title, description, path, jsonLd }: Props) {
       <meta
         property='og:image'
         content={OG_IMAGE}
+      />
+      <meta
+        property='og:image:width'
+        content='1200'
+      />
+      <meta
+        property='og:image:height'
+        content='630'
       />
       <meta
         property='og:site_name'

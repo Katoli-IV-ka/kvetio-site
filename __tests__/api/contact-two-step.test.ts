@@ -65,9 +65,10 @@ describe('contact API, two-step form', () => {
     expect(String(url)).toMatch(/\/editMessageText$/);
     const sent = JSON.parse(options.body);
     expect(sent.message_id).toBe(77);
-    expect(sent.text).toContain('Company: ACME');
-    expect(sent.text).toContain('Scale: Pilot (small sample batch)');
-    expect(sent.text).toContain('NDA needed: yes');
+    expect(sent.parse_mode).toBe('HTML');
+    expect(sent.text).toContain('<b>Company:</b> ACME');
+    expect(sent.text).toContain('<b>Scale:</b> Pilot (small sample batch)');
+    expect(sent.text).toContain('<b>NDA needed:</b> yes');
   });
 
   it('sends a fresh message when the edit fails', async () => {
@@ -108,5 +109,54 @@ describe('contact API, two-step form', () => {
 
     expect(reply.status).toBe(200);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('formats the Telegram message from the agreed template and escapes user text', async () => {
+    const { formatTelegramMessage } = await import('../../pages/api/contact');
+
+    const text = formatTelegramMessage({
+      name: 'Max',
+      email: 'max@example.com',
+      jobTitle: 'PR MANAGER',
+      company: 'INVIDIA',
+      volume: 'Ongoing, at scale',
+      timeline: '1–3 months',
+      source: 'LinkedIn',
+      message: 'Need <b>kitchen</b> data & more',
+    });
+
+    expect(text).toBe(
+      [
+        '🆕 Новая заявка <b>Kvetio</b>',
+        '',
+        '<b>Имя:</b> Max',
+        '<b>Email:</b> max@example.com',
+        '<b>Role:</b> PR MANAGER',
+        '<b>Company:</b> INVIDIA',
+        '',
+        '<b>Scale:</b> Ongoing, at scale',
+        '<b>Timeline:</b> 1–3 months',
+        '<b>Heard about us:</b> LinkedIn',
+        '',
+        '<b>Сообщение:</b> Need &lt;b&gt;kitchen&lt;/b&gt; data &amp; more',
+      ].join('\n'),
+    );
+  });
+
+  it('leaves out the empty groups when only the first step is filled in', async () => {
+    const { formatTelegramMessage } = await import('../../pages/api/contact');
+
+    const text = formatTelegramMessage({ name: 'Max', email: 'max@example.com', message: 'Hi' });
+
+    expect(text).toBe(
+      [
+        '🆕 Новая заявка <b>Kvetio</b>',
+        '',
+        '<b>Имя:</b> Max',
+        '<b>Email:</b> max@example.com',
+        '',
+        '<b>Сообщение:</b> Hi',
+      ].join('\n'),
+    );
   });
 });

@@ -10,7 +10,7 @@ export function Capabilities() {
       data-tone='alt'
     >
       <div className={styles.sectionInner}>
-        <div className={styles.sectionHead}>
+        <div className={`${styles.sectionHead} ${styles.sectionHeadStack}`}>
           <h2 className={styles.heading}>Core capabilities</h2>
           <p className={styles.sectionLead}>
             Four core areas of custom data production for training, post-training and evaluation.

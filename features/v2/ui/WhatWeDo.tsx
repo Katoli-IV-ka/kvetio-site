@@ -8,7 +8,7 @@ export function WhatWeDo() {
       className={styles.section}
     >
       <div className={styles.sectionInner}>
-        <div className={styles.sectionHead}>
+        <div className={`${styles.sectionHead} ${styles.sectionHeadStack}`}>
           <h2 className={styles.heading}>What we do</h2>
           <p className={styles.sectionLead}>
             Every project starts with a specific data requirement. We build the right production and

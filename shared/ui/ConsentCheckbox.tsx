@@ -98,15 +98,15 @@ export function ConsentFields({
         onChange={onConsent}
         required
       >
-        I have read the <PrivacyLink /> and I agree that Kvetio may process my name, email address
-        and the details I provide in this form in order to reply to my enquiry.
+        I have read the <PrivacyLink /> and I agree that Kvet may process my name, email address and
+        the details I provide in this form in order to reply to my enquiry.
       </ConsentCheckbox>
       <ConsentCheckbox
         id={`${idPrefix}-marketing`}
         checked={marketing}
         onChange={onMarketing}
       >
-        Optional: I agree to receive commercial information about Kvetio’s datasets and services at
+        Optional: I agree to receive commercial information about Kvet’s datasets and services at
         this email address. I can withdraw this consent at any time.
       </ConsentCheckbox>
     </Flex>

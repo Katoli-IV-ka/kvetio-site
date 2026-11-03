@@ -1,3 +1,5 @@
+import { COMPANY } from './company';
+
 export const PRIVACY_EMAIL = 'contact@kvet.io';
 export const PRIVACY_UPDATED = '3 November 2026';
 
@@ -7,7 +9,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '1. Who we are',
     body: [
-      `The controller of your personal data is Kvetio (“we”, “us”), a business based in Warsaw, Poland, operating the website kvet.io. You can contact us about anything in this policy at ${PRIVACY_EMAIL}.`,
+      `The controller of your personal data is ${COMPANY.legalName} (“Kvet”, “we”, “us”), a limited liability company with its registered office in ${COMPANY.seat}, Poland (KRS ${COMPANY.krs}, NIP ${COMPANY.nip}), operating the website kvet.io. You can contact us about anything in this policy at ${PRIVACY_EMAIL}.`,
     ],
   },
   {
@@ -90,7 +92,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     title: '10. Cookies, analytics and browser storage',
     body: [
       'The website needs no cookies to work. Optional analytics runs only with your consent: when you first visit (and again after a year) a banner asks whether you accept analytics. Nothing is loaded before you choose, and nothing is loaded if you reject. You can change your choice at any time with the “Cookie settings” link in the footer; withdrawing consent switches analytics off and removes its cookies. The legal basis is your consent, Art. 6(1)(a) GDPR and the Polish Electronic Communications Law.',
-      'The analytics tool is Microsoft Clarity, operated by Microsoft Corporation. If you accept, it records how the site is used (pages visited, clicks, scrolling and session replays) and sets its own cookies, such as _clck, which recognises a returning visitor, and _clsk, which joins page views into one session. The contents of the contact form fields are masked and are not visible in the replays. We never allow advertising storage: sharing Clarity data with Microsoft Advertising is switched off and no advertising cookies are used.',
+      'The analytics tool is Microsoft Clarity, operated by Microsoft Corporation. If you accept, it records how the site is used (pages visited, clicks, scrolling and session replays) and sets its own cookies, such as _clck, which recognises a returning visitor and is kept for up to 13 months, and _clsk, which joins page views into one session and is kept for up to one day. The contents of the contact form fields are masked and are not visible in the replays. We never allow advertising storage: sharing Clarity data with Microsoft Advertising is switched off and no advertising cookies are used.',
       'While you fill in the contact form your browser may temporarily keep what you typed (session storage); it is removed when you send the form or close the tab.',
     ],
   },

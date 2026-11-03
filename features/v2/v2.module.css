@@ -1944,6 +1944,15 @@
   color: #8a8a8a;
 }
 
+.company {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--page-x) 16px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
 .legal {
   display: flex;
   flex-wrap: wrap;

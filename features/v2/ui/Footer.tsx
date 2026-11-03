@@ -1,4 +1,5 @@
 import { CLARITY_ID, openCookieSettings } from '../../consent/ui/CookieConsent';
+import { COMPANY } from '../company';
 import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
@@ -65,6 +66,10 @@ export function Footer({ base = '' }: { base?: string }) {
             )}
           </div>
         </div>
+        <p className={styles.company}>
+          {COMPANY.legalName} · {COMPANY.seat} · KRS {COMPANY.krs} · NIP {COMPANY.nip} · share
+          capital {COMPANY.shareCapital}
+        </p>
       </div>
     </footer>
   );

@@ -209,8 +209,8 @@ export function ContactPageV2() {
                   />
                   <span>
                     I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
-                    that Kvetio may process my name, email address and the details I provide in this
-                    form in order to reply to my inquiry. My request is delivered to the Kvetio team
+                    that Kvet may process my name, email address and the details I provide in this
+                    form in order to reply to my inquiry. My request is delivered to the Kvet team
                     by email and in a private Telegram chat.
                   </span>
                 </label>
@@ -222,7 +222,7 @@ export function ContactPageV2() {
                     onChange={(event) => setMarketing(event.target.checked)}
                   />
                   <span>
-                    Optional: I agree to receive commercial information about Kvetio&apos;s datasets
+                    Optional: I agree to receive commercial information about Kvet&apos;s datasets
                     and services at this email address. I can withdraw this consent at any time.
                   </span>
                 </label>

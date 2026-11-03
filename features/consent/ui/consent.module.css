@@ -1,0 +1,71 @@
+.banner {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #111;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: #444;
+}
+
+.text a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.accept,
+.reject {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.accept {
+  background: #000;
+  color: #fff;
+}
+
+.reject {
+  background: #fff;
+  color: #000;
+}
+
+.accept:focus-visible,
+.reject:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .banner {
+    right: auto;
+    bottom: 24px;
+    left: 24px;
+  }
+}

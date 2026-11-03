@@ -137,6 +137,7 @@ export function Contact() {
         {step === 'quick' && (
           <form
             className={styles.form}
+            data-clarity-mask='True'
             onSubmit={onQuickSubmit}
             noValidate
           >
@@ -237,6 +238,7 @@ export function Contact() {
         {step === 'details' && (
           <form
             className={styles.form}
+            data-clarity-mask='True'
             onSubmit={onDetailsSubmit}
             noValidate
           >

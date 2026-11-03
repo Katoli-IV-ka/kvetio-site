@@ -43,13 +43,14 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     list: [
       'email: Google Workspace / Gmail, which processes data on our behalf under its data-processing terms;',
       'website hosting: Vercel, which processes technical data on our behalf under its data-processing terms;',
-      'Telegram: we receive a notification about each inquiry in a private Telegram chat that only authorised members of our team can read. It contains the data you entered in the form (name, email, the details of your request and the optional details you add). Telegram is operated by Telegram FZ-LLC (United Arab Emirates) and its group companies and handles messages under its own terms and privacy policy (telegram.org/privacy). We have no separate data-processing agreement with Telegram.',
+      'Telegram: we receive a notification about each inquiry in a private Telegram chat that only authorised members of our team can read. It contains the data you entered in the form (name, email, the details of your request and the optional details you add). Telegram is operated by Telegram FZ-LLC (United Arab Emirates) and its group companies and handles messages under its own terms and privacy policy (telegram.org/privacy). We have no separate data-processing agreement with Telegram;',
+      'analytics, only if you accept it in the cookie banner: Microsoft Clarity (Microsoft Corporation), see section 10.',
     ],
   },
   {
     title: '5. Transfers outside the European Economic Area',
     body: [
-      'Some of the providers above are based in or may access data from outside the EEA. Transfers to Google and Vercel (United States) rely on the European Commission’s adequacy decision (EU–US Data Privacy Framework) or on standard contractual clauses.',
+      'Some of the providers above are based in or may access data from outside the EEA. Transfers to Google, Vercel and Microsoft (United States) rely on the European Commission’s adequacy decision (EU–US Data Privacy Framework) or on standard contractual clauses.',
       'Telegram is based outside the EEA (the United Arab Emirates, with group companies in the British Virgin Islands). There is no European Commission adequacy decision for these countries and we have not concluded standard contractual clauses with Telegram ourselves. For this reason we limit what reaches Telegram to the notification about your inquiry, keep it in a private chat with restricted access protected by two-factor authentication, and delete it once it is no longer needed (see section 6). If you prefer that your data does not reach Telegram, write to us instead of using the form.',
     ],
   },
@@ -85,9 +86,12 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
   },
   {
-    title: '10. Cookies and browser storage',
+    id: 'cookies',
+    title: '10. Cookies, analytics and browser storage',
     body: [
-      'This website does not use analytics, advertising or tracking cookies. While you move from the first to the next step of the contact form your browser temporarily keeps the name and email you typed (session storage); it is removed when you send the form or close the tab.',
+      'The website needs no cookies to work. Optional analytics runs only with your consent: when you first visit (and again after a year) a banner asks whether you accept analytics. Nothing is loaded before you choose, and nothing is loaded if you reject. You can change your choice at any time with the “Cookie settings” link in the footer; withdrawing consent switches analytics off and removes its cookies. The legal basis is your consent, Art. 6(1)(a) GDPR and the Polish Electronic Communications Law.',
+      'The analytics tool is Microsoft Clarity, operated by Microsoft Corporation. If you accept, it records how the site is used (pages visited, clicks, scrolling and session replays) and sets its own cookies, such as _clck, which recognises a returning visitor, and _clsk, which joins page views into one session. The contents of the contact form fields are masked and are not visible in the replays. We never allow advertising storage: sharing Clarity data with Microsoft Advertising is switched off and no advertising cookies are used.',
+      'While you fill in the contact form your browser may temporarily keep what you typed (session storage); it is removed when you send the form or close the tab.',
     ],
   },
   {

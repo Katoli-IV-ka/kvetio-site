@@ -1955,6 +1955,19 @@
   color: #fff;
 }
 
+.legalButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.legalButton:hover {
+  color: #fff;
+}
+
 .legalSep {
   display: none;
   color: #444;

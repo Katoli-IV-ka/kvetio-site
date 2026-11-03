@@ -1,3 +1,4 @@
+import { CLARITY_ID, openCookieSettings } from '../../consent/ui/CookieConsent';
 import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
@@ -50,6 +51,18 @@ export function Footer({ base = '' }: { base?: string }) {
                 <a href={link.href}>{link.label}</a>
               </span>
             ))}
+            {CLARITY_ID && (
+              <span className={styles.legal}>
+                <span className={styles.legalSep}>/</span>
+                <button
+                  className={styles.legalButton}
+                  type='button'
+                  onClick={openCookieSettings}
+                >
+                  Cookie settings
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>

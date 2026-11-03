@@ -111,6 +111,7 @@ export function ContactPageV2() {
           ) : (
             <form
               className={styles.pageForm}
+              data-clarity-mask='True'
               onSubmit={onSubmit}
               noValidate
             >

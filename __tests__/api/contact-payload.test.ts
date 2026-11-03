@@ -25,7 +25,6 @@ describe('normalizeContactPayload', () => {
         dataTypes: ['Audio', 'Media'],
         message: 'Need speech data.',
         source: 'LinkedIn',
-        marketingConsent: true,
       }),
     ).toEqual({
       name: 'Ada Lovelace',
@@ -35,7 +34,6 @@ describe('normalizeContactPayload', () => {
       company: 'ACME',
       dataTypes: ['Audio', 'Media'],
       source: 'LinkedIn',
-      marketingConsent: true,
     });
   });
 });

@@ -26,7 +26,6 @@ export function Contact() {
   const [email, setEmail] = useState('');
   const [request, setRequest] = useState('');
   const [privacy, setPrivacy] = useState(false);
-  const [marketing, setMarketing] = useState(false);
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [dataTypes, setDataTypes] = useState<string[]>([]);
@@ -54,7 +53,6 @@ export function Contact() {
         name: name.trim(),
         email: email.trim(),
         message: request.trim(),
-        marketingConsent: marketing,
         ...(stage === 'details' && {
           company: company.trim(),
           jobTitle: jobTitle.trim(),
@@ -206,18 +204,6 @@ export function Contact() {
                     form in order to reply to my inquiry. My request is sent as soon as I submit
                     this step and is delivered to the Kvet team by email and in a private Telegram
                     chat.
-                  </span>
-                </label>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='marketing'
-                    checked={marketing}
-                    onChange={(event) => setMarketing(event.target.checked)}
-                  />
-                  <span>
-                    Optional: I agree to receive commercial information about Kvet&apos;s datasets
-                    and services at this email address. I can withdraw this consent at any time.
                   </span>
                 </label>
               </div>

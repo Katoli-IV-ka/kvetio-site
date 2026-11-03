@@ -33,7 +33,6 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
     list: [
       'to reply to your inquiry and, if you wish, prepare a cooperation — Art. 6(1)(b) GDPR (steps taken at your request before a contract) and your consent given by ticking the box next to the form, Art. 6(1)(a) GDPR;',
-      'to send you commercial information about our datasets and services by email — only if you tick the separate, optional box next to the form — Art. 6(1)(a) GDPR and Art. 398 of the Polish Electronic Communications Law (Prawo komunikacji elektronicznej);',
       'to keep business correspondence, protect the website against abuse and defend against or pursue legal claims — our legitimate interest, Art. 6(1)(f) GDPR.',
     ],
   },
@@ -59,7 +58,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '6. How long we keep it',
     body: [
-      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. Data processed for the optional marketing consent is kept until you withdraw it. The notification in Telegram is deleted from the chat together with the inquiry, at the latest when the period above ends. When you give us the consents we record the date and time of the consent and the version of this policy as proof.',
+      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. The notification in Telegram is deleted from the chat together with the inquiry, at the latest when the period above ends. When you give us your consent we record the date and time of the consent and the version of this policy as proof.',
     ],
   },
   {
@@ -71,7 +70,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
       'have it erased (“right to be forgotten”) or its processing restricted;',
       'receive it in a portable format;',
       'object to processing based on our legitimate interest;',
-      'withdraw either of your consents at any time (for example by writing to us or using the unsubscribe link) — this does not affect the lawfulness of processing before the withdrawal.',
+      'withdraw your consent at any time by writing to us — this does not affect the lawfulness of processing before the withdrawal.',
     ],
   },
   {
@@ -81,9 +80,9 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     ],
   },
   {
-    title: '9. Two separate consents',
+    title: '9. Consent and the form',
     body: [
-      'The contact form contains two separate boxes, neither is ticked in advance. The first one (required to send the form) covers replying to your inquiry. The second one (optional) covers commercial emails; leaving it unticked has no effect on how we handle your inquiry.',
+      'The contact form contains one box, which is not ticked in advance and is required to send the form. It covers replying to your inquiry. We do not send newsletters or commercial emails and we do not use your data for marketing.',
       'If you submit only the first step of the form, we process the name, email and request you provided in it on the same basis; the second step is optional. Giving us your data is voluntary, but without name, email and your request we are not able to answer you. We do not make decisions about you by automated means and we do not profile you.',
     ],
   },

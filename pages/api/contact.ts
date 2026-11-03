@@ -27,7 +27,6 @@ export type ContactPayload = {
   company?: string;
   dataTypes?: string[];
   source?: string;
-  marketingConsent?: boolean;
   /** two-step form: 'initial' is the quick first step, 'details' adds to the same request */
   stage?: 'initial' | 'details';
   /** signed proof of the Telegram message created at the first step (see createEditToken) */
@@ -72,7 +71,6 @@ export function normalizeContactPayload(body: unknown): ContactPayload | null {
   if (company) result.company = company;
   if (dataTypes.length) result.dataTypes = dataTypes;
   if (source) result.source = source;
-  if (payload.marketingConsent === true) result.marketingConsent = true;
   if (payload.stage === 'initial' || payload.stage === 'details') result.stage = payload.stage;
   const editToken = text(payload.editToken, 300);
   if (editToken) result.editToken = editToken;
@@ -241,7 +239,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     company,
     dataTypes,
     source,
-    marketingConsent,
     volume,
     timeline,
     ndaNeeded,
@@ -256,7 +253,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ndaNeeded && 'NDA needed: yes',
     source && `Heard about us: ${source}`,
     `Consent to reply (Privacy Policy ${PRIVACY_POLICY_VERSION}): given ${new Date().toISOString()}`,
-    `Marketing e-mail consent: ${marketingConsent ? 'YES' : 'no'}`,
   ].filter((line): line is string => Boolean(line));
   const escape = (value: string) =>
     value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

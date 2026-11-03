@@ -365,6 +365,7 @@ export const FOOTER_COLUMNS = [
 
 export const LEGAL_LINKS = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Legal Notice', href: '/legal-notice' },
   { label: 'Data Processing Policy', href: '/privacy-policy#processing' },
   { label: 'Security', href: '/privacy-policy#security' },
 ];

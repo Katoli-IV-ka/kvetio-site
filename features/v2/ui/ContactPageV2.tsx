@@ -26,7 +26,6 @@ export function ContactPageV2() {
   const [message, setMessage] = useState('');
   const [source, setSource] = useState('');
   const [privacy, setPrivacy] = useState(false);
-  const [marketing, setMarketing] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
 
   // Answers typed in the old landing band are carried over through session storage.
@@ -37,7 +36,6 @@ export function ContactPageV2() {
       setName(draft.name);
       setEmail(draft.email);
       setPrivacy(draft.consent);
-      setMarketing(draft.marketing);
     });
   }, []);
 
@@ -65,7 +63,6 @@ export function ContactPageV2() {
           dataTypes,
           message: message.trim(),
           source,
-          marketingConsent: marketing,
         }),
       });
       if (res.ok) {
@@ -212,18 +209,6 @@ export function ContactPageV2() {
                     that Kvet may process my name, email address and the details I provide in this
                     form in order to reply to my inquiry. My request is delivered to the Kvet team
                     by email and in a private Telegram chat.
-                  </span>
-                </label>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='marketing'
-                    checked={marketing}
-                    onChange={(event) => setMarketing(event.target.checked)}
-                  />
-                  <span>
-                    Optional: I agree to receive commercial information about Kvet&apos;s datasets
-                    and services at this email address. I can withdraw this consent at any time.
                   </span>
                 </label>
               </div>

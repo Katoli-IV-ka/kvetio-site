@@ -1,3 +1,5 @@
+import { CLARITY_ID, openCookieSettings } from '../../consent/ui/CookieConsent';
+import { COMPANY } from '../company';
 import { BRAND, CTA_LABEL, FOOTER_COLUMNS, LEGAL_LINKS } from '../content';
 import styles from '../v2.module.css';
 
@@ -39,7 +41,12 @@ export function Footer({ base = '' }: { base?: string }) {
       </div>
       <div className={styles.footerBar}>
         <div className={styles.footerBarInner}>
-          <span>© 2026 {BRAND}. All rights reserved.</span>
+          <div className={styles.footerMeta}>
+            <span>© 2026 {BRAND}. All rights reserved.</span>
+            <span className={styles.company}>
+              {COMPANY.shortName} · KRS {COMPANY.krs} · NIP {COMPANY.nip}
+            </span>
+          </div>
           <div className={styles.legal}>
             {LEGAL_LINKS.map((link, index) => (
               <span
@@ -50,6 +57,18 @@ export function Footer({ base = '' }: { base?: string }) {
                 <a href={link.href}>{link.label}</a>
               </span>
             ))}
+            {CLARITY_ID && (
+              <span className={styles.legal}>
+                <span className={styles.legalSep}>/</span>
+                <button
+                  className={styles.legalButton}
+                  type='button'
+                  onClick={openCookieSettings}
+                >
+                  Cookie settings
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>

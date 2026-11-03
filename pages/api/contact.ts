@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 import { LRUCache } from 'lru-cache';
@@ -13,7 +14,7 @@ const detailsRateLimitCache = new LRUCache<string, number>({
   ttl: 10 * 60 * 1000,
 });
 
-const PRIVACY_POLICY_VERSION = '2026-10-09';
+const PRIVACY_POLICY_VERSION = '2026-11-03';
 const RATE_LIMIT = 5; // max new requests per IP per TTL window
 const DETAILS_RATE_LIMIT = 10; // max detail updates per IP per TTL window
 
@@ -26,11 +27,10 @@ export type ContactPayload = {
   company?: string;
   dataTypes?: string[];
   source?: string;
-  marketingConsent?: boolean;
   /** two-step form: 'initial' is the quick first step, 'details' adds to the same request */
   stage?: 'initial' | 'details';
-  /** id of the Telegram message created at the first step, so the second step can update it */
-  telegramMessageId?: number;
+  /** signed proof of the Telegram message created at the first step (see createEditToken) */
+  editToken?: string;
   volume?: string;
   timeline?: string;
   ndaNeeded?: boolean;
@@ -71,15 +71,9 @@ export function normalizeContactPayload(body: unknown): ContactPayload | null {
   if (company) result.company = company;
   if (dataTypes.length) result.dataTypes = dataTypes;
   if (source) result.source = source;
-  if (payload.marketingConsent === true) result.marketingConsent = true;
   if (payload.stage === 'initial' || payload.stage === 'details') result.stage = payload.stage;
-  if (
-    typeof payload.telegramMessageId === 'number' &&
-    Number.isSafeInteger(payload.telegramMessageId) &&
-    payload.telegramMessageId > 0
-  ) {
-    result.telegramMessageId = payload.telegramMessageId;
-  }
+  const editToken = text(payload.editToken, 300);
+  if (editToken) result.editToken = editToken;
   const volume = text(payload.volume, 100);
   const timeline = text(payload.timeline, 100);
   if (volume) result.volume = volume;
@@ -95,6 +89,41 @@ function getRateLimitedIP(req: NextApiRequest): string {
       ? (forwarded.split(',')[0] ?? 'unknown')
       : (req.socket.remoteAddress ?? 'unknown');
   return ip;
+}
+
+const EDIT_TOKEN_TTL_MS = 60 * 60 * 1000; // the second form step must follow within an hour
+
+function editSignature(messageId: number, expires: number, email: string): string {
+  return createHmac('sha256', `contact-form-edit:${process.env.TELEGRAM_BOT_TOKEN ?? ''}`)
+    .update(`${messageId}.${expires}.${email.toLowerCase()}`)
+    .digest('base64url');
+}
+
+/**
+ * Proof that this browser created the Telegram message and may complete it. The raw message id is
+ * never handed out: otherwise anyone could send another id and overwrite earlier requests.
+ */
+export function createEditToken(messageId: number, email: string, now = Date.now()): string {
+  const expires = now + EDIT_TOKEN_TTL_MS;
+  return `${messageId}.${expires}.${editSignature(messageId, expires, email)}`;
+}
+
+/** The message id when the token is genuine, unexpired and issued for this e-mail; otherwise undefined. */
+export function readEditToken(
+  token: string | undefined,
+  email: string,
+  now = Date.now(),
+): number | undefined {
+  const [id, expiresText, signature] = (token ?? '').split('.');
+  const messageId = Number(id);
+  const expires = Number(expiresText);
+  if (!signature || !Number.isSafeInteger(messageId) || messageId <= 0 || !(expires > now)) {
+    return undefined;
+  }
+  const expected = Buffer.from(editSignature(messageId, expires, email));
+  const given = Buffer.from(signature);
+  if (expected.length !== given.length || !timingSafeEqual(expected, given)) return undefined;
+  return messageId;
 }
 
 function telegramConfigured(): boolean {
@@ -210,11 +239,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     company,
     dataTypes,
     source,
-    marketingConsent,
     volume,
     timeline,
     ndaNeeded,
-    telegramMessageId,
+    editToken,
   } = payload;
   const details = [
     jobTitle && `Title: ${jobTitle}`,
@@ -225,13 +253,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ndaNeeded && 'NDA needed: yes',
     source && `Heard about us: ${source}`,
     `Consent to reply (Privacy Policy ${PRIVACY_POLICY_VERSION}): given ${new Date().toISOString()}`,
-    `Marketing e-mail consent: ${marketingConsent ? 'YES' : 'no'}`,
   ].filter((line): line is string => Boolean(line));
   const escape = (value: string) =>
     value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   let delivered = false;
-  let newTelegramId: number | undefined = telegramMessageId;
+  // a detail update edits the first message only when it carries a valid token for this e-mail
+  const editableId = isDetails ? readEditToken(editToken, email) : undefined;
+  let newTelegramId: number | undefined = editableId;
 
   if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
     try {
@@ -258,9 +287,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (telegramConfigured()) {
     const telegramText = formatTelegramMessage(payload);
     try {
-      if (isDetails && telegramMessageId) {
+      if (editableId) {
         try {
-          await editTelegramMessage(telegramMessageId, telegramText, 'HTML');
+          await editTelegramMessage(editableId, telegramText, 'HTML');
         } catch (error) {
           // the first message may be gone or unchanged; send the full request again instead
           console.error('Contact form: Telegram edit failed, sending a new message', error);
@@ -279,7 +308,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(502).json({ message: 'Could not deliver the message' });
   }
 
-  return res
-    .status(200)
-    .json({ message: 'Message sent successfully', telegramMessageId: newTelegramId });
+  return res.status(200).json({
+    message: 'Message sent successfully',
+    ...(newTelegramId && { editToken: createEditToken(newTelegramId, email) }),
+  });
 }

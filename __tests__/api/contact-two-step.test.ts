@@ -30,7 +30,7 @@ describe('contact API, two-step form', () => {
     vi.unstubAllGlobals();
   });
 
-  it('sends the first step as a new message and returns its id', async () => {
+  it('sends the first step as a new message and returns a signed token, not the raw id', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
@@ -42,19 +42,21 @@ describe('contact API, two-step form', () => {
     const reply = await call(handler, { ...base, stage: 'initial' });
 
     expect(reply.status).toBe(200);
-    expect(reply.body).toMatchObject({ telegramMessageId: 77 });
+    const body = reply.body as { editToken?: string; telegramMessageId?: number };
+    expect(body.telegramMessageId).toBeUndefined();
+    expect(body.editToken).toMatch(/^77\.\d+\./);
     expect(String(fetchMock.mock.calls[0]![0])).toMatch(/\/sendMessage$/);
   });
 
   it('updates the same Telegram message on the second step', async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({}) });
     vi.stubGlobal('fetch', fetchMock);
-    const { default: handler } = await import('../../pages/api/contact');
+    const { default: handler, createEditToken } = await import('../../pages/api/contact');
 
     const reply = await call(handler, {
       ...base,
       stage: 'details',
-      telegramMessageId: 77,
+      editToken: createEditToken(77, base.email),
       company: 'ACME',
       volume: 'Pilot (small sample batch)',
       ndaNeeded: true,
@@ -83,10 +85,16 @@ describe('contact API, two-step form', () => {
     vi.stubGlobal('fetch', fetchMock);
     const { default: handler } = await import('../../pages/api/contact');
 
-    const reply = await call(handler, { ...base, stage: 'details', telegramMessageId: 77 });
+    const { createEditToken } = await import('../../pages/api/contact');
+
+    const reply = await call(handler, {
+      ...base,
+      stage: 'details',
+      editToken: createEditToken(77, base.email),
+    });
 
     expect(reply.status).toBe(200);
-    expect(reply.body).toMatchObject({ telegramMessageId: 90 });
+    expect((reply.body as { editToken?: string }).editToken).toMatch(/^90\./);
     expect(String(fetchMock.mock.calls[1]![0])).toMatch(/\/sendMessage$/);
   });
 
@@ -109,6 +117,34 @@ describe('contact API, two-step form', () => {
 
     expect(reply.status).toBe(200);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('never edits a message without a valid token: the update goes out as a new message', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({ result: { message_id: 91 } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const { default: handler, createEditToken } = await import('../../pages/api/contact');
+    const good = createEditToken(77, base.email);
+    const [id, expires, signature] = good.split('.');
+    const attempts = [
+      undefined, // a bare request that names no message
+      '12', // a raw message id, as an attacker would guess it
+      `12.${expires}.${signature}`, // another message id under a copied signature
+      `${id}.${expires}.${signature!.slice(0, -2)}AA`, // tampered signature
+      createEditToken(77, 'someone@else.com'), // token issued for another e-mail
+      createEditToken(77, base.email, Date.now() - 2 * 60 * 60 * 1000), // expired
+    ];
+
+    for (const editToken of attempts) {
+      fetchMock.mockClear();
+      const reply = await call(handler, { ...base, stage: 'details', editToken });
+      expect(reply.status).toBe(200);
+      expect(fetchMock).toHaveBeenCalledOnce();
+      expect(String(fetchMock.mock.calls[0]![0])).toMatch(/\/sendMessage$/);
+    }
   });
 
   it('formats the Telegram message from the agreed template and escapes user text', async () => {

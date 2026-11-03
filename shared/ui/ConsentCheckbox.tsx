@@ -71,19 +71,11 @@ export function PrivacyLink() {
 type ConsentProps = {
   idPrefix: string;
   consent: boolean;
-  marketing: boolean;
   onConsent: (value: boolean) => void;
-  onMarketing: (value: boolean) => void;
 };
 
-/** The two separate consents: required (answering the enquiry) and optional (marketing e-mail). */
-export function ConsentFields({
-  idPrefix,
-  consent,
-  marketing,
-  onConsent,
-  onMarketing,
-}: ConsentProps) {
+/** The consent to process the details in order to answer the enquiry. */
+export function ConsentFields({ idPrefix, consent, onConsent }: ConsentProps) {
   return (
     <Flex
       direction='column'
@@ -98,16 +90,8 @@ export function ConsentFields({
         onChange={onConsent}
         required
       >
-        I have read the <PrivacyLink /> and I agree that Kvetio may process my name, email address
-        and the details I provide in this form in order to reply to my enquiry.
-      </ConsentCheckbox>
-      <ConsentCheckbox
-        id={`${idPrefix}-marketing`}
-        checked={marketing}
-        onChange={onMarketing}
-      >
-        Optional: I agree to receive commercial information about Kvetio’s datasets and services at
-        this email address. I can withdraw this consent at any time.
+        I agree to the processing of my personal data in order to reply to my enquiry. See the{' '}
+        <PrivacyLink />.
       </ConsentCheckbox>
     </Flex>
   );

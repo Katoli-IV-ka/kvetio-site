@@ -35,12 +35,11 @@ function BandForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
-  const [marketing, setMarketing] = useState(false);
 
   // Nothing is sent from here: the two answers are only carried to the full form.
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    saveDraft({ name: name.trim(), email: email.trim(), consent, marketing });
+    saveDraft({ name: name.trim(), email: email.trim(), consent });
     void router.push('/contact');
   };
 
@@ -88,9 +87,7 @@ function BandForm() {
             <ConsentFields
               idPrefix={idPrefix}
               consent={consent}
-              marketing={marketing}
               onConsent={setConsent}
-              onMarketing={setMarketing}
             />
           </Box>
           <PillButton />

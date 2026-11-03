@@ -26,7 +26,6 @@ export function ContactPageV2() {
   const [message, setMessage] = useState('');
   const [source, setSource] = useState('');
   const [privacy, setPrivacy] = useState(false);
-  const [marketing, setMarketing] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
 
   // Answers typed in the old landing band are carried over through session storage.
@@ -37,7 +36,6 @@ export function ContactPageV2() {
       setName(draft.name);
       setEmail(draft.email);
       setPrivacy(draft.consent);
-      setMarketing(draft.marketing);
     });
   }, []);
 
@@ -65,7 +63,6 @@ export function ContactPageV2() {
           dataTypes,
           message: message.trim(),
           source,
-          marketingConsent: marketing,
         }),
       });
       if (res.ok) {
@@ -111,6 +108,7 @@ export function ContactPageV2() {
           ) : (
             <form
               className={styles.pageForm}
+              data-clarity-mask='True'
               onSubmit={onSubmit}
               noValidate
             >
@@ -207,21 +205,8 @@ export function ContactPageV2() {
                     onChange={(event) => setPrivacy(event.target.checked)}
                   />
                   <span>
-                    I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
-                    that Kvetio may process my name, email address and the details I provide in this
-                    form in order to reply to my inquiry.
-                  </span>
-                </label>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='marketing'
-                    checked={marketing}
-                    onChange={(event) => setMarketing(event.target.checked)}
-                  />
-                  <span>
-                    Optional: I agree to receive commercial information about Kvetio&apos;s datasets
-                    and services at this email address. I can withdraw this consent at any time.
+                    I agree to the processing of my personal data in order to reply to my inquiry.
+                    See the <Link href='/privacy-policy'>Privacy Policy</Link>.
                   </span>
                 </label>
               </div>

@@ -26,7 +26,6 @@ export function Contact() {
   const [email, setEmail] = useState('');
   const [request, setRequest] = useState('');
   const [privacy, setPrivacy] = useState(false);
-  const [marketing, setMarketing] = useState(false);
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [dataTypes, setDataTypes] = useState<string[]>([]);
@@ -35,7 +34,7 @@ export function Contact() {
   const [ndaNeeded, setNdaNeeded] = useState(false);
   const [source, setSource] = useState('');
   const [trap, setTrap] = useState('');
-  const [messageId, setMessageId] = useState<number | undefined>();
+  const [editToken, setEditToken] = useState<string | undefined>();
   const [status, setStatus] = useState<Status>('idle');
 
   const toggleType = (type: string) =>
@@ -49,12 +48,11 @@ export function Contact() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         stage,
-        telegramMessageId: messageId,
+        editToken,
         website: trap,
         name: name.trim(),
         email: email.trim(),
         message: request.trim(),
-        marketingConsent: marketing,
         ...(stage === 'details' && {
           company: company.trim(),
           jobTitle: jobTitle.trim(),
@@ -79,8 +77,8 @@ export function Contact() {
     try {
       const res = await send('initial');
       if (res.ok) {
-        const data = (await res.json().catch(() => null)) as { telegramMessageId?: number } | null;
-        setMessageId(data?.telegramMessageId);
+        const data = (await res.json().catch(() => null)) as { editToken?: string } | null;
+        setEditToken(data?.editToken);
         setStatus('idle');
         setStep('details');
       } else {
@@ -137,6 +135,7 @@ export function Contact() {
         {step === 'quick' && (
           <form
             className={styles.form}
+            data-clarity-mask='True'
             onSubmit={onQuickSubmit}
             noValidate
           >
@@ -200,22 +199,8 @@ export function Contact() {
                     onChange={(event) => setPrivacy(event.target.checked)}
                   />
                   <span>
-                    I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
-                    that Kvetio may process my name, email address and the details I provide in this
-                    form in order to reply to my inquiry. My request is sent as soon as I submit
-                    this step.
-                  </span>
-                </label>
-                <label className={styles.consent}>
-                  <input
-                    type='checkbox'
-                    name='marketing'
-                    checked={marketing}
-                    onChange={(event) => setMarketing(event.target.checked)}
-                  />
-                  <span>
-                    Optional: I agree to receive commercial information about Kvetio&apos;s datasets
-                    and services at this email address. I can withdraw this consent at any time.
+                    I agree to the processing of my personal data in order to reply to my inquiry.
+                    See the <Link href='/privacy-policy'>Privacy Policy</Link>.
                   </span>
                 </label>
               </div>
@@ -236,6 +221,7 @@ export function Contact() {
         {step === 'details' && (
           <form
             className={styles.form}
+            data-clarity-mask='True'
             onSubmit={onDetailsSubmit}
             noValidate
           >

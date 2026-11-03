@@ -1944,6 +1944,18 @@
   color: #8a8a8a;
 }
 
+.footerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.company {
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: #737373;
+}
+
 .legal {
   display: flex;
   flex-wrap: wrap;
@@ -1952,6 +1964,19 @@
 }
 
 .legal a:hover {
+  color: #fff;
+}
+
+.legalButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.legalButton:hover {
   color: #fff;
 }
 
@@ -1981,7 +2006,7 @@
 
   .footerBarInner {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
 }

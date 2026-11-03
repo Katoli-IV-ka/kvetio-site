@@ -1,5 +1,5 @@
 export const PRIVACY_EMAIL = 'contact@kvet.io';
-export const PRIVACY_UPDATED = '9 October 2026';
+export const PRIVACY_UPDATED = '3 November 2026';
 
 export type PolicySection = { id?: string; title: string; body: string[]; list?: string[] };
 
@@ -12,12 +12,15 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   },
   {
     title: '2. What data we collect',
-    body: ['We collect only what you type into our contact form:'],
+    body: [
+      'We collect only what you type into our contact form. The form has two steps: we receive your data as soon as you submit the first step, and the second step is optional and adds details to the same request.',
+      'Like every website, our hosting provider processes technical data needed to deliver the pages and protect them, such as your IP address and the time of the request. We also keep your IP address in the server memory for about 10 minutes to limit the number of form submissions; it is not saved in our inquiry records.',
+    ],
     list: [
       'name and email address;',
-      'job title and company name;',
-      'the type of data you are interested in and the description of your request;',
-      'how you heard about us.',
+      'the description of your request;',
+      'optionally: job title and company name, the type of data you are interested in, the scale and timeline of the project, whether you need an NDA;',
+      'optionally: how you heard about us.',
     ],
   },
   {
@@ -35,20 +38,25 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '4. Who receives your data',
     body: [
-      'We do not use a CRM system, we do not sell your data, we do not use it for advertising and we do not share it with third parties for their own purposes. Your inquiry is only delivered to our team.',
-      'To deliver it we rely on service providers that process data strictly on our behalf and under their data-processing terms: an email service (Google Workspace / Gmail), a messenger used for an internal notification about a new inquiry (Telegram) and the hosting platform of this website (Vercel). We may also disclose data where a law or a competent authority requires it.',
+      'We do not use a CRM system, we do not sell your data, we do not use it for advertising and we do not share it with third parties for their own purposes. We may disclose data where a law or a competent authority requires it. Your inquiry is delivered to our team through the following providers:',
+    ],
+    list: [
+      'email: Google Workspace / Gmail, which processes data on our behalf under its data-processing terms;',
+      'website hosting: Vercel, which processes technical data on our behalf under its data-processing terms;',
+      'Telegram: we receive a notification about each inquiry in a private Telegram chat that only authorised members of our team can read. It contains the data you entered in the form (name, email, the details of your request and the optional details you add). Telegram is operated by Telegram FZ-LLC (United Arab Emirates) and its group companies and handles messages under its own terms and privacy policy (telegram.org/privacy). We have no separate data-processing agreement with Telegram.',
     ],
   },
   {
     title: '5. Transfers outside the European Economic Area',
     body: [
-      'Some of the providers above are based in or may access data from outside the EEA, including the United States. Such transfers rely on the European Commission’s adequacy decision (EU–US Data Privacy Framework) or on standard contractual clauses.',
+      'Some of the providers above are based in or may access data from outside the EEA. Transfers to Google and Vercel (United States) rely on the European Commission’s adequacy decision (EU–US Data Privacy Framework) or on standard contractual clauses.',
+      'Telegram is based outside the EEA (the United Arab Emirates, with group companies in the British Virgin Islands). There is no European Commission adequacy decision for these countries and we have not concluded standard contractual clauses with Telegram ourselves. For this reason we limit what reaches Telegram to the notification about your inquiry, keep it in a private chat with restricted access protected by two-factor authentication, and delete it once it is no longer needed (see section 6). If you prefer that your data does not reach Telegram, write to us instead of using the form.',
     ],
   },
   {
     title: '6. How long we keep it',
     body: [
-      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. Data processed for the optional marketing consent is kept until you withdraw it. When you give us the consents we record the date and time of the consent and the version of this policy as proof.',
+      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. Data processed for the optional marketing consent is kept until you withdraw it. The notification in Telegram is deleted from the chat together with the inquiry, at the latest when the period above ends. When you give us the consents we record the date and time of the consent and the version of this policy as proof.',
     ],
   },
   {
@@ -73,7 +81,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     title: '9. Two separate consents',
     body: [
       'The contact form contains two separate boxes, neither is ticked in advance. The first one (required to send the form) covers replying to your inquiry. The second one (optional) covers commercial emails; leaving it unticked has no effect on how we handle your inquiry.',
-      'Giving us your data is voluntary, but without name, email and your request we are not able to answer you. We do not make decisions about you by automated means and we do not profile you.',
+      'If you submit only the first step of the form, we process the name, email and request you provided in it on the same basis; the second step is optional. Giving us your data is voluntary, but without name, email and your request we are not able to answer you. We do not make decisions about you by automated means and we do not profile you.',
     ],
   },
   {
@@ -86,7 +94,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     id: 'security',
     title: '11. Security',
     body: [
-      'We apply reasonable technical and organizational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox where inquiries arrive and a limit on the number of form submissions.',
+      'We apply reasonable technical and organizational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox and the private Telegram chat where inquiries arrive and a limit on the number of form submissions.',
     ],
   },
   {

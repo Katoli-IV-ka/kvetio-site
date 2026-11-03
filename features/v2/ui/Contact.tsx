@@ -35,7 +35,7 @@ export function Contact() {
   const [ndaNeeded, setNdaNeeded] = useState(false);
   const [source, setSource] = useState('');
   const [trap, setTrap] = useState('');
-  const [messageId, setMessageId] = useState<number | undefined>();
+  const [editToken, setEditToken] = useState<string | undefined>();
   const [status, setStatus] = useState<Status>('idle');
 
   const toggleType = (type: string) =>
@@ -49,7 +49,7 @@ export function Contact() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         stage,
-        telegramMessageId: messageId,
+        editToken,
         website: trap,
         name: name.trim(),
         email: email.trim(),
@@ -79,8 +79,8 @@ export function Contact() {
     try {
       const res = await send('initial');
       if (res.ok) {
-        const data = (await res.json().catch(() => null)) as { telegramMessageId?: number } | null;
-        setMessageId(data?.telegramMessageId);
+        const data = (await res.json().catch(() => null)) as { editToken?: string } | null;
+        setEditToken(data?.editToken);
         setStatus('idle');
         setStep('details');
       } else {
@@ -203,7 +203,8 @@ export function Contact() {
                     I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
                     that Kvetio may process my name, email address and the details I provide in this
                     form in order to reply to my inquiry. My request is sent as soon as I submit
-                    this step.
+                    this step and is delivered to the Kvetio team by email and in a private Telegram
+                    chat.
                   </span>
                 </label>
                 <label className={styles.consent}>

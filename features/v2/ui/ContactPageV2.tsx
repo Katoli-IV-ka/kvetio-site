@@ -209,7 +209,8 @@ export function ContactPageV2() {
                   <span>
                     I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
                     that Kvetio may process my name, email address and the details I provide in this
-                    form in order to reply to my inquiry.
+                    form in order to reply to my inquiry. My request is delivered to the Kvetio team
+                    by email and in a private Telegram chat.
                   </span>
                 </label>
                 <label className={styles.consent}>

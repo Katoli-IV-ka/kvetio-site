@@ -199,11 +199,8 @@ export function Contact() {
                     onChange={(event) => setPrivacy(event.target.checked)}
                   />
                   <span>
-                    I have read the <Link href='/privacy-policy'>Privacy Policy</Link> and I agree
-                    that Kvet may process my name, email address and the details I provide in this
-                    form in order to reply to my inquiry. My request is sent as soon as I submit
-                    this step and is delivered to the Kvet team by email and in a private Telegram
-                    chat.
+                    I agree to the processing of my personal data in order to reply to my inquiry.
+                    See the <Link href='/privacy-policy'>Privacy Policy</Link>.
                   </span>
                 </label>
               </div>

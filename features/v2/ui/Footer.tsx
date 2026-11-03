@@ -41,7 +41,12 @@ export function Footer({ base = '' }: { base?: string }) {
       </div>
       <div className={styles.footerBar}>
         <div className={styles.footerBarInner}>
-          <span>© 2026 {BRAND}. All rights reserved.</span>
+          <div className={styles.footerMeta}>
+            <span>© 2026 {BRAND}. All rights reserved.</span>
+            <span className={styles.company}>
+              {COMPANY.shortName} · KRS {COMPANY.krs} · NIP {COMPANY.nip}
+            </span>
+          </div>
           <div className={styles.legal}>
             {LEGAL_LINKS.map((link, index) => (
               <span
@@ -66,10 +71,6 @@ export function Footer({ base = '' }: { base?: string }) {
             )}
           </div>
         </div>
-        <p className={styles.company}>
-          {COMPANY.legalName} · {COMPANY.seat} · KRS {COMPANY.krs} · NIP {COMPANY.nip} · share
-          capital {COMPANY.shareCapital}
-        </p>
       </div>
     </footer>
   );

@@ -9,7 +9,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
   {
     title: '1. Who we are',
     body: [
-      `The controller of your personal data is ${COMPANY.legalName} (“Kvet”, “we”, “us”), a limited liability company with its registered office in ${COMPANY.seat}, Poland (KRS ${COMPANY.krs}, NIP ${COMPANY.nip}), operating the website kvet.io. You can contact us about anything in this policy at ${PRIVACY_EMAIL}.`,
+      `The controller of your personal data is ${COMPANY.legalName} (“Kvet”, “we”, “us”), a Polish limited liability company (KRS ${COMPANY.krs}, NIP ${COMPANY.nip}), operating the website kvet.io. You can contact us about anything in this policy at ${PRIVACY_EMAIL}.`,
     ],
   },
   {
@@ -44,7 +44,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     list: [
       'email: Google Workspace / Gmail, which processes data on our behalf under its data-processing terms;',
       'website hosting: Vercel, which processes technical data on our behalf under its data-processing terms;',
-      'Telegram: we receive a notification about each inquiry in a private Telegram chat that only authorised members of our team can read. It contains the data you entered in the form (name, email, the details of your request and the optional details you add). Telegram is operated by Telegram FZ-LLC (United Arab Emirates) and its group companies and handles messages under its own terms and privacy policy (telegram.org/privacy). We have no separate data-processing agreement with Telegram;',
+      'a messaging service for internal notifications: our team receives a notification about each inquiry in a private channel that only authorised members of the team can read. It contains the data you entered in the form. The provider acts under its own terms and privacy policy;',
       'analytics, only if you accept it in the cookie banner: Microsoft Clarity (Microsoft Corporation), see section 10.',
     ],
   },
@@ -52,13 +52,13 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     title: '5. Transfers outside the European Economic Area',
     body: [
       'Some of the providers above are based in or may access data from outside the EEA. Transfers to Google, Vercel and Microsoft (United States) rely on the European Commission’s adequacy decision (EU–US Data Privacy Framework) or on standard contractual clauses.',
-      'Telegram is based outside the EEA (the United Arab Emirates, with group companies in the British Virgin Islands). There is no European Commission adequacy decision for these countries and we have not concluded standard contractual clauses with Telegram ourselves. For this reason we limit what reaches Telegram to the notification about your inquiry, keep it in a private chat with restricted access protected by two-factor authentication, and delete it once it is no longer needed (see section 6). If you prefer that your data does not reach Telegram, write to us instead of using the form.',
+      'The messaging service used for internal notifications is provided from outside the EEA. There is no European Commission adequacy decision for it and we have no separate standard contractual clauses with its provider. For this reason we limit what reaches it to the notification about your inquiry, keep it in a private channel with restricted access protected by two-factor authentication, and delete it once it is no longer needed (see section 6). If you prefer that your data does not reach it, write to us instead of using the form.',
     ],
   },
   {
     title: '6. How long we keep it',
     body: [
-      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. The notification in Telegram is deleted from the chat together with the inquiry, at the latest when the period above ends. When you give us your consent we record the date and time of the consent and the version of this policy as proof.',
+      'We keep your inquiry for as long as needed to handle it and for up to 12 months after our last contact, unless we start working together (then for the duration of the contract and the limitation period for related claims) or the law requires a longer period. The internal notification is deleted together with the inquiry, at the latest when the period above ends. When you give us your consent we record the date and time of the consent and the version of this policy as proof.',
     ],
   },
   {
@@ -99,7 +99,7 @@ export const PRIVACY_SECTIONS: PolicySection[] = [
     id: 'security',
     title: '11. Security',
     body: [
-      'We apply reasonable technical and organizational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox and the private Telegram chat where inquiries arrive and a limit on the number of form submissions.',
+      'We apply reasonable technical and organizational measures to protect your data, including encrypted connections (HTTPS), restricted access to the inbox and the private channel where inquiries arrive and a limit on the number of form submissions.',
     ],
   },
   {

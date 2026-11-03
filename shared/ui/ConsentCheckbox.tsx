@@ -90,8 +90,8 @@ export function ConsentFields({ idPrefix, consent, onConsent }: ConsentProps) {
         onChange={onConsent}
         required
       >
-        I have read the <PrivacyLink /> and I agree that Kvet may process my name, email address and
-        the details I provide in this form in order to reply to my enquiry.
+        I agree to the processing of my personal data in order to reply to my enquiry. See the{' '}
+        <PrivacyLink />.
       </ConsentCheckbox>
     </Flex>
   );

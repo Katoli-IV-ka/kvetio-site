@@ -1944,10 +1944,13 @@
   color: #8a8a8a;
 }
 
+.footerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .company {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--page-x) 16px;
   font-size: var(--fs-caption);
   line-height: 16px;
   color: #737373;
@@ -2003,7 +2006,7 @@
 
   .footerBarInner {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
 }

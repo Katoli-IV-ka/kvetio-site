@@ -15,8 +15,8 @@ import { WhatWeDo } from '../features/v2/ui/WhatWeDo';
 import { WhyKvet } from '../features/v2/ui/WhyKvet';
 import styles from '../features/v2/v2.module.css';
 
-const TITLE = `${BRAND} — Custom Data Production for AI`;
-const DESCRIPTION = `${BRAND} designs and produces custom datasets for AI — visual, multimodal and Physical AI data built around your model's requirements, from research pilots to global production at scale.`;
+const TITLE = `${BRAND} — Custom Real-World Data Production for AI`;
+const DESCRIPTION = `Your model needs data that doesn't exist yet. ${BRAND} produces it: custom datasets built around your model's requirements — controlled visual production, global data collection, multimodal capture and Physical AI.`;
 
 const JSON_LD = [
   {

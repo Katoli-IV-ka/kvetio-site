@@ -10,17 +10,23 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel='icon'
-            href='/favicon.ico'
+            href='/favicon.ico?v=4'
             sizes='48x48'
           />
           <link
             rel='icon'
-            href='/favicon.svg'
+            href='/favicon.svg?v=4'
             type='image/svg+xml'
           />
           <link
+            rel='icon'
+            href='/icon-192.png?v=4'
+            type='image/png'
+            sizes='192x192'
+          />
+          <link
             rel='apple-touch-icon'
-            href='/apple-touch-icon.png'
+            href='/apple-touch-icon.png?v=4'
           />
           <link
             rel='preconnect'
